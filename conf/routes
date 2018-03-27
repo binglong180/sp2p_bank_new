@@ -1,0 +1,397 @@
+#---------------------------------------cpcn begin--------------------------------------------#
+GET /test/sms  newr.front.account.LoginAndRegisterAction.bindingSMS()
+#-----------------------------------------------------wap开始------------------------------------------------------
+#for app的页面
+GET /m/aboutUs4App                                       						m.front.newHomeAction.aboutUs4App
+GET /m/appDownload                                       						m.front.newHomeAction.appDownload
+#首页、投资列表
+GET /                                                                       	m.front.newHomeAction.home
+GET /m/security                                         						m.front.newHomeAction.security
+GET /m/aboutUs                                          						m.front.newHomeAction.aboutUs
+#投资列表
+GET   /m/front/invest/investList                                             	m.front.invest.InvestAction.investList
+GET   /m/front/invest/investContract                                            m.front.invest.InvestAction.investContract
+GET   /m/front/invest/investListAjax                                         	m.front.invest.InvestAction.investListAjax
+#立即投资
+GET   /m/investDetail                                      				        m.front.invest.InvestAction.investDetail
+POST   /m/confirmInvest                      									m.front.invest.InvestAction.confirmInvest
+POST  /m/investVerifySMS														m.front.invest.InvestAction.investVerifySMS
+
+
+GET /m/isLogin	                                                                m.front.account.LoginAndRegisterAction.isLogin
+
+GET /m/isBindBank																m.front.account.FundsManageAction.isBindBank
+#主动投标回调
+*   /m/payment/chinapnr/initiativeTender									 	newr.payment.hf.HfPaymentCallBackAction.initiativeTender
+#检查用户状态
+POST   /m/checkUserStatus                										m.front.invest.InvestAction.checkUserStatus
+#资金托管认证注册
+GET    /m/check      															m.front.account.CheckAction.check
+
+#注册、登录、修改密码
+GET   /m/login                          										m.front.account.LoginAndRegisterAction.login
+*   /m/logining                          									    m.front.account.LoginAndRegisterAction.logining
+* /m/front/account/verifyLogin                                                  m.front.account.loginAndRegisterAction.verifyLogin
+*    /m/logout                          										m.front.account.LoginAndRegisterAction.logout
+GET  /m/registerMobile                       									m.front.account.LoginAndRegisterAction.registerMobile
+GET  /m/agreement                       										m.front.account.LoginAndRegisterAction.agreement
+GET  /m/register                       											m.front.account.LoginAndRegisterAction.registerMobile
+POST  /m/front/account/register                  								m.front.account.LoginAndRegisterAction.registering
+
+POST  /m/front/account/setCode                       							m.front.account.LoginAndRegisterAction.setCode
+GET    /m/front/account/getImg                       						    m.front.account.LoginAndRegisterAction.getImg
+POST   /m/front/account/hasNameExist                       					    m.front.account.LoginAndRegisterAction.hasNameExist
+POST   /m/front/account/checkRecommendName                       				m.front.account.LoginAndRegisterAction.checkRecommendName
+*      /m/front/account/hasMobileExists       									m.front.account.LoginAndRegisterAction.hasMobileExists
+POST   /m/front/account/verifySmsCodeForReg           							m.front.account.LoginAndRegisterAction.verifySmsCodeForReg
+POST   /m/front/account/findPasswordByMobile           							m.front.account.LoginAndRegisterAction.findPasswordByMobile
+POST   /m/front/account/verifyMobileForReg           							m.front.account.LoginAndRegisterAction.verifyMobileForReg
+
+POST   /m/front/account/verifySmsCodeForReg           							m.front.account.LoginAndRegisterAction.verifySmsCodeForReg
+GET    /m/resetPasswordByMobile          										m.front.account.LoginAndRegisterAction.resetPasswordByMobile
+POST   /m/savePasswordByMobile           										m.front.account.LoginAndRegisterAction.savePasswordByMobile
+#实名认证页面
+GET     /m/front/account/checkRealName      									m.front.account.CheckAction.checkRealName
+GET     /m/front/account/doCheckRealName      									m.front.account.CheckAction.doCheckRealName
+#资金托管开户页面
+GET     /m/front/account/createIpsAcct      									m.front.account.CheckAction.createIpsAcct
+#开户
+*   /m/front/account/createAcct                                                 m.front.account.FundsManageAction.createAcct
+#开户回调
+*	/m/payment/chinapnr/userRegisterSyn											newr.payment.hf.HfPaymentCallBackAction.userRegisterSyn
+#账户总览
+GET /m/accountHome                                                        		m.front.account.AccountHomeAction.accountHome
+GET /m/findCityByProvinceId                                                     m.front.account.FundsManageAction.findCityByProvinceId
+GET  /m/findBankCode                                                            m.front.account.FundsManageAction.findBankCode
+#绑卡
+GET   /m/front/account/myCard                                                    m.front.account.FundsManageAction.myCard
+GET   /m/front/account/addCard                                                   m.front.account.FundsManageAction.addCard
+POST  /m/front/account/getSMSCode                                                m.front.account.FundsManageAction.getSMSCode 
+POST  /m/front/account/verifySMS                                                m.front.account.FundsManageAction.verifySMS 
+#资金流水
+GET /m/front/account/dealRecord                                                 m.front.account.FundsManageAction.dealRecord
+GET /m/front/account/dealRecordAjax                                             m.front.account.FundsManageAction.dealRecordAjax
+#投资记录
+*     /m/front/invest/viewBidInvestRecords                        				m.front.invest.investAction.viewBidInvestRecords
+*     /m/front/invest/viewBidInvestRecordsAjax 									m.front.invest.investAction.viewBidInvestRecordsAjax
+
+
+#-----------------------------------------------------wap结束------------------------------------------------------
+
+#****************chencheng
+GET       /newr/supervisor/merchantTransferUser                          newr.supervisor.finance.FinanceAction.merchantTransferUser
+*       /newr/supervisor/saveMerchantTransferUser                          newr.supervisor.finance.FinanceAction.saveMerchantTransferUser
+
+POST /newr/front/account/WealthCircle/shareBySms	                                newr.front.account.WealthCircle.shareBySms
+*  /newr/front/account/wealthHome         	                                      newr.front.account.WealthCircle.wealthHome
+POST /newr/front/account/WealthCircle/queryRecommendFeeDetail			newr.front.account.WealthCircle.queryRecommendFeeDetail
+* /newr/bid                                                                      newr.front.NewHomeAction.bid 
+
+
+#***********************************************项目管理*****************************************************
+# -----------------------------------------------全部项目列表----------------------------------------------------------
+*       /supervisor/AllUser/queryAllUserOperationLog       	 supervisor.userManager.AllUser.queryAllUserOperationLog
+*       /newr/supervisor/project/uploadImg                      newr.supervisor.projectManager.ProjectAction.uploadImg
+
+*     	/newr/supervisor/getProject        						newr.supervisor.projectManager.ProjectAction.getProject
+GET     /newr/supervisor/updateProjectDetails        		    newr.supervisor.projectManager.ProjectAction.updateProjectDetails
+*     	/newr/supervisor/reviewProject        					newr.supervisor.projectManager.ProjectAction.reviewProject
+GET    	/newr/supervisor/getProjectDetails        				newr.supervisor.projectManager.ProjectAction.getProjectDetails
+*       /newr/supervisor/getProjectDetailsSuc       			newr.supervisor.projectManager.ProjectAction.approved
+*       /newr/supervisor/getProjectDetailsFai        			newr.supervisor.projectManager.ProjectAction.projectFailure
+# ***********************************************标的管理*****************************************************
+# -----------------------------------------------全部标的列表----------------------------------------------------------
+#
+GET /newr/front/home                                                                newr.front.NewHomeAction.home
+GET /newr/front/newer                                                               newr.front.NewHomeAction.newer     
+GET /newr/front/aboutUs                                                             newr.front.NewHomeAction.aboutUs                     
+GET /newr/front/helpCenterAccount                                                   newr.front.NewHomeAction.helpCenterAccount     
+GET /newr/front/helpCenterInvest                                                    newr.front.NewHomeAction.helpCenterInvest
+GET /newr/front/helpCenterProblems                                                  newr.front.NewHomeAction.helpCenterProblems    
+GET /newr/front/helpCenterTerms                                                     newr.front.NewHomeAction.helpCenterTerms
+GET /newr/front/cooperation                                                         newr.front.NewHomeAction.cooperation
+GET /newr/front/newOnline                                                           newr.front.NewHomeAction.newOnline
+GET /newr/front/account/home                                                        newr.front.account.AccountHome.home
+GET /newr/front/manageTeam                                                           newr.front.NewHomeAction.manageTeam
+GET /newr/front/workEnv                                                              newr.front.NewHomeAction.workEnv
+#2 account myLoadBills
+*    /newr/front/account/myLoanBills                      					    newr.front.account.AccountHome.myLoanBills
+*    /newr/front/account/queryRecommendFeeReport                     	            newr.front.account.AccountHome.queryRecommendFeeReport
+
+*    /newr/front/account/queryRecommendFeeDetail                     	            newr.front.account.AccountHome.queryRecommendFeeDetail
+#2 account loanBillDetails
+GET   /newr/front/account/loanBillDetails                  							newr.front.account.AccountHome.loanBillDetails
+GET   /newr/login                          										    newr.front.account.LoginAndRegisterAction.login
+POST   /newr/logining                          										newr.front.account.LoginAndRegisterAction.logining
+*    /newr/logout                          										    newr.front.account.LoginAndRegisterAction.logout
+GET  /newr/registerMobile                       									newr.front.account.LoginAndRegisterAction.registerMobile
+GET  /newr/register                       											newr.front.account.LoginAndRegisterAction.register
+POST  /newr/front/account/register                  								newr.front.account.LoginAndRegisterAction.registering
+POST  /newr/front/account/setCode                       							newr.front.account.LoginAndRegisterAction.setCode
+GET    /newr/front/account/getImg                       						    newr.front.account.LoginAndRegisterAction.getImg
+POST   /newr/front/account/hasNameExist                       					    newr.front.account.LoginAndRegisterAction.hasNameExist
+POST   /newr/front/account/checkRecommendName                       				newr.front.account.LoginAndRegisterAction.checkRecommendName
+*      /newr/front/account/hasMobileExists       									newr.front.account.LoginAndRegisterAction.hasMobileExists
+POST   /newr/front/account/verifySmsCodeForReg           							newr.front.account.LoginAndRegisterAction.verifySmsCodeForReg
+POST   /newr/front/account/findPasswordByMobile           							newr.front.account.LoginAndRegisterAction.findPasswordByMobile
+POST   /newr/front/account/verifyMobileForReg           							newr.front.account.LoginAndRegisterAction.verifyMobileForReg
+
+POST   /newr/front/account/verifySmsCodeForReg           							newr.front.account.LoginAndRegisterAction.verifySmsCodeForReg
+GET    /newr/front/account/securityCenter                                           newr.front.account.CheckAction.securityCenter
+GET    /newr/front/account/modifyPassword                      						newr.front.account.BasicInformation.modifyPassword
+POST   /newr/front/account/savePassword                      						newr.front.account.BasicInformation.savePassword
+POST   /newr/front/account/queryCorpusInverestByMonth                               newr.front.account.AccountHome.queryCorpusInverestByMonth
+POST   /newr/front/account/queryCorpusInverestByDay                                 newr.front.account.AccountHome.queryCorpusInverestByDay
+#通过手机重置密码
+GET    /newr/front/account/resetPasswordByMobile          							newr.front.account.LoginAndRegisterAction.resetPasswordByMobile
+POST   /newr/front/account/savePasswordByMobile           							newr.front.account.LoginAndRegisterAction.savePasswordByMobile
+
+
+
+#站内消息
+GET      /newr/front/account/systemMsgs                      						newr.front.account.Message.systemMsgs
+*      /newr/front/account/systemMsgDetail                      					newr.front.account.Message.systemMsgDetail
+POST   /newr/front/account/submitRepayment                 							newr.front.account.AccountHome.submitRepayment
+
+#--------------------------------------------------------------------------
+
+#还款
+*	  /newr/payment/chinapnr/batchRepaymentAyns						   newr.payment.hf.HfPaymentCallBackAction.batchRepaymentAyns
+
+POST   /newr/front/account/QueryBankInfo                      						newr.front.account.FundsManage.QueryBankInfo
+#--------------------------------------------------------------------------------------------------------------
+
+#-----------------------------------------------------------------------------------------------------------------
+#新版投资
+GET   /newr/front/invest/immediatelyInvest                                      newr.front.invest.InvestAction.immediatelyInvest
+GET   /newr/front/invest/investList                                             newr.front.invest.InvestAction.investList
+POST  /newr/front/bidAction/checkUserStatus	                                    newr.front.bid.BidAction.checkUserStatus
+GET   /newr/front/account/approve			                      			    newr.front.account.CheckAction.approve
+POST   /newr/front/invest/confirmInvest                      					newr.front.invest.investAction.confirmInvest
+#投标
+GET    /newr/front/invest/invest                            					newr.front.invest.investAction.invest
+#理财首页  
+GET    /newr/front/invest/investHome                        					newr.front.invest.investAction.investHome
+#确认投标
+POST   /newr/front/invest/confirmInvestBottom                      				newr.front.invest.investAction.confirmInvestBottom
+*     /newr/front/invest/viewBidInvestRecords                        			newr.front.invest.investAction.viewBidInvestRecords
+POST   /newr/front/invest/investDetail                                          newr.front.invest.InvestAction.investDetail
+#查看借款标提问记录ajax分页
+*     /newr/front/invest/viewBidAllQuestion                        				newr.front.invest.investAction.viewBidAllQuestion
+#检查用户状态
+POST   /newr/front/invest/checkUserStatus                						newr.front.invest.investAction.checkUserStatus
+#主动投标
+*   /newr/payment/chinapnr/initiativeTender										newr.payment.hf.HfPaymentCallBackAction.initiativeTender
+*   /newr/payment/chinapnr/initiativeTenderAyns									newr.payment.hf.HfPaymentCallBackAction.initiativeTenderAyns
+#投标成功
+GET    /newr/front/invest/investSuccess                            				newr.front.invest.investAction.investSuccess
+
+#放款
+*	/newr/payment/chinapnr/loansAyns											newr.payment.hf.HfPaymentCallBackAction.loansAyns
+
+GET   /newr/front/invest/investContract                                         newr.front.invest.InvestAction.investContract
+
+#-------------------------------------------------------------------------------------------------------------
+
+GET     /errorFront                   											Application.errorFront
+GET     /errorSupervisor              											Application.errorSupervisor
+POST    /Application/randomID                           						Application.randomID
+GET     /Application/captcha                            						Application.captcha
+GET     /Application/exportExcel                        						Application.exportExcel
+POST    /Application/getCity                            						Application.getCity
+GET     /images                            			 							Application.images
+GET     /dlimg                            			 	 						Application.dlImages
+GET     /downloadFiles                            		 						Application.downloadFiles
+POST    /vipAgreement                           		 						Application.vipAgreement
+GET 	/dlWidget										 						Application.dlWidget
+GET 	/log										 							Application.logs
+GET 	/dlpacks/{version}										 				Application.dlpacks
+GET     /favicon.ico                            								404
+
+#上传图片
+*     	/FileUpload/uploadImage 												FileUpload.uploadImage
+*     	/FileUpload/uploadImage2 												FileUpload.uploadImage2
+*     	/FileUpload/uploadImageReturnType 										FileUpload.uploadImageReturnType
+# 上传文件
+*     	/FileUpload/uploadFile 													FileUpload.uploadFile
+# 下载图片
+*    	/FileUpload/downloadImage    											FileUpload.downloadImage
+# Map static resources from the /app/public folder to the /public path
+
+GET     /public/                                staticDir:public
+GET     /data/                                  staticDir:data
+
+# ***********************************************登录*****************************************************
+# 登录
+GET    /supervisor/?                                  							supervisor.login.LoginAction.loginInit
+POST   /supervisor                                  							supervisor.login.LoginAction.login
+GET	   /supervisor/ukeyCheck                                  					supervisor.login.LoginAction.ukeyCheck
+GET    /supervisor/logout                           							supervisor.login.LoginAction.logout
+GET    /supervisor/login/loginAlert                        						supervisor.login.LoginAction.loginAlert
+
+GET    /supervisor/login/ipLocation                        						supervisor.login.LoginAction.ipLocation
+
+GET   /supervisor/checkUkeyInIt                          						supervisor.login.LoginAction.checkUkeyInIt
+GET   /supervisor/UkeyCheck                        						        supervisor.login.LoginAction.checkUkeySign
+GET   /supervisor/toBlank                        						        supervisor.login.LoginAction.toBlank
+
+# ***********************************************用户中心*****************************************************
+GET    /supervisor/account/home                            						supervisor.account.AccountAction.home
+POST   /supervisor/editSupervisor                          						supervisor.account.AccountAction.editSupervisor
+
+
+# ***********************************************管理首页*****************************************************
+GET    /supervisor/managementHome/showHome          							supervisor.managementHome.HomeAction.showHome
+*	   /supervisor/managementHome/saveIndexSetting          					supervisor.managementHome.HomeAction.saveIndexSetting
+GET	   /supervisor/managementHome/showEchartsData                               supervisor.managementHome.HomeAction.showEchartsData
+
+
+
+
+# -----------------------------------------------系统通知模版管理--------------------------------------------------------
+
+
+# 短信模版列表
+GET     /supervisor/TemplateAction/smsTemplates          						supervisor.webContentManager.TemplateAction.smsTemplates
+# 预览短信模版
+POST    /supervisor/TemplateAction/previewSmsTemplate          					supervisor.webContentManager.TemplateAction.previewSmsTemplate
+# 编辑短信模版页面
+POST    /supervisor/TemplateAction/editSmsTemplateInit          				supervisor.webContentManager.TemplateAction.editSmsTemplateInit
+# 编辑短信模版
+POST    /supervisor/TemplateAction/editSmsTemplate          					supervisor.webContentManager.TemplateAction.editSmsTemplate
+# 更新短信模板状态
+POST    /supervisor/TemplateAction/updateSmsTemplateStatus         				supervisor.webContentManager.TemplateAction.updateSmsTemplateStatus
+
+# 平台协议模版列表
+*    /supervisor/TemplateAction/platformProtocol          					    supervisor.webContentManager.TemplateAction.platformProtocol
+# 系统站内信模版列表
+GET     /supervisor/TemplateAction/stationTemplates          					supervisor.webContentManager.TemplateAction.stationTemplates
+# 预览站内信模版
+POST    /supervisor/TemplateAction/previewStationTemplate          				supervisor.webContentManager.TemplateAction.previewStationTemplate
+# 编辑站内信模版页面
+POST    /supervisor/TemplateAction/editStationTemplateInit         				supervisor.webContentManager.TemplateAction.editStationTemplateInit
+# 编辑站内信模版
+POST    /supervisor/TemplateAction/editStationTemplate          				supervisor.webContentManager.TemplateAction.editStationTemplate
+# 更新站内信模板状态
+POST    /supervisor/TemplateAction/updateStationTemplateStatus     				supervisor.webContentManager.TemplateAction.updateStationTemplateStatus
+
+# 自定义站内信模版列表
+GET     /supervisor/TemplateAction/myStationTemplates          					supervisor.webContentManager.TemplateAction.myStationTemplates
+# 添加自定义站内信模版
+POST    /supervisor/TemplateAction/createStationTemplate          				supervisor.webContentManager.TemplateAction.createStationTemplate
+# 
+*    /supervisor/TemplateAction/updatePactStatus          				        supervisor.webContentManager.TemplateAction.updatePactStatus
+# 
+POST    /supervisor/TemplateAction/updatePact          				            supervisor.webContentManager.TemplateAction.updatePact
+# 
+*    /supervisor/TemplateAction/viewPact          				                supervisor.webContentManager.TemplateAction.viewPact
+
+# -----------------------------------------------平台借款标管理--------------------------------------------------------
+
+#产品录入
+GET     /newr/supervisor/getProduct                                              newr.supervisor.projectManager.ProjectAction.getProduct
+GET     /newr/supervisor/setProduct                                              newr.supervisor.projectManager.ProjectAction.setProduct
+POST     /newr/supervisor/saveProduct                                            newr.supervisor.projectManager.ProjectAction.saveProduct
+GET    /newr/supervisor/deleteProduct                                            newr.supervisor.projectManager.ProjectAction.deleteProduct
+#借款人录入
+GET     /newr/supervisor/getLoanUser                                              newr.supervisor.projectManager.ProjectAction.getLoanUser
+GET     /newr/supervisor/setLoanUser                                              newr.supervisor.projectManager.ProjectAction.setLoanUser
+POST     /newr/supervisor/saveLoanUser                                            newr.supervisor.projectManager.ProjectAction.saveLoanUser
+GET    /newr/supervisor/deleteLoanUser                                            newr.supervisor.projectManager.ProjectAction.deleteLoanUser
+
+GET   	/newr/supervisor/project/setProject        				                  newr.supervisor.projectManager.ProjectAction.setProject
+POST   	/newr/supervisor/project/saveProject        			                  newr.supervisor.projectManager.ProjectAction.saveProject
+POST   	/newr/supervisor/project/updateProjectDetails        	                  newr.supervisor.projectManager.ProjectAction.saveUpdateProject
+GET      /newr/supervisor/project/deleteProject                                   newr.supervisor.projectManager.ProjectAction.deleteProject
+
+GET   /newr/supervisor/project/fullList                                           newr.supervisor.projectManager.ProjectAction.fullList
+GET   /newr/supervisor/project/fullBid                                            newr.supervisor.projectManager.ProjectAction.fullBid
+
+GET   /newr/supervisor/project/querySettlement                                           newr.supervisor.projectManager.ProjectAction.querySettlement
+###-----------------------------------------放款管理----------------------------------------------------------
+# 待放款借款标管理
+*       /supervisor/financeManager/readyReleaseList           					supervisor.financeManager.LoanManager.readyReleaseList
+# 放款账号列表
+POST    /supervisor/financeManager/userBank           		        			supervisor.financeManager.LoanManager.userBank
+# 放款到账户
+POST    /front/account/releaseAccount											supervisor.financeManager.LoanManager.releaseAccount
+# 放款到平台
+*       /supervisor/financeManager/releaseAudit									supervisor.financeManager.LoanManager.releaseAudit
+# 放款标记
+GET     /supervisor/financeManager/releaseSign	 								supervisor.financeManager.LoanManager.releaseSign
+# 已放款借款标管理
+*       /supervisor/financeManager/alreadyReleaseList         					supervisor.financeManager.LoanManager.alreadyReleaseList
+# 详情
+GET     /supervisor/financeManager/detail      			    					supervisor.financeManager.LoanManager.detail
+
+    
+
+# -----------------------------------------------资金托管账户管理----------------------------------------------------------
+#账户信息
+GET     /supervisor/financeManager/accountInfo         							supervisor.financeManager.FundsEscrowAccountManager.accountInfo
+#登录（记录用户名）
+GET     /supervisor/financeManager/login         								supervisor.financeManager.FundsEscrowAccountManager.login
+#资金托管协议
+GET     /supervisor/financeManager/fundsEscrowProtocol        					supervisor.financeManager.FundsEscrowAccountManager.fundsEscrowProtocol
+#上传
+GET     /supervisor/financeManager/upload         								supervisor.financeManager.FundsEscrowAccountManager.upload
+
+# -----------------------------------------------管理员管理-----------------------------------------------------------
+#系统管理员列表
+GET		/supervisor/supervisorAction/list										supervisor.systemSettings.supervisorAction.list
+#添加管理员初始化
+POST	/supervisor/supervisorAction/createSupervisorInit						supervisor.systemSettings.supervisorAction.createSupervisorInit
+#添加管理员
+POST	/supervisor/supervisorAction/createSupervisor							supervisor.systemSettings.supervisorAction.createSupervisor
+#编辑管理员初始化
+POST	/supervisor/supervisorAction/editSupervisorInit							supervisor.systemSettings.supervisorAction.editSupervisorInit
+#编辑管理员
+POST	/supervisor/supervisorAction/editSupervisor								supervisor.systemSettings.supervisorAction.editSupervisor
+#设置管理员的权限组页面
+POST	/supervisor/supervisorAction/selectGroupsOfSupervisorInit				supervisor.systemSettings.supervisorAction.selectGroupsOfSupervisorInit
+#设置管理员的权限组
+POST	/supervisor/supervisorAction/setGroupsOfSupervisor						supervisor.systemSettings.supervisorAction.setGroupsOfSupervisor	
+#查看详情
+POST	/supervisor/supervisorAction/detail										supervisor.systemSettings.supervisorAction.detail
+#设置权限页面
+POST	/supervisor/supervisorAction/setRightsInit								supervisor.systemSettings.supervisorAction.setRightsInit
+#设置权限
+POST	/supervisor/supervisorAction/setRights									supervisor.systemSettings.supervisorAction.setRights
+#锁定/启用
+POST	/supervisor/supervisorAction/enable										supervisor.systemSettings.supervisorAction.enable
+#删除管理员
+POST	/supervisor/supervisorAction/deleteSupervisor							supervisor.systemSettings.supervisorAction.deleteSupervisor
+#管理员重置密码
+GET 	/supervisor/supervisorAction/resetPassword							    supervisor.systemSettings.supervisorAction.resetPassword
+
+# -----------------------------------------------权限管理-----------------------------------------------------------
+#权限地图
+GET		/supervisor/rightAction/rightsMap 										supervisor.systemSettings.rightAction.rightsMap	
+#权限管理
+GET		/supervisor/rightAction/rightsManage 									supervisor.systemSettings.rightAction.rightsManage	
+#添加权限组页面		
+POST	/supervisor/rightAction/addRightGroupInit 								supervisor.systemSettings.rightAction.addRightGroupInit
+#添加权限组
+POST	/supervisor/rightAction/addRightGroup 									supervisor.systemSettings.rightAction.addRightGroup
+#编辑权限组页面
+POST	/supervisor/rightAction/editRightGroupInit 								supervisor.systemSettings.rightAction.editRightGroupInit
+#编辑权限组
+POST	/supervisor/rightAction/editRightGroup 									supervisor.systemSettings.rightAction.editRightGroup
+#编辑权限组名单页面	
+POST	/supervisor/rightAction/setGroupRosterInit 								supervisor.systemSettings.rightAction.setGroupRosterInit
+#编辑权限组名单
+POST	/supervisor/rightAction/setGroupRoster 									supervisor.systemSettings.rightAction.setGroupRoster
+#权限组权限设置页面		
+POST	/supervisor/rightAction/setGroupRightsInit 								supervisor.systemSettings.rightAction.setGroupRightsInit
+#权限组权限设置
+POST	/supervisor/rightAction/setGroupRights 									supervisor.systemSettings.rightAction.setGroupRights
+#查询管理员通过账号
+POST	/supervisor/rightAction/querySupervisorByName 							supervisor.systemSettings.rightAction.querySupervisorByName
+#选择管理员名单页面
+POST	/supervisor/rightAction/selectGroupRosterInit 							supervisor.systemSettings.rightAction.selectGroupRosterInit
+#选择管理员页面
+POST	/supervisor/rightAction/selectSupervisorInit 							supervisor.systemSettings.rightAction.selectSupervisorInit
+#添加管理员
+POST	/supervisor/rightAction/addSupervisor 									supervisor.systemSettings.rightAction.addSupervisor
+#删除权限组
+POST	/supervisor/rightAction/deleteRightGroup 								supervisor.systemSettings.rightAction.deleteRightGroup

@@ -1,0 +1,154 @@
+#{extends 'newr/common/frontMain.html' /}
+
+<div class="full">
+	<div class="content" style="background:#fff;">
+		<table cellpadding="0" cellspacing="0" width="100%">
+			<tr>
+				#{include '/newr/front/NewHomeAction/helpCenterLeftMenu.html'/}
+			
+				<td class="tree_right_td" valign="top">
+                    
+                    <div class="tree_right2">
+                    	<div class="right_top_title">名词解释</div>
+                    	<div class="tree_right2_b">
+                        	<!--问题开始-->
+                            <ul class="column" id="help_list">
+                                <li>
+                                    <ul>
+                                        <li class="coulmn_ul_li">
+                                            <h3 class="">名词解释</h3>
+                                            <ul class="coulmn_ul_ul" >
+                                                <li class="coulmn_ul_ul_li01">投资人</li>
+                                                <li class="coulmn_ul_ul_li">
+                                                   也称理财人，是指已经或准备在网站上进行出借活动的用户。凡18周岁以上的中国大陆地区公民，都可以成为理财人。
+                                                </li>
+                                                
+                                                <li class="coulmn_ul_ul_li01">充值</li>
+                                                <li class="coulmn_ul_ul_li">
+                                               指投资人可以通过与银信保合作的第三方托管平台以及网上银行进行充值。为保障投资人的资金安全，投资人在充值前必须完成实名认证。
+                                                </li>
+                                                
+                                                <li class="coulmn_ul_ul_li01">交易密码</li>
+                                                <li class="coulmn_ul_ul_li">
+                                                   用于提现的密码指令，建议用户设置不一样的交易密码和登录密码，提升安全等级。 
+                                                </li>
+                                                
+                                                <li class="coulmn_ul_ul_li01">资产总额</li>
+                                                <li class="coulmn_ul_ul_li">
+                                                   指用户账户的所有金额（含冻结金额和可用金额）。 
+                                                </li>
+                                                
+                                                <li class="coulmn_ul_ul_li01">可用余额</li>
+                                                <li class="coulmn_ul_ul_li">
+                                                   是指用户可自由支配的金额。
+                                                </li>
+                                                
+                                                <li class="coulmn_ul_ul_li01">冻结金额</li>
+                                                <li class="coulmn_ul_ul_li">
+                                                冻结资金分为购买冻结和提现冻结。
+                                                <br />
+<b>购买冻结：</b>指您购买的项目进度达到100%之前，您的购买资金会被冻结；当项目进度达到100%时，这部分资金将转给借款人；若在限定时间内项目进度没有达到100%，即流标，这部分资金将解除冻结返至您的平台账户。
+<br />
+<b>提现冻结：</b>指您提交提现申请后，这部分资金会被冻结，待提现审核通过后，这部分资金将解除冻结，由第三方支付公司划拨至您绑定的银行卡。
+                                                </li>
+                                                
+                                                <li class="coulmn_ul_ul_li01">待收本金</li>
+                                                <li class="coulmn_ul_ul_li">
+                                                指投资人已投资而尚未收回的本金。
+                                                </li>
+                                                
+                                                <li class="coulmn_ul_ul_li01">待收收益</li>
+                                                <li class="coulmn_ul_ul_li">
+                                                指投资人已投资而尚未收回的利息之和。
+                                                </li>
+                                                
+                                                <li class="coulmn_ul_ul_li01">借款列表</li>
+                                                <li class="coulmn_ul_ul_li">
+                                                当借款人成功发布一个借款请求时，我们将包含各种借款信息的请求称为一个借款列表。
+                                                </li>
+                                                
+                                                <li class="coulmn_ul_ul_li01">投标金额</li>
+                                                <li class="coulmn_ul_ul_li">
+                                                是指投资人对借款列表进行投标的金额。
+                                                </li>
+
+                                                <li class="coulmn_ul_ul_li01">投标</li>
+                                                <li class="coulmn_ul_ul_li">
+                                                是指投资人将其账户内指定的金额出借给其指定的借款列表的行为。
+                                                </li>
+                                                
+                                                <li class="coulmn_ul_ul_li01">满标</li>
+                                                <li class="coulmn_ul_ul_li">
+                                                指标的在规定时间内成功完成资金筹集，等待放款的状态。
+                                                </li>
+
+                                                <li class="coulmn_ul_ul_li01">提现</li>
+                                                <li class="coulmn_ul_ul_li">
+                                                指用户将其个人账户里的可用金额转移至其指定的银行卡，提现仅能将金额提至经过实名认证的用户银行卡中。在用户发起提现申请后，第三方托管账户汇付天下会在T+1个工作日完成资金划转。
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        
+                
+
+                                    </ul>
+                                </li>
+                            </ul>
+
+                        	<!--问题结束-->
+                        	<div class="clear"></div>
+                        </div>
+                   		<div class="clear"></div>
+                	</div><!--tree_right end-->
+                </td>
+			</tr>
+		</table>	
+        <div class="clear"></div>
+    </div><!--content end-->
+
+	<div class="clear"></div>
+</div>
+
+
+<script>
+	$(function(){
+		$(window).scroll(function(){
+			if($(window).scrollTop()>100){  //距顶部多少像素时，出现返回顶部按钮
+				$("#side-bar .gotop").fadeIn();	
+			}
+			else{
+				$("#side-bar .gotop").hide();
+			}
+		});
+		$("#side-bar .gotop").click(function(){
+			$('html,body').animate({'scrollTop':0},500); //返回顶部动画 数值越小时间越短
+		});
+	});
+
+/*问答js*/
+jQuery(function(){
+	jQuery("#help_list").find("h3").next("ul").hide();
+	jQuery("#help_list").find("h3").eq(0).addClass("on")
+	jQuery("#help_list").find("h3").eq(0).next("ul").show();
+	jQuery("#help_list").find("h3").click(function(){
+		var sub_list2 = jQuery(this).next("ul");
+		if(sub_list2.is( ":visible")){
+			sub_list2.slideUp();
+			jQuery(this).removeClass("on");
+		}else{
+			jQuery("#help_list").find("h3").removeClass("on");
+			jQuery("#help_list").find("h3").next().slideUp();
+			sub_list2.slideDown();
+			jQuery(this).addClass("on");
+		}
+	})
+})
+
+$(function(){
+	var obj = document.getElementById("helpCenterTerms");
+	change_bg(obj);
+});
+</script>
+
+</body>
+</html>

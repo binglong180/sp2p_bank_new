@@ -1,0 +1,67 @@
+%{
+		business.newr.User currUser = business.newr.User.currUser();
+	}%
+<!--左侧分类树js-->
+<script type="text/javascript">
+function change_bg(obj)
+{
+    var a=document.getElementById("menu_tree").getElementsByTagName("a");
+    for(var i=0;i<a.length;i++)
+    {
+        a[i].className="";
+    }
+    obj.className="current_on";
+}
+</script>
+<!--左侧分类树js-->
+				<td class="tree_left" valign="top" id="menu_tree" >
+                	<div class="tree_div">
+                    	<div class="tree_d_title">
+                        	<div class="tree_d_title_icon"></div>
+                            <div class="tree_d_title_text">我的账户</div>
+                        </div>
+                        <ul>
+                            <li class="tree_li"><a id='child1' href="@{newr.front.account.AccountHome.home()}">账户总览</a></li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                    
+                	<div class="tree_div">
+                    	<div class="tree_d_title">
+                        	<div class="tree_d_title_icon2"></div>
+                            <div class="tree_d_title_text">我的交易</div>
+                        </div>
+                        <ul>
+                            #{if currUser?.company !=null && currUser?.mobile == null}
+                            <li class="tree_li"><a id='child4' href="@{newr.front.account.AccountHome.myLoanBills()}" >还款管理</a></li>
+                            #{/if}
+                            #{else}
+                            <li class="tree_li"><a id='child4' href="@{newr.front.invest.investAction.viewBidInvestRecords()}" >投资记录</a></li>
+                            #{/else}
+                            <li class="tree_li"><a id='child5' href="@{newr.front.account.FundsManage.dealRecord}" >资金流水</a></li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+					<div class="tree_div">
+                    	<div class="tree_d_title">
+                        	<div class="tree_d_title_icon4"></div>
+                            <div class="tree_d_title_text">我的服务</div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                	<div class="tree_div">
+                    	<div class="tree_d_title">
+                        	<div class="tree_d_title_icon3"></div>
+                            <div class="tree_d_title_text">我的信息</div>
+                        </div>
+                        <ul>
+                            <li class="tree_li"><a id='child6'  href='@{newr.front.account.CheckAction.securityCenter()}'>安全中心</a></li>
+                            <li class="tree_li"><a id='child7'  href='@{newr.front.account.Message.systemMsgs()}'>站内消息</a></li>
+                           
+                            
+                  
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                    
+                </td>

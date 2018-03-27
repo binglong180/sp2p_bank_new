@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+	<title></title>
+	<script type="text/javascript" src="@{'/public/m/js/rem.js'}" ></script>
+	<script type="text/javascript" src="@{'/public/m/js/jquery-1.8.2.min.js'}" ></script>
+	<link rel="stylesheet" href="@{'/public/m/css/common.css'}" />
+	<link rel="stylesheet" href="@{'/public/m/css/firstep.css'}" />
+	<script type="text/javascript">
+		//绑卡验证银行卡是否存在
+		
+	  $(document).ready(function(){
+		  $("#oldBank").click(openBankS());
+	   });
+		// 查询快捷支付银行
+		function openBankS(){
+		     $("#oldBank").html("");
+		     var datasJson1;
+		     $.ajax({
+		         async: false,
+		         type: "get",
+		         dataType: "json",
+		         url: "/m/findBankCode",
+		         success: function (msg) {
+		         	 for(var i=0,l=msg.length;i<l;i++){
+		         		datasJson1+="<option  value="+msg[i].bank_code+">"+msg[i].bank_name+"</option>";
+		          	 } 
+		         	 $("#oldBank").append(datasJson1);
+		         }
+	       });
+		}
+		// 查询省市
+		function toggleProvince(){
+			$("#city").empty();
+			var cityStr = "";
+			var pcode = $("#province").find("option:selected").val();
+			if(!pcode){
+			 return false;
+			}else{
+		 		$.ajax({
+		            async: false,
+		            type: "get",
+		            data:"provinceId="+pcode,
+		            url: '/m/findCityByProvinceId',
+		            success: function (msg) {
+		            	for(var i=0,l=msg.length;i<l;i++){
+		            		cityStr+="<option id='"+msg[i].province_id+"' value='"+msg[0].name+"' style='color:#787878'>"+msg[i].name+"</option>";
+		            	}
+		            	$("#city").append(cityStr);
+		            }
+	        	}); 
+			}
+		}
+		
+		
+	
+		
+		/* function bindBankCard(){
+			$("#SMSCodeSubmit").submit();
+		} */
+		
+		
+		// 验证中文名称
+		function isChinaName(name) {
+		    var pattern = /^[\u4E00-\u9FA5]{1,6}$/;
+		    return pattern.test(name);
+		}
+		// 验证手机号
+		function isPhoneNo(phone) {  
+			var pattern = /^(1[34578]\d{9}$)/; 
+		    return pattern.test(phone);  
+		}
+
+		// 验证身份证 
+		function isCardNo(card) {  
+		   var pattern = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;  
+		   return pattern.test(card); 
+		} 
+		// 验证银行卡
+		function isBankNo(card) {  
+			 var pattern = /^([1-9]{1})(\d{15}|\d{18})$/;
+		   return pattern.test(card); 
+		} 
+		//验证手机验证码
+		
+		
+		/*点击时发送短信验证码*/
+		function sendCode(){
+			var PhoneNumber = $.trim($("#PhoneNumber").val());
+			var bankID = $.trim($('#oldBank').val());
+			var AccountName=$.trim($('#username').val());
+			var AccountNumber=$.trim($('#AccountNumber').val());
+			var IdentificationNumber=$.trim($('#IdentificationNumber').val());
+			var province=$('#province').val();;
+			var branch_bank_name=$.trim($('#branch_bank_name').val());
+          	var city=$('#city').val();
+          	
+			var str = '';
+				
+			    // 判断名称
+			    if(AccountName.length == 0) {
+			        str += '请输入姓名';
+			        $(".bindcard-error").html(str).show();
+			        $('#username').focus();
+			        return;
+			    } 
+			    // 验证身份证
+			    if(IdentificationNumber.length == 0) {  
+			        str += '请输入身份证号码';
+			        $(".bindcard-error").html(str).show();
+			        $('#IdentificationNumber').focus();
+			        return;
+			    } else {
+			        if(isCardNo(IdentificationNumber) == false) {
+			            str += '身份证号格式不正确';
+			            $(".bindcard-error").html(str).show();
+			            $('#IdentificationNumber').focus();
+			            return;
+			        }
+			    }
+			    // 判断开户行
+			    if(bankID == 0) {
+			        str += '请选择开户行';
+			        $(".bindcard-error").html(str).show();
+			        $('#oldBank').focus();
+			        return;
+			    } 
+			    // 判断开户行省
+			    if(province == 0) {
+			        str += '请选择开户行省';
+			        $(".bindcard-error").html(str).show();
+			        $('#province').focus();
+			        return;
+			    } 
+				 // 判断开户行城市
+			    if(city == 0) {
+			        str += '请选择开户行城市';
+			        $(".bindcard-error").html(str).show();
+			        $('#city').focus();
+			        return;
+			    } 
+			    // 判断银行卡号
+			    if (AccountNumber.length == 0) {  
+			        str += '请输入银行卡号';
+			        $(".bindcard-error").html(str).show();
+			        $('#AccountNumber').focus();
+			        return;
+			    } else {
+			        if(isBankNo(AccountNumber) == false) {
+			           str += '银行卡号格式错误';
+			           $(".bindcard-error").html(str).show();
+			           $('#AccountNumber').focus();
+			           return;
+			        }
+			    }
+			    // 判断手机号码
+			    if (PhoneNumber.length == 0) {  
+			        str += '请输入手机号';
+			        $(".bindcard-error").html(str).show();
+			        $('#PhoneNumber').focus();
+			        return;
+			    } else {
+			        if (isPhoneNo(PhoneNumber) == false) {
+			           str += '手机号码格式错误';
+			           $(".bindcard-error").html(str).show();
+			           $('#PhoneNumber').focus();
+			           return;
+			        }
+			    }
+				
+			    // 判断开户行
+			    if (branch_bank_name.length == 0) {  
+			        str += '请輸入支行名称';
+			        $(".bindcard-error").html(str).show();
+			        $('#branch_bank_name').focus();
+			        return;
+			    } 
+				
+			    
+
+			   /*  // 验证地址
+			    if($.trim($('#address').val()).length == 0) {  
+			        str += '地址没有输入\n';
+			        $('#address').focus();
+			    } */
+
+			    // 如果没有错误则显示
+			    if($.trim(str) != '') {
+			        $(".bindcard-error").html(str).show();
+			        return;
+			    } else {
+			    	$(".bindcard-error").hide();					
+				}
+			    
+			    
+			    $.ajax({
+					url:"@{m.front.account.FundsManageAction.getSMSCode()}",
+					data:{
+						"PhoneNumber":PhoneNumber,
+						"bankID":bankID,
+						"AccountName":AccountName,
+						"AccountNumber":AccountNumber,
+						"IdentificationNumber":IdentificationNumber,
+						"province":province,
+						"branch_bank_name":branch_bank_name,
+						"city":city
+					},
+					dataType:"json",
+					type:"post",
+					success:function(result){
+						if(result.success==true){
+							countDown();
+							$("#bindId").val(result.bankaccount.id);
+						}
+						if(result.success==false){
+							$(".bindcard-error").html(result.errorMsg).show();
+							return;
+						}
+						
+						
+						
+					}
+					});
+			    }			
+			    
+		
+		var remain = 90;
+		/*点击发送短信验证码后倒计时*/
+		function countDown() {
+		   if (remain == 0) {
+			   remain = 90;
+			   $("#sendSmsCode").html("点击发送");
+			   $("#sendSmsCode").attr("onclick", "sendCode();");
+			   $("#sendSmsCode").attr("style", "cursor:pointer");
+			   return;
+		   }
+
+		   $("#sendSmsCode").html("" + remain-- + "秒后重发");
+		   setTimeout("countDown()",1000);
+		}
+		// 绑卡
+		function bindBankCard() {
+			var phoneCode=$.trim($('#phoneCode').val());
+			// 判断验证码
+			var str="";
+		    if (phoneCode.length == 0) {
+		        str += '请輸入验证码';
+		        $(".bindcard-error").html(str).show();
+		        $('#phoneCode').focus();
+		        return;
+		    }
+		    $("#SMSCodeSubmit").submit();
+		}
+	</script>
+</head>
+<body style="background:#fafafa">
+<div class="container">
+	<!-- 头部  -->
+    <header class="header"> 绑定银行卡</header>
+    <!-- 内容  -->
+	<div class="bindcard-error" style="display:none;">xxx数据填写报错提示！</div>
+	
+	<div class="bindcard">
+	    
+		<div class="bindcard-border">
+			<input type="text" id="username" name="AccountName" value="" placeholder="您的真实姓名" />
+		</div>
+		<div class="bindcard-border">
+			<input type="text" id="IdentificationNumber" name="IdentificationNumber" value="" placeholder="您的真实身份证号" />
+		</div>
+		<div class="bindcard-border">
+			<select onchange=""  name="BankID" id="oldBank" required="required">
+			</select>
+		</div>
+		<div class="bindcard-border">
+			<input type="text" id="AccountNumber" name="AccountNumber" value="" placeholder="请输入银行卡号" />
+		</div>
+		<div class="bindcard-border">
+			<div class="bindcard-border-list">
+			<select onchange="toggleProvince();"  name="province" id="province" required="required">
+				<option style="color:#787878" value=0>请选择开户行省</option>
+				#{list items:provices, as:'provice'}
+				  <option id="${provice?.id}" value="${provice?.id}" style="color:#787878">${provice?.name}</option>
+				#{/list}
+			</select>
+			<select onchange=""  name="city" id="city" required="required" >
+				<option style="color:#787878" value=0>请选择开户行市</option>
+			</select>
+			</div>
+		</div>
+		<div class="bindcard-border">
+			<input type="text" id="branch_bank_name" name="branch_bank_name" value="" placeholder="请填写支行名称" />
+		</div>
+		<div class="bindcard-border">
+			<input type="text" id="PhoneNumber" name="PhoneNumber" value="" placeholder="请填写对应银行预留手机号" />
+		</div>
+	#{form @m.front.account.FundsManageAction.verifySMS(), id:'SMSCodeSubmit'}
+		<div class="bindcard-border">
+			<input type="number" id="phoneCode" name="code" value="" placeholder="输入验证码"/>
+			<input type="hidden" id = "randomID" />
+			<a href="javascript:void(0);" id="sendSmsCode" onclick="sendCode()" >获取验证码</a>
+			<!-- 获取绑定的信息 -->
+			<input type="hidden" id="bindId" name="bindId" />
+		</div>
+		<a class="bindcard-btn"  href="javascript:void(0);" onclick="bindBankCard();" >绑定</a>
+	</div>
+	#{/form}
+</div>
+</body>
+</html>

@@ -1,0 +1,318 @@
+2018-03-26 11:55:28,264 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-26 11:55:29,402 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1138
+2018-03-26 11:55:29,530 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1266
+2018-03-26 11:55:34,749 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 6485
+2018-03-26 11:55:48,990 ERROR ~ 
+
+@77d0ighge
+Internal Server Error (500) for request GET /
+
+Oops: DuplicateMemberException
+An unexpected error occured caused by exception DuplicateMemberException: duplicate method: count in models.t_bills
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 20726
+play.exceptions.UnexpectedException: While applying play.db.jpa.JPAPlugin@4be525ab on models.t_bills
+	at play.plugins.PluginCollection.enhance(PluginCollection.java:556)
+	at play.classloading.ApplicationClasses$ApplicationClass.enhance(ApplicationClasses.java:235)
+	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:167)
+	at play.classloading.ApplicationClassloader.getAllClasses(ApplicationClassloader.java:431)
+	at play.Play.start(Play.java:523)
+	at play.Play.detectChanges(Play.java:637)
+	at play.Invoker$Invocation.init(Invoker.java:198)
+	at Invocation.HTTP Request(Play!)
+Caused by: javassist.bytecode.DuplicateMemberException: duplicate method: count in models.t_bills
+	at javassist.bytecode.ClassFile.testExistingMethod(ClassFile.java:593)
+	at javassist.bytecode.ClassFile.addMethod(ClassFile.java:577)
+	at javassist.CtClassType.addMethod(CtClassType.java:1235)
+	at play.db.jpa.JPAEnhancer.enhanceThisClass(JPAEnhancer.java:29)
+	at play.db.jpa.JPAPlugin.enhance(JPAPlugin.java:102)
+	at play.plugins.PluginCollection.enhance(PluginCollection.java:551)
+	... 7 more
+2018-03-26 12:02:47,076 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-26 12:02:48,242 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1166
+2018-03-26 12:02:48,367 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1291
+2018-03-26 12:02:52,560 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 5484
+2018-03-26 12:03:03,341 ERROR ~ 
+
+@77d0jfaie
+Internal Server Error (500) for request GET /
+
+Oops: DuplicateMemberException
+An unexpected error occured caused by exception DuplicateMemberException: duplicate method: count in models.t_bills
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 16265
+play.exceptions.UnexpectedException: While applying play.db.jpa.JPAPlugin@4be525ab on models.t_bills
+	at play.plugins.PluginCollection.enhance(PluginCollection.java:556)
+	at play.classloading.ApplicationClasses$ApplicationClass.enhance(ApplicationClasses.java:235)
+	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:167)
+	at play.classloading.ApplicationClassloader.getAllClasses(ApplicationClassloader.java:431)
+	at play.Play.start(Play.java:523)
+	at play.Play.detectChanges(Play.java:637)
+	at play.Invoker$Invocation.init(Invoker.java:198)
+	at Invocation.HTTP Request(Play!)
+Caused by: javassist.bytecode.DuplicateMemberException: duplicate method: count in models.t_bills
+	at javassist.bytecode.ClassFile.testExistingMethod(ClassFile.java:593)
+	at javassist.bytecode.ClassFile.addMethod(ClassFile.java:577)
+	at javassist.CtClassType.addMethod(CtClassType.java:1235)
+	at play.db.jpa.JPAEnhancer.enhanceThisClass(JPAEnhancer.java:29)
+	at play.db.jpa.JPAPlugin.enhance(JPAPlugin.java:102)
+	at play.plugins.PluginCollection.enhance(PluginCollection.java:551)
+	... 7 more
+2018-03-26 13:09:18,451 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-26 13:09:20,714 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 2263
+2018-03-26 13:09:20,834 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 2383
+2018-03-26 13:09:30,852 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 12401
+2018-03-26 13:09:42,015 ERROR ~ 
+
+@77d128ndl
+Internal Server Error (500) for request GET /
+
+Oops: DuplicateMemberException
+An unexpected error occured caused by exception DuplicateMemberException: duplicate method: count in models.t_bills
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 23564
+play.exceptions.UnexpectedException: While applying play.db.jpa.JPAPlugin@142edebe on models.t_bills
+	at play.plugins.PluginCollection.enhance(PluginCollection.java:556)
+	at play.classloading.ApplicationClasses$ApplicationClass.enhance(ApplicationClasses.java:235)
+	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:167)
+	at play.classloading.ApplicationClassloader.getAllClasses(ApplicationClassloader.java:431)
+	at play.Play.start(Play.java:523)
+	at play.Play.detectChanges(Play.java:637)
+	at play.Invoker$Invocation.init(Invoker.java:198)
+	at Invocation.HTTP Request(Play!)
+Caused by: javassist.bytecode.DuplicateMemberException: duplicate method: count in models.t_bills
+	at javassist.bytecode.ClassFile.testExistingMethod(ClassFile.java:593)
+	at javassist.bytecode.ClassFile.addMethod(ClassFile.java:577)
+	at javassist.CtClassType.addMethod(CtClassType.java:1235)
+	at play.db.jpa.JPAEnhancer.enhanceThisClass(JPAEnhancer.java:29)
+	at play.db.jpa.JPAPlugin.enhance(JPAPlugin.java:102)
+	at play.plugins.PluginCollection.enhance(PluginCollection.java:551)
+	... 7 more
+2018-03-26 13:12:30,755 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 1
+2018-03-26 13:12:31,886 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1132
+2018-03-26 13:12:32,015 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1261
+2018-03-26 13:12:36,120 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 5366
+2018-03-26 13:12:45,835 ERROR ~ 
+
+@77d12ja2a
+Internal Server Error (500) for request GET /
+
+Oops: DuplicateMemberException
+An unexpected error occured caused by exception DuplicateMemberException: duplicate method: count in models.t_bills
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 15081
+play.exceptions.UnexpectedException: While applying play.db.jpa.JPAPlugin@4be525ab on models.t_bills
+	at play.plugins.PluginCollection.enhance(PluginCollection.java:556)
+	at play.classloading.ApplicationClasses$ApplicationClass.enhance(ApplicationClasses.java:235)
+	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:167)
+	at play.classloading.ApplicationClassloader.getAllClasses(ApplicationClassloader.java:431)
+	at play.Play.start(Play.java:523)
+	at play.Play.detectChanges(Play.java:637)
+	at play.Invoker$Invocation.init(Invoker.java:198)
+	at Invocation.HTTP Request(Play!)
+Caused by: javassist.bytecode.DuplicateMemberException: duplicate method: count in models.t_bills
+	at javassist.bytecode.ClassFile.testExistingMethod(ClassFile.java:593)
+	at javassist.bytecode.ClassFile.addMethod(ClassFile.java:577)
+	at javassist.CtClassType.addMethod(CtClassType.java:1235)
+	at play.db.jpa.JPAEnhancer.enhanceThisClass(JPAEnhancer.java:29)
+	at play.db.jpa.JPAPlugin.enhance(JPAPlugin.java:102)
+	at play.plugins.PluginCollection.enhance(PluginCollection.java:551)
+	... 7 more
+2018-03-26 13:16:07,539 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-26 13:16:08,694 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1155
+2018-03-26 13:16:08,826 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1287
+2018-03-26 13:16:14,837 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 7298
+2018-03-26 13:16:19,535 ERROR ~ 
+
+@77d135e3k
+Internal Server Error (500) for request GET /
+
+Compilation error (In /app/business/newr/Bill.java around line 109)
+The file /app/business/newr/Bill.java could not be compiled. Error raised is : bid_id cannot be resolved or is not a field
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 11996
+play.exceptions.CompilationException: bid_id cannot be resolved or is not a field
+	at play.classloading.ApplicationCompiler$2.acceptResult(ApplicationCompiler.java:246)
+	at org.eclipse.jdt.internal.compiler.Compiler.handleInternalException(Compiler.java:676)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:520)
+	at play.classloading.ApplicationCompiler.compile(ApplicationCompiler.java:282)
+	at play.classloading.ApplicationClassloader.getAllClasses(ApplicationClassloader.java:426)
+	at play.Play.start(Play.java:523)
+	at play.Play.detectChanges(Play.java:637)
+	at play.Invoker$Invocation.init(Invoker.java:198)
+	at Invocation.HTTP Request(Play!)
+2018-03-26 13:16:41,208 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-26 13:16:42,313 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1105
+2018-03-26 13:16:42,450 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1242
+2018-03-26 13:16:45,777 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 4569
+2018-03-26 13:16:56,024 ERROR ~ 
+
+@77d137g42
+Internal Server Error (500) for request GET /
+
+Oops: DuplicateMemberException
+An unexpected error occured caused by exception DuplicateMemberException: duplicate method: count in models.t_bills
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 14816
+play.exceptions.UnexpectedException: While applying play.db.jpa.JPAPlugin@4be525ab on models.t_bills
+	at play.plugins.PluginCollection.enhance(PluginCollection.java:556)
+	at play.classloading.ApplicationClasses$ApplicationClass.enhance(ApplicationClasses.java:235)
+	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:167)
+	at play.classloading.ApplicationClassloader.getAllClasses(ApplicationClassloader.java:431)
+	at play.Play.start(Play.java:523)
+	at play.Play.detectChanges(Play.java:637)
+	at play.Invoker$Invocation.init(Invoker.java:198)
+	at Invocation.HTTP Request(Play!)
+Caused by: javassist.bytecode.DuplicateMemberException: duplicate method: count in models.t_bills
+	at javassist.bytecode.ClassFile.testExistingMethod(ClassFile.java:593)
+	at javassist.bytecode.ClassFile.addMethod(ClassFile.java:577)
+	at javassist.CtClassType.addMethod(CtClassType.java:1235)
+	at play.db.jpa.JPAEnhancer.enhanceThisClass(JPAEnhancer.java:29)
+	at play.db.jpa.JPAPlugin.enhance(JPAPlugin.java:102)
+	at play.plugins.PluginCollection.enhance(PluginCollection.java:551)
+	... 7 more
+2018-03-26 13:20:14,435 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-26 13:20:15,557 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1122
+2018-03-26 13:20:15,688 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1253
+2018-03-26 13:20:20,712 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 6277
+2018-03-26 13:20:31,132 ERROR ~ 
+
+@77d13jm09
+Internal Server Error (500) for request GET /
+
+Oops: DuplicateMemberException
+An unexpected error occured caused by exception DuplicateMemberException: duplicate method: count in models.t_bills
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 16697
+play.exceptions.UnexpectedException: While applying play.db.jpa.JPAPlugin@310c247a on models.t_bills
+	at play.plugins.PluginCollection.enhance(PluginCollection.java:556)
+	at play.classloading.ApplicationClasses$ApplicationClass.enhance(ApplicationClasses.java:235)
+	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:167)
+	at play.classloading.ApplicationClassloader.getAllClasses(ApplicationClassloader.java:431)
+	at play.Play.start(Play.java:523)
+	at play.Play.detectChanges(Play.java:637)
+	at play.Invoker$Invocation.init(Invoker.java:198)
+	at Invocation.HTTP Request(Play!)
+Caused by: javassist.bytecode.DuplicateMemberException: duplicate method: count in models.t_bills
+	at javassist.bytecode.ClassFile.testExistingMethod(ClassFile.java:593)
+	at javassist.bytecode.ClassFile.addMethod(ClassFile.java:577)
+	at javassist.CtClassType.addMethod(CtClassType.java:1235)
+	at play.db.jpa.JPAEnhancer.enhanceThisClass(JPAEnhancer.java:29)
+	at play.db.jpa.JPAPlugin.enhance(JPAPlugin.java:102)
+	at play.plugins.PluginCollection.enhance(PluginCollection.java:551)
+	... 7 more
+2018-03-26 13:23:18,885 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-26 13:23:20,015 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1130
+2018-03-26 13:23:20,145 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1260
+2018-03-26 13:23:24,877 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 5992
+2018-03-26 13:23:34,787 ERROR ~ 
+
+@77d14481i
+Internal Server Error (500) for request GET /
+
+Oops: DuplicateMemberException
+An unexpected error occured caused by exception DuplicateMemberException: duplicate method: count in models.t_bills
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 15902
+play.exceptions.UnexpectedException: While applying play.db.jpa.JPAPlugin@4be525ab on models.t_bills
+	at play.plugins.PluginCollection.enhance(PluginCollection.java:556)
+	at play.classloading.ApplicationClasses$ApplicationClass.enhance(ApplicationClasses.java:235)
+	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:167)
+	at play.classloading.ApplicationClassloader.getAllClasses(ApplicationClassloader.java:431)
+	at play.Play.start(Play.java:523)
+	at play.Play.detectChanges(Play.java:637)
+	at play.Invoker$Invocation.init(Invoker.java:198)
+	at Invocation.HTTP Request(Play!)
+Caused by: javassist.bytecode.DuplicateMemberException: duplicate method: count in models.t_bills
+	at javassist.bytecode.ClassFile.testExistingMethod(ClassFile.java:593)
+	at javassist.bytecode.ClassFile.addMethod(ClassFile.java:577)
+	at javassist.CtClassType.addMethod(CtClassType.java:1235)
+	at play.db.jpa.JPAEnhancer.enhanceThisClass(JPAEnhancer.java:29)
+	at play.db.jpa.JPAPlugin.enhance(JPAPlugin.java:102)
+	at play.plugins.PluginCollection.enhance(PluginCollection.java:551)
+	... 7 more
+2018-03-26 13:28:52,153 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-26 13:28:53,298 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1145
+2018-03-26 13:28:53,431 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1278
+2018-03-26 13:28:57,137 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 4984
+2018-03-26 13:29:35,003 INFO  ~ Connected to jdbc:mysql://127.0.0.1/p2p_bank?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci  ~ play.Logger.info(Logger.java:289) ~ play ~ 42850
+2018-03-26 13:29:37,614 INFO  ~ Application 'sp2p_bank' is now started !  ~ play.Logger.info(Logger.java:289) ~ play ~ 45461
+2018-03-26 13:29:38,181 DEBUG ~ select t_system_o0_.id as id32_, t_system_o0_._key as column2_32_, t_system_o0_._value as column3_32_, t_system_o0_.description as descript4_32_ from t_system_options t_system_o0_ order by t_system_o0_.id  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 46028
+2018-03-26 13:29:38,435 DEBUG ~ select t_dict_ad_0_.id as id18_, t_dict_ad_0_.name as name18_ from t_dict_ad_provinces t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 46282
+2018-03-26 13:29:38,464 DEBUG ~ select t_dict_ad_0_.id as id53_, t_dict_ad_0_.name as name53_, t_dict_ad_0_.province_id as province3_53_ from t_dict_ad_citys t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 46311
+2018-03-26 13:34:01,536 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-26 13:34:02,664 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1128
+2018-03-26 13:34:02,789 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1253
+2018-03-26 13:34:07,045 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 5509
+2018-03-26 13:34:18,038 INFO  ~ Connected to jdbc:mysql://127.0.0.1/p2p_bank?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci  ~ play.Logger.info(Logger.java:289) ~ play ~ 16502
+2018-03-26 13:34:20,215 INFO  ~ Application 'sp2p_bank' is now started !  ~ play.Logger.info(Logger.java:289) ~ play ~ 18679
+2018-03-26 13:34:20,683 DEBUG ~ select t_system_o0_.id as id32_, t_system_o0_._key as column2_32_, t_system_o0_._value as column3_32_, t_system_o0_.description as descript4_32_ from t_system_options t_system_o0_ order by t_system_o0_.id  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 19147
+2018-03-26 13:34:20,798 DEBUG ~ select t_dict_ad_0_.id as id18_, t_dict_ad_0_.name as name18_ from t_dict_ad_provinces t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 19262
+2018-03-26 13:34:20,809 DEBUG ~ select t_dict_ad_0_.id as id53_, t_dict_ad_0_.name as name53_, t_dict_ad_0_.province_id as province3_53_ from t_dict_ad_citys t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 19273
+2018-03-26 13:39:49,356 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 1
+2018-03-26 13:39:50,509 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1154
+2018-03-26 13:39:50,639 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1284
+2018-03-26 13:39:51,120 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1765
+2018-03-26 13:40:02,459 INFO  ~ Connected to jdbc:mysql://127.0.0.1/p2p_bank?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci  ~ play.Logger.info(Logger.java:289) ~ play ~ 13104
+2018-03-26 13:40:05,211 INFO  ~ Application 'sp2p_bank' is now started !  ~ play.Logger.info(Logger.java:289) ~ play ~ 15856
+2018-03-26 13:40:05,742 DEBUG ~ select t_system_o0_.id as id32_, t_system_o0_._key as column2_32_, t_system_o0_._value as column3_32_, t_system_o0_.description as descript4_32_ from t_system_options t_system_o0_ order by t_system_o0_.id  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 16387
+2018-03-26 13:40:05,843 DEBUG ~ select t_dict_ad_0_.id as id18_, t_dict_ad_0_.name as name18_ from t_dict_ad_provinces t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 16488
+2018-03-26 13:40:05,855 DEBUG ~ select t_dict_ad_0_.id as id53_, t_dict_ad_0_.name as name53_, t_dict_ad_0_.province_id as province3_53_ from t_dict_ad_citys t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 16500
+2018-03-26 14:08:39,096 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-26 14:08:40,221 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1125
+2018-03-26 14:08:40,351 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1255
+2018-03-26 14:09:04,633 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 25537
+2018-03-26 14:09:14,508 INFO  ~ Connected to jdbc:mysql://127.0.0.1/p2p_bank?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci  ~ play.Logger.info(Logger.java:289) ~ play ~ 35412
+2018-03-26 14:09:16,658 INFO  ~ Application 'sp2p_bank' is now started !  ~ play.Logger.info(Logger.java:289) ~ play ~ 37562
+2018-03-26 14:09:17,138 DEBUG ~ select t_system_o0_.id as id32_, t_system_o0_._key as column2_32_, t_system_o0_._value as column3_32_, t_system_o0_.description as descript4_32_ from t_system_options t_system_o0_ order by t_system_o0_.id  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 38042
+2018-03-26 14:09:17,296 DEBUG ~ select t_dict_ad_0_.id as id18_, t_dict_ad_0_.name as name18_ from t_dict_ad_provinces t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 38200
+2018-03-26 14:09:17,305 DEBUG ~ select t_dict_ad_0_.id as id53_, t_dict_ad_0_.name as name53_, t_dict_ad_0_.province_id as province3_53_ from t_dict_ad_citys t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 38209
+2018-03-26 14:14:43,439 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-26 14:14:44,750 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1311
+2018-03-26 14:14:44,895 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1456
+2018-03-26 14:14:45,149 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1710
+2018-03-26 14:14:55,583 INFO  ~ Connected to jdbc:mysql://127.0.0.1/p2p_bank?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci  ~ play.Logger.info(Logger.java:289) ~ play ~ 12144
+2018-03-26 14:14:57,667 INFO  ~ Application 'sp2p_bank' is now started !  ~ play.Logger.info(Logger.java:289) ~ play ~ 14228
+2018-03-26 14:14:58,148 DEBUG ~ select t_system_o0_.id as id32_, t_system_o0_._key as column2_32_, t_system_o0_._value as column3_32_, t_system_o0_.description as descript4_32_ from t_system_options t_system_o0_ order by t_system_o0_.id  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 14709
+2018-03-26 14:14:58,259 DEBUG ~ select t_dict_ad_0_.id as id18_, t_dict_ad_0_.name as name18_ from t_dict_ad_provinces t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 14820
+2018-03-26 14:14:58,267 DEBUG ~ select t_dict_ad_0_.id as id53_, t_dict_ad_0_.name as name53_, t_dict_ad_0_.province_id as province3_53_ from t_dict_ad_citys t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 14828
+2018-03-26 14:53:34,637 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-26 14:53:35,805 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1168
+2018-03-26 14:53:35,930 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1293
+2018-03-26 14:53:44,751 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 10114
+2018-03-26 14:53:54,896 INFO  ~ Connected to jdbc:mysql://127.0.0.1/p2p_bank?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci  ~ play.Logger.info(Logger.java:289) ~ play ~ 20259
+2018-03-26 14:53:57,119 INFO  ~ Application 'sp2p_bank' is now started !  ~ play.Logger.info(Logger.java:289) ~ play ~ 22482
+2018-03-26 14:53:57,623 DEBUG ~ select t_system_o0_.id as id32_, t_system_o0_._key as column2_32_, t_system_o0_._value as column3_32_, t_system_o0_.description as descript4_32_ from t_system_options t_system_o0_ order by t_system_o0_.id  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 22986
+2018-03-26 14:53:57,765 DEBUG ~ select t_dict_ad_0_.id as id18_, t_dict_ad_0_.name as name18_ from t_dict_ad_provinces t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 23128
+2018-03-26 14:53:57,776 DEBUG ~ select t_dict_ad_0_.id as id53_, t_dict_ad_0_.name as name53_, t_dict_ad_0_.province_id as province3_53_ from t_dict_ad_citys t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 23139
+2018-03-26 15:20:54,784 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-26 15:20:55,910 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1126
+2018-03-26 15:20:56,038 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1254
+2018-03-26 15:21:01,197 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 6413
+2018-03-26 15:21:11,553 INFO  ~ Connected to jdbc:mysql://127.0.0.1/p2p_bank?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci  ~ play.Logger.info(Logger.java:289) ~ play ~ 16769
+2018-03-26 15:21:13,735 INFO  ~ Application 'sp2p_bank' is now started !  ~ play.Logger.info(Logger.java:289) ~ play ~ 18951
+2018-03-26 15:21:14,277 DEBUG ~ select t_system_o0_.id as id32_, t_system_o0_._key as column2_32_, t_system_o0_._value as column3_32_, t_system_o0_.description as descript4_32_ from t_system_options t_system_o0_ order by t_system_o0_.id  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 19493
+2018-03-26 15:21:14,383 DEBUG ~ select t_dict_ad_0_.id as id18_, t_dict_ad_0_.name as name18_ from t_dict_ad_provinces t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 19599
+2018-03-26 15:21:14,391 DEBUG ~ select t_dict_ad_0_.id as id53_, t_dict_ad_0_.name as name53_, t_dict_ad_0_.province_id as province3_53_ from t_dict_ad_citys t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 19607
+2018-03-26 15:36:21,408 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-26 15:36:22,514 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1106
+2018-03-26 15:36:22,650 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1242
+2018-03-26 15:36:24,908 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 3500
+2018-03-26 15:36:35,370 INFO  ~ Connected to jdbc:mysql://127.0.0.1/p2p_bank?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci  ~ play.Logger.info(Logger.java:289) ~ play ~ 13962
+2018-03-26 15:36:37,469 INFO  ~ Application 'sp2p_bank' is now started !  ~ play.Logger.info(Logger.java:289) ~ play ~ 16061
+2018-03-26 15:36:37,931 DEBUG ~ select t_system_o0_.id as id32_, t_system_o0_._key as column2_32_, t_system_o0_._value as column3_32_, t_system_o0_.description as descript4_32_ from t_system_options t_system_o0_ order by t_system_o0_.id  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 16523
+2018-03-26 15:36:38,033 DEBUG ~ select t_dict_ad_0_.id as id18_, t_dict_ad_0_.name as name18_ from t_dict_ad_provinces t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 16625
+2018-03-26 15:36:38,045 DEBUG ~ select t_dict_ad_0_.id as id53_, t_dict_ad_0_.name as name53_, t_dict_ad_0_.province_id as province3_53_ from t_dict_ad_citys t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 16637
+2018-03-26 16:17:00,476 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-26 16:17:01,536 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1060
+2018-03-26 16:17:01,630 ERROR ~ Could not bind on port 9000  ~ play.Logger.error(Logger.java:399) ~ play ~ 1154
+2018-03-26 16:50:34,157 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-26 16:50:35,269 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1112
+2018-03-26 16:50:35,400 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1243
+2018-03-26 16:50:48,096 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 13939
+2018-03-26 16:50:58,532 INFO  ~ Connected to jdbc:mysql://127.0.0.1/p2p_bank?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci  ~ play.Logger.info(Logger.java:289) ~ play ~ 24375
+2018-03-26 16:51:00,542 INFO  ~ Application 'sp2p_bank' is now started !  ~ play.Logger.info(Logger.java:289) ~ play ~ 26385
+2018-03-26 16:51:01,033 DEBUG ~ select t_system_o0_.id as id32_, t_system_o0_._key as column2_32_, t_system_o0_._value as column3_32_, t_system_o0_.description as descript4_32_ from t_system_options t_system_o0_ order by t_system_o0_.id  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 26876
+2018-03-26 16:51:01,268 DEBUG ~ select t_dict_ad_0_.id as id18_, t_dict_ad_0_.name as name18_ from t_dict_ad_provinces t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 27111
+2018-03-26 16:51:01,277 DEBUG ~ select t_dict_ad_0_.id as id53_, t_dict_ad_0_.name as name53_, t_dict_ad_0_.province_id as province3_53_ from t_dict_ad_citys t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 27120
+2018-03-26 17:43:19,143 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-26 17:43:20,442 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1299
+2018-03-26 17:43:20,582 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1439
+2018-03-26 17:43:44,139 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 24996
+2018-03-26 17:44:00,678 INFO  ~ Connected to jdbc:mysql://127.0.0.1/p2p_bank?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci  ~ play.Logger.info(Logger.java:289) ~ play ~ 41535
+2018-03-26 17:44:04,870 INFO  ~ Application 'sp2p_bank' is now started !  ~ play.Logger.info(Logger.java:289) ~ play ~ 45727
+2018-03-26 17:44:05,986 DEBUG ~ select t_system_o0_.id as id32_, t_system_o0_._key as column2_32_, t_system_o0_._value as column3_32_, t_system_o0_.description as descript4_32_ from t_system_options t_system_o0_ order by t_system_o0_.id  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 46843
+2018-03-26 17:44:06,405 DEBUG ~ select t_dict_ad_0_.id as id18_, t_dict_ad_0_.name as name18_ from t_dict_ad_provinces t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 47262
+2018-03-26 17:44:06,535 DEBUG ~ select t_dict_ad_0_.id as id53_, t_dict_ad_0_.name as name53_, t_dict_ad_0_.province_id as province3_53_ from t_dict_ad_citys t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 47392

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+	<title></title>
+	<script type="text/javascript" src="@{'/public/m/js/rem.js'}" ></script>
+	<script type="text/javascript" src="@{'/public/m/js/jquery-1.8.2.min.js'}" ></script>
+	<link rel="stylesheet" href="@{'/public/m/css/common.css'}" />
+	<link rel="stylesheet" href="@{'/public/m/css/firstep.css'}" />
+</head>
+<body style="background:#fafafa">
+<div class="container">
+	<!-- 头部  -->
+    <header class="header">
+    	<icon onclick="window.history.go(-1)"></icon>项目详情
+    </header>
+    <!-- 内容  -->
+    <div class="bidinfo">
+    	<ul class="bidinfo-tab">
+    		<li id="1">项目详情</li>
+    		<li id="2" class="current">投资</li>
+    		<li id="3">成交记录</li>
+    	</ul>	
+    	<div class="bidinfo-bodyone">
+    		<h3>车快融${bid?.title}期</h3>
+    		<dl>
+    			<dd>预期年化收益率：<em class="orange" id="apr">${bid?.apr}%</em></dd>
+    			<dd>期限：<em class="orange">${bid?.period}天</em></dd>
+    			<dd>到期还款方式：<em>${bid?.repayment?.name}</em></dd>
+    			<dd>融资进度：<p class="plan"><span style="width:20%"></span></p><em class="orange">${(bid?.hasInvestedAmount/bid?.amount*100).format('###,##0')}%</em></dd>
+    			<dd>起投金额：<em>1000 元</em></dd>
+    			<dd>融资规模：<em>${bid?.amount?.format('###,##0.00')} 元</em></dd>
+    			<dd>剩余可投金额：<em>${(bid?.amount-bid?.hasInvestedAmount).format('###,##0.00')} 元</em></dd>
+    		</dl>
+    		<a href="javascript:void(0);">立即投资</a>
+    	</div>
+    	<div class="bidinfo-bodytwo" style="display:none;">
+    		<h4>项目描述</h4>
+    		<div class="bidinfo-border">
+    			<p>融资人为物流行业的国有企业，主要经营仓储服务、现代物流、企业投资管理及信息服务，拥有较稳定的经营收入、固定的经营场所和先进的经营模式。本次所融资金企业将用于流动资金周转。</p>
+    		</div>
+    		<h4>还款来源</h4>
+    		<div class="bidinfo-border">
+    			<p>1、融资人持有未到期商业承兑汇票【编号：${bid?.bidNo}】作为本笔融资的还款来源；</p>
+    			<p>2、融资人持有的汇票，已通过了洪洞县洪洞洪都村镇银行真实性审验，并代为保管。</p>
+    		</div>
+    		<h4>银行见证信息</h4>
+    		<div class="bidinfo-border">
+    			<ul>
+    				<li><img src=""><span>图片信息</span></li>
+    				<li><img src=""><span>图片信息</span></li>
+    				<li><img src=""><span>图片信息</span></li>
+    				<li><img src=""><span>图片信息</span></li>
+    			</ul>
+    		</div>
+    		<h4>资金到账日</h4>
+    		<div class="bidinfo-border">
+    			<p>到期日后1-3个工作日，到期日至实际到账日之间，资金不计收益。</p>
+    		</div>
+    	</div>
+    	<div class="bidinfo-bodythree" style="display:none;">
+    	
+    		#{list items:pageBean?.page, as: 'records'}
+    		<div class="bidinfo-list">
+    			<dl>
+    				<dt>${records?.user_id}</dt>
+    				<dd>${records?.time}</dd>
+    			</dl>
+    			<span><em>${records?.amount}</em>元</span>
+    		</div>
+			#{/list}
+    		
+    		
+    	</div>
+    </div> 
+      <!-- 弹窗 -->
+    <div class="bidinfo-popup">
+    	<div class="bidinfo-popup-body">
+    		<h4>可投金额：<span>￥ ${(bid?.amount-bid?.hasInvestedAmount).format('###,##0.00')}</span></h4>
+    		<i class="close"></i>
+    		<ul>
+    			<li><input name="lendAmount" value="" id="lendAmount" type="tel" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" onafterpaste="this.value=this.value.replace(/[^0-9]/g,'')" onchange="showYjsy()" placeholder="投资金额（元）：请输入1000的整数"/></li>
+    			<li style="border:none"><p>预期收益（元）：<em id="anticipatedInterest">0.00</em></p></li>
+    			<li>
+    				<input type="text" name="phoneCode" id="phoneCode" placeholder="请输入验证码"/>
+					<a href="javascript:void(0);" id="btn" onclick="getVerifyCode();">获取验证码</a>
+    			</li>
+    		</ul>
+    		<a class="bidinfo-popup-btn" href="javascript:void(0)">立即投资</a>
+    	</div>
+    </div>
+    
+    
+       
+</div>  
+
+<script type="text/javascript">
+	
+</script>
+<script>
+    $(document).ready(function(){
+		$(".bidinfo-tab li").click(function(){
+			$(".bidinfo-tab li").removeClass("current");
+			$(this).addClass("current");
+			var id = $(this).attr("id");
+			if (id == 1){
+				$(".bidinfo-bodytwo").show();
+				$(".bidinfo-bodyone").hide();
+				$(".bidinfo-bodythree").hide();
+			}
+			else if (id == 2){
+				$(".bidinfo-bodytwo").hide();
+				$(".bidinfo-bodyone").show();
+				$(".bidinfo-bodythree").hide();
+			}
+			else if (id == 3){
+				$(".bidinfo-bodytwo").hide();
+				$(".bidinfo-bodyone").hide();
+				$(".bidinfo-bodythree").show();
+			}
+		})
+	})
+	
+	
+	//去投资
+	$(".bidinfo-bodyone a").click(function(){
+		isLogin();
+		
+	})
+	    
+	$(document).ready(function(){
+		$("input").focus(function(){
+			$(this).css("color","#333")
+		})
+	})
+
+	var investsign;
+	var investUUid;
+	//确认投资
+	$(".bidinfo-popup-btn").click(function(){
+		
+		var phoneCode=$("#phoneCode").val();
+		if(phoneCode==null || $.trim(phoneCode)==""){
+			alert("请输入验证码");
+			return;
+		}
+	    $.ajax({
+			url:"/m/investVerifySMS",
+			type:"post",
+			data:{
+				"sign":investsign,
+				"uuid":investUUid,
+				"smscode":phoneCode
+			},				
+			success:function(data){
+				if(data.success==false){
+					alert("验证失败！");
+					return;
+				}
+				
+				//成功后跳转页面
+				//window.location.href="";
+			}
+			});
+	    		
+	})
+	
+	//计算预计收益
+	function showYjsy(){
+		var apr=${bid?.apr};
+		var period=${bid?.period};
+		var lendAmount=$("#lendAmount").val();
+		if(lendAmount<1000){
+			$("#lendAmount").val(1000);
+			alert("金额必须大于1000元")
+			lendAmount=1000;
+		}
+		if(lendAmount%1000!=0){
+			alert("请输入1000的整数。");
+			return;
+		}
+		var interest=lendAmount*apr/100/360*period;
+		$("#anticipatedInterest").html(Math.floor(interest*100)/100);
+	}
+	
+	/*点击时发送短信验证码*/
+	
+	 function getVerifyCode(){
+			
+			var sign='${bid?.sign}';
+			var uuid='${uuid}';
+			var investAmount=$("#lendAmount").val();
+		    $.ajax({
+				url:"/m/confirmInvest",
+				type:"post",
+				data:{
+					"sign":sign,
+					"uuid":uuid,
+					"investAmount":investAmount
+				},				
+				success:function(data){
+					if(data.seccuess==true){
+						countDown();
+						investsign=data.investsign;
+						investUUid=data.investUUid;
+					}
+					if(data.seccuess==false){
+						return;
+					}
+				}
+				});
+		    }			 
+		    
+	
+	var remain = 90;
+	/*点击发送短信验证码后倒计时*/
+	function countDown() {
+	   if (remain == 0) {
+		   remain = 90;
+		   $("#btn").html("点击发送");
+		   $("#btn").attr("onclick", "getVerifyCode();");
+		   $("#btn").attr("style", "cursor:pointer");
+		   return;
+	   }
+
+	   $("#btn").html("" + remain-- + "秒后重发");
+	   setTimeout("countDown()",1000);
+	}
+	// 绑卡
+	function bindBankCard() {
+		var phoneCode=$.trim($('#phoneCode').val());
+		// 判断验证码
+		var str="";
+	    if (phoneCode.length == 0) {
+	        str += '请輸入验证码';
+	        $(".bindcard-error").html(str).show();
+	        $('#phoneCode').focus();
+	        return;
+	    }
+	    // 如果没有错误则显示
+	    if($.trim(str) != '') {
+	        $(".bindcard-error").html(str).show();
+	        return;
+	    } else {
+	    	
+	    	$(".bindcard-error").hide();
+	    	$("#SMSCodeSubmit").submit();
+		}
+	}
+	
+	//判断用户是否登录
+	function isLogin(){
+    	 $.ajax({  
+             type: "get",  
+             dataType: "json",  
+             url: "/m/isLogin",  
+             success: function (data) {  
+                 if(data.result==2){
+                	 //判断绑定银行卡
+                	 isBindBank();
+                 }else if(data.result==3){
+                	 //用户登录
+                	 window.location.href="/m/login?toUrl="+window.location.href;
+                 }
+             }  
+       });  
+    }
+	//判断用户是否绑定银行卡/m/isBindBank
+	function isBindBank(){
+    	 $.ajax({  
+             type: "get",  
+             dataType: "json",  
+             url: "/m/isBindBank",  
+             success: function (data) {  
+                 if(data.result==1){
+                	 //已绑卡 显示弹窗
+					$(".bidinfo-popup").show();
+					$(".bidinfo-popup .close").click(function(){
+							$(".bidinfo-popup").hide();
+					})
+                 }else if(data.result==0){
+                	 //未绑卡 /m/front/account/addCard
+                	 window.location.href="/m/front/account/addCard?toUrl="+window.location.href;
+                 }
+             }  
+       });  
+    }
+	
+</script>
+</body>
+</html>

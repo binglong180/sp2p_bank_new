@@ -1,0 +1,34 @@
+
+<div class="xf_con_mem_nav"></div>
+<!-- 左边导航区域 -->
+<div class="xf_con_wyjk_left">
+	<h2 class="xf_con_mem_lefth2">
+		${parent?.name}
+	</h2>
+	<ul class="xf_con_wyjk_leftul xf_con_suba_leftul" id="gywm">
+		#{list types}
+			#{if _?.name == '合作伙伴'}
+				<li id="aboutUs${_?.id}">
+					<a class="xf_mem_l_title" href="@{front.help.HelpCenterAction.partner(-1008)}">${_?.name}</a>
+					
+					<a class="xf_mem_r_more xf_mem_r_ishot2"></a>
+				</li>
+			#{/if}
+			#{else}
+				<li id="aboutUs${_?.id}">
+					<a class="xf_mem_l_title" href="@{front.home.HomeAction.aboutUs(_?.id)}">${_?.name}</a>
+					<a class="xf_mem_r_more xf_mem_r_ishot2"></a>
+				</li>
+			#{/else}
+		#{/list}
+	</ul>
+</div>
+
+<script type="text/javascript">
+<!--
+	$(function(){
+		$("#aboutUs" + ${id}).addClass("xf_con_wyjk_leftliisshow");
+	});
+//-->
+
+</script>

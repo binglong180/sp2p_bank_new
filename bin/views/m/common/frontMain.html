@@ -1,0 +1,40 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+%{
+		business.newr.User currUser = business.newr.User.currUser();
+		business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+		String platUrl = constants.Constants.BASE_URL;
+		
+		
+		boolean ipsEnable = constants.Constants.IPS_ENABLE;
+	}%
+	
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="renderer" content="webkit">
+	<meta name = "format-detection" content="telephone = no" />
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>银信保--汽车金融，为您开启财富之门|互联网金融|十大品牌|哪家好</title>
+    <meta name="keywords" content="银信保,互联网金融,汽车金融,P2P网贷,P2P理财,周转贷,消费金融,资金监管">
+	<meta name="description" content="银信保是中国互联网金融领军企业，解决客户资金需求，为投资用户带来高收益。足额抵押物担保，确保投资理财用户资金安全。">
+	<link rel="stylesheet" href="@{'/public/m/css/bootstrap.min.css'}">
+	<link rel="stylesheet" href="@{'/public/m/css/public.css'}">
+	<script src="@{'/public/m/js/jquery.min.js'}"></script>
+	<script src="@{'/public/m/js/bootstrap.min.js'}"></script>
+	<script type="text/javascript" src="@{'/public/javascripts/common.js'}"></script>
+</head>
+<body style="background:#fff;">
+<header class="app-header row">
+	<div class="myaccount-logo">
+		<img src="@{'/public/m/images/firstep/reg-logo.png'}" />
+	</div>
+</header>
+
+#{doLayout /}
+   
+#{include '/m/common/foot.html' /}
+</body>
+</html>

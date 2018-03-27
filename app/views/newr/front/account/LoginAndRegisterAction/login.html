@@ -1,0 +1,159 @@
+#{extends 'newr/common/frontMain.html' /}
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+}%
+#{set title:currBackstageSet.seoTitle+'|登录' /}
+
+
+<div class="full">
+	<div class="login_div">
+        <div class="content">
+         	<div class="login_img"><img src="@{'/public/skin/images/login_img_03.png'}" width="522" height="480" /></div>
+            <div class="login_main_div">
+           
+            <table class="login_table" cellpadding="0" cellspacing="0">
+             #{form @newr.front.account.LoginAndRegisterAction.logining(), id:'submit'}
+            	<tr>
+                	<td style="font-size:24px; padding-bottom:0px;">用户登录</td>
+                </tr>
+            	<tr>
+                    <td height="75">
+                        <div class="td_n_div" > 
+                    		<input type="text" class="user-input" id="name" name="name" placeholder="请输入用户名" value="${flash?.name}" onFocus="if(this.value=='请输入用户名'){this.value=${flash?.name};}"  onblur="if(this.value==''){this.value='请输入用户名';}"/>
+                        	<div class="zhmm_user_icon" ><img src="@{'/public/skin/images/input_icon_03.png'}" width="43" height="47" /></div>
+                        </div>
+                        <span class="" id="username_login"></span>
+                    </td>
+            	</tr>
+            	<tr>
+                    <td height="75">   
+                        <div class="td_n_div" >                    	
+                    		<input class="user-input" name="password" type="password" id="password" placeholder="请输入登录密码" />
+                        	<div class="zhmm_user_icon" ><img src="@{'/public/skin/images/input_icon_06.png'}" width="43" height="47" /></div>
+                        </div>
+                        <!--  <span class=""  id="password_login">${flash?.error}</span>
+                        <a class="login_a" href="@{newr.front.account.LoginAndRegisterAction.resetPasswordByMobile()}" >忘记密码</a> -->
+                    </td>
+            	</tr>
+            	#{if flash?.loginCount > "2"}
+            	<tr>
+            	<!--   <td>
+				<li>
+					<div>
+						<span class="y_dl1 dl2">
+							<span><img src="@{'/public/skin/images/dl2.png'}" class="img2"></span>
+							<input type="text" id="code" name="code" class="y_dltxt1 t2 pas1_test" />
+							<input type="hidden" name="randomID" id="randomID" />
+							<i>验证码</i>
+						</span>
+						<a href="#" class="y_yzm"><img src="" class="" id="img" onclick="change()" width="75px" height="32px"></a>
+						<a href="#" onclick="change()" class="y_dla1">刷新</a>
+					</div>
+				</li>
+				 </td>-->
+
+                    <td>
+                    	<div class="td_n_div" >
+                    		<input type="text" class="user-input" style="width:200px;" name="code" value="请输入验证码" id="code" onFocus="if(this.value=='请输入验证码'){this.value='';}"  onblur="if(this.value==''){this.value='请输入验证码';}"/>
+                        	<img src="@{'/public/skin/images/yzm_03.jpg'}" onclick="change()" id="img" width="85" height="30" style="float:right; margin-top:7px; margin-right:12px; cursor:pointer;" />
+                        	<input type="hidden" name="randomID" id = "randomID" />
+                        </div>
+                    </td>
+				</tr>
+				#{/if}
+				<tr>
+                    <td style="margin-top:0; padding-top:0px;">
+                        <span class=""  id="password_login">${flash?.error}</span>
+                        <a class="login_a" href="@{newr.front.account.LoginAndRegisterAction.resetPasswordByMobile()}" >忘记密码</a>
+                    </td>
+            	</tr>
+            	
+            	<tr>
+                    <td>                    	
+                        <a class="zhmm_btn_cz" onClick="login()">确认</a>
+                    </td>
+            	</tr>
+            	#{/form}
+            	<tr>
+                    <td align="right"> 
+                    	没有账号？<a class="login_zc" href="@{newr.front.account.LoginAndRegisterAction.registerMobile()}">免费注册</a>
+                    </td>
+            	</tr>
+             </table>   
+            	<div class="clear"></div>
+            </div>   
+        </div><!--content end-->
+	</div>
+	<div class="clear"></div>
+</div>
+<script type="text/javascript">
+		$(document).ready(function(){
+			  $("#name").blur(function(){ 
+				  
+				   $("#username_login").html("");
+				   if(this.value=="请输入用户名"){
+					   $("#username_login").removeClass("login_n_span");
+					   $("#username_login").addClass("");
+			       }
+			  });
+			 
+			  $("#password").blur(function(){ 
+					  
+				   $("#password_login").html("");
+				   if(this.value=="请输入密码"){
+					   $("#password_login").removeClass("login_n_span");
+					   $("#password_login").addClass("");
+			       }
+			  });
+		});
+
+
+		$(function(){
+		    var setCode = #{jsAction @newr.front.account.loginAndRegisterAction.setCode()/}
+			$.post(setCode({}),function(data){
+				var arr=eval(data);
+				var img = arr.img;
+				$("#img").attr("src","@{newr.front.account.loginAndRegisterAction.getImg()}?id="+img);	
+				$("#randomID").val(img);
+			});
+			
+		});
+		function login(){
+		    var name = $("#name").val();
+		    if(name == '请输入用户名'){
+		    	$("#username_login").addClass("login_n_span");
+		    	$("#username_login").html("请输入用户名");
+		        return;
+		    }
+
+		    var password = $("#password").val();
+		    if(password == ''){
+		    	$("#password_login").addClass("login_n_span");
+		        $("#password_login").html("请输入密码");
+		        return;
+		    }
+
+		    /*用户名和密码验证
+	    	$.ajax({
+	    		  url : "@{newr.front.account.LoginAndRegisterAction.verifyLogin()}",
+	    		  type : "POST",
+	    		  data : {
+	    			  "name" : name,
+	    			  "password" : password
+	    		  },
+	    		  dataType:'json',
+	    		  success : function(data) {
+	    			  if(data.code < 0){
+	    				 $("#password_login").html(data.msg);
+	    			  }else{
+	    				  $("#submit").submit();
+	    			  }
+	    			},
+	    	});*/
+		    
+	    	$("#submit").submit();
+		    
+		}
+		
+		
+</script>

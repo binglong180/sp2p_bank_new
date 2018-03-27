@@ -1,0 +1,74 @@
+#{extends 'common/supervisor.html' /}
+#{include 'newr/supervisor/projectManager/projectManagerLeft.control'/}
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".full").css("width",document.body.clientWidth- 278 +"px ");
+});  
+
+$(window).resize(function(){
+	 var onLoadWidth = document.body.clientWidth;
+		$(".full").css("width",document.body.clientWidth- 278 +"px ");
+})
+</script>
+<style>
+.full{float:left; }
+.table01{width:100%;}
+.table01 th,.table01 td{font-size:12px; height:40px; text-align:center; font-weight:normal;}
+.table01 td{ color:#666;}
+.table01 .td_a{ color:#666;}
+.but01{color:#3a7dc0;}
+</style>
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="@{'/public/skin/css/layout.css'}" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="@{'/public/javascripts/jquery-2.0.js'}"></script>
+<script type="text/javascript" src="@{'/public/javascripts/index.js'}"></script>
+<script type="text/javascript" src="@{'/public/javascripts/jquery.json-2.4.min.js'}"></script>
+</head>
+<body>
+
+<div class="full">
+	<div class="list_items">
+        <div class="list_data">     
+            #{table}
+        	<table class="table01" cellpadding="0" cellspacing="0">
+            	<tr>
+                	<th>序号</th>
+                    <th>结算用户</th>
+                    <th>结算金额</th>
+                    <th>结算时间</th>
+                    <th>结算状态</th>
+                </tr>
+	            #{list resultList}
+			        #{tr tr_index:_index}
+			            <tr>   
+				        	<td>${ _index}</td>
+				        	<td><a class="but01" href="">${_?.userName}</a></td>
+				        	<td>${_?.amount}</td>
+				        	<td>${_?.time}</td>	
+				        	<td>#{if _?.status==1}待结算#{/if}
+				        	    #{elseif _?.status==2}结算处理中  #{/elseif}
+				        	    #{else}结算完成#{/else}
+				        	</td>			        	
+			       		</tr>   
+			        #{/tr}
+	        	#{/list}
+       	 </table>
+         #{/table}  
+       			
+        </div>
+    	<!-- 列表底部 -->
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+	function showPage(currPage, pageSize){
+		$("#currPage").val(currPage);
+		$("#pageSize").val(pageSize);
+		$("#submit").submit();
+	}
+</script>
+</html>

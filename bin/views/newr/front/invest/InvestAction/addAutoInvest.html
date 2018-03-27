@@ -1,0 +1,343 @@
+#{extends 'newr/common/frontMain.html' /}
+<script>
+function usr()
+{
+if(divid2.style.display=='none')
+{divid2.style.display='none';}
+else
+{divid2.style.display='block';}
+}
+</script>
+<!--项目期限js开始-->
+<script type="text/javascript">
+    $(document).ready(function(){
+    	if(${result}<0){
+    		alert('${msg}');
+    	}
+    	if(${robot!=null}){
+    	  if(${robot?.period_range?.indexOf('1')==-1}){
+    		  $("#checkbox1").attr("checked",false);
+    		  $("#checkbox101").attr("class",'serve_st_li_none');
+    	  }
+    	  if(${robot?.period_range?.indexOf('4')==-1}){
+    		  $("#checkbox2").attr("checked",false);
+    		  $("#checkbox102").attr("class",'serve_st_li_none');
+    	  }
+    	  if(${robot?.period_range?.indexOf('7')==-1}){
+    		  $("#checkbox3").attr("checked",false);
+    		  $("#checkbox103").attr("class",'serve_st_li_none');
+    	  }
+    	  if(${robot?.period_range?.indexOf('10')==-1}){
+    		  $("#checkbox4").attr("checked",false);
+    		  $("#checkbox104").attr("class",'serve_st_li_none');
+    	  } 
+    	}
+    });
+	$(document).ready(function(){
+	  $("#checkbox1").click(function(){
+		  if($(this).attr("checked")){
+			  $("#checkbox101").attr("class",'serve_st_li_none');
+			  $(this).attr("checked",false);
+		  }else{
+			  $("#checkbox101").attr("class",'serve_st_li_on');
+			  $('#periodRangeTip').attr("style","display:none");
+			  $(this).attr("checked",true);
+			  }
+	  });
+	 
+	  //
+	  $("#checkbox2").click(function(){
+		  if($(this).attr("checked")){
+			  $("#checkbox102").attr("class",'serve_st_li_none');
+			  $(this).attr("checked",false);
+		  }else{
+			  $("#checkbox102").attr("class",'serve_st_li_on');
+			  $('#periodRangeTip').attr("style","display:none");
+			  $(this).attr("checked",true);
+			  }
+	  });
+	
+	  //
+	  $("#checkbox3").click(function(){
+		  if($(this).attr("checked")){
+			  $("#checkbox103").attr("class",'serve_st_li_none');
+			  $(this).attr("checked",false);
+		  }else{
+			  $("#checkbox103").attr("class",'serve_st_li_on');
+			  $('#periodRangeTip').attr("style","display:none");
+			  $(this).attr("checked",true);
+			  }
+	  });
+	
+	  //
+	  $("#checkbox4").click(function(){
+		  if($(this).attr("checked")){
+			  $("#checkbox104").attr("class",'serve_st_li_none');
+			  $(this).attr("checked",false);
+		  }else{
+			  $("#checkbox104").attr("class",'serve_st_li_on');
+			  $('#periodRangeTip').attr("style","display:none");
+			  $(this).attr("checked",true);
+			  }
+	  });
+	  
+	  $('#minInvestAmount').focus(function(){
+		  $('#autoInvestMoneyTip').attr("style","display:none");
+	  });
+	  $('#maxInvestAmount').focus(function(){
+		  $('#autoInvestMoneyTip').attr("style","display:none");
+	  });
+	  $('#remandAmount').focus(function(){
+		  $('#autoremandMoneyTip').attr("style","display:none");
+	  });
+	   $('#agreementche').click(function(){
+		   if($(this).attr("checked")){
+			   $(this).attr("checked",false) 
+		   }else{
+			   $(this).attr("checked",true)  
+		   }
+		  $('#agreementTip').attr("style","display:none");
+	   });
+	  });
+	  
+</script>
+<!--项目期限js结束-->
+</head>
+<body>
+<!--银信保自动投资协议弹出框开始-->
+        <div id="register_link" class="register_link">
+        
+        <div class="register_show">
+             
+        </div>
+        <em class="register_links" href="" onClick="M.goExpr('register_eelou_id','0');return false;">
+        	<div class="register_tck_div">
+        		<div class="register_tck_div_title">
+                	<span style="float:left;">银信保自动投资协议</span>
+                    <span class="register_tck_close" href="javascript:;" title="关闭窗口" onClick="document.getElementById('register_nav').className='register_nav';document.getElementById('register_link').className='register_link';return !1;"><img src="@{'/public/skin/images/close.png'}" width="17" height="17" /></span>
+                </div>
+                <div class="register_tck_div_main">
+                
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;声明：投资人在银信保开启自动投资功能，则视为投资人已充分了解并认可该投资规则；同时视为投资人对银信保公示的有关自动投资的法律文本均已知悉且无异议。自动投资成功后，产生如下法律后果：投资人与融资方形成投资或债权转让等法律关系，受相关法律、银信保协议、自动投资规则及投资项目协议等相关法律文件的约束。
+<br />
+一、 主要内容
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自动投资是银信保推出的在投资人与投资项目间进行自动匹配，促成投资的新功能。
+<br />二、自动投资管理
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.1投资人全权委托银信保按照自动投资规则及本协议的约定自动投资。
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2 投资范围：银信保平台上发布的所有项目。
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.3 投资人使用自动投资功能后，银信保将按照投资人加入时间的先后顺序，对投资人资金进行自动投资。
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.4后续管理：投资人全权委托银信保对每期自动投资项目的后续回款（包括但不限于本金、利息等）按照自动投资规则投资新的项目，投资范围参见本协议第2.2条。
+<br />三、本协议成立并生效
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1投资人按银信保自动投资规则，通过在银信保上勾选“我已阅读并同意《银信保自动投资服务协议》”以及点击“保存并开启”按钮确认后，本协议成立并生效。视为投资人与银信保已达成协议并同意接受本协议的全部约定以及接受与银信保网站所包含的其他与本协议有关的各项规则的规定。
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2投资人知悉、了解并同意本协议的签署不代表投资成功，是否投资成功并获得相应收益须以自动投资资金划转至融资方银行账户为准。
+<br />四、法律适用与争议解决
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1本协议之效力、解释、变更、执行与争议解决均适用中华人民共和国法律，没有相关法律规定的，参照国际惯例和/或行业惯例。
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.2凡因本协议产生的争议，双方应友好协商解决。协商不成的，提请北京仲裁委员会按照其仲裁规则进行仲裁。仲裁裁决是终局的，对双方均有约束力。
+<br />五、其他
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.1 本协议的任何修改、补充均须以银信保平台电子文本形式作出。
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2本网站保留对本规则的最终解释权。
+<br />
+<br />
+                </div>
+        	</div>
+        </em>
+
+</div>
+<!--银信保自动投资协议弹出框结束-->
+<!--关闭弹出框开始-->
+        <div id="radio_link" class="radio_link">
+        
+        <div class="radio_show">
+             
+        </div>
+        <em class="radio_links" href="" onClick="M.goExpr('radio_eelou_id','0');return false;">
+        	<div class="radio_tck_div">
+        		<div class="radio_tck_div_title">
+                	<span style="float:left;">提示</span>
+                    <span class="radio_tck_close" href="javascript:;" title="关闭窗口" onClick="document.getElementById('radio_nav').className='radio_nav';document.getElementById('radio_link').className='radio_link';return !1;"><img src="@{'/public/skin/images/close.png'}" width="17" height="17" /></span>
+                </div>
+                <div class="radio_tck_div_main">
+                	确定关闭自动投资？
+                    <span class="radio_span">
+                   <a class="radio_btn_qx" href="javascript:;" onClick="document.getElementById('radio_nav').className='radio_nav';document.getElementById('radio_link').className='radio_link';return !1;">取消</a>
+                   <a class="radio_btn_cz" href="@{newr.front.invest.InvestAction.closeRobot(robot?.id)}">确认</a>
+                   </span>
+                </div>
+        	</div>
+        </em>
+
+</div>
+<div class="full">
+	<div class="content" style="background:#fff;">
+		<table cellpadding="0" cellspacing="0" width="100%">
+			<tr>
+				#{include '/newr/common/leftMenu.html'/}
+				<td class="tree_right_td" valign="top">
+                    
+                    <div class="tree_right2">
+                    	<div class="right_top_title">自动投资</div>
+                        <!--提示条开始-->
+                        <div class="auto_t">注意：自动投资一旦设置并保存成功，将即时生效，如不想复投，请提前关闭自动投资，以免影响提现。</div>
+                        <!--提示条结束-->
+                        <!--服务状态开始-->
+                        <div class="serve_st">
+                        	<form >
+                        	服务状态：<span class="serve_st_span"><input type="radio" name="state" checked="checked" value="open" onclick="usr()"  />&nbsp;&nbsp;开启</span>
+                            <span class="serve_st_span"><input type="radio" name="state" value="close" id="radio_nav" onClick="this.className='radio_nav radio_hover';document.getElementById('radio_link').className='radio_link radio_hovers'" />&nbsp;&nbsp;关闭</span>
+                            </form>
+                        </div>
+                        
+                        <!--服务状态内容开始-->
+                        <div class="serve_st_content" style=" display:block;">
+                        	#{form @newr.front.invest.InvestAction.saveOrUpdateRobot(),method:'POST',id:'saveRobot'}
+                            	<div class="serve_st_div">
+                        			投资金额：<input class="serve_st_input" type="text" id="minInvestAmount" name="minInvestAmount" value="${robot?.min_amount?.format('###,##0')}" />&nbsp;—&nbsp;<input class="serve_st_input" type="text" id="maxInvestAmount" name="maxInvestAmount" value="${robot?.max_amount?.format('###,##0')}" />&nbsp;&nbsp;元
+                                    <span id='autoInvestMoneyTip' class="radio_n_span" style="display:none">请输入正确的数值</span>
+                                </div>
+                            	<div class="serve_st_div">
+                        			保留金额：<input class="serve_st_input" type="text" id="remandAmount" name="remandAmount" value="${robot?.retention_amout?.format('###,##0')}" />&nbsp;&nbsp;元
+                                    <span id='autoremandMoneyTip' class="radio_n_span" style="display:none">请输入正确的数值</span>
+                                </div>
+                            	<div class="serve_st_div">
+                        			本金复投：  本金收回后将即时继续自动投资，若想提现请提前设置保留金额或关闭自动投资。
+                                </div>
+
+
+
+                            	<div class="serve_st_div">
+                        			<div style="float:left; line-height:43px;">项目期限：</div>
+                                    <ul style="float:left;">
+                                    	<li id="checkbox101" class="serve_st_li_on">
+                                        	1-3个月
+                                            <div class="checkboxFive">
+                                                <input id="checkbox1" checked="checked" type="checkbox" value="1" name="periodFlags" />
+                                                <label for="checkbox1"></label>
+                                            </div>
+                                        </li>
+                                    	<li id="checkbox102" class="serve_st_li_on">
+                                        	4-6个月
+                                            <div class="checkboxFive">
+                                                <input id="checkbox2"  checked="checked" type="checkbox" value="2"  name="periodFlags" />
+                                                <label for="checkbox2"></label>
+                                            </div>
+                                        </li>
+                                        
+                                    	<li id="checkbox103" class="serve_st_li_on">
+                                        	7-9个月
+                                            <div class="checkboxFive">
+                                                <input id="checkbox3"  checked="checked" type="checkbox" value="3"  name="periodFlags" />
+                                                <label for="checkbox3"></label>
+                                            </div>
+                                        </li>
+                                        
+                                    	<li id="checkbox104" class="serve_st_li_on">
+                                        	10-12个月
+                                            <div class="checkboxFive">
+                                                <input id="checkbox4"  checked="checked" type="checkbox" value="4"  name="periodFlags" />
+                                                <label for="checkbox4"></label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <span id="periodRangeTip" class="radio_n_span" style="display:none">请至少勾选一项</span>
+                                    <div class="clear"></div>
+                                </div>
+                           
+                                <div class="serve_st_div">
+                            		<div class="td_n_div" style="width:auto; height:20px; margin-left:74px;">                      	
+                                         <input class="register_checkbox" id="agreementche" type="checkbox" checked="checked"/>
+                                         <span class="register_xiey">我已阅读并同意 <a class="register_nav" id="register_nav" onClick="this.className='register_nav register_hover';document.getElementById('register_link').className='register_link register_hovers'" href="#">《银信保自动投资协议》</a></span>
+                                         <span id="agreementTip" class="radio_n_span" style="display:none">请阅读并同意银信保自动投资协议</span>
+                                     </div>
+                               </div>
+                               
+                                <div class="serve_st_div">
+                                	<div style=" width:auto; margin-left:74px;">   
+                                    	<a class="cz_money_btn"  onclick="startAutoInvest();" style="float:left;">保存并开启</a>
+                                    </div> 
+                                </div>
+							 #{/form}
+                             
+                        	<div class="clear"></div>
+                        </div>
+                        <!--服务状态内容结束-->
+                        
+                        <!--服务状态结束-->
+                    	<div class="serve_st_ts">
+                        	<p><b>自动投资设置说明：</b></p>
+							<p>1、用户点击“开启”并成功“保存”即视为开启自动投资服务。</p>
+                            <p>2、开启自动投资服务的用户形成投资队列，根据队列顺序按照用户设定的金额自动完成投资。</p>
+							<p>3、用户修改自动投资规则时保持在原队列中；用户关闭自动投资再开启，重新排队。</p>
+                            <p>4、当项目开标30分钟后启动自动投资。</p>
+							<p>5、当项目的投资进度达到90%时停止自动投资。</p>
+                            <p>6、自动投资金额为账户可用余额、设置的最大金额、项目剩余金额三者中的最小值。</p>
+                            <p>7、如果用户有提现需求，请提前关闭自动投资服务，否则可能会触发自动投资规则，导致资金自动投资。</p>
+                        	<div class="clear"></div>
+                        </div>
+                   		<div class="clear"></div>
+                	</div><!--tree_right end-->
+                </td>
+			</tr>
+		</table>	
+        <div class="clear"></div>
+    </div><!--content end-->
+
+	<div class="clear"></div>
+</div>
+<script type="text/javascript">
+ function startAutoInvest(){
+	 var minInvestAmount = $('#minInvestAmount').val();
+	 var maxInvestAmount = $('#maxInvestAmount').val();
+	 var remandAmount   = $('#remandAmount').val();
+	 var patrn=/^([1-9]\d*)$/;
+	 var flag1 = patrn.exec(minInvestAmount.trim());
+	 var flag2 = patrn.exec(maxInvestAmount.trim());
+	 var flag3 = patrn.exec(remandAmount.trim());
+	 if(minInvestAmount.replace(/\s+/g,"") == "" || null == minInvestAmount.replace(/\s+/g,"")||maxInvestAmount.replace(/\s+/g,"") == "" || null == maxInvestAmount.replace(/\s+/g,"")){
+			$("#autoInvestMoneyTip").html("对不起！投标金额不能为空！");
+			$("#autoInvestMoneyTip").attr("style","display:block");
+		    return;
+	    }
+	 if(!flag1||!flag2){
+	    	$("#autoInvestMoneyTip").html("对不起！请您输入正整数！");
+	    	$("#autoInvestMoneyTip").attr("style","display:block");
+		 	return;
+	 }
+	
+	 if(Number(maxInvestAmount) <= Number(minInvestAmount)){
+		   	$("#autoInvestMoneyTip").html("对不起！最大投资金额应给小于最小投资金额！");
+	    	$("#autoInvestMoneyTip").attr("style","display:block");
+		 	return; 
+	 }
+	
+	 if(Number(minInvestAmount)<100){
+		   	$("#autoInvestMoneyTip").html("对不起！最小投资金额应大于100！");
+	    	$("#autoInvestMoneyTip").attr("style","display:block");
+		 	return; 
+	 }
+	 if(remandAmount.replace(/\s+/g,"") == "" || null == remandAmount.replace(/\s+/g,"")){
+			$("#autoremandMoneyTip").html("对不起！保留金额不能为空！");
+			$("#autoremandMoneyTip").attr("style","display:block");
+		    return;
+	    }
+	 if(!flag3){
+	    	$("#autoremandMoneyTip").html("对不起！保留金额请您输入正整数！");
+	    	$("#autoremandMoneyTip").attr("style","display:block");
+		 	return;
+	 }
+	 if(!$('#checkbox1').attr("checked") && !$('#checkbox2').attr("checked") && !$('#checkbox3').attr("checked")&&!$('#checkbox4').attr("checked")){
+		 $('#periodRangeTip').attr("style","display:block");
+		 return;
+	 }
+	 if(!$('#agreementche').attr("checked")){
+		 $('#agreementTip').attr("style","display:block");
+		 return;
+		 
+	 }
+	 $("#saveRobot").submit();
+ }
+ 
+ $(function(){
+		var obj = document.getElementById("child9");
+		change_bg(obj);
+	});
+</script>

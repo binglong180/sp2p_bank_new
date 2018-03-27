@@ -1,0 +1,133 @@
+#{extends 'm/common/frontMain.html' /} 
+<section class="row" style="background:#fff;">
+	<div class="app-locate">
+		<a class="app-return" href="@{m.front.account.AccountHomeAction.accountHome()}"> < 返回</a>
+		<h2>我要提现</h2>
+	</div>
+	<div class="app-recharge">
+		#{form @m.front.account.FundsManageAction.submitWithdrawal(), id:'withDrawalSubmit'}
+		<input type="hidden" name="uuidRepeat" value="${flash?.success}">
+        <input type="hidden" name="accountId" value="" id="accountId"></input>
+        <input type="hidden" name="type" value="1"> 
+		<dl>
+			#{if banks == []}
+			<!-- 未绑卡 -->
+			<a class="app-nobank" style="" onclick="bindCard();">
+				<img class="icon-add" src="@{'/public/m/images/icon-add.png'}"/>添加银行卡
+			</a>
+			#{/if}
+			#{else}
+			<!-- 已绑卡 -->
+			#{list items:banks,as:'bank'}
+			<div class="app-bank" href="javascript:;" onclick="changeBank(this,'${bank.id}')">
+				<input type="hidden" value="${bank.openBankId}" />
+                <input type="hidden" value="${bank.id}" id="defId" />
+				<img src=""/>
+				<div class=""><font>****&nbsp;</font><font>${bank.subAccount}</font></div>
+				<!--  <i class="icon-ok">√</i> -->
+			</div>
+			#{/list}
+			#{/else}
+			
+		</dl>
+		<dl>
+			<dt>可提额度（元）：</dt>
+			<dd><span>#{if ipsEnable}${withdrawalAmount2?.format('###,##0.00')}#{/if}#{else}${withdrawalAmount?.format("###,##0.00")}#{/else}</span></dd>
+		</dl>
+		<dl>
+			<dt>提现金额：</dt>
+			<dd>
+				<input id="amount" name="amount" placeholder="请输入提现金额" type="text">
+				<span>元</span>
+			</dd>
+		</dl>
+		#{/form}
+		<span class="hint-error" id="withDrawal-hint"></span>
+		<a class="" onClick="withDrawSubmits()"><button type="button" class="app-btn app-btn-default app-radius">立即提现</button></a>
+		<p data-toggle="modal" data-target="#myModal">提现注意事项</p>
+	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content modal-noradius">
+		  <div class="modal-header modal-bgred">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title" id="myModalLabel">提现注意事项</h4>
+		  </div>
+		  <div class="modal-body modal-recharge">	
+			<dl>
+				<dd>1. 提现手续费由银信保支付；</dd>			
+				<dd>2. 工作日（周六/周日/法定节假日均除外）20:00之前申请的提现，下一工作日12:00-16:00到账， 否则将于第三个工作日12:00-16:00到账；</dd>
+				<dd>3. 实际到账时间依据账户托管方（第三方支付平台）及提现银行而有所差异；</dd>
+				<dd>4. 根据第三方支付规定，为防止恶意转账、套现等行为 ，用户的投资资金必须经投资回款后才能提现；</dd>
+				<dd>5. 第三方支付公司严禁信用卡充值、套现等行为，一经发现将予以处罚。</dd>
+			</dl>
+		  </div>
+		</div>
+	  </div>
+	</div>
+</section>
+
+<script type="text/javascript">
+//表单验证
+function withDrawSubmits(){
+	if( ${banks.size()} == 0){
+		$("#withDrawal-hint").html("未添加要提现的银行卡！");
+        return;
+    }
+    if($("#amount").val() == '' || $("#amount").val() == '请输入提现金额'){
+    	$("#withDrawal-hint").html("提现金额不能为空！");
+        return;
+    }
+    if(isNaN($("#amount").val())){
+    	$("#withDrawal-hint").html("金额必须为数字！");
+    	return;
+    } 
+     if($("#amount").val()>500000.00){
+    	 $("#withDrawal-hint").html("提现金额不能大于500000.00");
+    	return;
+    }  
+    if($("#amount").val()>${withdrawalAmount2}){
+    	$("#withDrawal-hint").html("提现金额不能大于可提额度");
+    	return;
+    } 
+    $("#withDrawalSubmit").submit();
+}
+    
+
+function bindCard(){
+	window.location.href="@{m.front.account.FundsManageAction.userBindCard}";
+}
+var imageHtml="<i class='icon-ok'>√</i>";
+$(function(){
+	if($(".app-bank").length==0){
+		//显示未绑定银行卡
+		$("#dis1").show();
+		$("#dis2").show();
+	}else{
+	//当银行卡的个数不为空时
+		$(".app-bank").each(function(){
+			var str="/public/skin/images/bindBank/"+$(this).children().first().val()+"_bank.jpg";
+			$(this).children('img').first().attr("src",str);
+			$(this).children('div').children('font').last().html(splitAccount($(this).children('div').children('font').last().html()));
+		});
+		 $(".app-bank").first().append(imageHtml);
+		 //默认选择银行的ID
+		 $("#accountId").val($("#defId").val());
+   }
+});
+//更换银行卡
+function changeBank(obj,accountId){
+	$(".app-bank").each(function(){
+		$(this).children('i').remove();
+	});
+	$(obj).append(imageHtml);
+	$("#accountId").val(accountId);//选择银行的ID
+};
+function splitAccount(str) {
+	if(str == "" || str == null){
+		return "";
+	}
+	return str.substr(str.length-4);
+}
+</script>

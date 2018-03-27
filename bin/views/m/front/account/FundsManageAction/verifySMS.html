@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+	<title></title>
+	<script type="text/javascript" src="@{'/public/m/js/rem.js'}" ></script>
+	<script type="text/javascript" src="@{'/public/m/js/jquery-1.8.2.min.js'}" ></script>
+	<link rel="stylesheet" href="@{'/public/m/css/common.css'}" />
+	<link rel="stylesheet" href="@{'/public/m/css/firstep.css'}" />
+</head>
+<body>
+<div class="container">
+	<!-- 头部  -->
+    <header class="header"> 绑定银行卡</header>
+    <!-- 内容  -->
+	<div class="bindcard-result">
+		#{if success==true}
+		<img src="@{'/public/m/images/common/icon-win.png'}"/>
+		<p>恭喜您，绑定银行卡成功！</p>
+		<a href="@{ m.front.account.FundsManageAction.myCard()}">确定</a>
+		#{/if}
+		#{else}
+		<img src="@{'/public/m/images/common/icon-fail.png'}"/>
+		<p>抱歉，绑定银行卡失败！</p>
+		<a href="@{ m.front.account.FundsManageAction.addCard()}">返回</a>
+		#{/else}
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ips</title>
+</head>
+<body>
+	<form action="${args.action}" id="frm1" method="post">
+		#{list items:args.keySet(), as:'key'}
+			<input id="${key}" name="${key}" value="${args.get(key).raw()}" type="hidden"/><br>
+		#{/list}
+	</form>
+	
+	<script language="javascript">
+	document.getElementById("frm1").submit();
+	</script>
+</body>
+</html>

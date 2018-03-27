@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+	<title></title>
+	<script type="text/javascript" src="@{'/public/m/js/rem.js'}" ></script>
+	<script type="text/javascript" src="@{'/public/m/js/jquery-1.8.2.min.js'}" ></script>
+	<link rel="stylesheet" href="@{'/public/m/css/common.css'}" />
+	<link rel="stylesheet" href="@{'/public/m/css/firstep.css'}" />
+</head>
+<body style="background:#fafafa">
+<div class="container">
+	<!-- 头部  -->
+    <header class="header">
+        <icon onclick="window.history.go(-1)"></icon>我的银行卡
+    </header>
+    #{if banks == []}
+	<!--未绑定的银行卡-->
+	<div class="bindcard-result">
+		<img src="@{'/public/m/images/common/icon-fail.png'}"/>
+		<p>您还没有绑定银行卡！</p>
+		<a href="@{m.front.account.FundsManageAction.addCard()}">添加银行卡</a>
+	</div>
+	#{/if}
+	#{else}
+			<!-- 已绑卡 -->
+	#{list items:banks,as:'bank'}
+			<!--已绑定的银行卡-->
+	<div class="myCard-border">
+		<h4>${bank.bankName}</h4>
+		<p>卡号：${bank.subAccount} <em>储蓄卡</em></p>
+		<span>姓名：${bank.accountName}</span>
+	</div>
+	#{/list}
+	#{/else}
+	 
+</div>
+</body>
+</html>

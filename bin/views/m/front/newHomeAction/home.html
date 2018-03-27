@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+	<title></title>
+	<script type="text/javascript" src="@{'/public/m/js/rem.js'}" ></script>
+	<script type="text/javascript" src="@{'/public/m/js/jquery-1.8.2.min.js'}" ></script>
+	<link rel="stylesheet" href="@{'/public/m/css/common.css'}" />
+	<link rel="stylesheet" href="@{'/public/m/css/firstep.css'}" />
+</head>
+<body>
+<div class="container">
+	<div class="index-header">
+		<a class="index-logo" href=""><img src="@{'/public/m/images/firstep/reg-logo.png'}"></a>
+		<ul>
+			<li><a href="@{m.front.account.LoginAndRegisterAction.login()}">登录</a></li>
+			<li><a href="@{m.front.account.LoginAndRegisterAction.registerMobile()}">注册</a></li>
+		</ul>
+	</div>
+	<!-- banner轮播图 -->
+	<div class="banner">
+		<div id="slideBox" class="slideBox">
+			<div class="bd">
+				<ul>
+		  			<li><a href=""><img src="images/firstep/banner001.jpg" alt=""/></a></li>
+		  			<li><a href=""><img src="images/firstep/banner002.jpg" alt=""/></a></li>
+		  			<li><a href=""><img src="images/firstep/banner003.jpg" alt=""/></a></li>
+				</ul>
+			</div>
+			<div class="hd">
+				<ul></ul>
+			</div>
+		</div>
+	</div>
+	<!-- 公告 -->
+	<div class="notice">
+		<div id="notice">
+			<ul>
+				<li><a href="">平台公告：公告内容公告内容....</a></li>
+				<li><a href="">平台公告：公告内容公告内容....</a></li>
+				<li><a href="">平台公告：公告内容公告内容.....</a></li>
+			</ul>
+		</div>
+	</div>
+	<!-- 产品 -->
+	<div class="index-bid">
+		<h4><a href="">槐乡富<i></i></a></h4>
+		<div class="index-bidtext">
+			<p>项目名称项目名称项目名称</p>
+			<h3>4.50<em>%</em></h3>
+			<ul>
+				<li>起投金额：<span>1000.00</span>元</li>
+				<li>期限：<span>180 </span>天</li>
+			</ul>
+			<a href="">立即投资</a>
+		</div>
+	</div>	
+	<!-- 底部 -->
+    #{include '/m/common/foot.html' /}
+</div>
+<script src="js/TouchSlide.1.1.js"></script>
+<script src="js/swiper-3.4.1.jquery.min.js"></script>
+<script type="text/javascript">
+	TouchSlide({
+		slideCell:"#slideBox",
+		titCell:".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+		mainCell:".bd ul",
+		effect:"leftLoop",
+		autoPage:true,//自动分页
+		autoPlay:true //自动播放
+	});
+	
+	//公告滚动效果
+	function AutoScroll(obj){ 
+		$(obj).find("ul:first").animate({ 
+			marginTop:"-0.25rem" 
+		},500,function(){ 
+			$(this).css({marginTop:"0px"}).find("li:first").appendTo(this); 
+		}); 
+	} 
+	$(document).ready(function(){ 
+		setInterval('AutoScroll("#notice")',5000) 
+	});	
+</script>
+</body>
+</html>

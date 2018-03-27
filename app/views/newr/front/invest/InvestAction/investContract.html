@@ -1,0 +1,177 @@
+#{extends 'newr/common/frontMain.html' /}
+%{business.newr.User currUser = business.newr.User.currUser();	}%
+<div class="full">
+	<div class="content" >
+    <!--找回密码开始-->
+        <div class="xmxq_div">
+        	<div class="t_l_d_title">
+                <font class="t_l_d_title_td01" style="line-height:56px;">债权收益权转让协议</font>
+            </div>
+            <div class="xiey">
+                甲方（出让人）：<font>${t2_user?.companyName}</font>
+                <br />
+                法定代表人：<font>${t2_user?.company}</font>
+                <br />
+                联系方式：<font>${t2_user?.office_telephone}</font>
+                <br />
+                地址：<font>${t2_user?.company_address}</font>
+                <br />
+                乙方（受让人）：<font>${currUser?.realityName}</font>
+                <br />
+                身份证号：<font>${currUser?.idNumber}</font>
+                <br />
+                丙方(第三方服务机构)：<font> 深圳银信保金融服务有限公司</font>
+                <br />
+                法定代表人：<font>郭风云</font>
+                <br />
+                联系方式：<font>400-111-0189</font>
+                <br />
+                网站：<font>www.yinxinbao.com</font>
+                <br />
+                鉴于：
+                <br /> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、银信保网站（域名：www.yinxinbao.com）由丙方运营管理，甲乙双方均系银信保网站的实名制注册会员。
+ <br /> 
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、甲方与基础债权债务人通过丙方提供的投融资服务平台的居间服务线下达成了借款合意，并在丙方严格风控监督下，形成了本协议项下的基础债权。丙方保证该基础债权的真实性、合法性、有效性。根据《中华人民共和国合同法》、《中华人民共和国民法通则》等有关法律规定，甲乙丙三方本着诚实信用、公平公正的基本原则，经充分友好协商一致，就甲方自愿通过银信保网站向乙方转让债权及收益权的相关事宜达成如下协议：
+ <br /> 
+<b>第一条 本协议相关名词释义</b>
+ <br /> 	
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、“基础债权”是指本协议甲方作为出借人，通过丙方提供的投融资服务平台的居间服务与借款人线下达成了借款合意，在丙方法务和风控人员的全程监管和见证下形成并在本协议中转让的原合同债权。
+ <br /> 
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、“债权及收益权”是指债权人基于债权而获得收取除本金以外收益的权利。基础债权的债权人与债务人协商一致，赋予债权及收益权受让方优先受领债务人归还借款本金和一定利息款项（金额不得超过债权及收益权本金及相应利息的总和）的权利。 <br /> 
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3、“资金监管账户”是指丙方平台在第三方支付机构或银行开立的资金管理账户，该账户由丙方与甲方共同监管。
+ <br /> 
+ <b>第二条 基础债权信息</b>
+ <br /> 
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、甲方拥有下列基础债权的债权及收益权,并自愿将全部或部分债权及收益权对乙方进行转让：
+ <br />
+ <table class="xiey_table" cellpadding="0" cellspacing="0">
+ 	<tr>
+    	<th class="xiey_th" colspan="4">基础债权信息</th>
+    </tr>
+ 	<tr>
+    	<td class="xiey_td_b">原合同编号：</td>
+        <td class="xiey_td_f">PHKR-${t2bid?.project_no}</td>
+        <td class="xiey_td_b">债权金额：</td>
+        <td class="xiey_td_f">￥${t2bid?.total_project}</td>
+    </tr>
+ 	<tr>
+    	<td class="xiey_td_b">债权形成时间：</td>
+        <td class="xiey_td_f">${t2projects?.check_time}</td>
+        <td class="xiey_td_b">年化利率：</td>
+        <td class="xiey_td_f">${t2bid?.year_apr}%</td>
+    </tr>
+    <tr>
+    	<td class="xiey_td_b" >原合同期限：</td>
+        <td class="xiey_td_f" colspan="3"><font>${t2projects?.check_time}</font>&nbsp;至&nbsp;<font>${repayment_time}</font></td>
+    </tr>
+    <tr>
+    	<td class="xiey_td_b" >还款方式：</td>
+        <td class="xiey_td_f" colspan="3">#{if t2bid?.repayment_type=='3'} 一次性还本付息#{/if}#{if t2bid?.repayment_type=='2'} 按月付息,到期还本#{/if}</td>
+    </tr>
+    <tr>
+    	<td class="xiey_td_b" >债权抵押物信息：</td>
+        <td class="xiey_td_f" colspan="3">${t2projects?.vehicle_model}汽车抵押</td>
+    </tr>
+ </table> 	
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、上述债权按月计息,按月付息,到期还本。
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3、基础债权形成的原始凭证与本协议有关的书面文件或电子信息，由丙方法务中心负责保管。
+<br />
+<b>第三条 债权收益权的价值和转让价格</b>
+<br />
+ <table class="xiey_table" cellpadding="0" cellspacing="0">
+ 	<tr>
+    	<th class="xiey_th" colspan="5">债权收益权及转让信息</th>
+    </tr>
+ 	<tr>
+    	<td class="xiey_td_b2">债权收益权价值</td>
+        <td class="xiey_td_b2">债权收益权转让价</td>
+        <td class="xiey_td_b2">投资年化收益率</td>
+        <td class="xiey_td_b2">收益起始日期</td>
+        <td class="xiey_td_b2">收益截止日期</td>
+    </tr>
+ 	<tr>
+    	<td class="xiey_td_f2">￥${amount}</td>
+        <td class="xiey_td_f2">￥${invest_amount}</td>
+        <td class="xiey_td_f2">${t2bid?.year_apr}%</td>
+        <td class="xiey_td_f2">${bid?.realInvestExpireTime?.format('yyyy-MM-dd')}</td>
+        <td class="xiey_td_f2">${repayment_time}</td>
+    </tr>
+
+</table>
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;债权及收益权价值包含债权及收益权转让价及预期利息收益。
+<br />
+<b>第四条 债权收益权利息收益的支付</b>
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、基础债权债务人根据其与甲方签订的原合同向指定账户支付利息后，甲方应将不少于本协议已转让部分债权及收益权相对应的利息，支付到资金监管账户绑定账号（基础债权债务人已直接将利息汇于资金监管账户绑定账号的除外），并向乙方支付相应债权及收益权利息。
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、基础债权债务人未按照原合同履行期限按时支付利息的，甲方应当代基础债权债务人向乙方支付相应债权及收益权利息。
+<br />
+<b>第五条 其他权利义务</b>
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、转让的债权及收益权的价值可能并非甲方对原债务人享有的全部债权及收益权，乙方对此充分理解并明确清楚基础债权的全部情况。
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、甲方保证本协议项下转让给乙方的债权及收益权真实有效，并为甲方合法拥有，甲方对其拥有完全、有效的处分权。
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3、乙方声明与保证其所用于受让标的债权及收益权的资金来源合法，如果第三方对资金归属及合法性问题发生争议，由乙方独立承担责任。
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4、若债务人逾期未履行债务，甲方必须无条件垫付乙方本息，并赎回债权及收益权。
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5、因不可抗力致使不能实现合同目的，甲乙丙三方互不追究责任。
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6、本协议的任何修改、补充均须以银信保网站电子文本形式作出。
+<br />
+<b>第六条 争议解决方式</b>
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本协议在履行过程中发生的争议由协议当事人协商解决，协商不成的依法向丙方所在地人民法院起诉。
+<br />
+<b>第七条 协议的保管与生效</b>
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;乙方按照“银信保网站”的规则，在甲方发布的债权及收益权转让投资项目中点击”立即投资”按钮，将债权及收益权转让款支付至甲方通过丙方平台在第三方支付机构或银行开立的资金监管账户，并确认订立本协议，甲方收到资金后，协议立即生效。
+<div style=" width:100%; text-align:right; line-height:35px; position:relative;">
+<div class="yinzhang"><img src="@{'/public/skin/images/yinzhang.png'}" width="210" height="210" /></div>
+甲方： ${t2_user?.companyName}
+<br />
+日期：${bid?.realInvestExpireTime?.format('yyyy-MM-dd')}
+<br />
+乙方：${currUser?.realityName}
+<br />
+日期：${bid?.realInvestExpireTime?.format('yyyy-MM-dd')}
+<br />
+丙方：深圳银信保金融服务有限公司
+<br />
+日期：${bid?.realInvestExpireTime?.format('yyyy-MM-dd')}
+</div>
+
+
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>        
+        <div class="clear"></div>
+    </div>
+
+	<div class="clear"></div>
+</div>
+
+
+<script>
+	$(function(){
+		$(window).scroll(function(){
+			if($(window).scrollTop()>100){  //距顶部多少像素时，出现返回顶部按钮
+				$("#side-bar .gotop").fadeIn();	
+			}
+			else{
+				$("#side-bar .gotop").hide();
+			}
+		});
+		$("#side-bar .gotop").click(function(){
+			$('html,body').animate({'scrollTop':0},500); //返回顶部动画 数值越小时间越短
+		});
+	});
+</script>
+</body>
+</html>

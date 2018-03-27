@@ -1,0 +1,101 @@
+#{extends 'common/frontMain.html' /}
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+}%
+#{set title:currBackstageSet.seoTitle+'|登录' /}
+<div class="xf_login_centent clr">
+	<!-- 登录 -->
+	<div class="xf_login_centent_l">
+		<div class="xf_login_centent_rightbj"></div>
+		<div class="xf_login_title">
+			<span class="xf_login_title_yhdl">用户登录</span>
+			<a href="@{front.account.LoginAndRegisterAction.registerMobile}"
+				class="xf_login_title_zcxyh">注册新用户</a>
+		</div>
+		<div class="xf_login_inputsr">
+			#{form @front.account.loginAndRegisterAction.logining(), id:'submit'}
+			<ul class="xf_login_inputsrul y_dlul" style="margin-top:15px">
+			   
+				<li>
+					<div>
+						<div class="y_dl1">
+							<span><img src="public/images/zc1.png"></span>
+							<input type="text" name="name" id="name" placeholder='请输入用户名/手机/邮箱' class="y_dltxt1 pas1_test" value="${flash?.name}"/>
+						</div>
+					</div>
+					
+				</li>
+	
+				<li>
+					<div>
+						<div class="y_dl1">
+							<span><img src="public/images/dl3.png" class="img2"></span>
+							<input type="password" name="password" placeholder="请输入密码" id="password" class="y_dltxt1 pas1_test" />
+						</div>
+					</div>
+					
+				</li>
+				#{if flash?.loginCount > "2"}
+				<li>
+					<div>
+						<span class="y_dl1 dl2">
+							<span><img src="public/images/dl2.png" class="img2"></span>
+							<input type="text" id="code" name="code" class="y_dltxt1 t2 pas1_test"#{if !constants.Constants.CHECK_CODE}value="1234" readonly="readonly"#{/if} />
+							<input type="hidden" name="randomID" id="randomID" />
+							<i>验证码</i>
+						</span>
+						<a href="#" class="y_yzm"><img src="" class="" id="img" onclick="change()" width="75px" height="32px"></a>
+						<a href="#" onclick="change()" class="y_dla1">刷新</a>
+					</div>
+				</li>
+				#{/if}
+				<li>
+				<div>
+					<div class="y_dl1" style="text-align: right;width:320px;border:none;">
+						<a href="@{front.account.loginAndRegisterAction.resetPasswordByEmail()}" class="" style="color:gray;font-size: 12px;"><u>忘记密码</u></a>
+					</div>
+					</div>
+				</li>
+				<li class="xf_login_xxhelp">
+					
+					<div class="">
+						<b class="xf_login_text_cg"></b>
+						<span class="xf_login_text_cgsp">您的信息将通过128位SGC加密保护数据传输安全</span>
+						<!-- 添加登入页面标示，用于登入状态无效时返回页面的判断 -->
+						<input type="hidden" value="SDBGIOH24HFQ94HT2HSDAF89Q2P">
+					</div>
+				</li>
+				<li>
+					<div style="text-align: center">
+					<a onClick="login()" style="margin-left: auto" class="xf_con_inputfbjk1">安全登录</a>
+					</div>
+				</li>
+			</ul>
+			#{/form}
+		</div>
+	</div>
+	<!-- 共享登录 -->
+	<div class="xf_login_centent_r" >
+		<div class="xf_login_centent_rimg">
+			<img src="@{'/public/images/login.png'}" style="width:auto;margin-left:18px">
+		</div>
+		<div class="xf_gxlogin_input" style="margin-left: 0px">
+			<span class="xf_gxlogin_title">合作账号登录：</span>
+			<a class="xf_gxlogin_qq" href="@{front.quicklogin.qzone.QZoneAPI.login}" ><img src="@{'/public/images/qq.png'}"/></a>
+			<a class="xf_gxlogin_wb" href="@{front.quicklogin.weibo.WeiBoAPI.login}" ><img src="@{'/public/images/weibo.png'}"/></a>
+			<div class="clear"></div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+		$(function(){
+		    var setCode = #{jsAction @front.account.loginAndRegisterAction.setCode()/}
+			$.post(setCode({}),function(data){
+				var arr=eval(data);
+				var img = arr.img;
+				$("#img").attr("src","@{front.account.loginAndRegisterAction.getImg()}?id="+img);	
+				$("#randomID").val(img);
+			});
+			
+		});
+</script>

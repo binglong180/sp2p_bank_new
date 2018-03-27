@@ -1,0 +1,86 @@
+#{extends 'newr/common/frontMain.html' /} 
+
+<div class="full">
+       #{form @newr.front.invest.InvestAction.investList(), id:'submit'}
+            <input type="hidden" name="currPage" id="currPage">
+            <input type="hidden" name="pageSize" id="pageSize">
+       #{/form}
+	<div class="content" style="margin-bottom:0;"> 
+    	<!--list01 start-->
+    	#{list items:pageBean.page, as:'bid'}
+    	#{if bid_index%4==0}
+          <div class="list_item" style="margin-right:0px;">
+    	#{/if}
+    	#{else}
+    	  <div class="list_item" >
+    	#{/else}
+            <div class="list_title"><span class="title_star">车快融${bid?.title}期</span></div>
+            <div class="list_interest">
+                <div class="interest_list">
+                    <span class="" style="margin:0 0 0 9;">${bid?.apr}<span class="" style="font-size:13px;">%</span></span>
+                </div>
+                <div class="interest_title">年化收益率</div>
+            </div>
+            <div class="list_accomplish">
+                <div class="list_data2">
+                    <div class="list_progress" style="width:${bid?.has_invested_amount/bid?.amount*100}%;"></div>
+                </div>
+                <div class="list_progress_title">${(bid?.has_invested_amount/bid?.amount*100).format('###,##0')}%</div>
+            </div>
+            <div class="list_bottom">
+                <div class="list_botm_data" style="border-right:1px solid #e6e6e6;">
+                    <div class="list_td_content">#{if bid?.period_unit ==-1}
+								${bid?.period}年
+								#{/if}
+								#{if bid?.period_unit ==0}
+								${bid?.period}个月
+								#{/if}
+								#{if bid?.period_unit ==1}
+								${bid?.period}天
+								#{/if}</div>
+                    <div class="list_td_title">期限</div>
+                </div>
+                <div class="list_botm_data">
+                    <div class="list_td_content">#{format money:(bid?.amount-bid?.has_invested_amount)}#{/format}</div>
+                    <div class="list_td_title">可投金额</div>
+                </div>
+            </div>
+            <div class="list_buttom">#{if bid?.status==2}
+                <a class="" href="@{newr.front.invest.InvestAction.immediatelyInvest(bid?.id)}">立即投资</a>
+                #{/if}
+                #{if bid?.status==3 ||  bid?.status==4}
+                <a class="list_btm" href="@{newr.front.invest.InvestAction.immediatelyInvest(bid?.id)}">回款中</a>
+                #{/if}
+                #{if bid?.status==5}
+                <a class="list_btm">已还清</a>
+                #{/if}
+                #{if bid?.status!=2 && bid?.status!=4 && bid?.status!=5}
+                <a class="" >${bid?.status}</a>
+                #{/if}
+                </div>
+        </div>
+      #{/list}
+        
+        <div class="clear"></div>
+    </div><!--content end-->
+	<!--翻页开始-->
+           <div class="digg"> 
+              <!-- 分页器 -->
+		  #{page currPage:pageBean.currPage,totalCount:pageBean.totalCount,pageSize:pageBean.pageSize,theme:2,style:2}#{/page}
+              
+          </div> 
+    <!--翻页结束-->
+	<div class="clear"></div>
+</div>
+
+<script type="text/javascript">
+function showPage(currPage, pageSize){
+    $("#currPage").val(currPage);
+    $("#pageSize").val(pageSize);
+    $("#submit").submit();
+  }
+$(function(){
+	$('#invests a').toggleClass("on");
+});
+</script>
+

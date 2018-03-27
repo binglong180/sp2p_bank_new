@@ -1,0 +1,314 @@
+#{extends 'm/common/frontMain.html' /} 
+%{boolean ipsEnable = constants.Constants.IPS_ENABLE;
+business.newr.User currUser = business.newr.User.currUser();
+}%
+<section class="row" style="background:#fff;">
+	<div class="app-locate">
+		<a class="app-return" href="@{m.front.invest.InvestAction.investList()}"> < 返回</a>
+		<h2>车快融${bid?.title}期</h2>
+	</div>
+	<div class="app-buyplan">
+		<div class="app-buyone">
+			<dl class="grid3">
+				<dd>年化收益</dd>
+				<dd><span class="table-text-red">${bid?.apr}%</span></dd>
+			</dl>
+			<dl class="grid4">
+				<dd>期限</dd>
+				<dd><span>${bid?.period}</span>个月</dd>
+			</dl>
+			<dl class="grid5">
+				<dd>可投金额（元）</dd>
+				<dd><span>${(bid?.amount-bid?.hasInvestedAmount).format('###,##0.00')}</span></dd>
+			</dl>
+		</div>
+		<div class="app-speed">
+			<dl>
+				<dd>投资进度：</dd>
+				<dd class="app-plan">
+					<span class="plan100"></span>
+					<span class="plan-rate" style="width:${bid?.hasInvestedAmount/bid?.amount*100}%;"></span>
+				</dd>
+				<dd><em class="plan-text">${(bid?.hasInvestedAmount/bid?.amount*100).format('###,##0')}%</em></dd>
+			</dl>	
+		</div>
+		<div class="app-buytwo">
+			<ul>
+				<li><em>项目金额(元)：</em><span>${bid?.amount?.format('###,##0.00')}</span></li>
+				<li><em>发布日期：</em><span>${bid?.time?.format('yyyy-MM-dd')}</span></li>
+				<li><em>还款方式：</em><span>${bid?.repayment?.name}</span></li>
+				<li><em>剩余时间：</em>#{if bid?.status==4 || bid?.status==3}<span>00天00小时00分</span>#{/if}
+				             #{else}<span id="day">天</span><span id="hours">小时</span><span id="minutes">分</span>#{/else}
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="app-buythree">
+		<ul class="app-buytab">
+			<li id="1" class="on">项目详情</li>
+			<li id="2">投资记录</li>
+		</ul>
+		<div id="app-buycont">
+			<dl>
+				<dt>项目描述</dt>
+				<dd><p>本项目借款主要用于借款人资金周转。借款人为${t2projects?.family_address}居民（户籍），工作稳定，信用良好，还款来源为其个人工资性收入和日常经营所得，有充足的偿还能力，而且借款人以自有的${t2projects?.vehicle_model}汽车作抵押，抵押车辆评估价为人民币${t2projects?.evaluator_quotation}元，抵押物价值远大于借款金额。</p></dd>
+			</dl>
+			<dl>
+				<dt>出借人信息（原始债权人）</dt>
+				<dd><p>${companyName}是一家集信用风险评估与管理，信用数据整合服务，二手车抵押贷款咨询等业务于一体的信息咨询服务机构。</p></dd>
+			</dl>
+			<dl>
+				<dt>借款人信息</dt>
+				<dd>
+					<table class="table table-buycont">
+					</table>
+				</dd>
+			</dl>
+			<dl>
+				<dt>还款来源</dt>
+				<dd>
+					<ul>
+						<li>第一还款来源：借款人个人工资性收入和日常经营所得；</li>
+						<li>第二还款来源：如借款人到期未还本付息，${companyName}承诺以借款人未偿还的本息金额为对价购买投资人在此项目中获得的债权；</li>
+						<li>第三还款来源：如${companyName}到期未购买投资人的债权，则处置借款人抵押的自有${t2projects?.vehicle_model}汽车，车辆市场估价为人民币${t2projects?.evaluator_quotation}元所得购买投资人的债权。</li>
+					</ul>
+				</dd>
+			</dl>
+			<dl>
+				<dt>风控措施</dt>
+				<dd><p>抵押车辆经${companyName}专业评估师认定，此车为非问题车辆，车辆市值足以覆盖借款金额。车辆保险受益人变更为${companyName}，并在车管部门做了抵押登记。${companyName}对抵押车辆行驶轨迹实时掌控。</p></dd>
+			</dl>
+		</div>
+		<div id="app-buyform" style="display:none;">
+			<table class="table table-buyform">
+				<thead>
+				<tr>
+					<td>投资人</td>
+					<td>投资金额（元）</td>
+					<td class="table-w90">投资时间</td>
+					<td>状态</td>
+				</tr>
+				</thead>
+				<tbody>
+				#{list items:pageBean?.page , as: 'records'}
+				<tr>
+					<td>${records?.name?.asterisk()}</td>
+					<td>${records?.invest_amount}</td>
+					<td><span class="table-time">${records?.time?.format('yyyy-MM-dd')}<em>${records?.time?.format('HH:mm:ss')}</em></span></td>
+					<td>#{if records?.transfer_status == 0}正常#{/if}#{if records?.transfer_status == -1}已转让出#{/if}#{if records?.transfer_status == 1}转让中#{/if}</td>
+				</tr>
+				#{/list}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	#{if bid?.status==2}
+	<button type="button" class="app-btn app-btn-default app-radius app-float"  data-toggle="modal" data-target="#myModal">立即投资</button>
+	#{/if}
+           
+    #{if bid?.status==4 || bid?.status==3}
+	<button type="button" class="app-btn app-btn-primary app-radius app-float">回款中</button>
+	#{/if}
+	
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content modal-noradius">
+		  <div class="modal-header modal-bgred">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title" id="myModalLabel">可投金额：<em>￥${(bid?.amount-bid?.hasInvestedAmount).format('###,##0.00')}</em></h4>
+		  </div>
+		  <div class="modal-body modal-invested">
+				#{form @m.front.invest.investAction.confirmInvest(bid?.sign, uuid), method:'POST', id:'confirmInvest'}
+				<ul class="invested-form">
+					<li class="app-noborder">
+						<label class="app-label">可用余额（元）：</label>
+						#{if currUser == null}
+						<span id="userAmount">0.00</span>
+						#{/if}
+						#{else}
+						<span id="userAmount">${(ipsEnable?currUser?.balanceDetail?.user_amount+currUser?.balanceDetail?.user_amount2:currUser?.balanceDetail?.user_amount)?.format('###,##0.00')}</span>
+						#{/else}
+					</li>
+					<li>
+						<label class="app-label">投资金额（元）：</label>
+						<input id="allInvestMoney" name="investAmount" placeholder="请输入100-${(bid?.amount-bid?.hasInvestedAmount).format('###,###')}之间的整数">
+						<!--  <a class="app-btn app-btn-orange" href="">全投</a> -->
+					</li>
+				</ul>
+				#{/form}
+				<p>预期收益（元）：<span id="expectedReturn">0.00</span></p>
+				<p class="invest-hint" id="error_invest"></p>
+				<dl>
+					<!--  <dt>（此次投资您还需要充值：<span>300</span>元）</dt> -->
+					<dd><a class="" onclick="investApplyNow();"><button type="button" class="app-btn app-btn-default app-radius">立即投资</button></a></dd>
+				</dl>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$(".app-buytab li").click(function(){
+			$(".app-buytab li").removeClass("on");
+			$(this).addClass("on");
+			var id = $(this).attr("id");
+			if (id == 1){
+				$("#app-buycont").show();
+				$("#app-buyform").hide();
+			}
+			else if (id == 2){
+				$("#app-buycont").hide();
+				$("#app-buyform").show();
+			}
+		})
+	})
+	</script>
+</section>
+	
+<script type="text/javascript">
+showTime();
+function showTime(){
+	var endTime =" ${bid?.investExpireTime?.format('yyyy/MM/dd HH:mm:ss')}";
+	time_end = new Date(endTime);//结束的时间
+	
+	var tt = time_end.getTime();
+	var now = new Date().getTime();
+	var cha = tt-now;
+	var SysSecond=parseInt(cha);
+	 
+ 	if (SysSecond > 0) {
+		int_day=Math.floor(SysSecond/86400000);
+		SysSecond-=int_day*86400000;
+		int_hour=Math.floor(SysSecond/3600000);
+   		SysSecond-=int_hour*3600000;
+   		int_minute=Math.floor(SysSecond/60000);
+   		SysSecond-=int_minute*60000;
+   		int_second=Math.floor(SysSecond/1000);
+
+        if(int_hour<10){
+  	       int_hour="0"+int_hour;
+	       }
+	 
+        if(int_minute<10){
+		       int_minute="0"+int_minute;
+           }
+  
+	    if (int_second<10){
+ 	      int_second="0"+int_second;
+           }
+  
+	       $("#day").html(int_day+"天");
+	       $("#hours").html(int_hour+"小时");
+	       $("#minutes").html(int_minute+"分");
+	       //$("#seconds").html(int_second);
+      }else{
+      
+      	   $("#day").html("00"+"天");
+	       $("#hours").html("00"+"小时");
+	       $("#minutes").html("00"+"分");
+	       //$("#seconds").html("00");
+      }
+	setTimeout('showTime()',1000);
+	
+	$(document).ready(function(){
+ 	   $("#allInvestMoney").blur(function(){
+ 		   $("#error_invest").html("");
+ 		   var im = $("#allInvestMoney").val();
+ 		   var maxInvestAmount = ${bid?.amount - bid?.hasInvestedAmount};
+ 		   if(im < 100 && maxInvestAmount >=100 ){
+ 			   $("#error_invest").html("投资金额不能小于100!"); //2016 add 只在可投金额大于100的时候进行限制
+ 			   return;
+ 		   }
+ 		   if(im > maxInvestAmount){
+ 			   $("#error_invest").html("投资金额超限!");
+ 			   return;
+ 		   }
+
+ 		   var patrn=/^([1-9]\d*)$/;
+			   var flag = patrn.exec(im.trim());
+			   if(!flag){
+					$("#error_invest").html("请输入正整数！");
+			 		return;
+		   		}
+ 		   
+ 		   var expr = (($("#allInvestMoney").val() * ${bid?.apr} /12) * ${bid?.period})/100;
+ 		   $("#expectedReturn").html(expr.toFixed(2));
+ 		   
+ 		   var balance = new Number($("#balance").html().replace(',',''));
+			   if($("#balance").html()!=undefined){
+ 			   if(balance < im){
+ 				   var expr = (($("#allInvestMoney").val() * ${bid?.apr} /12) * ${bid?.period})/100;
+		    		   $("#needRecharge").html(expr.toFixed(2));
+					   $("#chargeMoneyTip").css("display","block");
+ 				   $("#needRecharge").html((im - balance).toFixed(2)); 
+ 			   }else{
+ 				   $("#chargeMoneyTip").css("display","none");
+ 			   }
+ 		   }
+
+ 	   });	 
+	 });
+}
+
+//立即投资
+function investApplyNow(){
+	var listAction = #{jsAction @m.front.invest.investAction.checkUserStatus() /};
+	$.post(listAction(), function(data) {		
+		switch(data.status * 1){
+		    case 1:
+		    	 confirmInvest();  
+			break;
+			/* 未登录 */
+			case -1:
+				 window.location.href="@{m.front.account.LoginAndRegisterAction.login()}";
+				 return;
+			/* 未激活 */
+			case -6:
+				 window.location.href="@{m.front.account.CheckAction.check}";
+				 return;
+
+		}
+	});
+}
+
+//投标提交
+function confirmInvest(){
+	var investAmount = $("#allInvestMoney").val();
+	var minInvestAmount = ${bid?.minAllowInvestAmount};
+	var maxInvestAmount = ${bid?.amount - bid?.hasInvestedAmount};
+	var patrn=/^([1-9]\d*)$/;
+	var flag = patrn.exec(investAmount.trim());
+	var userAmount = ${ipsEnable?currUser?.balanceDetail?.user_amount+currUser?.balanceDetail?.user_amount2:currUser?.balanceDetail?.user_amount};
+
+	
+	if(userAmount<investAmount){
+		$("#error_invest").html("余额不足，请充值！");
+	    return;
+	}else{
+		if(investAmount.replace(/\s+/g,"") == "" || null == investAmount.replace(/\s+/g,"")){
+			$("#error_invest").html("对不起！投标金额不能为空！");
+		    return;
+	    }else{
+	    	if(!flag){
+	    	    $("#error_invest").html("对不起！请您输入正整数！");
+	    		return;
+	    	}else{
+	    		if(investAmount > maxInvestAmount){
+	    			$("#error_invest").html("对不起！您的投标金额超过了剩余投标金额！");
+	    			return;
+	    		}else{
+	    			if(investAmount < 100 && maxInvestAmount >= 100){
+	    				$("#error_invest").html("对不起！您的投标金额不能小于100！");
+	    				return;
+	    			}else{
+	    				$("#confirmInvest").submit();
+	    			}
+	    		}
+	    	}
+	    }
+	}
+
+	//$("#confirmInvest").submit();
+}
+</script>

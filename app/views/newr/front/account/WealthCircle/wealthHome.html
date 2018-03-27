@@ -1,0 +1,365 @@
+#{extends 'newr/common/frontMain.html' /}
+<!--左侧分类树js-->
+<script type="text/javascript">
+function change_bg(obj)
+{
+    var a=document.getElementById("menu_tree").getElementsByTagName("a");
+    for(var i=0;i<a.length;i++)
+    {
+        a[i].className="";
+    }
+    obj.className="current_on";
+}
+</script>
+<!--左侧分类树js-->
+<script type="text/javascript"> 
+$(document).ready(function(){
+$(".city_link").css("width",document.body.clientWidth +"px ");
+$(".city_link").css("height",document.body.scrollHeight +"px ");
+$(".tck_div").css("margin-top",(document.body.scrollHeight - 508 ) / 2 +"px ");
+});  
+
+$(window).resize(function(){
+ var onLoadWidth = document.body.clientWidth;
+$(".city_link").css("width",document.body.clientWidth +"px ");
+$(".city_link").css("height",document.body.scrollHeight +"px ");
+$(".tck_div").css("margin-top",(document.body.scrollHeight - 508 ) / 2+"px ");
+})
+function FormatDate (strTime) {
+    var date = new Date(strTime);
+    return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+}
+function rolldealdetail(userId){
+	$.ajax({
+		url : "@{newr.front.account.WealthCircle.queryRecommendFeeDetail()}",
+		type : "POST",
+		data : {'userId':userId},
+		success : function(data) {
+			        $("#city_link").find('table').find("tr:not(:first)").remove();
+	                        for(var i = 0; i < data.length; i ++){
+	                        	var line = '<tr>'
+	                        	+'<td class="box_td">'+(i+1)+'</td>'
+	                            +'<td class="box_td">'+data[i].name+'</td>'
+	                            +'<td class="box_td">'+FormatDate(data[i].time)+'</td>'
+	                            +'<td class="box_td">'+data[i].title+'</td>'
+	                            +'<td class="box_td">'+data[i].amount+'</td>'
+	                            +'<td class="box_td">'+data[i].fee+'</td>'
+	                            +'</tr>'
+
+	            				$("#city_link").find('table').append(line);
+	            			}
+
+		}
+	});
+    document.getElementById('city_link').className='city_link city_hovers';
+}
+</script>
+<!--弹出框开始-->
+	
+        <div id="city_link" class="city_link">
+        
+        <div class="city_show">
+             
+        </div>
+        <em class="city_links" href="" onClick="M.goExpr('city_eelou_id','0');return false;">
+        	<div class="tck_div">
+        		<div class="tck_div_title">
+                	<span style="float:left;">详情</span>
+                    <span class="tck_close" href="javascript:;" title="关闭窗口" onclick="document.getElementById('city_link').className='city_link';return !1;"><img src="@{'/public/skin/images/close.png'}" width="17" height="17" /></span>
+                </div>
+                <div class="tck_div_main">
+                    <table width="100%" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <th class="box_th">序号</th>
+                            <th class="box_th">受邀人</th>
+                            <th class="box_th">投资时间</th>
+                            <th class="box_th">投资项目</th>
+                            <th class="box_th">投资金额（元）</th>
+                            <th class="box_th">手续费</th>
+                        </tr>      
+                    </table>    
+                    
+                </div>
+        	</div>
+        </em>
+
+</div>
+<!--弹出框结束-->
+<div class="full">
+	<div class="content" style="background:#fff;">
+		<table cellpadding="0" cellspacing="0" width="100%">
+			<tr>
+			#{include '/newr/common/leftMenu.html'/}
+			
+				<td class="tree_right_td" valign="top">
+                    
+                    <div class="tree_right2">
+                    	<div class="right_top_title">邀请好友</div>
+                    	
+                        	<div class="yao_fr_title">
+                            	<div class="yao_div">
+                                    <span class="yao_text">邀请好友链接：</span>
+                                    <span class="yao_input" ><input type="text" id="shareUrl" value="${shortUrl}"/></span>
+                                    <span class="yao_input" onclick="copyUrl();"><a class="tck_btn_cz" href="javascript:void(0);">复制链接</a></span>
+                                </div>
+                                <div class="yao_div2">
+                                	<span class="yao_text2">分享邀请链接：</span>
+                                    <dl class="yao_dl">
+                                    	<dt onclick="wechatShare();event.stopPropagation();"><a href="javascript:void(0)"><img src="@{'/public/skin/images/yao_20.jpg'}" width="39" height="39" /></a></dt>
+                                        <dd><a href="javascript:void(0)">微信</a></dd>
+                                    <!-- 二维码图片 -->
+                                    <div style="display:none; position:relative; z-index:200;" id="qrcodeImg">
+                                    	 <img src="/data/attachments/${user?.qrcode2}" />      
+                                    </div>
+                                    </dl>
+                                    <dl class="yao_dl">
+                                    	<dt onclick="smsShare();event.stopPropagation();"><a href="javascript:void(0)"><img src="@{'/public/skin/images/yao_26.jpg'}" width="39" height="39" /></a></dt>
+                                        <dd><a href="javascript:void(0)">短信分享</a></dd>
+                                        <!-- 短信分享 -->
+                                        <div style="display:none; position:relative; z-index:200; width:200px; padding:8px; background:#fff; border:1px solid #dcdcdc;" id="smsShare" onclick="event.stopPropagation();">
+                                        	<div style="background:#FFF;font-size:6px;" >
+                                        		<p>
+                                        			<span id="content">【银信保】我是${user?.name}，邀你一起拿个理财红包钱生钱，注册就有！点这里领取：${mShortUrl}</span>
+                                        		</p>
+                                        	</div>	
+                                        	<div onclick="event.stopPropagation();"style=" margin:7px 0;">
+                                        		<input style="width:194px; padding:0 3px; border:1px solid #dcdcdc; height:30px; line-height:30px; color:#505050; text-align:left;" type="text" id="mobile" name="mobile" value="对方手机号码" size="10px" onFocus="if(this.value=='对方手机号码'){this.value='';}" onblur="if(this.value==''){this.value='对方手机号码';}"/>
+                                        	</div>
+                                        	<div>
+                                        		<input  type="hidden" name="randomID" id="randomID" />               	
+                    							<input style="width:94px; padding:0 3px; border:1px solid #dcdcdc; height:30px; line-height:30px; color:#505050; text-align:left;" type="text"  name="code" value="请输入验证码" id="code" onFocus="if(this.value=='请输入验证码'){this.value='';}"  onblur="if(this.value==''){this.value='请输入验证码';}"/>
+                        						<img src="" onclick="change()" id="img" width="85" height="30" style="float:right; cursor:pointer;" title="点击刷新"/>
+                        					</div>
+                                        	<div style="width:100%; height:30px; margin:10px 0; text-align:center;">
+                                        		<input type="button" value="发送" onclick="sendSms()"  style="border-radius:3px; width:80px; height:30px; background:#EB9E00; color:#fff; display:inline-block; border:none; margin:0 auto;"/> 
+                                        	</div>
+                                        	<div class="clear"></div>
+                                    	</div>
+                                    </dl>
+                                    <dl class="yao_dl">
+                                    	<dt onclick="weiboShare()"><a href="javascript:void(0)"><img src="@{'/public/skin/images/yao_23.jpg'}" width="39" height="39" /></a></dt>
+                                        <dd><a href="javascript:void(0)">新浪微博</a></dd>
+                                    </dl>
+                                     <dl class="yao_dl">
+                                    	<dt onclick="tencentShare()"><a href="javascript:void(0)"><img src="@{'/public/skin/images/yao_25.jpg'}" width="39" height="39" /></a></dt>
+                                        <dd><a href="javascript:void(0)">腾讯微博</a></dd>
+                                    </dl>
+                                     <div>
+                                        
+                                     </div>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <!--更改内容开始-->
+                                 <div style="width:740px; height:103px; margin:5px auto 0 auto;">
+                                    <table class="right_zh_tab" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td class="ze_l5_li" rowspan="2" align="center" valign="middle"><img src="@{'public/skin/images/yqhy01_icon.png'}" width="44" height="44" /></td>
+                                            <td class="ze_l5_td2" valign="middle">${outlineData.recommendUserCount}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ze_l5_td" valign="top">受邀人数</td>
+                                        </tr>
+                                    </table>
+ 
+                                    <table class="right_zh_tab" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td class="ze_l5_li" rowspan="2" align="center" valign="middle"><img src="@{'public/skin/images/yqhy02_icon.png'}" width="44" height="44" /></td>
+                                            <td class="ze_l5_td2" valign="middle">${outlineData.investAccount}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ze_l5_td" valign="top">投资金额（元）</td>
+                                        </tr>
+                                    </table>
+                                    <table class="right_zh_tab" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td class="ze_l5_li" rowspan="2" align="center" valign="middle"><img src="@{'public/skin/images/yqhy03_icon.png'}" width="44" height="44" /></td>
+                                            <td class="ze_l5_td2" valign="middle">${outlineData.fee}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ze_l5_td" valign="top">手续费（元）</td>
+                                        </tr>
+                                    </table>
+                                    <table class="right_zh_tab" cellpadding="0" cellspacing="0" style=" margin-right:0;">
+                                        <tr>
+                                            <td class="ze_l5_li" rowspan="2" align="center" valign="middle"><img src="@{'public/skin/images/yqhy04_icon.png'}" width="44" height="44" /></td>
+                                            <td class="ze_l5_td2" valign="middle">${outlineData.toPay}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ze_l5_td" valign="top">待发手续费（元）</td>
+                                        </tr>
+                                    </table>
+                                </div> 
+                            <!--更改内容结束-->
+                            <!--表格开始-->
+                            <div class="tree_right2_b" style="margin-top:15px;">
+                                <table width="100%" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <th class="box_th">序号</th>
+                                        <th class="box_th">受邀人</th>
+                                        <th class="box_th">注册时间</th>
+                                        <th class="box_th">投资金额（元）</th>
+                                        <th class="box_th">手续费（元）</th>
+                                        <th class="box_th">操作</th>
+                                    </tr>
+                                     #{list items:page?.page , as: 'records'}
+                                	<tr> 
+                                   		<td class="box_td">${records_index}</td>
+                                    	<td class="box_td">${records?.name}</td>
+                                    	<td class="box_td">${records?.time?.format('yyyy-MM-dd')}</td>
+                                    	<td class="box_td">${records?.investAccount}</td>
+                                    	<td class="box_td">${records?.fee} </td>
+                                    	<td class="box_td">#{if records?.investAccount !=null }<a class="chakan" href="javascript:;" onclick="rolldealdetail('${records.id}')">查看详情</a>#{/if}</td>
+                                	</tr>
+                               	 	#{/list}                                     
+                                </table>
+                            </div>    
+                        <!--表格结束-->
+                        	
+                   		<div class="clear"></div>
+                	</div><!--tree_right end-->
+                </td>
+			</tr>
+		</table>	
+        <div class="clear"></div>
+    </div><!--content end-->
+
+	<div class="clear"></div>
+</div>
+
+<div css="">
+    <ul id="side-bar" class="side-pannel side-bar">
+      <a href="javascript:;" class="tel"><s class="g-icon-tel"></s><i></i></a>
+      <a href="tencent://message/?uin=938049488&Site=sc.chinaz.com&Menu=yes" class="qq"><s class="g-icon-qq"></s></a>
+      <a href="javascript:;" class="wx"><s class="g-icon-wx"></s><i></i></a>
+      <a href="javascript:;" class="gotop" style="display:none;"><s class="g-icon-top"></s></a>
+    </ul>
+</div>
+<script type="text/javascript" src="/public/skin/js/jquery.min_rv.js"></script>
+<script>
+document.onclick =function(e){	
+	$("#smsShare").hide(1000);
+	$("#qrcodeImg").hide(1000);
+}
+	/*微信分享*/
+	function wechatShare(){
+		$("#smsShare").hide(1000);
+		if($("#qrcodeImg").css("display")=="none"){
+			$("#qrcodeImg").show(1000);
+		}else{
+			$("#qrcodeImg").hide(1000);
+		}
+		event.stopPropagation();
+	}
+	/*短信分享*/
+	function smsShare(){
+		$("#qrcodeImg").hide(1000);
+		$("#mobile").val("对方手机号码");
+		if($("#smsShare").css("display")=="none"){
+			$("#smsShare").show(1000);
+			/*获取验证码*/
+			var setCode = #{jsAction @newr.front.account.loginAndRegisterAction.setCode()/}
+			$.post(setCode({}),function(data){
+				var arr=eval(data);
+				var img = arr.img;
+				$("#img").attr("src","@{newr.front.account.loginAndRegisterAction.getImg()}?id="+img);	
+				$("#randomID").val(img);
+			});
+		}else{
+			$("#smsShare").hide(1000);
+		}
+		
+	}
+	//更换验证码
+	function change(){
+		var setCode = #{jsAction @newr.front.account.loginAndRegisterAction.setCode()/};
+		$.post(setCode({}),function(data){
+			var arr=eval(data);
+			var img = arr.img;
+			$("#randomID").val(img);
+			$("#img").attr("src","@{newr.front.account.loginAndRegisterAction.getImg()}?id="+img);	
+		});
+	}
+	/*发送短信*/
+	function sendSms(){
+		var mobile=$("#mobile").val();
+		//手机号码不能为空
+		if(mobile=="对方手机号码" || mobile==""){
+			alert("手机号码不能为空！");
+			return;
+		}
+		//验证码校验
+		if($("#code").val()=="请输入验证码"||$("#code").val()==""){
+			alert("请输入验证码！");
+			return;
+		}
+		//验证码后台校验
+		var randomId=$("#randomID").val();
+		var code=$("#code").val();
+		//发送短信
+		var content=$("#content").html();
+		var sendMsg=#{jsAction @newr.front.account.WealthCircle.shareBySms(':mobile',':content',':randomId',':code') /};
+		$.post(sendMsg({mobile:mobile,content:encodeURI(content),randomId:randomId,code:code}),function(data){
+			var arr=eval(data);
+			if(arr.error.code < 0){
+				alert(arr.error.msg);
+				return;
+			}
+			alert(arr.error.msg);
+			change();
+			$("#mobile").val("对方手机号码");
+			$('#code').val("请输入验证码");
+		});
+	}
+	/*新浪微博分享*/
+	function weiboShare(){
+		var title="银信保"+$("#shareUrl").val();
+		var pic="http://www.yinxinbao.com/public/m/images/logo.png";
+		var ralateUid="5838658174";       //@官方微博
+		window.open("http://service.weibo.com/share/share.php?title="+title+"&pic="+pic+"&ralateUid="+ralateUid,"_blank");
+	}
+	/*腾讯微博分享*/
+	function tencentShare(){
+		var title="银信保欢迎您！"+$("#shareUrl").val();		//less than 140
+		var url="wwww.yinxinbao.com";                	//转播页的url
+		var pic="http://www.yinxinbao.com/public/m/images/logo.png";//需要转播的图片url，多张以|连接					
+		window.open("http://share.v.t.qq.com/index.php?c=share&a=index&title="+title+"&url="+url+"&pic="+pic,"_blank");
+	}
+	/*复制链接*/
+	function copyUrl(){
+		if(window.clipboardData && window.clipboardData.setData){  
+  			var data=$("#shareUrl").val();  
+			window.clipboardData.setData("Text",data);
+			alert("复制成功,现在去分享给您的小伙伴去吧!");  
+    	}else{  
+        	alert("您的浏览器不支持此复制功能，请使用Ctrl+C或鼠标右键。");   
+        	$("#shareUrl").select(); // 选中要复制的内容，给用户提供方便  
+    	} 
+	}	
+	$(function(){
+		$(window).scroll(function(){
+			if($(window).scrollTop()>100){  //距顶部多少像素时，出现返回顶部按钮
+				$("#side-bar .gotop").fadeIn();	
+			}
+			else{
+				$("#side-bar .gotop").hide();
+			}
+		});
+		$("#side-bar .gotop").click(function(){
+			$('html,body').animate({'scrollTop':0},500); //返回顶部动画 数值越小时间越短
+		});
+	});
+	$(function(){
+	var obj = document.getElementById("child9");
+	change_bg(obj);
+});
+</script>
+
+
+
+
+
+
+
+
+

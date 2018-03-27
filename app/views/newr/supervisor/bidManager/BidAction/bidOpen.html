@@ -1,0 +1,119 @@
+#{extends 'common/supervisor.html' /}
+#{include 'newr/supervisor/bidManager/bidManagerLeft.control'/}
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".full").css("width",document.body.clientWidth- 200 +"px ");
+});  
+
+$(window).resize(function(){
+	 var onLoadWidth = document.body.clientWidth;
+		$(".full").css("width",document.body.clientWidth- 200 +"px ");
+})
+</script>
+<style>
+.full{float:left; }
+.table01{width:100%;}
+.table01 th,.table01 td{font-size:12px; height:40px; text-align:center; font-weight:normal;}
+.table01 td{ color:#666;}
+.table01 .td_a{ color:#666;}
+.but01{color:#3a7dc0;}
+</style>
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="@{'/public/skin/css/layout.css'}" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="@{'/public/javascripts/jquery-2.0.js'}"></script>
+<script type="text/javascript" src="@{'/public/javascripts/index.js'}"></script>
+<script type="text/javascript" src="@{'/public/javascripts/jquery.json-2.4.min.js'}"></script>
+
+</head>
+<body>
+<div class="full">
+	<div class="list_items_aim">
+	    #{form @bidOpen(), id:'sub'}
+    	<div class="data_header">
+        	<div class="data_item">
+            	<div class="td_title">标的名称：</div>
+                <div class="td_content"><input class="input_title" type="text" id="bid_name" name="bid_name" placeholder=""></div>
+            </div>
+            <div class="btn_search" onclick="searchSubmit();"><a class="" >查询</a></div>
+        </div>
+        <input type="hidden" id="currPage" name="currPage"/>
+	    <input type="hidden" id="pageSize" name="pageSize"/>
+	    <input type="hidden" id="orderType" name="orderType" value="${page.conditions?.orderType}"/>
+        #{/form}
+        <div class="list_data">
+        	#{table}
+        	<table class="table01" cellpadding="0" cellspacing="0">
+            	<tr>
+                	<th>序号</th>
+                    <th>标的名称</th>
+                    <th>标的总额（元）</th>
+                    <th>期限</th>
+                    <th>年化收益率</th>
+                    <th>还款方式</th>
+                    <th>开标时间</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+		            #{list page?.page}
+				        #{tr tr_index:_index}
+		                    <tr>                
+		                       <!--  <td>${_?.id}</td> -->
+		                        <td>${(page?.currPage - 1) * page?.pageSize + _index}</td>
+		                        <td>车快融第${_?.title}期</td>
+		                        <td>${_?.total_project}</td>
+		                        <td>${_?.invest_period}</td>
+		                        <td>${_?.year_apr}</td>
+		                        <td>#{if _?.repayment_type=="2"}按月付息,到期还本#{/if}#{if _?.repayment_type=="3"}一次性还本付息#{/if}</td>
+		                        <td>${_?.start_date}</td>
+		                        <td>#{if _?.status=="-1"}终止#{/if}
+		                            #{if _?.status=="0"}待设置参数#{/if}
+		                            #{if _?.status=="1"}待开标#{/if}
+		                            #{if _?.status=="2"}开标中#{/if}
+		                            #{if _?.status=="3"}暂停#{/if}
+		                        </td>
+		                        <td>
+		                        #{if _?.status=="-1"}
+		                            <a class="but01"  href="@{newr.supervisor.bidManager.BidAction.openBid(_?.project_no,_?.status)}"></a>
+		                        #{/if}
+		                        #{if _?.status=="1"}
+		                             <a class="but01"  href="@{newr.supervisor.bidManager.BidAction.openBid(_?.project_no,_?.status)}">开标</a>
+		                        #{/if}
+		                        #{if _?.status=="2"}
+		                             <a class="but01"  href="@{newr.supervisor.bidManager.BidAction.openBid(_?.project_no,'pause')}">暂停/</a>
+		                             <a class="but01"  href="@{newr.supervisor.bidManager.BidAction.openBid(_?.project_no,'stop')}">终止</a>
+		                        #{/if}
+		                        #{if _?.status=="3"}
+		                             <a class="but01"  href="@{newr.supervisor.bidManager.BidAction.openBid(_?.project_no,_?.status)}">重启</a>
+		                        #{/if}
+								</td>
+		                    </tr>
+		            	  #{/tr}
+	        		#{/list}
+	        	</table>
+                #{/table}  
+            </div>
+        </div>
+        <!-- 列表底部 -->
+	    <div class="xn_c_content_bottom">
+	      <div class="page_warp">
+	        #{page currPage:page.currPage,totalCount:page.totalCount,pageSize:page.pageSize,theme:2,style:4/}
+	      </div>
+	    </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+	function searchSubmit() {
+		$("#sub").submit();
+	}
+	function showPage(currPage, pageSize){
+		$("#currPage").val(currPage);
+		$("#pageSize").val(pageSize);
+		$("#sub").submit();
+	}
+</script>
+</html>

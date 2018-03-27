@@ -1,0 +1,106 @@
+#{extends 'common/supervisor.html' /}
+#{include 'newr/supervisor/projectManager/projectManagerLeft.control'/}
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".full").css("width",document.body.clientWidth- 200 +"px ");
+});  
+
+$(window).resize(function(){
+	 var onLoadWidth = document.body.clientWidth;
+		$(".full").css("width",document.body.clientWidth- 200 +"px ");
+})
+</script>
+<style>
+.full{float:left; }
+.table01{width:100%;}
+.table01 th,.table01 td{font-size:12px; height:40px; text-align:center; font-weight:normal;}
+.table01 td{ color:#666;}
+.table01 .td_a{ color:#666;}
+.but01{color:#3a7dc0;}
+</style>
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="@{'/public/skin/css/layout.css'}" rel="stylesheet" type="text/css">
+<link href="@{'/public/stylesheets/site.css'}" rel="stylesheet" type="text/css">
+<link href="@{'/public/stylesheets/temp.css'}" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="@{'/public/javascripts/jquery-2.0.js'}"></script>
+<script type="text/javascript" src="@{'/public/javascripts/index.js'}"></script>
+<script type="text/javascript" src="@{'/public/javascripts/jquery.json-2.4.min.js'}"></script>
+<script charset="utf-8" src="@{'public/javascripts/ajaxfileupload.js'}"></script>
+<script type="text/javascript" src="@{'/public/javascripts/common.js'}"></script>
+</head>
+<body>
+<div class="xn_c_content">
+  <div class="xf_ht_tablelist">
+    <!-- 搜索 -->
+    #{form @fullList(), id:'fullList'}
+    
+	  <input type="hidden" id="currPage" name="currPage"/>
+	  <input type="hidden" id="pageSize" name="pageSize"/>
+
+    #{/form}
+    <!-- 列表内容 -->
+    <div class="xn_c_content_top">
+      #{table class:"xn_c_content_list", cellspacing:"0", cellpadding:"0", border:"0", tr_class_odd:"xn_tr_bj"}
+        #{tr}
+          #{th}序号#{/th}
+		  #{th}编号#{/th}
+          #{th}标题#{/th}
+          #{th}借款人#{/th}
+          #{th}借款金额[￥]#{/th}
+          #{th}年利率#{/th}
+          #{th}借款期限#{/th}
+          #{th}申请时间#{/th}
+          #{th}满标时间#{/th}
+          #{th}满标状态#{/th}
+		  #{th}操作#{/th}
+        #{/tr}
+		#{list pageBean?.page}
+		#{tr tr_index:_index}
+		  #{td}${(pageBean?.currPage - 1)*pageBean?.pageSize + _index}#{/td}
+		  #{td}${_?.bid_no}#{/td}
+		  #{td}${_?.title}#{/td}
+		  #{td}${_?.user_id}#{/td}
+		  #{td}${_?.amount?.format("###,##0.00")}#{/td}
+		  #{td}${_?.apr}#{/td}
+		  #{td}
+		    ${_?.period}
+		  	#{if _?.period_unit == -1}
+			  [年]
+		    #{/if}
+		    #{elseif _?.period_unit == 1}
+		      [日]
+		    #{/elseif}
+		    #{else}
+		      [月]
+		    #{/else}
+		  #{/td}
+		  #{td}${_?.time?.format('yyyy-MM-dd')}#{/td}
+		  #{td}${_?.invest_expire_time?.format('yyyy-MM-dd')}#{/td}
+		  #{td}<span ><a class="" href="@{newr.supervisor.projectManager.ProjectAction.fullBid(_?.id)}">满标放款</a></span>#{/td}
+	     
+	    #{/tr}
+	    #{/list}
+      #{/table}
+    </div>
+    <!-- 列表底部 -->
+    <div class="xn_c_content_bottom">
+      <div class="page_warp">
+        #{page currPage:pageBean.currPage,totalCount:pageBean.totalCount,pageSize:pageBean.pageSize,theme:2,style:4/}
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+/* 条件搜素查询 */
+function showPage(currPage, pageSize){
+     $("#currPage").val(currPage);
+     $("#pageSize").val(pageSize);
+     $("#fullList").submit();
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+.fl{float: left;}
+.fr{float: right;}
+.tac{text-align: center;}
+.tal{text-align: left;}
+.tar{text-align: right;}
+.vat{vertical-align: top;}
+.vam{vertical-align: middle;}
+.clear-fix:after{content: '';display: block;height: 0;visibility: hidden;clear: both;}
+.clear-fix{zoom: 1;clear: both;}
+.hide{display: none;}
+.ellipsis{overflow: hidden;text-overflow: ellipsis;-o-text-overflow: ellipsis;white-space: nowrap;}
+.inline-block{display: inline-block; *display:inline;zoom: 1;}
+.ime-disabled{-webkit-ime-mode: disabled;ime-mode: disabled;}
+.side-pannel{position: fixed; right:10px; margin-left:510px; z-index: 99;}
+
+.side-bar{border-bottom:none; bottom:190px; }
+.side-bar a{display: block;cursor: pointer;width: 50px;height: 50px; position: relative; color:#676767; text-align: center;margin:10 0;}
+.side-bar a s{display: block;margin-left: auto;margin-right: auto;}
+.side-bar a span{line-height: 20px;}
+.side-bar a.gotop s{position:absolute;}
+
+/*tel*/
+.side-bar a.tel s{position: absolute; }
+.side-bar a.tel i{width:205; height:60px; position: absolute; left: -210px; top: 50%; margin-top: -30px; display: none; background-position: 0 0;}
+.side-bar a.tel:hover i{display: block;}
+.side-bar a.tel i{background-image: url(../images/tel_win.png);}
+.g-icon-tel{height:50px;width:50px; background:url(../images/right_nav.png) 0px 0px no-repeat;}
+
+/*QQ*/
+.side-bar a.qq s{position: absolute; }
+.side-bar a.qq i{width:205;height:60px; position: absolute; left: -210px; top: 50%; margin-top: -30px; display: none; background-position: 0 0;}
+.side-bar a.qq:hover i{display: block;}
+.g-icon-qq{height:50px;width:50px; background:url(../images/right_nav.png) 0px -55px no-repeat;}
+
+/*wx*/
+.side-bar a.wx s{position: absolute; }
+.side-bar a.wx i{width:155px; height:150px; position: absolute; left: -160px;  margin-top: -50px; display: none; background-position: 0 0;}
+.side-bar a.wx:hover i{display: block;}
+.side-bar a.wx i{background-image: url(../images/wx_win.png);}
+.g-icon-wx{height:50px;width:50px; background:url(../images/right_nav.png) 0px -110px no-repeat;}
+
+/*top*/
+.side-bar a.top s{position: absolute; }
+.side-bar a.top i{width:205;height:60px; position: absolute; left: -210px; top: 50%; margin-top: -30px; display: none; background-position: 0 0;}
+.side-bar a.top:hover i{display: block;}
+.g-icon-top{height:50px;width:50px; background:url(../images/right_nav.png) 0px -165px no-repeat;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

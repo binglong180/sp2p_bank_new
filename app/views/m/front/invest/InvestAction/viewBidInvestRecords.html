@@ -1,0 +1,195 @@
+#{extends 'm/common/frontMain.html' /}
+
+<script type="text/javascript"> 
+$(document).ready(function(){
+$(".city_link").css("width",document.body.clientWidth +"px ");
+$(".city_link").css("height",document.body.scrollHeight +"px ");
+$(".tck_div").css("margin-top",(document.body.scrollHeight - 508 ) / 2 +"px ");
+});  
+
+$(window).resize(function(){
+ var onLoadWidth = document.body.clientWidth;
+$(".city_link").css("width",document.body.clientWidth +"px ");
+$(".city_link").css("height",document.body.scrollHeight +"px ");
+$(".tck_div").css("margin-top",(document.body.scrollHeight - 508 ) / 2+"px ");
+})
+
+ function FormatDate (strTime) {//年月日
+	    var date = new Date(strTime);
+	    return date.getFullYear()
+	    	   +"-"+(parseInt(date.getMonth()+1)>=10?(date.getMonth()+1):("0"+(date.getMonth()+1)))
+	    	   +"-"+(parseInt(date.getDate())>=10?date.getDate():("0"+date.getDate()));
+	}
+function rolldealdetail(title,investId){
+	var line="";
+	$("#myModalTable").children().remove();
+	$.ajax({
+		url : "@{m.front.invest.InvestAction.investDetail()}",
+		type : "POST",
+		data : {'title':title,'investId':investId},
+		success : function(data) {
+				var data=data;
+	            for(var i = 0; i < data.length; i ++){
+	            	line += '<tr>'
+	            	+'<td class="box_td">'+data[i].periods+'</td>'
+	            	+'<td>'+data[i].amount+'</td>'
+	            	+'<td>'+FormatDate(data[i].receive_time)+'</td>'
+	                +'<td><font class="font_hk">'+data[i].status+'</font></td>'
+	                +'</tr>'
+	            }   
+	            $("#myModalTable").append(line);          
+		}
+	});
+	$("#myModalLabel").html("还款详情 —【车快融"+title+"期】");
+} 
+/* $(document).on("click",'.myModal',function(){
+		var title=$(this).find("td:eq(0)").find("em").text().replace('期','');
+		var investId=$(this).find("input:eq(0)").val();
+		rolldealdetail(title.trim(),investId);
+}); */
+</script>
+
+<body>
+<!--弹出框开始-->
+	
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+	<div class="modal-content modal-noradius">
+	  <div class="modal-header modal-bgred">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h4 class="modal-title" id="myModalLabel"></h4>
+	  </div>
+	  <div class="modal-body modal-nobody">
+		<table class="table table-modal">
+			<thead>
+				<td class="table-w50">期数</td>
+				<td>金额（元）</td>
+				<td>时间</td>
+				<td>状态</td>
+			</thead>
+			<tbody id="myModalTable">
+			</tbody>
+		</table>
+	  </div>
+	</div>
+  </div>
+</div>
+<!--弹出框结束-->
+
+<section class="row" style="background:#fff;">
+	<div class="app-locate">
+		<a class="app-return" href="@{m.front.account.AccountHomeAction.accountHome()}"> < 返回</a>
+		<h2>投资记录</h2>
+	</div>
+	<div class="app-buylist">
+		<table class="table table-buylist">
+			<thead>
+				<tr>
+					<td>项目名称</td>
+					<td>金额（元）</td>
+					<td class="table-w90">时间</td>
+					<td>状态</td>
+					<td>合同</td>
+				</tr>
+			</thead>
+			<tbody id="tbody">
+				#{list items:pageBean?.page , as: 'records'}
+				<tr data-toggle="modal" data-target="#myModal" class="myModal">
+					<td><span>车快融<em>${records?.title}期</em></span></td>
+					<td>${records?.invest_amount}</td>
+					<td><span class="table-time">${records?.time?.format('yyyy-MM-dd')}<em>${records?.time?.format('HH:mm:ss')}</em></span></td>
+					<td><span class="table-text-red">#{if records?.status == 2}
+								投资中
+								#{/if}
+								#{if records?.status == 4 || records?.status == 3}
+								回款中
+								#{/if}
+								#{if records?.status == 5}
+								 已还清
+								#{/if}</span>
+					</td>
+					 <td><a href="@{m.front.invest.InvestAction.investContract()}" >查看</td>
+					<input type="hidden" value="${records?.id}" />
+				</tr>
+				#{/list}
+			</tbody>
+	   	  <input type="hidden" name="currPage" id="currPage" value="${pageBean.currPage}">
+          <input type="hidden" name="pageSize" id="pageSize" value="${pageBean.pageSize}">
+          <input type="hidden" name="totalCount" id="totalCount" value="${pageBean.totalCount}">
+	
+		</table>
+		<div class="app-load" id="showdiv"  style="display:none;">
+			加载中<i class="glyphicon glyphicon-menu-down" aria-hidden="true"></i>
+		</div>
+		<div class="app-load" id="showdiv2"  style="display:none;">
+			已经到最后了<i class="glyphicon glyphicon-menu-down" aria-hidden="true"></i>
+		</div>
+	</div>
+	
+</section>
+<script type="text/javascript">
+
+$(function(){
+	var totalCount=parseInt($("#totalCount").val());
+	var pageSize=parseInt($("#pageSize").val());
+	$(window).scroll(function(){
+			var currPage=parseInt($("#currPage").val());//当前页
+			var endPage=totalCount%pageSize==0?totalCount/pageSize:Math.ceil(totalCount/pageSize);//最后一页
+			var srollPos = $(window).scrollTop();    //滚动条距顶部距离(页面超出窗口的高度) 
+			var totalheight = parseFloat($(window).height()) + parseFloat(srollPos);
+			if(($(document).height()-80) <= totalheight && currPage < endPage){
+				rollNext(currPage+1,pageSize);		
+				if($(document).height() <= totalheight){  //当浏览器下拉倒底部时
+					$("#showdiv").show();
+				}
+			}
+	});
+}); 
+ function rollNext(currPage,pageSize){
+	$("#currPage").val(currPage);
+	$.ajax({
+		url :  "@{m.front.invest.investAction.viewBidInvestRecordsAjax()}",
+		type : "GET",
+		data : {'currPage':currPage},
+		success : function(data) {
+				var data=eval(data);
+				var line="";
+				var status=["投资中","回款中","回款中","已还清"];
+				for ( var i = 0; i <= data.length-1; i++) {	
+					var time1=FormatDate1(data[i].time);
+					var time2=FormatDate2(data[i].time);
+				line +='<tr data-toggle="modal" data-target="#myModal" class="myModal">'
+							+'<td><span>车快融<em>'+data[i].title+'期</em></span></td>'
+							+'<td>'+parseFloat(data[i].invest_amount).toFixed(1)+'</td>'
+							+'<td><span class="table-time">'+time1+'<em>'+time2+'</em></span></td>'
+							+'<td><span class="table-text-red">'+status[parseInt(data[i].status)-2]+'</span></td>'
+							+'<input id="invest_id" type="hidden" value='+'"'+data[i].id+'"'+'></input></tr>'
+				}
+				$("#tbody").append(line);
+				$("#showdiv").hide();
+				var totalCount=parseInt($("#totalCount").val());
+				var pageSize=parseInt($("#pageSize").val());
+				var currPage=parseInt($("#currPage").val());
+				var endPage=totalCount%pageSize==0?totalCount/pageSize:Math.ceil(totalCount/pageSize);//最后一页
+				if(currPage>=endPage){
+					$("#showdiv2").show();
+				}
+			}
+		});
+	} 
+ function FormatDate1 (strTime) {//年月日
+	    var date = new Date(strTime);
+	    return date.getFullYear()
+	    	   +"-"+(parseInt(date.getMonth()+1)>=10?(date.getMonth()+1):("0"+(date.getMonth()+1)))
+	    	   +"-"+(parseInt(date.getDate())>=10?date.getDate():("0"+date.getDate()));
+	}
+	function FormatDate2 (strTime) {//时分秒
+	    var date = new Date(strTime);
+	    return ((parseInt(date.getHours())>=10)?date.getHours():("0"+date.getHours()))
+	    		+":"+((parseInt(date.getMinutes())>=10)?date.getMinutes():("0"+date.getMinutes()))
+	    		+":"+((parseInt(date.getSeconds())>=10)?date.getSeconds():("0"+date.getSeconds()));
+	}
+</script>	
+	
+	

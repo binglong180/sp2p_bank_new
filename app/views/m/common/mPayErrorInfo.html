@@ -1,0 +1,16 @@
+#{extends 'm/common/frontMain.html' /}
+
+<section class="row">
+	<div class="app-jump">
+		<h3>
+			#{if error.code >= 0}
+			<img src="/public/m/images/yes.png" /><span>${error.msg}</span>
+			#{/if}
+			#{else}
+			<img src="/public/m/images/error.png" /><span>${error.msg}</span>
+			#{/else}
+		</h3>
+
+		<p id="jumpTo">点击跳转到<a href="${error.returnUrl}">${error.returnMsg}</a>！</p>
+	</div>
+</section>

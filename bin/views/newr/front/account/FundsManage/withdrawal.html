@@ -1,0 +1,187 @@
+#{extends 'newr/common/frontMain.html' /} 
+
+
+<div class="full">
+	<div class="content" style="background:#fff;">
+		<table cellpadding="0" cellspacing="0" width="100%">
+			<tr>
+			#{include '/newr/common/leftMenu.html'/}
+				<td class="tree_right_td" valign="top">
+                    
+                    <div class="tree_right2">
+                    	<div class="right_top_title">我要提现</div>
+                    	<div class="tree_right2_b">
+                        	<!--未绑定银行卡开始-->
+                        	<div class="top_text" style="display:none" id="dis1">请先绑定用于提现的银行账户，该银行账户名称与您的身份证姓名须一致。</div>
+                            <div class="tx_bank_div" style="display:none" id="dis2">
+                            	<a class="tx_bank" href="#" >
+                                	<img class="tx_tj_icon" src="@{'/public/skin/images/tj.png'}" width="26" height="26" />
+                                    <div class="tx_tj_text" onclick="bindCard();">添加银行卡</div>
+                                </a>
+                            </div> 
+                             <!--未绑定银行卡结束-->                                                                  	   	
+                                 	   	                       
+                        	<!--已绑定银行卡开始-->
+                        	<div class="top_text" style="display:none" id="dis3">已绑定的银行卡：</div>
+                            <div class="tx_bank_div" style="display:none" id="dis4">
+                            	#{list items:banks,as:'bank'}
+                            	<a class="tx_bank01" href="javascript:;" onclick="changeBank(this,'${bank.id}')">
+                            		<input type="hidden" value="${bank.openBankId}" />
+                            		<input type="hidden" value="${bank.id}" id="defId" />
+                                	<img class="tx_ytj_bank" src="" width="110" height="43" />
+                                    <div class="tx_bank_no"><font>****&nbsp;</font><font>${bank.subAccount}</font></div>
+                                </a>
+                                #{/list}
+                              
+                            	<a class="tx_bank" href="@{newr.front.account.FundsManage.userBindCard()}">
+                                	<img class="tx_tj_icon" src="@{'/public/skin/images/tj.png'}" width="26" height="26" />
+                                    <div class="tx_tj_text" onclick="bindCard();">添加银行卡</div>
+                                </a>
+                            </div>
+                            <script type="text/javascript">
+                           		var imageHtml="<img class='bank_xd_07' src="+"@{'/public/skin/images/bank_xd_07.jpg'}"+" width='14' height='14' />";
+                            	$(function(){
+                            		if($(".tx_bank01").length==0){
+                            			//显示未绑定银行卡
+                            			$("#dis1").show();
+                            			$("#dis2").show();
+                            			//$(".tree_right2_b").children('div').get(1).attr("style","display:none");
+                            		}else{
+                            		//当银行卡的个数不为空时
+                            			$(".tx_bank01").each(function(){
+                            				var str="/public/skin/images/bindBank/"+$(this).children().first().val()+"_bank.jpg";
+                            				$(this).children('img').first().attr("src",str);
+                            				$(this).children('div').children('font').last().html(splitAccount($(this).children('div').children('font').last().html()));
+                            			});
+                            			 $(".tx_bank01").first().append(imageHtml);
+                            			 //默认选择银行的ID
+                            			 $("#accountId").val($("#defId").val());
+                            			 $("#dis3").show();
+                             			 $("#dis4").show();
+                            	   }
+                            	});
+                            	//更换银行卡
+                            	function changeBank(obj,accountId){
+                            		$(".tx_bank01").each(function(){
+                             			if($(this).children('img').length==2){
+                                			$(this).children('img').last().remove();
+                                		}
+                            		});
+                            		$(obj).append(imageHtml);
+                            		$("#accountId").val(accountId);//选择银行的ID
+                            	};
+                            	function splitAccount(str) {
+                            		if(str == "" || str == null){
+                            			return "";
+                            		}
+                            		return str.substr(str.length-4);
+                            	}
+                            </script>
+                            <!--已绑定银行卡结束-->
+                            <table cellpadding="0" cellspacing="0" width="400" style="margin:50px auto 20px auto;">
+                                <tr>
+                                    <th class="cz_td" align="right" height="50">可提额度：</th>
+                                    <th class="cz_td" align="left" height="50"><span class="cz_money">#{if ipsEnable}${withdrawalAmount2?.format('###,##0.00')}#{/if}#{else}${withdrawalAmount?.format("###,##0.00")}#{/else}</span>&nbsp;元</th>
+                                </tr>
+                                	#{form @newr.front.account.FundsManage.submitWithdrawal(), id:'ipsAmountSubmit',target:'_blank'}
+	                              <input type="hidden" name="uuidRepeat" value="${flash?.success}">
+                                  <input type="hidden" name="accountId" value="" id="accountId"></input>
+                                  <input type="hidden" name="type" value="1"> 
+                                <tr>
+                                    <td class="cz_td" align="right" height="50">提现金额：</td>
+                                    <td class="cz_td" align="left" height="50"><input class="cz_money_input" value="请输入要提现的金额" type="text" name="amount" id="amount" onclick="javascript:$('#amount').val('')"/>&nbsp;元</td>
+                                </tr>
+                                <tr>
+                                	<td class="cz_td" height="80" colspan="2" valign="bottom" align="center">
+                                    	
+                                    		<a class="cz_money_btn" onClick="withDrawSubmits()">立即提现</a>
+                                       
+                                    </td>
+                                </tr>
+                            </table>   
+                   #{/form}     
+                        	<div class="cz_shuom">
+                            	<p><b>提现说明：</b></p>
+                                <p>
+                                1. 提现手续费由银信保支付；
+                                </p>
+                                <p>
+                                2. 工作日（周六/周日/法定节假日均除外）20:00之前申请的提现，下一工作日12:00-16:00到账， 否则将于第三个工作日12:00-16:00到账；
+                                </p>
+                                <p>
+                                3. 实际到账时间依据账户托管方（第三方支付平台）及提现银行而有所差异；
+                                </p>
+                                <p>
+                                4. 根据第三方支付规定，为防止恶意转账、套现等行为 ，用户的投资资金必须经投资回款后才能提现；
+                                </p>
+                                <p>
+                                5. 第三方支付公司严禁信用卡充值、套现等行为，一经发现将予以处罚。
+                                </p>
+                            
+                        	<div class="clear"></div>
+                        </div>
+                        
+                        	<div class="clear"></div>
+                        </div>
+                   		<div class="clear"></div>
+                	</div><!--tree_right end-->
+                </td>
+			</tr>
+		</table>	
+        <div class="clear"></div>
+    </div><!--content end-->
+
+	<div class="clear"></div>
+</div>
+<script type="text/javascript">
+$(function(){
+	var obj = document.getElementById("child3");
+	change_bg(obj);
+});
+//表单验证
+function withDrawSubmits(){
+
+	if( ${banks.size()} == 0){
+
+        alert("未添加要提现的银行卡！");
+        return;
+    }
+    if($("#amount").val() == '' || $("#amount").val() == '请输入要提现的金额'){
+        alert("提现金额不能为空！");
+        return;
+    }
+    if(isNaN($("#amount").val())){
+    	alert("金额必须为数字！");
+    	return;
+    } 
+     if($("#amount").val()>500000.00){
+    	alert("提现金额不能大于500000.00");
+    	return;
+    }  
+    if($("#amount").val()>${withdrawalAmount2}){
+    	alert("提现金额不能大于可用额度");
+    	return;
+    } 
+    $("#ipsAmountSubmit").submit();
+}
+    
+
+/*     
+    if($("#amount").val() > 50000000){
+  	  alert("提现金额不能大于50000000");
+  	  return;
+    }
+		var ipsEnable = ${ipsEnable};
+		if (ipsEnable) {
+			$("#mountSubmit").submit();
+			return;
+		}
+    if($("#payPassword").val() == ''){
+        alert("交易密码不能为空！");
+        return;
+    }
+*/    
+function bindCard(){
+	window.location.href="@{newr.front.account.FundsManage.userBindCard}";
+}
+</script>

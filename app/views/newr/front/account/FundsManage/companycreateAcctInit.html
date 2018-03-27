@@ -1,0 +1,17 @@
+
+#{extends 'newr/common/frontMain.html' /}
+<script src="@{'/public/javascripts/laydate/laydate.js'}"></script>
+<div class="full">
+	<div class="content" style="background:#fff;">
+        #{form @newr.front.account.FundsManage.companycreateAcct(), id:'submit'}
+                         公司全称: <input type="text" name="companyName"/>               	
+                营业执照编号: <input type="text" name="business_licence_no"/>
+                   税务登记号 : <input type="text" name="tax_no"/>
+                   <input type="submit" value="提交">
+         #{/form}  
+	</div>
+</div>
+
+
+
+

@@ -1,0 +1,63 @@
+#{extends 'newr/common/frontMain.html' /}
+<div class="full">
+	<div class="content" style="background:#fff;">
+		<table cellpadding="0" cellspacing="0" width="100%">
+			<tr>
+				#{include '/newr/common/leftMenu.html'/}
+			
+				<td class="tree_right_td" valign="top">
+                    
+                    <div class="tree_right2">
+                    	<div class="right_top_title">绑定邮箱</div>
+                    	<div class="tree_right2_b">
+                        #{form @newr.front.account.CheckAction.doCheckEmailSet(), id:'form'}
+                            <table cellpadding="0" cellspacing="0" width="400" style="margin:50px auto 20px auto;">
+                                <tr><span id="showTips" style="color: red;padding-left: 5px;">${flash.error}</span>
+                                    <td class="cz_td" align="right" height="50"><font color="#ff0000">*</font>邮箱地址：</td>
+                                    <td class="cz_td" align="left" height="50"><input class="t_l_d_r02_input" type="text" id="email" name="email"/></td>
+                                </tr>
+                                <tr>
+                                	<td class="cz_td" height="80" colspan="2" valign="bottom" align="center">
+                                    		<a class="cz_money_btn" onclick="doCheckEmailSet()">确认绑定</a>
+                                    </td>
+                                </tr>
+                            </table>   
+                        #{/form}
+                        	<div class="cz_shuom">
+                            	<p><b>温馨提示：</b></p>
+                                <p>
+                                1. 绑定邮箱可用于登录和安全验证，提高账户安全； 
+                                </p>
+                                <p>
+                                2. 完成邮箱绑定后，可以通过该邮箱接收投资、还款等信息。
+                                </p>
+                            
+                        	<div class="clear"></div>
+                        </div>
+                        
+                        	<div class="clear"></div>
+                        </div>
+                   		<div class="clear"></div>
+                	</div><!--tree_right end-->
+                </td>
+			</tr>
+		</table>	
+        <div class="clear"></div>
+    </div><!--content end-->
+
+	<div class="clear"></div>
+</div>
+<script type="text/javascript">
+	function doCheckEmailSet(){
+		var email = $("#email").val();
+		if("" == email || undefined == email){
+			alert("请输入邮箱！");
+			return ;
+		}
+		if(!email.isEmail()){
+			alert("邮箱格式有误！")
+			return ;
+		}
+		$("#form").submit();
+	}
+</script>

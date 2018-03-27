@@ -1,0 +1,71 @@
+    <!-- 内容区域 -->
+    <div class="center_wrap">
+		<div class="center_main">
+			<div class="yysj_top">
+				<div class="yysj_name">运营数据</div>	
+				<div class="yysj_syxs">
+	            	<input type="checkbox" id="check" class="radio"/><label for="check" class="radio"></label>
+	            	<span>首页显示统计数据</span>
+	            </div>	
+			</div>
+			<div class="yysj_xq">
+				<div class="tab1" >
+					<div class="menu" id="menu1">
+						<ul>
+							<li onclick="newMembers(1)">昨日</li>
+							<li onclick="newMembers(2)">最近7天</li>
+							<li onclick="newMembers(3)">最近30天</li>
+						</ul>
+					</div>
+					<div class="menudiv">
+						<div id="showEcharts">
+							<div class="menudiv_img" id="memberDiv"></div>
+						</div>
+					</div>
+				</div>
+				<div class="tab1 tab2" >
+					<div class="menu" id="menu2">
+						<ul>
+							<li onclick="getMoney(1)">昨日</li>
+							<li onclick="getMoney(2)">最近7天</li>
+							<li onclick="getMoney(3)">最近30天</li>
+						</ul>
+					</div>
+					<div class="menudiv">
+						<div id="showEcharts">
+							<div class="menudiv_img" id="moneyDiv"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="yysj_bot">
+				<div class="yysj_bot_cn">
+					
+				</div>
+				<div class="yysj_bot_cn">
+				</div>
+				<div class="yysj_bot_cn">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+    
+    <!-- 内容区域end -->
+<script>
+$(function(){
+	$('#check').prop('checked',${business.BackstageSet.getCurrentBackstageSet().isDisplayStatistics == 1});
+	$('#check').click(function(){
+		$.post('@{saveIndexSetting()}',{display:$(this).prop('checked')},function(data){
+			if(data.code < 0){
+				alert(data.msg);
+			}
+		})
+	});
+	
+	newMembers(1);
+	getMoney(1);
+	
+});
+
+</script>

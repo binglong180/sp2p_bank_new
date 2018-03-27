@@ -1,0 +1,19 @@
+<script type="text/javascript" src="@{'/public/javascripts/index.js'}"></script>
+<div class="xn_c_content_left">
+  <div class="xn_c_content_leftul">
+    <ul>
+      <li>
+        <div class="xn_c_li_head_one">
+          <!-- 展开样式：xn_c_li_bg_jian -->
+          <div class="xn_c_li_bg" id="lab_1"></div>标的管理
+        </div>
+        <div class="xn_c_li_head_two" id="hi_1">
+          <!-- 当前样式：xn_c_li_head_ishow -->
+          <a id="mg_1" class="xn_c_li_head_twoli" href="@{newr.supervisor.bidManager.BidAction.getBid()}">标的参数设置</a>
+          <a id="mg_2" class="xn_c_li_head_twoli" href="@{newr.supervisor.bidManager.BidAction.bidOpen()}">标的开标管理</a>
+        </div>
+      </li>
+     </ul>
+  </div>
+</div>
+<script type="text/javascript" src="@{'/public/javascripts/tab/tab_mg_bid.js'}"></script>

@@ -1,0 +1,173 @@
+#{extends 'newr/common/frontMain.html' /}
+<script type="text/javascript"> 
+$(document).ready(function(){
+$(".city_link").css("width",document.body.clientWidth +"px ");
+$(".city_link").css("height",document.body.scrollHeight +"px ");
+$(".tck_div").css("margin-top",(document.body.scrollHeight - 508 ) / 2 +"px ");
+});  
+
+$(window).resize(function(){
+ var onLoadWidth = document.body.clientWidth;
+$(".city_link").css("width",document.body.clientWidth +"px ");
+$(".city_link").css("height",document.body.scrollHeight +"px ");
+$(".tck_div").css("margin-top",(document.body.scrollHeight - 508 ) / 2+"px ");
+})
+function FormatDate (strTime) {
+    var date = new Date(strTime);
+    return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+}
+function rolldealdetail(clickId,title,investId){
+	$.ajax({
+		url : "@{newr.front.invest.InvestAction.investDetail()}",
+		type : "POST",
+		data : {'title':title,'id':investId},
+		success : function(data) {
+			        $("#city_link").find('table').find("tr:not(:first)").remove();
+	                        for(var i = 0; i < data.length; i ++){
+	                        	var line = '<tr>'
+	                            +'<td class="box_td">'+data[i].periods+'</td>'
+	                            +'<td class="box_td">'+data[i].amount+'</td>'
+	                            +'<td class="box_td">'+FormatDate(data[i].receive_time)+'</td>'
+	                            +'<td class="box_td"><font class="font_hk">'+data[i].status+'</font></td>'
+	                            +'</tr>'
+
+	            				$("#city_link").find('table').append(line);
+	            			}
+
+		}
+	});
+	$("#city_link").find('b').html("【车快融"+title.substr(2,title.length)+"期】");
+	document.getElementById(clickId).className='city_nav city_hover';document.getElementById('city_link').className='city_link city_hovers';
+}
+</script>
+
+<body>
+<!--弹出框开始-->
+	
+        <div id="city_link" class="city_link">
+        
+        <div class="city_show">
+             
+        </div>
+        <em class="city_links" href="" onClick="M.goExpr('city_eelou_id','0');return false;">
+        	<div class="tck_div">
+        		<div class="tck_div_title">
+                	<span style="float:left;">还款详情—<b>【车快融2016001期】</b></span>
+                    <span class="tck_close" href="javascript:;" title="关闭窗口" onclick=   "document.getElementById('city_nav').className='city_nav';document.getElementById('city_link').className='city_link';return !1;"><img src="@{'/public/skin/images/close.png'}" width="17" height="17" /></span>
+                </div>
+                <div class="tck_div_main">
+                    <table width="100%" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <th class="box_th">期数</th>
+                            <th class="box_th">金额（元）</th>
+                            <th class="box_th">时间</th>
+                            <th class="box_th">状态</th>
+                        </tr>
+                      
+                    </table>    
+                    
+                </div>
+        	</div>
+        </em>
+
+</div>
+<!--弹出框结束-->
+
+<div class="full">
+	<div class="content" style="background:#fff;">
+	       #{form @newr.front.invest.investAction.viewBidInvestRecords(), id:'submit'}
+            <input type="hidden" name="currPage" id="currPage">
+            <input type="hidden" name="pageSize" id="pageSize">
+       #{/form}
+		<table cellpadding="0" cellspacing="0" width="100%">
+			<tr>
+			#{include '/newr/common/leftMenu.html'/}
+			
+				<td class="tree_right_td" valign="top">
+                    
+                    <div class="tree_right2">
+                    	<div class="right_top_title">投资记录</div>
+                    	<div class="tree_right2_b">
+
+                            <table width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <th class="box_th">项目名称</th>
+                                    <th class="box_th">金额（元）</th>
+                                    <th class="box_th">时间</th>
+                                    <th class="box_th">状态</th>
+                                    <th class="box_th">还款详情</th>
+                                    <th class="box_th">合同</th>
+                                </tr>
+                                #{list items:pageBean?.page , as: 'records'}
+                                <tr> 
+                                    <td class="box_td">车快融${records?.title}期</td>
+                                    <td class="box_td">${records?.invest_amount}元</td>
+                                    <td class="box_td">${records?.time?.format('yyyy-MM-dd')}</td>
+                                    <td class="box_td"><font class="font_hk">	
+                                    #{if records?.status == 2}
+									投资中
+									#{/if}
+									#{if records?.status == 4 || records?.status == 3}
+									回款中
+									#{/if}
+									#{if records?.status == 5}
+									 已还清
+									#{/if}</font></td>
+                                    <td class="box_td">
+                                    	<span class="city_nav" id="city_nav" onClick="rolldealdetail(this.id,'${records?.title}','${records?.id}');">
+                                        	<a class="money_styel" href="#">
+                                        	#{if records?.receive== null}0.00#{/if}#{else}${records?.receive}#{/else}/#{if records?.unreceive == null}0.00#{/if}#{else}${records?.unreceive}#{/else}</a>
+                                        </span>
+                                    </td>
+                                    
+									<td class="box_td">
+										#{if records?.status == 4 || records?.status == 5}
+										<a class="chakan" href="@{newr.front.invest.InvestAction.investContract(records)}">查看</a>
+										#{/if}
+									</td>
+                                </tr>
+                                #{/list}
+                            </table>
+
+                            <!--翻页开始-->
+                                <div class="digg" style="width:740px; margin-top:35px;"> 
+                                    #{page currPage:pageBean.currPage,pageSize:pageBean.pageSize,totalCount:pageBean.totalCount,theme:2,style:2 /}  
+                               </div> 
+                            <!--翻页结束-->
+                        
+                        	<div class="clear"></div>
+                        </div>
+                   		<div class="clear"></div>
+                	</div><!--tree_right end-->
+                </td>
+			</tr>
+		</table>	
+        <div class="clear"></div>
+    </div><!--content end-->
+
+	<div class="clear"></div>
+</div>
+<script type="text/javascript">
+function showPage(currPage, pageSize){
+    $("#currPage").val(currPage);
+    $("#pageSize").val(pageSize);
+    $("#submit").submit();
+  }
+$(function(){
+	var obj = document.getElementById("child4");
+	change_bg(obj);
+});
+$(function(){
+	$(window).scroll(function(){
+		if($(window).scrollTop()>100){  //距顶部多少像素时，出现返回顶部按钮
+			$("#side-bar .gotop").fadeIn();	
+		}
+		else{
+			$("#side-bar .gotop").hide();
+		}
+	});
+	$("#side-bar .gotop").click(function(){
+		$('html,body').animate({'scrollTop':0},500); //返回顶部动画 数值越小时间越短
+	});
+});
+</script>

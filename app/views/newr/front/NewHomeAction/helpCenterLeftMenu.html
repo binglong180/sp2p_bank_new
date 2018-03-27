@@ -1,0 +1,29 @@
+ <!--左侧分类树js-->
+<script type="text/javascript">
+function change_bg(obj)
+{
+    var a=document.getElementById("menu_tree").getElementsByTagName("a");
+    for(var i=0;i<a.length;i++)
+    {
+        a[i].className="";
+    }
+    obj.className="current_on";
+}
+</script>
+<!--左侧分类树js-->
+<td id="menu_tree" class="tree_left"  valign="top">
+	<div class="tree_div">
+    	<div class="tree_d_title">
+            <div class="help_d_title_text">帮助中心</div>
+        </div>
+        <ul>
+            <li class="help_tree_li"><a id="helpCenterAccount" href="@{newr.front.NewHomeAction.helpCenterAccount()}" onClick="change_bg(this)" class="current_on">关于账户</a></li>
+            <li class="help_tree_li"><a id="helpCenterInvest" href="@{newr.front.NewHomeAction.helpCenterInvest()}" onClick="change_bg(this)">关于投资</a></li>
+            <li class="help_tree_li"><a id="helpCenterProblems" href="@{newr.front.NewHomeAction.helpCenterProblems()}" onClick="change_bg(this)">常见问题</a></li>
+            <li class="help_tree_li"><a id="helpCenterTerms" href="@{newr.front.NewHomeAction.helpCenterTerms()}" onClick="change_bg(this)">名词解释</a></li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+    
+    
+</td>

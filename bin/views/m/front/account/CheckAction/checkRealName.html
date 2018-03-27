@@ -1,0 +1,53 @@
+#{extends 'm/common/frontMain.html' /}
+
+<section class="row" style="background:#fff;">
+	<div class="app-locate">
+		<!--  <a class="app-return" href=""> < 返回</a> -->
+		<h2>实名认证</h2>
+	</div>
+	<div class="app-form">
+		#{form @m.front.account.CheckAction.doCheckRealName(), id:'form'}
+		<ul class="app-reg-form">
+			<li>
+				<label class="app-label app-icon01"></label>
+				<input class="app-input" id="realName" name="realName" placeholder="请输入真实姓名" type="text">
+				#{if flash.nameError}
+					<span class="form-error" id="realName-hint">${flash?.nameError}</span>
+				#{/if}
+			    #{else}
+			    	<span class="form-error" id="realName-hint"></span>
+			    #{/else}
+			</li>
+			<li>
+				<label class="app-label app-icon07"></label>
+				<input class="app-input" id="idNumber" name="idNumber" style="color:#ccccd1;" placeholder="请输入身份证号">
+				#{if flash.idNoError}
+					<span class="form-error" id="idNumber-hint">${flash?.idNoError}</span>
+				#{/if}
+			    #{else}
+			    	<span class="form-error" id="idNumber-hint"></span>
+			    #{/else} 
+			</li>
+		</ul>
+		#{/form}
+		<button type="button" class="app-btn app-btn-default app-radius" style="margin-top:2rem;" onclick="submit()">开通汇付天下账号</button>
+	</div>
+</section>
+
+<script type="text/javascript">
+
+function submit() {
+	var realName = $("#realName").val();
+    if(realName == ""){
+   		$("#realName-hint").html("请输入真实姓名");
+     	return;
+    }
+
+    var idNumber = $("#idNumber").val();
+    if(idNumber == ""){
+   		$("#idNumber-hint").html("请输入身份证号");
+     	return;
+    }
+    $("#form").submit();
+}
+</script>

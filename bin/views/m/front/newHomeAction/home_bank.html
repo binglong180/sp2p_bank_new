@@ -1,0 +1,56 @@
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+	business.newr.User currUser = business.newr.User.currUser();
+}%
+#{extends 'm/common/frontMain.html' /}
+
+
+<section class="row">
+	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+		<!-- 原点 -->
+		<ol class="carousel-indicators">
+			<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+			<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+			<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+		</ol>
+		<!-- Wrapper for slides -->
+		<div class="carousel-inner" role="listbox">
+			<div class="item active">
+			  <img src="@{'/public/m/images/banner1.jpg'}" alt="开启财富之门">
+			</div>
+			<div class="item">
+			  <img src="@{'/public/m/images/banner2.jpg'}" alt="平台特性">
+			</div>
+			<div class="item">
+			  <img src="@{'/public/m/images/banner3.jpg'}" alt="产品特性">
+			</div>
+		</div>
+	</div>
+	<div class="app-border">
+		<h2>投资项目<em>稳健收益，安心理财</em><a class="app-more" href="@{m.front.invest.InvestAction.investList()}">更多>></a></h2>
+		#{list items:pageBean.page, as:'bid'}
+		<div class="app-list">
+			<h4>车快融${bid?.title}期</h4>
+			<dl>
+				<dt class="grid4"><span class="app-text-f26">${bid?.apr}</span></dt>
+				<dt class="grid2"><span>${bid?.period}个月</span></dt>
+				<dt class="grid4"><span>#{format money:(bid?.amount-bid?.has_invested_amount)}#{/format}</span></dt>
+			</dl>
+			<dl>
+				<dd class="grid4">年化收益率(%)</dd>
+				<dd class="grid2">投资期限</dd>
+				<dd class="grid4">可投金额(元)</dd>
+			</dl>
+			#{if bid?.status==2}
+			<a class="" href="@{m.front.invest.InvestAction.investDetail(bid?.id)}"><button type="button" class="app-btn app-btn-default app-radius float-btn">立即投资</button></a>
+			#{/if}
+               #{if bid?.status==4 || bid?.status==3 }
+               <a class="" href="@{m.front.invest.InvestAction.investDetail(bid?.id)}"><button type="button" class="app-btn app-btn-primary app-radius float-btn2">回款中</button></a>
+               #{/if}
+               #{if bid?.status==5}
+               <button type="button" class="app-btn app-btn-primary app-radius float-btn2">已还清</button>
+               #{/if}
+		</div>
+		#{/list}
+	</div>
+</section>

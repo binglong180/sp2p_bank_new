@@ -1,0 +1,28 @@
+<div class="xn_c_content_left">
+  <div class="xn_c_content_leftul">
+    <ul>
+
+      <li>
+        <div class="xn_c_li_head_one">
+          <div class="xn_c_li_bg" id="lab_3"></div>管理员管理
+        </div>
+        <div class="xn_c_li_head_two" id="hi_3">
+          <a id="mg_10" class="xn_c_li_head_twoli" href="@{supervisor.systemSettings.supervisorAction.list()}">管理员列表</a>
+        </div>
+      </li>
+      <li>
+        <div class="xn_c_li_head_one">
+          <div class="xn_c_li_bg" id="lab_4"></div>权限管理
+        </div>
+        <div class="xn_c_li_head_two" id="hi_4">
+          <a id="mg_11" class="xn_c_li_head_twoli" href="@{supervisor.systemSettings.rightAction.rightsMap()}">权限地图</a>
+          <a id="mg_12" class="xn_c_li_head_twoli" href="@{supervisor.systemSettings.rightAction.rightsManage()}">权限管理</a>
+        </div>
+      </li> 
+    </ul>
+  </div>
+  <div class="xn_c_con_leftbutton">
+    <div class="xn_c_con_enimg">导航点击</div>
+  </div>
+</div>
+<script type="text/javascript" src="@{'/public/javascripts/tab/tab_mg_sys.js'}"></script>

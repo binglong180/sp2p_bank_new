@@ -1,0 +1,66 @@
+#{extends 'm/common/frontMain.html' /}
+
+<section class="row" style="background:#fff;">
+	<div class="app-locate">
+		<!--  <a class="app-return" href=""> < 返回</a> -->
+		<h2>登录</h2>
+	</div>
+	<div class="app-form">
+		#{form @m.front.account.LoginAndRegisterAction.logining(), id:'submit'}
+		<ul class="app-login-form">
+			<li>
+				<img class="app-label app-icon01" src="@{'/public/m/images/icon05.png'}"/>
+				<input id="name" class="app-input" id="name" name="name" placeholder="请输入用户名" type="text">
+			</li>
+			<li>
+				<img class="app-label app-icon02" src="@{'/public/m/images/icon06.png'}"/>
+				<input id="password" class="app-input" id="password" name="password" placeholder="请输入密码" type="password">			
+			</li>
+			<li class="app-noborder">
+				<span class="form-hint" id="login_error"></span>
+				<a class="app-forget" href="@{m.front.account.LoginAndRegisterAction.resetPasswordByMobile()}">忘记密码？</a>
+			</li>
+		</ul>
+		<a onClick="login()"><button type="button" class="app-btn app-btn-default app-radius" >登录</button></a>
+		#{/form}
+	</div>
+	<dl class="app-form-bottom">
+		<dt>没有账号？ <a href="@{m.front.account.LoginAndRegisterAction.registerMobile()}">免费注册</a></dt>
+		<dd><img class="app-icon-safe" src="@{'/public/m/images/icon10.png'}"/>账户资金由汇付天下托管</dd>
+	</dl>
+</section>
+	
+<script type="text/javascript">
+/*登录*/
+ function login(){
+  
+	var name = $("#name").val();
+	var password = $("#password").val();
+	if(name == ''){
+    	$("#login_error").html("请输入用户名");
+        return;
+    }
+	if(password == ''){
+        $("#login_error").html("请输入密码");
+        return;
+    }
+    /*用户名和密码验证*/
+   	$.ajax({
+   		  url : "@{m.front.account.LoginAndRegisterAction.verifyLogin()}",
+   		  type : "POST",
+   		  data : {
+   			  "name" : name,
+   			  "password" : password
+   		  },
+   		  dataType:'json',
+   		  success : function(data) {
+   			  if(data.code < 0){
+   				 $("#login_error").html(data.msg);
+   			  }else{
+   				  $("#submit").submit();
+   			  }
+   			},
+   	});
+	    
+ }				
+</script>

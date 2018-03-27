@@ -1,0 +1,10 @@
+2018-03-17 22:47:41,753 INFO  ~ Starting D:\workspaceNewr\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-17 22:47:42,876 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1123
+2018-03-17 22:47:43,061 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1308
+2018-03-17 22:48:00,722 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 18969
+2018-03-17 22:48:29,871 INFO  ~ Connected to jdbc:mysql://127.0.0.1/p2p_bank?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci  ~ play.Logger.info(Logger.java:289) ~ play ~ 48118
+2018-03-17 22:48:32,329 INFO  ~ Application 'sp2p_bank' is now started !  ~ play.Logger.info(Logger.java:289) ~ play ~ 50576
+2018-03-17 22:48:33,005 DEBUG ~ select t_system_o0_.id as id36_, t_system_o0_._key as column2_36_, t_system_o0_._value as column3_36_, t_system_o0_.description as descript4_36_ from t_system_options t_system_o0_ order by t_system_o0_.id  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 51252
+2018-03-17 22:48:33,221 DEBUG ~ select t_content_0_._key as col_0_0_, t_content_0_.title as col_1_0_, t_content_0_.url as col_2_0_, t_content_0_.target as col_3_0_ from t_content_advertisements_links t_content_0_ where t_content_0_.status=0 order by t_content_0_._order  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 51468
+2018-03-17 22:48:33,239 DEBUG ~ select t_dict_ad_0_.id as id21_, t_dict_ad_0_.name as name21_ from t_dict_ad_provinces t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 51486
+2018-03-17 22:48:33,248 DEBUG ~ select t_dict_ad_0_.id as id61_, t_dict_ad_0_.name as name61_, t_dict_ad_0_.province_id as province3_61_ from t_dict_ad_citys t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 51495

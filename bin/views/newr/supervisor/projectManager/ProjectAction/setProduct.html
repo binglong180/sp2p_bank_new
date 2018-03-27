@@ -1,0 +1,187 @@
+#{extends 'common/supervisor.html' /}
+#{include 'newr/supervisor/projectManager/projectManagerLeft.control'/}
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".full").css("width",document.body.clientWidth- 200 +"px ");
+});  
+
+$(window).resize(function(){
+	 var onLoadWidth = document.body.clientWidth;
+		$(".full").css("width",document.body.clientWidth- 200 +"px ");
+})
+</script>
+<style>
+.full{float:left; }
+.table01{width:100%;}
+.table01 th,.table01 td{font-size:12px; height:40px; text-align:center; font-weight:normal;}
+.table01 td{ color:#666;}
+.table01 .td_a{ color:#666;}
+.but01{color:#3a7dc0;}
+</style>
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="@{'/public/skin/css/layout.css'}" rel="stylesheet" type="text/css">
+<link href="@{'/public/stylesheets/site.css'}" rel="stylesheet" type="text/css">
+<link href="@{'/public/stylesheets/temp.css'}" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="@{'/public/javascripts/jquery-2.0.js'}"></script>
+<script type="text/javascript" src="@{'/public/javascripts/index.js'}"></script>
+<script type="text/javascript" src="@{'/public/javascripts/jquery.json-2.4.min.js'}"></script>
+<script charset="utf-8" src="@{'public/javascripts/ajaxfileupload.js'}"></script>
+<script type="text/javascript" src="@{'/public/javascripts/common.js'}"></script>
+</head>
+<body>
+<div class="full">
+<div class="list_add_items">
+    <div class="data_header">
+        <div class="data_item"><div class="td_title" style=" font-size:18px; font-weight:bold;">添加产品</div></div>
+        </div>
+         <div class="list_data">
+        #{form @saveProduct(), method:'POST', id:'saveProduct'}
+             <div class="data_info">
+                <div class="data_item">
+                    <div class="item_title">基本信息</div>
+                    <div class="item_content">
+                        <ul>
+                            <li>
+                                <div class="td_title"><span>*</span>持票企业：</div>
+                                <div class="td_content"><input class="input_title" type="text" name="ticket.holder" id="holder" placeholder=""></div>
+
+                            </li>
+                           <li>
+                                <div class="td_title"><span>*</span>出票企业：</div>
+                                <div class="td_content">
+                                   <input class="input_title" type="text" name="ticket.creater" id="creater" placeholder="">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="td_title"><span>*</span>出票日期：</div>
+                                    <input id="startTime"  name = "ticket.start_time" placeholder = "yyyy-mm-dd" type="text" style="height:30px;"/> 
+                                    <img onclick="WdatePicker({el:$dp.$('startTime')})" src="@{'/public/My97DatePicker/skin/datePicker.gif'}" _fcksavedurl="@{'/public/My97DatePicker/skin/datePicker.gif'}" width="16" height="22" align="absmiddle"> 
+                            </li>
+                             <li>
+                                <div class="td_title"><span>*</span>出票日期：</div>
+                                    <input id="endTime"  name = "ticket.end_time" placeholder = "yyyy-mm-dd" type="text" style="height:30px;"/> 
+                                    <img onclick="WdatePicker({el:$dp.$('endTime')})" src="@{'/public/My97DatePicker/skin/datePicker.gif'}" _fcksavedurl="@{'/public/My97DatePicker/skin/datePicker.gif'}" width="16" height="22" align="absmiddle"> 
+                            </li>
+                            <li>
+                                <div class="td_title">商票类型：</div>
+                                 <select name="ticket.type" id="ticket.type" class="input_select">
+                                     <option  value="1">商业汇票</option>
+                                     <option  value="2">承兑汇票</option>
+                                  </select>
+                                <div class="td_content"><input class="input_title" type="text" id="type" name ="ticket.type"  placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title"><span>*</span>商票编号：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="ticket_no" name ="ticket.ticket_no"  placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title"><span>*</span>商票金额：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="amout" name ="ticket.ticket_amout"  placeholder=""></div>
+                            </li>
+                            
+                            <li>
+                                 <div class="td_title"><span>*</span>票据影印件：</div>
+                                    <div class="pic_div">  
+                                       <div class="pic_size">
+                                           <input type="hidden" name="ticket.ticket_image" id="ticket_image" value=""/>                                 
+                                           <input type="file" class="input_file" name="imgFile" id="ticket_image_file" onchange="upload('ticket_image_file','ticket_image_image','ticket_image');"/>
+                                           <img id="ticket_image_image" style="position:relative; z-index:5;" src="@{'public/skin/images/qcyh.jpg'}" />
+                                       </div> 
+                                    <div class="clear"></div>
+                                  </div>
+                             </li>
+                              <li>
+                                 <div class="td_title"><span>*</span>商品交易合同：</div>
+                                    <div class="pic_div">  
+                                       <div class="pic_size">
+                                           <input type="hidden" name="ticket.deal_contract" id="deal_contract" value=""/>                                 
+                                           <input type="file" class="input_file" name="imgFile" id="deal_contract_file" onchange="upload('deal_contract_file','deal_contract_image','deal_contract');"/>
+                                           <img id="deal_contract_image" style="position:relative; z-index:5;" src="@{'public/skin/images/qcyh.jpg'}" />
+                                       </div> 
+                                    <div class="clear"></div>
+                                  </div>
+                             </li>
+                              <li>
+                                 <div class="td_title"><span>*</span>合同发票：</div>
+                                    <div class="pic_div">  
+                                       <div class="pic_size">
+                                           <input type="hidden" name="ticket.contract_bill" id="contract_bill" value=""/>                                 
+                                           <input type="file" class="input_file" name="imgFile" id="contract_bill_file" onchange="upload('contract_bill_file','contract_bill_image','contract_bill');"/>
+                                           <img id="contract_bill_image" style="position:relative; z-index:5;" src="@{'public/skin/images/qcyh.jpg'}" />
+                                       </div> 
+                                    <div class="clear"></div>
+                                  </div>
+                             </li>
+                              <li>
+                                 <div class="td_title"><span>*</span>货物发送单据：</div>
+                                    <div class="pic_div">  
+                                       <div class="pic_size">
+                                           <input type="hidden" name="ticket.goods_bill" id="goods_bill" value=""/>                                 
+                                           <input type="file" class="input_file" name="imgFile" id="goods_bill_file" onchange="upload('goods_bill_file','goods_bill_image','goods_bill');"/>
+                                           <img id="goods_bill_image" style="position:relative; z-index:5;" src="@{'public/skin/images/qcyh.jpg'}" />
+                                       </div> 
+                                    <div class="clear"></div>
+                                  </div>
+                             </li>
+                             <li>
+                                 <div class="td_title"><span>*</span>提单：</div>
+                                    <div class="pic_div">  
+                                       <div class="pic_size">
+                                           <input type="hidden" name="ticket.submit_bill" id="submit_bill" value=""/>                                 
+                                           <input type="file" class="input_file" name="imgFile" id="submit_bill_file" onchange="upload('submit_bill_file','submit_bill_image','submit_bill');"/>
+                                           <img id="submit_bill_image" style="position:relative; z-index:5;" src="@{'public/skin/images/qcyh.jpg'}" />
+                                       </div> 
+                                    <div class="clear"></div>
+                                  </div>
+                             </li>
+                             <li>
+                                 <div class="td_title"><span>*</span>运输单：</div>
+                                    <div class="pic_div">  
+                                       <div class="pic_size">
+                                           <input type="hidden" name="ticket.transport_bill" id="transport_bill" value=""/>                                 
+                                           <input type="file" class="input_file" name="imgFile" id="transport_bill_file" onchange="upload('transport_bill_file','transport_bill_image','transport_bill');"/>
+                                           <img id="transport_bill_image" style="position:relative; z-index:5;" src="@{'public/skin/images/qcyh.jpg'}" />
+                                       </div> 
+                                    <div class="clear"></div>
+                                  </div>
+                             </li>                                                                                                                     
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="btn_alter">
+            <input class="btn_search" type="submit" value = "保存" >
+            </div>
+           #{/form}
+        </div>
+
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+function upload(imgFile, image, imageFilename) {
+	$.ajaxFileUpload({
+		url : '@{newr.supervisor.projectManager.ProjectAction.uploadImg()}',
+		secureuri : false,
+		fileElementId :imgFile ,
+		dataType : 'text',
+		success : function(data) {
+			data = $.evalJSON(data);
+			if (data.code < 0) {
+				alert(data.msg);
+				return;
+			}
+			$("#"+image).attr("src", data.filename);
+			$("#"+imageFilename).attr("value",data.filename);
+		},
+		error : function(data, status, e) {
+			alert("上传图片失败");
+		}
+	})
+}
+</script>
+</html>

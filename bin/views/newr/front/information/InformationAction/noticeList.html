@@ -1,0 +1,87 @@
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+	business.newr.User currUser = business.newr.User.currUser();
+}%
+#{extends 'newr/common/frontMain.html' /}
+
+<div class="full">
+	<div class="content" >
+    <!--平台公告开始-->
+        <div class="xmxq_div">
+        	<div class="t_l_d_title">
+                <font class="t_l_d_title_td01" style="line-height:56px;">平台公告</font>
+            </div>
+             #{form @newr.front.information.InformationAction.noticeList(), id:'submit'}
+               <input type="hidden" name="currPage" id="currPage">
+               <input type="hidden" name="pageSize" id="pageSize">
+             #{/form}
+			<div class="pingtgg_div">
+				<ul class="ptgg_ul">
+				#{table border:"0", cellspacing:"0", cellpadding:"0", class:"xn_c_content_list",tr_class_odd:"xn_tr_bj"}
+				#{list items:page.page, as:'content'}
+		        #{tr tr_index:content_index}
+		          <li class="ptgg_ul_li">
+		          <span class="ptgg_ul_li_spanl">
+		          <a href="@{newr.front.information.InformationAction.noticeDetail(content?.id)}">【${content?.startShowTime?.format('yyyy-MM-dd')}】${content?.title}</a>
+		          </span>
+		          <span class="ptgg_ul_li_spanr">${content?.time?.format('yyyy-MM-dd')}</span></li>
+		        #{/tr}
+				#{/list}
+				#{/table}
+                </ul>
+                <!--翻页开始-->
+                    <div class="digg" style="width:740px; margin-top:35px; float:right;"> 
+                        #{page currPage:page.currPage,totalCount:page.totalCount,pageSize:page.pageSize,theme:2,style:2}#{/page}
+                   </div> 
+                <!--翻页结束-->
+
+                        
+            </div>
+
+            <div class="clear"></div>
+        </div>
+        <!--平台公告结束-->
+        <div class="clear"></div>
+    </div><!--content end-->
+
+	<div class="clear"></div>
+</div>
+<script type="text/javascript">
+  function showPage(currPage, pageSize){
+	    $("#currPage").val(currPage);
+	    $("#pageSize").val(pageSize);
+	    $("#submit").submit();
+	  }
+  
+   function conditonSearch(order){
+	   var orderStatus = "${page?.conditions?.orderStatus}";
+	   var orderType = "${page?.conditions?.orderType}";
+		
+		if(orderStatus == 1 && orderType == order){
+			$("#orderStatus").val(0);
+		}else{
+			$("#orderStatus").val(1);
+		}
+		
+		$("#orderType").val(order);
+		$("#submit").submit();
+   }
+</script>
+
+<script>
+	$(function(){
+		$(window).scroll(function(){
+			if($(window).scrollTop()>100){  //距顶部多少像素时，出现返回顶部按钮
+				$("#side-bar .gotop").fadeIn();	
+			}
+			else{
+				$("#side-bar .gotop").hide();
+			}
+		});
+		$("#side-bar .gotop").click(function(){
+			$('html,body').animate({'scrollTop':0},500); //返回顶部动画 数值越小时间越短
+		});
+	});
+</script>
+</body>
+</html>

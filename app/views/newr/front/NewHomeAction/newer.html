@@ -1,0 +1,62 @@
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+	business.newr.User currUser = business.newr.User.currUser();
+}%
+#{extends 'newr/common/frontMain.html' /}
+
+<div class="full">
+	<!--banner start-->
+	<div class="top_banner_bg">
+    	<div class="top_banner"><img src="@{'/public/skin/images/new_user_03.jpg'}" width="1000" height="569" /></div>
+    </div>
+    <div class="second_banner_bg">
+    	<div class="second_banner"><img src="@{'/public/skin/images/new_user_05.jpg'}" width="1000" height="518" /></div>
+    </div>
+    <div class="third_banner_bg">
+    	<div class="third_banner"><img src="@{'/public/skin/images/new_user_06.jpg'}" width="1000" height="494" /></div>
+    </div>
+	<!--banner end-->
+    <!--步骤开始-->
+	<div class="bz_bg">
+            <div id="featureContainer">
+                <div id="feature">
+                    <div id="block">
+                        <div id="botton-scroll">
+                            <ul class="featureUL">
+                            
+                                <li class="featureBox">
+                                    <img alt="Paracletos" src="${'/public/skin/images/one_07.jpg'}" width="1000" height="789">
+                                </li>
+                                
+                                <li class="featureBox">
+                                    <img alt="Natural Touch Soap" src="${'/public/skin/images/two_07.jpg'}" width="1000" height="789">
+                                </li>
+                                <li class="featureBox">
+                                    <img alt="LRTK" src="${'/public/skin/images/three_07.jpg'}" width="1000" height="789">
+                                </li>
+                                <li class="featureBox">
+                                    <img alt="Natalie Reid" src="${'/public/skin/images/four_07.jpg'}" width="1000" height="789">
+                                </li>
+                            </ul>
+                        </div><!-- /botton-scroll -->
+                    </div>
+                    <a class="prev" href="javascript:void();">Previous</a>
+                    <a class="next" href="javascript:void();">Next</a>
+                </div><!-- /feature -->
+            </div><!-- /featureContainer -->
+            
+    </div>
+	<!--步骤结束-->
+    <div class="new_user_div">
+        <span style=" font-size:16px; display:block; padding-bottom:15px;">开启轻松理财</span>
+        <a class="new_user_btn_cz" href="@{newr.front.invest.InvestAction.investList()}">我要投资</a>
+    </div>
+	<div class="clear"></div>
+</div>
+
+<script type="text/javascript">
+$(function(){
+	$('#newer a').toggleClass("on");
+});
+</script>
+

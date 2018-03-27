@@ -1,0 +1,168 @@
+#{extends 'newr/common/frontMain.html' /}
+<script type="text/javascript"> 
+$(document).ready(function(){
+$(".city_link").css("width",document.body.clientWidth +"px ");
+$(".city_link").css("height",document.body.scrollHeight +"px ");
+$(".tck_div").css("margin-top",(document.body.scrollHeight - 508 ) / 2 +"px ");
+});  
+
+$(window).resize(function(){
+ var onLoadWidth = document.body.clientWidth;
+$(".city_link").css("width",document.body.clientWidth +"px ");
+$(".city_link").css("height",document.body.scrollHeight +"px ");
+$(".tck_div").css("margin-top",(document.body.scrollHeight - 508 ) / 2+"px ");
+})
+function FormatDate (strTime) {
+    var date = new Date(strTime);
+    return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+}
+function rolldealdetail(userId){
+	$.ajax({
+		url : "@{newr.front.account.AccountHome.queryRecommendFeeDetail()}",
+		type : "POST",
+		data : {'userId':userId},
+		success : function(data) {
+			        $("#city_link").find('table').find("tr:not(:first)").remove();
+	                        for(var i = 0; i < data.length; i ++){
+	                        	var line = '<tr>'
+	                        	+'<td class="box_td">'+(i+1)+'</td>'
+	                            +'<td class="box_td">'+data[i].name+'</td>'
+	                            +'<td class="box_td">'+FormatDate(data[i].time)+'</td>'
+	                            +'<td class="box_td">'+data[i].title+'</td>'
+	                            +'<td class="box_td">'+data[i].amount+'</td>'
+	                            +'<td class="box_td">'+data[i].fee+'</td>'
+	                            +'</tr>'
+
+	            				$("#city_link").find('table').append(line);
+	            			}
+
+		}
+	});
+    document.getElementById('city_link').className='city_link city_hovers';
+}
+</script>
+
+<body>
+<!--弹出框开始-->
+	
+        <div id="city_link" class="city_link">
+        
+        <div class="city_show">
+             
+        </div>
+        <em class="city_links" href="" onClick="M.goExpr('city_eelou_id','0');return false;">
+        	<div class="tck_div">
+        		<div class="tck_div_title">
+                	<span style="float:left;">详情</span>
+                    <span class="tck_close" href="javascript:;" title="关闭窗口" onclick="document.getElementById('city_link').className='city_link';return !1;"><img src="@{'/public/skin/images/close.png'}" width="17" height="17" /></span>
+                </div>
+                <div class="tck_div_main">
+                    <table width="100%" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <th class="box_th">序号</th>
+                            <th class="box_th">受邀人</th>
+                            <th class="box_th">投资时间</th>
+                            <th class="box_th">投资项目</th>
+                            <th class="box_th">投资金额（元）</th>
+                            <th class="box_th">手续费</th>
+                        </tr>      
+                    </table>    
+                    
+                </div>
+        	</div>
+        </em>
+
+</div>
+<!--弹出框结束-->
+
+<div class="full">
+	<div class="content" style="background:#fff;">
+		<table cellpadding="0" cellspacing="0" width="100%">
+			<tr>
+			#{include '/newr/common/leftMenu.html'/}
+			
+				<td class="tree_right_td" valign="top">
+                    
+                    <div class="tree_right2">
+                    	<div class="right_top_title">我的团队</div>
+                    	
+                    	<div class="tree_right2_b">
+                    	<table width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <th class="box_th">受邀人数</th>
+                                    <th class="box_th">投资金额（元）</th>
+                                    <th class="box_th">手续费</th>
+                                    <th class="box_th">待发手续费</th>
+                                </tr>
+                         
+                                <tr> 
+                                    <td class="box_td">${outlineData.recommendUserCount}</td>
+                                    <td class="box_td">${outlineData.investAccount}</td>
+                                    <td class="box_td">${outlineData.fee}</td>
+                                    <td class="box_td">${outlineData.toPay}</td>	
+                                 </tr>  
+                            </table>
+                    	</div>
+                    	
+                    	
+                    	
+                    	<div class="tree_right2_b">
+
+                            <table width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <th class="box_th">序号</th>
+                                    <th class="box_th">受邀人</th>
+                                    <th class="box_th">注册时间</th>
+                                    <th class="box_th">投资金额</th>
+                                    <th class="box_th">手续费</th>
+                                    <th class="box_th">操作</th>
+                                </tr>
+                                #{list items:page?.page , as: 'records'}
+                                <tr> 
+                                   <td class="box_td">${records_index}</td>
+                                    <td class="box_td">${records?.name}</td>
+                                    <td class="box_td">${records?.time?.format('yyyy-MM-dd')}</td>
+                                     <td class="box_td">${records?.investAccount}</td>
+                                    <td class="box_td">${records?.fee} </td>
+                                    <td class="box_td">#{if records?.investAccount !=null }<a href="javascript:;" onclick="rolldealdetail('${records.id}')">查看详情</a>#{/if}</td>
+                                </tr>
+                                #{/list}
+                            </table>
+
+                            <!--翻页开始-->
+                                <div class="digg" style="width:740px; margin-top:35px;"> 
+                                    *{page funMethod:"showBidRecords",currPage:page.currPage,pageSize:page.pageSize,totalCount:page.totalCount,theme:1,style:2 /}*  
+                               </div> 
+                            <!--翻页结束-->
+                        
+                        	<div class="clear"></div>
+                        </div>
+                   		<div class="clear"></div>
+                	</div><!--tree_right end-->
+                </td>
+			</tr>
+		</table>	
+        <div class="clear"></div>
+    </div><!--content end-->
+
+	<div class="clear"></div>
+</div>
+<script type="text/javascript">
+$(function(){
+	var obj = document.getElementById("child8");
+	change_bg(obj);
+});
+$(function(){
+	$(window).scroll(function(){
+		if($(window).scrollTop()>100){  //距顶部多少像素时，出现返回顶部按钮
+			$("#side-bar .gotop").fadeIn();	
+		}
+		else{
+			$("#side-bar .gotop").hide();
+		}
+	});
+	$("#side-bar .gotop").click(function(){
+		$('html,body').animate({'scrollTop':0},500); //返回顶部动画 数值越小时间越短
+	});
+});
+</script>

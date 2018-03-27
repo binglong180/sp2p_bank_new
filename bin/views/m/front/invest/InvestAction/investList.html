@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+	<title></title>
+	<script type="text/javascript" src="@{'/public/m/js/rem.js'}" ></script>
+	<script type="text/javascript" src="@{'/public/m/js/jquery-1.8.2.min.js'}" ></script>
+	<link rel="stylesheet" href="@{'/public/m/css/common.css'}" />
+	<link rel="stylesheet" href="@{'/public/m/css/firstep.css'}" />
+</head>
+<body>
+<div class="container">
+	<!-- 头部  -->
+    <header class="header">
+    	<icon onclick="window.history.go(-1)"></icon>投资列表
+    </header>
+    <!-- 内容  -->
+    <div class="bidinfo">
+    	<ul class="bidinfo-tab">
+    		<li id="1" class="current">全部</li>
+    		<li id="2">如意宝</li>
+    		<li id="3">槐乡富</li>
+    	</ul>
+    	<div class="bidlist">
+		#{list items:pageBean.page, as:'bid'}
+          <div class="bidlist-border">
+    			<a href="@{m.front.invest.InvestAction.investDetail(bid?.id)}">${bid?.title}</a>
+    			<div class="bidlist-data01">
+    				<span><em>${bid?.apr}</em>%</span>
+    				<p>预期年化收益率</p>
+    			</div>
+    			<div class="bidlist-data02">
+    				<span><em>${bid?.period}</em>天</span>
+    				<p>期限</p>
+    			</div>
+    			<div class="bidlist-data03">
+    				<span><em>1000.00</em></span>
+    				<p>起投金额</p>
+    			</div>
+    		</div>
+		#{/list}
+    
+    	</div>
+    </div>
+    <!-- 底部 -->
+
+    #{include '/m/common/foot.html' /}
+    <script>
+    $(document).ready(function(){
+		$(".bidinfo-tab li").click(function(){
+			$(".bidinfo-tab li").removeClass("current");
+			$(this).addClass("current").siblings("li").removeClass("current");
+		})
+	})
+    </script>
+</body>
+</html>

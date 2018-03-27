@@ -1,0 +1,166 @@
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+	business.newr.User currUser = business.newr.User.currUser();
+}%
+#{extends 'newr/common/frontMain.html' /}
+
+
+<div class="full">
+	<div class="login">
+		#{if currUser == null}
+    	<div class="center" style="display:;">
+            <div class="header_title">
+            	<div class="td_title">年化收益率高至<br><span>10%</span></div>
+                <div class="td_content">
+                	<ul>
+                		<li style="display:none;">活期存款收益</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="btn_login"><a class="" href="@{newr.front.account.LoginAndRegisterAction.registerMobile()}">注 册</a></div>
+            <div class="tab_login">
+                <a class="" style=" color:#c9a335;">已有账户？</a>
+                <a class="" href="@{newr.front.account.LoginAndRegisterAction.login()}" style=" color:#e24b4b; text-decoration:underline;">立即登录</a>
+            </div>
+        </div>
+        #{/if}
+		#{else}
+        <div class="center" style="display:;">
+            <div class="header_title">
+            	<div class="td_title" style="color:#ff9934; margin: 10 0 0 0;">—— 欢迎使用洪洞直销银行 ——</div>
+                <div class="td_content">
+                	<div class="item_balance">
+                    	<div class="balance_title">可用余额：</div>
+                        <div class="balance_content">#{if (ipsEnable?currUser?.balanceDetail?.user_amount+currUser?.balanceDetail?.user_amount2:currUser?.balanceDetail?.user_amount) > 100000000}
+								#{format money:(ipsEnable?currUser?.balanceDetail?.user_amount+currUser?.balanceDetail?.user_amount2:currUser?.balanceDetail?.user_amount)}#{/format}
+							#{/if}
+							#{else}
+								${(ipsEnable?currUser?.balanceDetail?.user_amount+currUser?.balanceDetail?.user_amount2:currUser?.balanceDetail?.user_amount)?.format('###,##0.00')}
+							#{/else}
+							<span>元</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="btn_accounts"><a class="" href="@{newr.front.account.AccountHome.home()}">管理我的账户</a></div>
+        
+        </div>
+        #{/else}
+    </div>
+    
+	<div class="banner">
+        <div class="banner_tab">
+            <div class="gg" id="gg">
+                <div class="ggLoading">
+                    <div class="ggLoading2"><em></em></div>
+                </div>
+                <div class="ggs">
+                    <div class="ggBox" id="img_box">
+                        <a target="_blank" style="z-index: 3; opacity: 4;"><img src="@{'/public/skin/images/banner-1-2016-0303.jpg'}" usemap="#Map" border="0"/>
+                        <map name="Map">
+                          <area target="_blank" shape="rect" coords="854,235,1031,263" href="http://www.yxbp2p.com/">
+                        </map>
+                        <a><img src="@{'/public/skin/images/banner-2-2016-0606.jpg'}" usemap="#Map2" border="0"/>
+                        </a>
+                        <a><img src="@{'/public/skin/images/banner-3-2016-0303.jpg'}"/></a>
+                        <a><img src="@{'/public/skin/images/banner-4-2016-0303.jpg'}"/></a>
+                    </div>
+                </div>
+                <div class="tab_btn">
+                    <div class="tab_btns" id="tab_btns">
+                        <a href='javascript:void(0)' class="ggOn"><em>1</em></a>
+                        <a href='javascript:void(0)'><em>2</em></a>
+                        <a href='javascript:void(0)'><em>3</em></a>
+                        <a href='javascript:void(0)'><em>4</em></a>
+                        <a style="display:none;" href='javascript:void(0)'><em>5</em></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="list_notice data_center">
+    	<div class="td_title">平台公告：</div>
+        <div class="td_content"><a class="" href="@{newr.front.information.InformationAction.noticeDetail(notice.page?.get(0)?.id)}">${notice.page?.get(0)?.title}　　[${notice.page.get(0)?.startShowTime?.format('yyyy-MM-dd')}]</a></div>
+    </div>
+        
+    <div class="list_trait">
+    	<img src="@{'/public/skin/images/trait_02.jpg'}" width="1000" height="204" />
+    </div>
+    
+    <div class="list_data">
+    	<div class="item_title">
+        	<i class="icon"></i>
+            <div class="td_title">投资项目</div>
+            <div class="td_assist">稳健收益，安心理财</div> <!-- 稳健收益，安心理财 10:00准时发布项目，其余时间与周末随机发标-->
+            <a class="" href="@{newr.front.invest.InvestAction.investList()}">更多>></a>
+        </div>
+        <div class="item_content">
+         #{list items:pageBean.page, as:'bid'}
+           #{if bid_index==3}
+        	<div class="data_item" >
+           #{/if}
+           #{else}
+           <div class="data_item" style="margin:0 12 0 0;">
+           #{/else}
+            	<div class="item_title"><span class="title_star">车快融${bid?.title}期</span></div>
+                <div class="item_interest">
+                	<div class="interest_item">
+						<span class="" style="margin:0 0 0 9;">${bid?.apr}<span class="" style=" font-size:13px;">%</span></span>
+                    </div>
+                    <div class="interest_title">年化收益率</div>
+                </div>
+                <div class="item_accomplish">
+                    <div class="progress_data">
+                    	<div class="item_progress" style="width:${bid?.has_invested_amount/bid?.amount*100}%;"></div>
+                    </div>
+                    <div class="progress_title">${(bid?.has_invested_amount/bid?.amount*100).format('###,##0')}%</div>
+                </div>
+                <div class="item_bottom">
+                	<div class="bottom_data" style="border-right:1px solid #e6e6e6;">
+                    	<div class="td_content">#{if bid?.period_unit ==-1}
+								${bid?.period}年
+								#{/if}
+								#{if bid?.period_unit ==0}
+								${bid?.period}个月
+								#{/if}
+								#{if bid?.period_unit ==1}
+								${bid?.period}天
+								#{/if}</div>
+                        <div class="td_title">期限</div>
+                    </div>
+                    <div class="bottom_data">
+                    	<div class="td_content">#{format money:(bid?.amount-bid?.has_invested_amount)}#{/format}</div>
+                        <div class="td_title">可投金额</div>
+                    </div>
+                </div>
+                <div class="buttom">
+                #{if bid?.status==2}
+                <a class="" href="@{newr.front.invest.InvestAction.immediatelyInvest(bid?.id)}">立即投资</a>
+                #{/if}
+                #{if bid?.status==4 || bid?.status==3 }
+                <a class="btm" href="@{newr.front.invest.InvestAction.immediatelyInvest(bid?.id)}">回款中</a>
+                #{/if}
+                #{if bid?.status==5}
+                <a class="btm">已还清</a>
+                #{/if}
+                #{if bid?.status!=2 && bid?.status!=4 && bid?.status!=5}
+                <a class="" >${bid?.status}</a>
+                #{/if}
+                </div>
+            </div>   
+        #{/list}
+        </div>
+    </div>
+    
+    <div class="border_item">
+    	<div class="dot"></div>
+    </div>      
+</div>
+
+<script type="text/javascript">
+$(function(){
+	$('#index a').toggleClass("on");
+});
+</script>
+

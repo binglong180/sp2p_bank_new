@@ -1,0 +1,30 @@
+========================汇付提供的银行=====
+		(ICBC", "中国工商银行");
+		(ABC", "中国农业银行");
+		(CMB", "招商银行");
+		(CCB", "中国建设银行");
+		("BCCB", "北京银行");
+		("BJRCB", "北京农村商业银行");
+		("BOC", "中国银行");
+		("BOCOM", "交通银行");
+		("CMBC", "中国民生银行");
+		("BOS", "上海银行");
+		("CBHB", "渤海银行");
+		("CEB", "中国光大银行");
+		("CIB", "兴业银行");
+		("CITIC", "中信银行");
+		bankMap.put("CZB", "浙商银行");
+		bankMap.put("GDB", "广发银行");
+		bankMap.put("HKBEA", "东亚银行");
+		bankMap.put("HXB", "华夏银行");
+		bankMap.put("HZCB", "杭州银行");
+		bankMap.put("NJCB", "南京银行");
+		bankMap.put("PINGAN", "平安银行");
+		bankMap.put("PSBC", "中国邮政储蓄银行");
+		bankMap.put("SDB", "深发银行");
+		bankMap.put("SPDB", "上海浦发银行");
+		bankMap.put("SRCB", "上海农村商业银行");
+备注：()		
+浙江民泰银行  ZJMT
+盛京银行      shengjing 
+大连银行      dalian 

@@ -1,0 +1,45 @@
+#{extends 'm/common/frontMain.html' /}
+<section class="row" style="background:#fff;">
+	<div class="app-locate">
+		<!-- <a class="app-return" href=""> < 返回</a> -->
+		<h2>账户总览</h2>
+	</div>
+	<div class="app-account">
+		<div class="app-account-assets">
+			<dl>
+				<dt>
+					<img class="icon-online" src="@{'/public/m/images/icon16.png'}"/>
+					<span>${user?.name}</span>
+				</dt>
+		
+			</dl>
+		</div>
+		<div class="app-account-data">
+			<ul>
+				<li>
+					<img class="app-icon-account app-icon-a03" src="@{'/public/m/images/icon14.png'}"/>
+					<span>
+						<em>${user?.receiveCorpus}</em>待收本金（元）
+					</span>
+				</li>
+				<li>
+					<img class="app-icon-account app-icon-a04" src="@{'/public/m/images/icon15.png'}"/>
+					<span class="pd-left">
+						<em>${user?.receiveInterest}</em>待收收益（元）
+					</span>
+				</li>
+			</ul>
+		</div>
+		<div class="app-border">
+			<ul class="app-account-border">
+				<li>
+					<a href="@{m.front.invest.investAction.viewBidInvestRecords()}">投资记录<i class="glyphicon glyphicon-menu-right"></i></a>
+				</li>
+				<li>
+					<a href="@{m.front.account.FundsManageAction.dealRecord()}">资金流水<i class="glyphicon glyphicon-menu-right"></i></a>
+				</li>
+			</ul>
+		</div>
+		<a href="@{m.front.account.LoginAndRegisterAction.logout()}"><button type="button" class="app-btn app-btn-default app-radius" >退出登录</button></a>
+	</div>
+</section>

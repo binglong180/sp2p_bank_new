@@ -1,0 +1,360 @@
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+}%
+#{extends 'common/frontMain.html' /} 
+#{set title:currBackstageSet.seoTitle /}
+
+<!-- 大广告 -->
+#{include "front/home/HomeAction/banner.html"/}
+
+#{if currBackstageSet.isDisplayStatistics == 1}
+<div style="margin-top:15px;padding-top:12px;width:1000px;margin:0 auto;font-size:18px;color:#18B160;">
+   <span style="padding-left:90px">累计投资:<span style="font-size:29px;color:#ff9933">#{format money:(jobs.IndexStatisticsJob.sumInvest)}#{/format}</span>元</span>
+   <span style="padding-left:90px">累计收益:<span style="font-size:29px;color:#ff9933">#{format money:(jobs.IndexStatisticsJob.sumIncome)}#{/format}</span></span>元
+   <span style="padding-left:90px">注册人数:<span style="font-size:29px;color:#ff9933">${jobs.IndexStatisticsJob.regCount}</span>人</span>
+</div>
+#{/if}
+*{
+<div class="itembox">
+	<div class="item1">
+	<img src="@{'/public/images/isoapp.png'}" alt="" width="315" height="110"/>
+	</div>
+	<div class="item2">
+	<img src="@{'/public/images/AndriodAPP.png'}" alt="" width="315" height="110"/>
+	</div>
+	<div class="item3">
+	<img src="@{'/public/images/weixin_img.png'}" alt="" width="315" height="110"/>
+	</div>
+</div>
+}*
+<div class="xf_c_idx_3_content">
+	<div class="xf_c_idx_3_main">
+		<div class="xf_c_idx_3_mainLeft">
+			<!-- 借款流程/理财流程 -->
+			*{#{include "front/home/HomeAction/procedures.control"/}}*
+			
+<!--投标搜索 start-->
+<div class="xf_wylc_tbssbox" style="width: 655px;margin-bottom: 15px;float: left;border: 1px solid #E7EAEC;padding-bottom: 2px;">
+	<div class="xf_wylc_tbsousou">
+		<span class="xf_c_wyjk_1_jklcTitle">投标搜索</span>
+		 <form action="@{front.home.HomeAction.home()}" method="get" accept-charset="utf-8" enctype="application/x-www-form-urlencoded" id="bidsSearch">
+		<div class="xf_wylc_tbssinput">
+			<input title="请输入标题或编号" id="keywords" name="keywords" value="${conditionMap?.keywords}" type="text"> <a onclick="showHomeBids();">搜索</a>
+		    <input id="aprtemp" name="apr" value="${conditionMap?.apr}" type="hidden">
+		    <input id="amounttemp" name="amount" value="${conditionMap?.amount}" type="hidden">
+		    <input id="loanScheduletemp" name="loanSchedule" value="${conditionMap?.loanSchedule}" type="hidden">
+				
+		</div>
+	</div>
+	<!-- 搜索条件 -->
+	
+	<dl class="xf_wylc_tbtitlelist" id="apr" style="border-bottom:1px solid #ddd;">
+		<dt class="xf_wylc_tbsstitle">利率：</dt>
+		<dd value="0" #{if conditionMap?.apr == '0'} class="xf_wylc_tbssisthot" #{/if}>全部</dd>
+		<dd value="1" #{if conditionMap?.apr == '1'} class="xf_wylc_tbssisthot" #{/if}>10%以下</dd>
+		<dd value="2" #{if conditionMap?.apr == '2'} class="xf_wylc_tbssisthot" #{/if}>10%-15%</dd>
+		<dd value="3" #{if conditionMap?.apr == '3'} class="xf_wylc_tbssisthot" #{/if}>15%-20%</dd>
+		<dd value="4" #{if conditionMap?.apr == '4'} class="xf_wylc_tbssisthot" #{/if}>20%以上</dd>
+	</dl>
+	<dl class="xf_wylc_tbtitlelist" id="amount" style="border-bottom:1px solid #ddd;">
+		<dt class="xf_wylc_tbsstitle">金额：</dt>
+		<dd value="0" #{if conditionMap?.amount == '0'} class="xf_wylc_tbssisthot" #{/if}>全部</dd>
+		<dd value="1" #{if conditionMap?.amount == '1'} class="xf_wylc_tbssisthot" #{/if}>10万以下</dd>
+		<dd value="2" #{if conditionMap?.amount == '2'} class="xf_wylc_tbssisthot" #{/if}>10—50万</dd>
+		<dd value="3" #{if conditionMap?.amount == '3'} class="xf_wylc_tbssisthot" #{/if}>50—100万</dd>
+		<dd value="4" #{if conditionMap?.amount == '4'} class="xf_wylc_tbssisthot" #{/if}>100—300万</dd>
+		<dd value="5" #{if conditionMap?.amount == '5'} class="xf_wylc_tbssisthot" #{/if}>300万以上</dd>
+	</dl>
+	<dl class="xf_wylc_tbtitlelist" id="loanSchedule" style="border-bottom:1px solid #ddd;">
+		<dt class="xf_wylc_tbsstitle">认购进度：</dt>
+		<dd value="0" #{if conditionMap?.loanSchedule == '0'} class="xf_wylc_tbssisthot" #{/if}>全部</dd>
+		<dd value="1" #{if conditionMap?.loanSchedule == '1'} class="xf_wylc_tbssisthot" #{/if}>50%以下</dd>
+		<dd value="2" #{if conditionMap?.loanSchedule == '2'} class="xf_wylc_tbssisthot" #{/if}>50%-80%</dd>
+		<dd value="3" #{if conditionMap?.loanSchedule == '3'} class="xf_wylc_tbssisthot" #{/if}>80%以上</dd>
+		<dd value="4" #{if conditionMap?.loanSchedule == '4'} class="xf_wylc_tbssisthot" #{/if}>满标</dd>
+	</dl>
+	<dl class="xf_wylc_tbtitlelist" style="border-bottom:1px solid #ddd;">
+		<dt class="xf_wylc_tbsstitle">借款标类型：</dt>
+		<dd class="xfselect">
+			<select class="xf_wylc_selectAge xf_wylc_selectAge2" name="loanType" id="loanType">
+				<option value="-1">请选择</option>
+				
+					<option value="1">实地考察</option>
+				
+					<option value="2">信用借款</option>
+				
+					<option value="3">净值借款</option>
+				
+					<option value="4">秒还借款</option>
+				
+					<option value="5">担保借款</option>
+				
+					<option value="6">抵押借款</option>
+				
+			</select>&nbsp;
+		</dd>
+	</dl>
+	<dl class="xf_wylc_tbtitlelist xf_wylc_tbtitlelist_fast" style="border-bottom:0px solid #ddd;">
+		<dt class="xf_wylc_tbsstitle">信用等级：</dt>
+		<dd class="xfselect">
+			<select name="minLevel" class="xf_wylc_selectAge xf_wylc_selectAge2" id="minLevel">
+			   <option value="-1">请选择</option>
+			   
+				<option value="1">HR</option>
+			  
+				<option value="3">E</option>
+			  
+				<option value="4">D</option>
+			  
+				<option value="17">C</option>
+			  
+				<option value="15">B</option>
+			  
+				<option value="5">A</option>
+			  
+				<option value="2">AA</option>
+			  	
+			</select>&nbsp;
+		</dd>
+	</dl></form>
+</div>
+<!-- 排序条件 -->
+			<!-- 借款中的标 -->
+			#{include "front/home/HomeAction/bids.control"/}
+			<!-- 合作机构借款标 -->
+			#{include "front/home/HomeAction/agencybids.control"/}
+		</div>
+		<!--侧边栏-->
+		#{include "front/home/HomeAction/sidebar.control"/}
+		<div class="clear"></div>
+	</div>
+	<!--最新满标-->
+	*{#{include "front/home/HomeAction/fullbids.control"/}}*
+	
+	<!-- 安全保障 -->
+	#{include "front/home/HomeAction/security.control"/}
+	<!-- 合作伙伴 -->
+	#{include "front/home/HomeAction/partner.control"/}
+</div>
+
+
+<script type="text/javascript">
+	$(function() {
+		showbids();
+		/**tab切换 start */
+		$("#xf_c_idx_8_tabsColName li a").first().addClass(
+				"xf_c_idx_8_tabsColNameActive");
+		$("#xf_c_idx_8_tabsColName li").click(
+				function() {
+					$(this).children().addClass("xf_c_idx_8_tabsColNameActive")
+							.parent().siblings().children().removeClass(
+									"xf_c_idx_8_tabsColNameActive");
+					$("#xf_c_idx_8_content").children().eq(
+							$(".xf_c_idx_8_tabsColName li").index($(this)))
+							.show().siblings().hide();
+
+				});
+		/**tab切换 ends */
+
+		/***截取字数 append 链接 start***/
+		$(".xf_c_idx_5_gfggIntroduce p").limit();
+		$(".xf_c_idx_5_gfggIntroduce p").append(
+				"<a  class='xf_c_idx_5_gfggIntroduceMore'>[全文]</a>");
+		/***截取字数 append 链接 end***/
+		
+	});
+</script>
+<script>
+function showbids(){
+	$("#bids").show();
+	$("#agencybids").hide();
+}
+function showagencybids(){
+	$("#bids").hide();
+	$("#agencybids").show();
+}
+
+(function($){
+	    $.fn.FontScroll = function(options){
+	        var d = {time: 3000,s: 'fontColor',num: 1}
+	        var o = $.extend(d,options);
+	        
+
+	        this.children('ul').addClass('line');
+	        this.children('ul').attr("style",'margin-top:0');
+	        var _con = $('.line').eq(0);
+	        var _conH = _con.height(); //滚动总高度
+	        var _conChildH = _con.children().eq(0).height();//一次滚动高度
+	        var _temp = _conChildH;  //临时变量
+	        var _time = d.time;  //滚动间隔
+	        var _s = d.s;  //滚动间隔
+
+
+	        _con.clone().insertAfter(_con);//初始化克隆
+
+	        //样式控制
+	        var num = d.num;
+	        var _p = this.find('li');
+	        var allNum = _p.length;
+
+	        _p.eq(num).addClass(_s);
+
+
+	        var timeID = setInterval(Up,_time);
+			this.hover(function(){clearInterval(timeID)},function(){timeID = setInterval(Up,_time);});
+
+	        function Up(){
+	        
+	            _con.animate({marginTop: '-'+_conChildH});
+	            //样式控制
+	            _p.removeClass(_s);
+	            num += 1;
+	            _p.eq(num).addClass(_s);
+	            
+	            if(_conH == _conChildH){
+	                _con.animate({marginTop: '-'+_conChildH},"normal",over);
+	            } else {
+	                _conChildH += _temp;
+	            }
+	        }
+	        function over(){
+	       
+	            _con.attr("style",'margin-top:0');
+	            _conChildH = _temp;
+	            num = 1;
+	            _p.removeClass(_s);
+	            _p.eq(num).addClass(_s);
+	        }
+	        
+	        
+	    }
+	})(jQuery);
+	
+	$('#FontScroll2').FontScroll({time: 2000,num: 1});
+	$('#FontScroll3').FontScroll({time: 2000,num: 1});
+	$('#FontScroll').FontScroll({time: 2000,num: 1});
+	
+	
+</script>
+
+<script>
+	        var apr="";
+	        var amount="";
+		    var loanSchedule="";
+		    var startDate = "";
+	     	var endDate = "";
+	     	var loanType = "";
+	     	var orderType = "";
+	     	
+	     	$(function(){
+	     		var a='${conditionMap?.loanType}';
+	     		var b='${conditionMap?.minLevel}';
+	     		if(a!=null && a!=''){
+	     			$("#loanType").val(a);
+	     		}
+	     		if(b!=null && b!=''){
+	     			$("#minLevel").val(b);
+	     		}
+	        	
+			    $("#apr dd").click(function(){ 
+			    	$("#apr dd").removeClass("xf_wylc_tbssisthot");
+				    $(this).addClass("xf_wylc_tbssisthot");
+				      apr = $(this).attr("value"); 
+				      $("#aprtemp").val(apr);
+				      showHomeBids();
+			  });
+			   $("#amount dd").click(function(){ 
+			    	$("#amount dd").removeClass("xf_wylc_tbssisthot");
+				    $(this).addClass("xf_wylc_tbssisthot");
+				     amount = $(this).attr("value"); 
+				      $("#amounttemp").val(amount);
+				    showHomeBids();
+			  });
+			   $("#loanSchedule dd").click(function(){ 
+			    	$("#loanSchedule dd").removeClass("xf_wylc_tbssisthot");
+				    $(this).addClass("xf_wylc_tbssisthot");
+				     loanSchedule = $(this).attr("value");  
+				     $("#loanScheduletemp").val(loanSchedule);
+				     showHomeBids();
+			  });
+			
+	     })
+	     	
+	     	
+	     	
+		$(function(){
+	    //条件查询控制样式
+      var num= '${pageBean?.conditions?.orderType}';
+
+		  if(num == 0){
+		  	$("#div_0").addClass("xf_wylc_orderdesc_nocheck");
+		    	return;
+		  }
+
+		  var sum = num/2;
+		  if(sum.toString().indexOf('.') == -1){
+		    var sum2 = num -1;
+		    $("#div_"+sum2).removeClass("xf_wylc_orderdesc_ishot");
+		    $("#div_"+sum2).addClass("xf_wylc_orderdesc_up");
+		    return;
+		  }else{
+		   // $("#div_"+num).removeClass("xf_wylc_orderdesc_up");
+		    $("#div_"+num).addClass("xf_wylc_orderdesc_ishot");
+		  }
+	        
+	     })
+	     
+function conditonSearch(num){
+
+  var order= '${pageBean?.conditions?.orderType}';
+  if(order == 0){
+    $("#orderType").val(num);
+    $("#bidsSearch").submit();
+    return;
+  }
+  if(order == num){
+    $("#orderType").val(num + 1);
+    $("#bidsSearch").submit();
+     return;
+  }else{
+    $("#orderType").val(num);
+    $("#bidsSearch").submit();
+     return;
+  }
+}
+
+	    
+	  function showHomeBids(){
+	  
+	    var minLevel = $("#minLevel").val();
+	    
+	     $("#bidsSearch").submit();
+    }	
+    /*
+    function showCollect(){
+    	var pageNum = 1;
+    	var pageSize = 10;
+		showCollectBids(pageNum,pageSize);
+    }
+    
+    
+     function showCollectBids(pageNum,pageSize){
+    	
+    	$.ajax({
+    	  url:"@{front.invest.investAction.queryUserCollectBids()}",
+    	  type:"POST",
+    	  data:{"pageNum" : pageNum,"pageSize" : pageSize},
+    	  success:function(data){$("#bidList").html(data);},
+		  error:function(){alert("对不起，出现错误!");}
+    	})
+    }
+     function showPage(currPage, pageSize){
+        $("#currPage").val(currPage);
+        $("#pageSize").val(pageSize);
+        $("#bidsSearch").submit();
+    }
+    	*/
+		
+	</script>
+<script type="text/javascript" src="@{'/public/javascripts/tab/tab_index.js'}"></script>
+	

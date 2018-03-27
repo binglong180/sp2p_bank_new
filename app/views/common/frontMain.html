@@ -1,0 +1,367 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	%{
+		business.User currUser = business.User.currUser();
+		business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+		String platUrl = constants.Constants.BASE_URL;
+		java.util.Map<String,java.util.List<business.BottomLinks>> bottomLinks = business.BottomLinks.currentBottomlinks();
+		java.lang.String type1Name = business.NewsType.queryName(1);
+		java.lang.String type2Name = business.NewsType.queryName(2);
+		java.lang.String type4Name = business.NewsType.queryName(4);
+		boolean ipsEnable = constants.Constants.IPS_ENABLE;
+		boolean debtUse = constants.Constants.DEBT_USE;
+	}%
+		<title>#{get 'title' /}</title>
+		<meta name="keywords" content="${currBackstageSet?.seoKeywords}" />
+		<meta name="description" content="${currBackstageSet?.seoDescription}" />
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<meta property="qc:admins" content="133011667666155146375" />
+		<meta property="wb:webmaster" content="6582954f8f7d9e1d" />
+		<link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.ico'}">
+		<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/site.css'}" />		
+		<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/reset.css'}" />
+		<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/temp.css'}" />	
+		<script type="text/javascript" src="@{'/public/javascripts/koala.min.1.5.js'}"></script>
+		<script type="text/javascript" src="@{'/public/javascripts/jquery-2.0.js'}"></script>
+		<script type="text/javascript" src="@{'/public/javascripts/jquery.json-2.4.min.js'}"></script>
+		<script type="text/javascript" src="@{'/public/javascripts/xf_front.js'}"></script>
+		<script charset="utf-8" src="@{'public/javascripts/ajaxfileupload.js'}"></script>
+		<script type="text/javascript" src="@{'/public/javascripts/common.js'}"></script>
+		<script type="text/javascript" src="@{'/public/javascripts/jquery.lazyload.min.js'}"></script>
+	</head>
+	<body>
+	<div class="xf_h_idx_1_header">
+			<!--头部 start -->
+			<div class="xf_h_idx_1_welWrap">
+				<!--顶栏 start-->
+				<div class="xf_h_idx_1_welcome">
+					<span class="xf_h_idx_1_welLeft">
+						<a class="xf_h_idx_1_jrscw" onClick="AddFavorite('${platUrl}','${currBackstageSet?.platformName}')"><span class="xf_h_idx_1_welbgl"></span>加入收藏</a>
+						<a class="xf_h_idx_1_jrscw2" href="http://weibo.com/u/2219448503" target="_blank"><span class="xf_h_idx_1_welbgr"></span>关注我们</a>
+					</span>
+					<span class="xf_h_idx_1_welRight">
+						#{if currUser == null}
+						<span class="xf_h_idx_1_welInfo">您好，欢迎来到${currBackstageSet?.platformName}，</span><a href="@{front.account.LoginAndRegisterAction.registerMobile()}" class="xf_h_idx_1_welmfzc">免费注册 </a>|
+						<a href="@{front.account.loginAndRegisterAction.login()}" class="xf_h_idx_1_wellogin">立即登录</a>	
+						#{/if}
+						#{else}
+						<span class="xf_h_idx_1_welInfo">您好，【<a href="@{front.account.AccountHome.home()}">${currUser?.name}</a>】，</span><a href="@{front.account.loginAndRegisterAction.logout()}" class="xf_h_idx_1_wellogin">安全退出</a>
+						#{/else}
+						<a href="@{front.help.HelpCenterAction.index(13)}" class="xf_h_idx_1_helpw" target="_self"><span class="xf_h_idx_1_helpbg"></span>帮助中心</a>
+						
+						<div class="xf_h_idx_1_online">
+							<a class="xf_h_idx_1_onlineqq" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=${currBackstageSet?.companyQQ1}&site=qq&menu=yes"></a>
+						</div>
+					</span>
+				</div>
+				<!--顶栏 end-->
+			</div>						
+			<div class="xf_h_idx_1_logoWrap">
+				<!--Logo start-->
+				<div class="xf_h_idx_1_logol">
+					<a href="@{front.home.HomeAction.home}">#{img src:"${currBackstageSet.platformLogoFilename}",width:"300",height:"86"}#{/img}</a>
+				</div>
+				<div class="xf_h_idx_1_contact">
+					<div class="xf_h_idx_1_workTime">
+						<div class="xf_h_idx_telimg"><img src="@{'public/images/top_dh.png'}" alt="联系方式"></div>
+						<div class="xf_h_idx_telcont">
+							<div class="xf_h_idx_teltop">在线客服电话</div>
+							<div class="xf_h_idx_teltel">${currBackstageSet.platformTelephone}</div>
+						</div>
+					</div>
+					
+				</div>	
+				<!--Logo end-->
+			</div>
+			<div class="xf_h_idx_1_navigator">
+				<div class="xf_h_idx_1_nav">
+					<ul class="xf_h_idx_1_navul">
+						<li id="index"><a href="@{front.home.HomeAction.home()}">首页</a></li>
+						<li id="bid"><a href="@{front.bid.bidAction.index()}" >我要借款</a></li>
+						<li id="invests"><a href="@{front.invest.InvestAction.investHome()}">我要理财</a></li>
+						#{if debtUse}
+						<li id="claim"><a href="@{front.debt.debtAction.debtHome()}">债权转让</a></li>
+						#{/if}
+						<li id="usr"><a href="@{front.account.accountHome.home()}">我的账户</a></li>
+						<li id="principal"><a href="@{front.principal.PrincipalGuaranteeAction.principalGuaranteeHome()}">${type4Name}</a></li>
+						<li id="wealth"><a href="@{front.wealthinfomation.WealthInfomationAction.home()}">${type1Name}</a></li>
+						<li id="help"><a href="@{front.help.HelpCenterAction.index(13)}">${type2Name}</a></li>
+						<li style="display:inline-block;width:110px;line-height:40px;height:40px;text-align:center;font-size:16px;font-family:Microsoft YaHei;color:#fff;background: #D0A733;"><a href="http://www.yxbp2p.com" target="_blank">进入旧平台</a></li>
+					</ul>
+					#{if currUser == null && loginOrRegister == null} 
+					<div class="xf_h_idx_1_navDropdown">
+					#{form @front.account.LoginAndRegisterAction.logining(), id:'submit'}
+						<span class="xf_h_idx_1_userName">用户名：<input type="text" name="name" id="name" tabIndex="1" value="${flash.name}"/></span>
+						<input type="hidden" name="result" value="${reason}" id="result" />
+						<span class="xf_h_idx_1_pwd">密码：<input type="password" id="password" name="password" tabIndex="2"/>
+						<a href="@{front.account.loginAndRegisterAction.resetPasswordByEmail()}" class="xf_h_idx_1_forgetPwd">忘记密码?</a></span>
+						<span class="xf_h_idx_1_checkCode">验证码：<input type="text" name="code" id="code" tabIndex="3" #{if !constants.Constants.CHECK_CODE}value="1234" readonly="readonly"#{/if} #{else}value="${flash?.code}" #{/else}/>
+						<input type="hidden" name="randomID" id="randomID" />
+						<img src="" class="xf_login_yzmimg" id="img" onclick="change()" width="65px" height="29px"></span>
+						<a onclick="change()" class="xf_h_idx_1_refresh"></a> 
+						<span class="xf_h_idx_1_login"><a onClick="login()">安全登录</a> |<a href="@{front.account.loginAndRegisterAction.registerMobile()}" class="xf_zf_regis">注册</a></span>
+				    #{/form}
+					</div>
+					#{/if}
+					#{elseif currUser != null && loginOrRegister == null }
+					<div class="xf_h_idx_1_navDropdown" style="text-align: center;">
+					    <input type="hidden" id="currUserName" value="${currUser?.name}">
+					    <input type="hidden" id="vipTimeType" value="${currBackstageSet?.vipTimeType}">
+					    <input type="hidden" id="vipMinTimeType" value="${currBackstageSet?.vipMinTimeType}">
+					    <input type="hidden" id="vipMinTimeLength" value="${currBackstageSet?.vipMinTimeLength}">
+					    <input type="hidden" id="vipAmount" value="${currBackstageSet?.vipFee}">
+					    <input type="hidden" id="vipDiscount" value="${currBackstageSet?.vipDiscount}">
+						<span class="xf_h_idx_1_hydj" >
+							<span class="xf_h_idx_1_hydjfdgdf">会员名：${currUser?.name}</span>
+						 
+							#{if currUser?.vipStatus}
+				  			         【vip会员】
+					  		#{/if}
+					  		#{else}
+					  			【普通会员】 <a class="xf_mem_acc_sjvip" id="xf_mem_acc_sjvip_front" onClick="vipApply()">[升级VIP]</a> 
+					  		#{/else} 
+					    </span>
+						<span class="xf_h_idx_1_zhye" style="margin-left: -20px;">账户可用余额：
+							#{if (ipsEnable?currUser?.balanceDetail?.user_amount+currUser?.balanceDetail?.user_amount2:currUser?.balanceDetail?.user_amount) > 100000000}
+								#{format money:(ipsEnable?currUser?.balanceDetail?.user_amount+currUser?.balanceDetail?.user_amount2:currUser?.balanceDetail?.user_amount)}#{/format}
+							#{/if}
+							#{else}
+								${(ipsEnable?currUser?.balanceDetail?.user_amount+currUser?.balanceDetail?.user_amount2:currUser?.balanceDetail?.user_amount)?.format('###,##0.00')}
+							#{/else}
+							元
+						</span>
+						<span class="xf_h_idx_1_xyed" style="margin-left: -15px;">信用额度：${currUser?.balanceDetail?.credit_line?.format('###,##0.00')}元 <!-- <a onclick="applyForOverBorrowInit();">提高信用额度</a> --> </span>
+						<span class="xf_h_idx_1_logout"><a href="@{front.account.loginAndRegisterAction.logout()}">安全退出</a></span>
+					</div>
+					#{/elseif}
+				</div>
+			</div>
+			<!--头部 end-->
+		</div>
+        #{doLayout /}
+        <div class="xf_f_idx_4_wrap">
+			<div class="xf_f_idx_4_cont">
+				<div class="xf_f_idx_4_xsrm">
+					<div class="xf_f_idx_4_xsrmTitle">新手入门</div>
+					<ul class="xf_f_idx_4_xsrmUl">
+					#{list items:bottomLinks?.get("1")}
+					#{if _?.target == 2}
+					<li>#{a href:"${_?.url}",target:"_blank"}${_?.title}#{/a}</li>
+					#{/if}
+					#{else}
+					<li>#{a href:"${_?.url}"}${_?.title}#{/a}</li>
+					#{/else}
+					#{/list}
+					</ul>
+				</div>
+				<div class="xf_f_idx_4_wyjk">
+					<div class="xf_f_idx_4_wyjkTitle">我要借款</div>
+					<ul class="xf_f_idx_4_wyjkUl">
+					#{list items:bottomLinks?.get("2")}
+					#{if _?.target == 2}
+					<li>#{a href:"${_?.url}",target:"_blank"}${_?.title}#{/a}</li>
+					#{/if}
+					#{else}
+					<li>#{a href:"${_?.url}"}${_?.title}#{/a}</li>
+					#{/else}
+					#{/list}
+					</ul>
+				</div>
+				<div class="xf_f_idx_4_wylc">
+					<div class="xf_f_idx_4_wylcTitle">我要理财</div>
+					<ul class="xf_f_idx_4_wylcUl">
+					#{list items:bottomLinks?.get("3")}
+					#{if _?.target == 2}
+					<li>#{a href:"${_?.url}",target:"_blank"}${_?.title}#{/a}</li>
+					#{/if}
+					#{else}
+					<li>#{a href:"${_?.url}"}${_?.title}#{/a}</li>
+					#{/else}
+					#{/list}
+					</ul>
+				</div>
+				<div class="xf_f_idx_4_about">
+					<div class="xf_f_idx_4_aboutTitle">关于我们</div>
+					<ul class="xf_f_idx_4_aboutUl">
+					#{list items:bottomLinks?.get("4")}
+					#{if _?.target == 2}
+					<li>#{a href:"${_?.url}",target:"_blank"}${_?.title}#{/a}</li>
+					#{/if}
+					#{else}
+					<li>#{a href:"${_?.url}"}${_?.title}#{/a}</li>
+					#{/else}
+					#{/list}
+					</ul>
+				</div>
+				<div class="xf_f_idx_4_help">
+					<div class="xf_f_idx_4_helpTitle">帮助中心</div>
+					<ul class="xf_f_idx_4_helpUl">
+					#{list items:bottomLinks?.get("5")}
+					#{if _?.target == 2}
+					<li>#{a href:"${_?.url}",target:"_blank"}${_?.title}#{/a}</li>
+					#{/if}
+					#{else}
+					<li>#{a href:"${_?.url}"}${_?.title}#{/a}</li>
+					#{/else}
+					#{/list}
+					</ul>
+				</div>
+				<div class="xf_f_idx_4_surport">
+					<div class="xf_f_idx_4_surportTitle">客服与支持</div>
+					<ul class="xf_f_idx_4_helpUl">
+					#{if currBackstageSet.platformTelephone}
+					<li>客服电话：${currBackstageSet.platformTelephone}</li>
+					#{/if}
+					#{if currBackstageSet.platformTelephone2}
+					<li>客服电话：${currBackstageSet.platformTelephone2}</li>
+					#{/if}
+					#{if currBackstageSet.companyFax}
+					<li>传真（FAX）：${currBackstageSet.companyFax}</li>
+					#{/if}
+					#{if currBackstageSet.companyEmail}
+					<li>总经理邮箱：${currBackstageSet.companyEmail}</li>
+					#{/if}
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="xf_cp_idx_5_wrap">
+			<div class="xf_cp_idx_5_cont">
+			   <div class="xf_cp_idx_5_contLeft">
+				<div class="xf_cp_idx_5_contCopy" id="system_info">
+					<p>${currBackstageSet?.companyName} <br/>总部地址：${currBackstageSet?.companyAddress}</p>
+					<p>
+					<a href="http://www.miitbeian.gov.cn" target="_blank" style="color: #6d747b">
+					${currBackstageSet?.siteIcpNumber}
+					</a>
+					</p>
+				</div>
+				<div class="xf_cp_idx_5_contLinks">
+					<a href="http://cn.norton.com" class="pi_tb1"></a>
+					<a href="http://webscan.360.cn" class="pi_tb2"></a>
+					<a href="http://www.anquan.org" class="pi_tb3"></a>
+					<a href="https://www.icann.org" class="pi_tb4"></a>
+					<a href="http://t.knet.cn" class="pi_tb5"></a>
+				</div>
+			   </div>
+			   <div style="display:none">
+			   ${currBackstageSet?.baiduCode.raw()}
+			   </div>
+			   <div class="xf_cp_idx_5_contRight">
+					<!-- <div class="xf_cp_idx_5_erwmAndroid">
+						<div class="xf_cp_idx_5_erwmAndroidImg">
+							<img src="@{'/public/images/app_download.png'}" alt="" width="85" height="85"/>
+						</div>
+						<div class="xf_cp_idx_5_erwmAndroidTitle">
+							APP版本
+						</div>
+					</div>
+					<div class="xf_cp_idx_5_erwmApple">
+						<div class="xf_cp_idx_5_erwmAndroidImg">
+							<img src="@{'/public/images/wx_download.png'}" alt="" width="85" height="85"/>
+						</div>
+						<div class="xf_cp_idx_5_erwmAndroidTitle">
+							微信版本
+						</div>
+					</div> -->
+			   </div>
+			</div>
+		</div>
+		#{include "front/account/AccountHome/overBorrowIps.control"/}
+		#{include "common/homeVipApply2.control"/}
+		#{include 'common/acitveEmail.control'/}
+    </body>
+<script type="text/javascript">
+  $(document).keydown(function(event){
+    if(event.keyCode == 13){
+      if(document.activeElement.id == 'name' || document.activeElement.id == 'code' || document.activeElement.id == 'password'){
+    	  login();
+      }
+    }
+  });
+  function vipApply(){
+     if(${!(currUser?.isEmailVerified || currUser?.isMobileVerified)}) {
+     	 showDiv($("#email_box"));
+     	 return;
+     }
+    showDiv($("#xf_mem_acc_sjvip_tcc"));
+  }
+
+  function login(){
+    var name = $("#name").val();
+           
+    if(name == ''){
+      alert("请输入用户名或邮箱");
+      return;
+    }
+
+    if($("#password").val() == ''){
+      alert("请输入密码");
+      return;
+    }
+
+    if($("#code").val() == ''){
+      alert("请输入验证码");
+      return;
+    }
+    $("#submit").submit();
+  }
+
+  $(function(){
+	$('img.lazy').lazyload({ 
+	  //effect:'fadeIn' 
+	});
+    $("#xf_h_idx_1_hydjfdgdf").limit();
+	   
+    /* 所有继承页面flash.error的值弹框,被继承页面则无需再写 */
+    if('${flash.error}' !='') {
+	      alert('${flash?.error}');
+      if('${flash?.emailUrl}' !='') {
+        window.open('${flash?.emailUrl}');
+      }
+    }
+	/*与重复提交冲突，注释，如功能发生冲突，请更改其他处
+    if('${flash.success}' != ''){
+      alert('${flash?.success}');
+    }
+	*/  	
+    //获取图片验证码
+    if('${currUser?.name}' == '' && '${loginOrRegister}' == '') {
+      var setCode = #{jsAction @front.account.LoginAndRegisterAction.setCode()/}
+      $.post(setCode({}),function(data){
+        var arr=eval(data);
+        var img = arr.img;
+        $("#img").attr("src","@{front.account.LoginAndRegisterAction.getImg()}?id="+img)	
+		$("#randomID").val(img);
+	  });
+	}
+  })
+
+  function change(){
+    var setCode = #{jsAction @front.account.LoginAndRegisterAction.setCode()/}
+	$.post(setCode({}),function(data){
+	  var arr=eval(data);
+	  var img = arr.img;
+	  $("#img").attr("src","@{front.account.LoginAndRegisterAction.getImg()}?id="+img);
+	  $("#randomID").val(img);	
+	});
+  }
+  function AddFavorite(url,title) {
+    var ua = navigator.userAgent.toLowerCase();
+    if(ua.indexOf("msie 8")>-1){
+      external.AddToFavoritesBar(url,title,'');//IE8
+    }else{
+      try {
+        window.external.addFavorite(url, title);
+      } catch(e) {
+        try {
+          window.sidebar.addPanel(title, url, "");//firefox
+        } catch(e) {
+          alert("加入收藏失败，请使用Ctrl+D进行添加");
+        }
+      }
+    }
+  }
+</script>
+</html>

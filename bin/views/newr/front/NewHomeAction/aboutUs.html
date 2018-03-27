@@ -1,0 +1,64 @@
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+	business.newr.User currUser = business.newr.User.currUser();
+}%
+#{extends 'newr/common/frontMain.html' /}
+<div class="full">
+	<div class="about_banner_bg">
+    	<div class="about_banner"><img src="@{'/public/skin/images/about_banner_03.jpg'}" width="1000" height="382" /></div>
+    </div>
+    <div class="about_width3">
+		<div class="about_title1">从这里认识银信保</div>
+        <div class="about_text">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;银信保是一家专注于汽车金融产品的互联网金融信息服务平台，与工商银行、建设银行、尧都农商行及其发起的村镇银行、通商银行等多家金融机构开展合作。自2014年7月1日正式上线以来，截至2016年3月累计投资总额达13455余万元。为了给广大用户提供更好的投资理财服务, 2016年3月11日，银信保进行了全新改版升级。平台的经营团队均由资深金融专家和IT专家组成，拥有丰富的金融产品创新和风险管理经验，致力于为广大用户提供一个安全、专业、规范、高收益的理财平台。平台采用汇付天下的第三方资金托管系统，实现账户隔离，保障投资人的资金安全和合法权益。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        银信保始终秉承&ldquo;见微知著，小有大为&rdquo;的企业理念，肩负&ldquo;牵手中小银行，普惠千家万户&rdquo;的社会使命，坚守&ldquo;安全诚信、专业高效&rdquo;的企业精神，打造一个增值、安全的互联网金融信息服务平台！</div>
+    </div>
+    
+    <div class="about_width">
+    	<div class="adout_width_2">
+            <div class="about_title1">银信保是什么样的投资平台？</div>
+            <div class="about_text">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;银信保遵循“不吸储不放贷”的原则，合法合规的为投融双方提供信息中介服务，依托商业银行、农商银行、村镇银行、保理公司、融资租赁公司等机构为我们提供优质安全的融资客户，把经过平台与合作银行双重严格风控审核筛选的符合推荐标准的借款人与投资人进行撮合，并通过保荐机构为双方提供贷后管理、风险控制、信息咨询等一条龙服务。平台用户的各项资金往来均通过具备金融牌照的第三方机构、银行来对接，并通过专业、严格的信用审核系统最大限度地保障投资人的资金安全。
+            </div>
+            <div class="about_img"><img src="@{'/public/skin/images/about_img_05.jpg'}" width="1000" height="470" /></div>
+        </div>    
+	</div>
+    
+    <div class="about_width3">
+		<div class="about_title1">银信保的优势</div>
+        <div class="about_div">
+            <dl class="about_dl">
+                <dt class="about_dt"><img src="@{'/public/skin/images/about_icon_13.png'}" width="195" height="102" /></dt>
+                <dd class="about_dd_title">银行背景&nbsp;&nbsp;安全稳健</dd>
+                <dd class="about_dd_text">银信保是一家专注于汽车金融产品的互联网金融信息服务平台，与多家金融机构开展合作。采用银行级交易系统，确保投资交易的绝对安全，解决投资人的后顾之忧。</dd>
+            </dl>
+            
+            <dl class="about_dl">
+                <dt class="about_dt"><img src="@{'/public/skin/images/about_icon_15.png'}" width="195" height="102" /></dt>
+                <dd class="about_dd_title">产品创新&nbsp;&nbsp;信息透明</dd>
+                <dd class="about_dd_text">银信保自上线伊始，不断创新产品结构，推出优质借款项目。银信保也是透明专业的金融信息服务平台，公司将最大程度的公开业务数据和信息，让投资人明确知悉自己的投资去向。</dd>
+            </dl>
+
+            <dl class="about_dl">
+                <dt class="about_dt"><img src="@{'/public/skin/images/about_icon_09.png'}" width="195" height="102" /></dt>
+                <dd class="about_dd_title">优质风控&nbsp;&nbsp;严格把关</dd>
+                <dd class="about_dd_text">银信保引进国际先进风控管理经验，形成一整套高效、严密的风险控制体系，风控团队会对借款人及拟融资项目进行风险的实质性评估，独立客观的帮助投资人把好信用风险的闸门。</dd>
+            </dl>
+
+            <dl class="about_dl" style=" margin-right:0;">
+                <dt class="about_dt"><img src="@{'/public/skin/images/about_icon_11.png'}" width="195" height="102" /></dt>
+                <dd class="about_dd_title">专业团队&nbsp;&nbsp;品质服务</dd>
+                <dd class="about_dd_text">银信保的团队具有多年的互联网金融服务与资产管理经验，团队人员不但对金融和互联网行业具有丰富经验和深刻认识，而且有信心为投资人提供最优质的理财项目和最一流的服务。</dd>
+            </dl>
+            <div class="clear"></div>
+        </div>
+    </div>    
+
+	<div class="clear"></div>
+</div>
+
+<script type="text/javascript">
+$(function(){
+	$('#aboutus a').toggleClass("on");
+});
+</script>

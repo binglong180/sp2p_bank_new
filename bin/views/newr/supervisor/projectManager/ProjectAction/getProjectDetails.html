@@ -1,0 +1,763 @@
+#{extends 'common/supervisor.html' /}
+#{include 'newr/supervisor/projectManager/projectManagerLeft.control'/}
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".full").css("width",document.body.clientWidth- 200 +"px ");
+});  
+
+$(window).resize(function(){
+	 var onLoadWidth = document.body.clientWidth;
+		$(".full").css("width",document.body.clientWidth- 200 +"px ");
+})
+</script>
+<style>
+.full{float:left; }
+.table01{width:100%;}
+.table01 th,.table01 td{font-size:12px; height:40px; text-align:center; font-weight:normal;}
+.table01 td{ color:#666;}
+.table01 .td_a{ color:#666;}
+.but01{color:#3a7dc0;}
+</style>
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="@{'/public/skin/css/layout.css'}" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="@{'/public/javascripts/jquery-2.0.js'}"></script>
+<script type="text/javascript" src="@{'/public/javascripts/index.js'}"></script>
+<script type="text/javascript" src="@{'/public/javascripts/jquery.json-2.4.min.js'}"></script>
+<!-- **********************begin*********************** -->
+<style type="text/css">
+div, ul, li {
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+
+}
+#Over {
+	position: absolute;
+	width: 100%;
+	z-index: 100;
+	left: 0px;
+	top: 0px;
+
+}
+.content {
+	text-align: center;
+
+	margin-right: auto;
+	margin-left: auto;
+;
+}
+.EnlargePhoto {
+	cursor: pointer;
+	
+	
+}
+.TempContainer {
+	position: absolute;
+	z-index: 101;
+	margin-right: 0px;
+	margin-left: 0px;
+	text-align: center;
+	width: 100%;
+	cursor: pointer;
+	
+}
+</style>
+<link href="@{'/public/sizeOfImage/public.css'}" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="@{'/public/sizeOfImage/jquery-1.5.min.js'}"></script>
+<script type="text/javascript">
+$(document).ready(function(e) {
+	var ImgsTObj = $('.EnlargePhoto');
+	if(ImgsTObj){
+	  $.each(ImgsTObj,function(){
+		  $(this).click(function(){
+			  var currImg = $(this);
+			  CoverLayer(1);
+			  var TempContainer = $('<div class=TempContainer></div>');
+			  with(TempContainer){
+				  appendTo("body");
+				  css('top',currImg.offset().top);
+				  html('<img border=0 src=' + currImg.attr('src') + '>');
+			  }
+			  TempContainer.click(function(){
+				  $(this).remove();
+				  CoverLayer(0);
+			  });
+		  });
+	  });
+	}
+	else{
+		return false;
+	}
+	function CoverLayer(tag){
+		with($('#Over')){
+			if(tag==1){
+				css('height',$(document).height());
+				css('display','block');
+				css('opacity',0.9);
+				css("background-color","#000");
+			}
+			else{
+				css('display','none');
+			}
+		}
+	}
+});
+</script>
+<!-- **********************end*********************** -->
+</head>
+<body>
+<div class="full">
+	<div class="list_add_items">
+    	<div class="data_header">
+        	<div class="data_item"><div class="td_title" style=" font-size:18px; font-weight:bold;">· 添加项目</div></div>
+        </div>
+        
+        <div class="list_data">
+        	#{table width:"100%"}
+			    #{list page?.page}
+					 #{tr tr_index:_index}
+            <div class="data_info">
+                <div class="data_item">
+                    <div class="item_title">基本信息</div>
+                    <div class="item_content">
+                        <ul>
+                            <li>
+                                <div class="td_title"><span>*</span>申请人姓名：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.name}" readOnly="true" placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title"><span>*</span>性别：</div>
+                                <div class="td_content">
+                                    #{if _?.sex == '1'}
+                                    <div class="item_radio"><input type="radio" name="sex" value="1" class="btn_radio" checked="checked"/><span>男</span></div>
+                                    <div class="item_radio"><input type="radio" name="sex" value="2" class="btn_radio" disabled /><span>女</span></div>
+                                    #{/if}
+                                    #{if _?.sex == '2'}
+                                    <div class="item_radio"><input type="radio" name="sex" value="1" class="btn_radio" disabled /><span>男</span></div>
+                                    <div class="item_radio"><input type="radio" name="sex" value="2" class="btn_radio" checked="checked"/><span>女</span></div>
+                                    #{/if}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="td_title"><span>*</span>身份证号码：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.id_number}" readOnly="true" placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">身份证有效期：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.id_number_valid}" readOnly="true" placeholder="" style=" float:left; width:85%;"></div>
+                            </li>
+                            <li>
+                                <div class="td_title"><span>*</span>身份证扫描件：</div>
+                                  <div class="td_content">
+                                	<div class="item_files">
+                                       
+                                        <div class="upload_files" style="display:;">
+	                                    	<div class="pic_size">                                     
+	                                           	<img class="img EnlargePhoto" src="${_?.id_number_scanning_positive}" />
+	                                        </div>
+	                                    	<div class="pic_size">                                     
+	                                             <img class="img EnlargePhoto" src="${_?.id_number_scanning_back}" />
+	                                        </div>
+                                        </div>
+                                    </div>
+                                 </div>
+                            </li>
+                            <li style="display:none;">
+                                <div class="td_title">年龄：</div>
+                                 <div class="td_content" style="display:;">30</div>
+                                <div class="td_content" style="display:none;">
+                                	<div class="age">30</div>
+                                    <div class="btn_operation"><a class="" href="">修改</a><a>|</a><a class="" href="">查看</a><a>|</a><a class="" href="">审核</a></div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="td_title"><span>*</span>是否本市户口：</div>
+                                <div class="td_content">
+                                    #{if _?.local_residents == '1'}
+                                    <div class="item_radio"><input type="radio" name="local_residents" value="1" class="btn_radio" checked="checked"/><span>是</span></div>
+                                    <div class="item_radio"><input type="radio" name="local_residents" value="0" class="btn_radio" disabled/><span>否</span></div>
+                                	#{/if}
+                                	#{if _?.local_residents == '0'}
+                                    <div class="item_radio"><input type="radio" name="local_residents" value="1" class="btn_radio" disabled/><span>是</span></div>
+                                    <div class="item_radio"><input type="radio" name="local_residents" value="0" class="btn_radio" checked="checked"/><span>否</span></div>
+                                	#{/if}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="td_title"><span>*</span>居住证扫描件：</div>
+                                <div class="td_content">
+                                	<div class="item_files">
+                                       
+                                        <div class="upload_files">
+                                            <div class="pic_size">                                     
+                                                 <img class="img EnlargePhoto" src="${_?.residence_permit}"  />
+                                            </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="td_title">居住证有效期：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.residence_permit_valid}" readOnly="true" placeholder="" style=" float:left; width:85%;"></div>
+                            </li>
+                            <li>
+                                <div class="td_title">家庭电话：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.family_telephone}" readOnly="true" placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">家庭地址：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.family_address}" readOnly="true"  placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">现住址：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.address}" readOnly="true" placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">手机号码：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.mobile}" readOnly="true"  placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">紧急联系电话：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.mobile_urgency}" readOnly="true" placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">健康状况：</div>
+                                <div class="td_content">
+                                    #{if _?.health_status == '0'}
+                                    <div class="item_radio"><input type="radio" name="health_status" value="0" checked="checked" class="btn_radio"/><span>良好</span></div>
+                                    <div class="item_radio"><input type="radio" name="health_status" value="1" disabled class="btn_radio"/><span>一般</span></div>
+                                    <div class="item_radio"><input type="radio" name="health_status" value="2" disabled class="btn_radio"/><span>较差</span></div>
+                                	#{/if}
+                                	#{if _?.health_status == '1'}
+                                    <div class="item_radio"><input type="radio" name="health_status" value="0" disabled class="btn_radio"/><span>良好</span></div>
+                                    <div class="item_radio"><input type="radio" name="health_status" value="1" checked="checked" class="btn_radio"/><span>一般</span></div>
+                                    <div class="item_radio"><input type="radio" name="health_status" value="2" disabled class="btn_radio"/><span>较差</span></div>
+                                	#{/if}
+                                	#{if _?.health_status == '2'}
+                                    <div class="item_radio"><input type="radio" name="health_status" value="0" disabled class="btn_radio"/><span>良好</span></div>
+                                    <div class="item_radio"><input type="radio" name="health_status" value="1" disabled class="btn_radio"/><span>一般</span></div>
+                                    <div class="item_radio"><input type="radio" name="health_status" value="2" checked="checked" class="btn_radio"/><span>较差</span></div>
+                                	#{/if}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="td_title"><span>*</span>婚姻状况：</div>
+                                <div class="td_content">
+                               		#{if _?.marital_status == '0'}
+                                    <div class="item_radio"><input type="radio" name="marital_status" value="0" checked="checked" class="btn_radio"/><span>未婚</span></div>
+                                    <div class="item_radio"><input type="radio" name="marital_status" value="1" disabled class="btn_radio"/><span>已婚</span></div>
+                                    <div class="item_radio"><input type="radio" name="marital_status" value="2" disabled class="btn_radio"/><span>丧偶</span></div>
+                                    <div class="item_radio"><input type="radio" name="marital_status" value="3" disabled class="btn_radio"/><span>离异</span></div>
+                                    #{/if}
+                                    #{if _?.marital_status == '1'}
+                                    <div class="item_radio"><input type="radio" name="marital_status" value="0" disabled class="btn_radio"/><span>未婚</span></div>
+                                    <div class="item_radio"><input type="radio" name="marital_status" value="1" checked="checked" class="btn_radio"/><span>已婚</span></div>
+                                    <div class="item_radio"><input type="radio" name="marital_status" value="2" disabled class="btn_radio"/><span>丧偶</span></div>
+                                    <div class="item_radio"><input type="radio" name="marital_status" value="3" disabled class="btn_radio"/><span>离异</span></div>
+                                    #{/if}
+                                    #{if _?.marital_status == '2'}
+                                    <div class="item_radio"><input type="radio" name="marital_status" value="0" disabled class="btn_radio"/><span>未婚</span></div>
+                                    <div class="item_radio"><input type="radio" name="marital_status" value="1" disabled class="btn_radio"/><span>已婚</span></div>
+                                    <div class="item_radio"><input type="radio" name="marital_status" value="2" checked="checked" class="btn_radio"/><span>丧偶</span></div>
+                                    <div class="item_radio"><input type="radio" name="marital_status" value="3" disabled class="btn_radio"/><span>离异</span></div>
+                                    #{/if}
+                                    #{if _?.marital_status == '3'}
+                                    <div class="item_radio"><input type="radio" name="marital_status" value="0" disabled class="btn_radio"/><span>未婚</span></div>
+                                    <div class="item_radio"><input type="radio" name="marital_status" value="1" disabled class="btn_radio"/><span>已婚</span></div>
+                                    <div class="item_radio"><input type="radio" name="marital_status" value="2" disabled class="btn_radio"/><span>丧偶</span></div>
+                                    <div class="item_radio"><input type="radio" name="marital_status" value="3" checked="checked" class="btn_radio"/><span>离异</span></div>
+                                    #{/if}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="td_title">有无子女：</div>
+                                <div class="td_content">
+                                    #{if _?.without_children == '0'}
+                                    <div class="item_radio"><input type="radio" name="without_children" value="0" checked="checked" class="btn_radio"/><span>无</span></div>
+                                    <div class="item_radio"><input type="radio" name="without_children" value="1" disabled class="btn_radio"/><span>有</span></div>
+                                    #{/if}
+                                    #{if _?.without_children == '1'}
+                                    <div class="item_radio"><input type="radio" name="without_children" value="0" disabled class="btn_radio"/><span>无</span></div>
+                                    <div class="item_radio"><input type="radio" name="without_children" value="1" checked="checked" class="btn_radio"/><span>有</span></div>
+                                    #{/if}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="td_title"><span>*</span>教育背景：</div>
+                                <div class="td_content">
+                                    #{if _?.education_id == '0'}
+                                    <div class="item_radio"><input type="radio" name="education_id" value="0" checked="checked" class="btn_radio"/><span>硕士及以上</span></div>
+                                    <div class="item_radio"><input type="radio" name="education_id" value="1" disabled class="btn_radio"/><span>本科</span></div>
+                                    <div class="item_radio"><input type="radio" name="education_id" value="2" disabled class="btn_radio"/><span>大专</span></div>
+                                    <div class="item_radio"><input type="radio" name="education_id" value="3" disabled class="btn_radio"/><span>高中</span></div>
+                                    #{/if}
+                                    #{if _?.education_id == '1'}
+                                    <div class="item_radio"><input type="radio" name="education_id" value="0" disabled class="btn_radio"/><span>硕士及以上</span></div>
+                                    <div class="item_radio"><input type="radio" name="education_id" value="1" checked="checked" class="btn_radio"/><span>本科</span></div>
+                                    <div class="item_radio"><input type="radio" name="education_id" value="2" disabled class="btn_radio"/><span>大专</span></div>
+                                    <div class="item_radio"><input type="radio" name="education_id" value="3" disabled class="btn_radio"/><span>高中</span></div>
+                                    #{/if}
+                                    #{if _?.education_id == '2'}
+                                    <div class="item_radio"><input type="radio" name="education_id" value="0" disabled class="btn_radio"/><span>硕士及以上</span></div>
+                                    <div class="item_radio"><input type="radio" name="education_id" value="1" disabled class="btn_radio"/><span>本科</span></div>
+                                    <div class="item_radio"><input type="radio" name="education_id" value="2" checked="checked" class="btn_radio"/><span>大专</span></div>
+                                    <div class="item_radio"><input type="radio" name="education_id" value="3" disabled class="btn_radio"/><span>高中</span></div>
+                                    #{/if}
+                                    #{if _?.education_id == '3'}
+                                    <div class="item_radio"><input type="radio" name="education_id" value="0" disabled class="btn_radio"/><span>硕士及以上</span></div>
+                                    <div class="item_radio"><input type="radio" name="education_id" value="1" disabled class="btn_radio"/><span>本科</span></div>
+                                    <div class="item_radio"><input type="radio" name="education_id" value="2" disabled class="btn_radio"/><span>大专</span></div>
+                                    <div class="item_radio"><input type="radio" name="education_id" value="3" checked="checked" class="btn_radio"/><span>高中</span></div>
+                                    #{/if}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="td_title">工作年限：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.work_years}" readOnly="true" placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">月均收入：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.income_per_month}" readOnly="true" placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">工作单位或主要经济来源：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.income_resource}" readOnly="true"  placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">所在部门及职位：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.department_position}" readOnly="true" placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">是否自营公司：</div>
+                                <div class="td_content">
+                                 #{if _?.whether_company == '0'}
+                                    <div class="item_radio"><input type="radio" name="whether_company" checked="checked" value="0" class="btn_radio"/><span>无</span></div>
+                                    <div class="item_radio"><input type="radio" name="whether_company" disabled value="1" class="btn_radio"/><span>有</span></div>
+                                 #{/if}
+                                 #{if _?.whether_company == '1'}
+                                    <div class="item_radio"><input type="radio" name="whether_company" disabled value="0" class="btn_radio"/><span>无</span></div>
+                                    <div class="item_radio"><input type="radio" name="whether_company" checked="checked" value="1" class="btn_radio"/><span>有</span></div>
+                                 #{/if}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="td_title">单位电话：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.company_mobile}" readOnly="true" placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">单位地址：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.company_address}" readOnly="true" placeholder=""></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="data_item">
+                    <div class="item_title">联系人信息</div>
+                    <div class="item_content">
+                        <ul>
+                        	<div class="ul_title">· 配偶</div>
+                            <li>
+                                <div class="td_title">姓名：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.spouse_name}" readOnly="true" placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">手机号码：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.spouse_mobile}" readOnly="true" placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">单位电话：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.spouse_unit_mobile}" readOnly="true" placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">工作单位及部门：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.spouse_department_position}" readOnly="true" placeholder=""></div>
+                            </li>
+                        </ul>
+                        <ul>
+                        	<div class="ul_title">· 直系亲属</div>
+                            <li>
+                                <div class="td_title">姓名：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.immediate_name}" readOnly="true" placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">关系：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.immediate_relation}" readOnly="true" placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">手机号码：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.immediate_mobile}" readOnly="true" placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">宅电：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.immediate_home_mobile}" readOnly="true" placeholder=""></div>
+                            </li>
+                        </ul>
+                        <ul>
+                        	<div class="ul_title">· 其他联系人1</div>
+                            <li>
+                                <div class="td_title">姓名：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.contact1_name}" readOnly="true" placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">关系：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.contact1_relation}" readOnly="true" placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">手机号码：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.contact1_mobile}" readOnly="true" placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">宅电：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.contact1_home_mobile}" readOnly="true" placeholder=""></div>
+                            </li>
+                        </ul>
+                        <ul>
+                        	<div class="ul_title">· 其他联系人2</div>
+                            <li>
+                                <div class="td_title">姓名：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.contact2_name}" readOnly="true"  placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">关系：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.contact2_relation}" readOnly="true"  placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">手机号码：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.contact2_mobile}" readOnly="true" placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">宅电：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.contact2_home_mobile}" readOnly="true" placeholder=""></div>
+                            </li>
+                        </ul>
+                        <ul>
+                        	<div class="ul_title">· 其他联系人3</div>
+                            <li>
+                                <div class="td_title">姓名：</div>
+                                <div class="td_content"><input class="input_title" type="text" id=""  value="${_?.contact3_name}" readOnly="true" placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">关系：</div>
+                                <div class="td_content"><input class="input_title" type="text" id=""  value="${_?.contact3_relation}" readOnly="true" placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">手机号码：</div>
+                                <div class="td_content"><input class="input_title" type="text" id=""  value="${_?.contact3_mobile}" readOnly="true" placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">宅电：</div>
+                                <div class="td_content"><input class="input_title" type="text" id=""  value="${_?.contact3_home_mobile}" readOnly="true" placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">家人是否知晓您的此项贷款：</div>
+                                <div class="td_content">
+                                    #{if _?.home_whether_know_loan == '0'}
+                                    <div class="item_radio"><input type="radio" name="home_whether_know_loan" value="1" disabled class="btn_radio"/><span>是</span></div>
+                                    <div class="item_radio"><input type="radio" name="home_whether_know_loan" value="0" checked="checked" class="btn_radio"/><span>否</span></div>
+                               		#{/if}
+                               		#{if _?.home_whether_know_loan == '1'}
+                                    <div class="item_radio"><input type="radio" name="home_whether_know_loan" value="1" checked="checked" class="btn_radio"/><span>是</span></div>
+                                    <div class="item_radio"><input type="radio" name="home_whether_know_loan" value="0" disabled class="btn_radio"/><span>否</span></div>
+                               		#{/if}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="data_item">
+                    <div class="item_title">贷款信息</div>
+                    <div class="item_content">
+                        <ul>
+                            <li>
+                                <div class="td_title">申请贷款金额（元）：</div>
+                                <div class="td_content"><input class="input_title" type="text" id=""  value="${_?.amount}" readOnly="true"  placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">贷款期限：</div>
+                                <div class="td_content">
+                                	<select name="" id="" class="input_select">
+                                        <option value="1">${_?.period}个月</option>
+                                    </select>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="td_title">还款方式：</div>
+                                <div class="td_content">
+                                	#{if _?.repayment_type_id == '2'}
+                                    <div class="item_radio"><input type="radio" name="repayment_type_id" value="2" checked="checked" class="btn_radio"/><span>按月付息,到期还本</span></div>
+                                    <div class="item_radio"><input type="radio" name="repayment_type_id" value="3" disabled="disabled" class="btn_radio"/><span>一次性还本付息</span></div>
+                                	#{/if}
+                                 	#{if _?.repayment_type_id == '3'}
+                                    <div class="item_radio"><input type="radio" name="repayment_type_id" value="2" disabled="disabled" class="btn_radio"/><span>按月付息,到期还本</span></div>
+                                    <div class="item_radio"><input type="radio" name="repayment_type_id" value="3" checked="checked" class="btn_radio"/><span>一次性还本付息</span></div>
+                                	#{/if}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="td_title">抵押类型：</div>
+                                <div class="td_content">
+                                    #{if _?.collateral_type == '0'}
+                                    <div class="item_radio"><input type="radio" name="collateral_type" value="0" checked="checked" class="btn_radio"/><span>押手续+押车</span></div>
+                                    <div class="item_radio"><input type="radio" name="collateral_type" value="1" disabled="disabled" class="btn_radio"/><span>押手续</span></div>
+                                	#{/if}
+                                	#{if _?.collateral_type == '1'}
+                                    <div class="item_radio"><input type="radio" name="collateral_type" value="0" disabled="disabled" class="btn_radio"/><span>押手续+押车</span></div>
+                                    <div class="item_radio"><input type="radio" name="collateral_type" value="1" checked="checked"class="btn_radio"/><span>押手续</span></div>
+                                	#{/if}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="td_title">综合利率：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.apr}" readOnly="true" placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">放款日期：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.loan_time}" readOnly="true" placeholder="" style=" float:left; width:85%;"></div>
+                            </li>
+                            <li>
+                                <div class="td_title">贷款用途：</div>
+                                <div class="td_content"><textarea class="input_textarea" type="text" id="" readOnly="true" placeholder="">${_?.loan_purpose}</textarea></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+<!--                 <div class="data_item">
+                    <div class="item_title">抵押物信息</div>
+                    <div class="item_content">
+                        <ul>
+                            <li>
+                                <div class="td_title">车型：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.vehicle_model}" readOnly="true"  placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">车牌号：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.plate_numbers}" readOnly="true" placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">车架号：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.frame_number}" readOnly="true" placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">发动机号：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.engine_number}" readOnly="true" placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">车身颜色：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.car_color}" readOnly="true" placeholder=""></div>
+                            </li>
+                               <li style="width:100%;">
+                                <div class="td_title">车辆照片：</div>
+                                <div class="td_content">
+                                	<div class="item_files">
+                                        
+                                        <div class="upload_files">
+                                            <div class="pic_size">                                     
+                                                <img class="img EnlargePhoto" src="${_?.car_photo1}" />
+                                            </div>
+                                            
+                                            
+                                            <div class="pic_size">                                     
+                                                 <img class="img EnlargePhoto" src="${_?.car_photo2}" />
+                                            </div>
+                                            
+                                        
+                                            <div class="pic_size">                                     
+                                                 <img class="img EnlargePhoto" src="${_?.car_photo3}" />
+                                            </div>
+                                            
+                                            
+                                            <div class="pic_size">                                     
+                                                 <img class="img EnlargePhoto" src="${_?.car_photo4}" />
+                                            </div>
+                                        
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="td_title">评估人报价：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.evaluator_quotation}" readOnly="true" placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">行驶本：</div>
+                                <div class="td_content">
+                                	<div class="item_files">
+                                        
+                                        	<div class="upload_files">
+                                                <div class="pic_size">                                     
+                                                <img class="img EnlargePhoto" src="${_?.driver_book}" />
+                                        	</div>                                        
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                              <div class="td_title">机动车登记证：</div>
+                                <div class="td_content">
+                                	<div class="item_files">
+                                        <div class="upload_files" >
+                                                <div class="pic_size">                                     
+                                                    <img class="img EnlargePhoto" src="${_?.motor_vehicle_registration_certificate}" />
+                                                </div>                                        
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="td_title">保单：</div>
+                                    <div class="td_content">
+                                	   <div class="item_files">
+                                        <div class="upload_files">
+                                         	<div class="pic_size">                                     
+                                                <img class="img EnlargePhoto" src="${_?.guarantee_slip}" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="td_title">保单有效期：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.guarantee_slip_valid}" readOnly="true" placeholder="" style=" float:left; width:85%;"></div>
+                            </li>
+                            <li>
+                                <div class="td_title">购车发票：</div>
+                                   <div class="td_content">
+                                	 <div class="item_files">
+                                        <div class="upload_files">
+                                                <div class="pic_size">                                     
+                                                    <img class="img EnlargePhoto" src="${_?.purchase_invoice}" />
+                                                </div>
+                                    	</div>
+                                    </div>
+                            </li>
+                            <li>
+                                <div class="td_title">个人汽车抵押申请表：</div>
+                                <div class="td_content">
+                                	<div class="item_files">
+                                        <div class="upload_files" >
+                                         	<div class="pic_size">                                     
+                                                    <img class="img EnlargePhoto" src="${_?.car_pledge_table}" />
+                                         	</div>
+                                    	</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="td_title">二手车两状况评估表：</div>
+                                <div class="td_content">
+                                	<div class="item_files">
+                                        <div class="upload_files" >
+                                            <div class="pic_size">                                     
+                                                   <img class="img EnlargePhoto" src="${_?.evaluation_table}" />
+                                         	</div>
+                                       </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="td_title">借款合同：</div>
+                                <div class="td_content">
+                                	<div class="item_files">
+                                        <div class="upload_files">
+                                            <div class="pic_size">                                     
+                                                 <img class="img EnlargePhoto" src="${_?.loan_contract1}" />
+                                            </div>
+                                            <div class="pic_size">                                     
+                                                <img class="img EnlargePhoto" src="${_?.loan_contract2}" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div> -->
+                
+                <div class="data_item">
+                    <div class="item_title">操作信息</div>
+                    <div class="item_content">
+                        <ul>
+                            <li style=" width:100%;">
+                                <div class="td_title">客户来源：</div>
+                                <div class="td_content">
+                                 	#{if _?.customer_resource == '-1'}
+                                    <div class="item_radio"><input type="radio" name="customer_resource" value="0" disabled="disabled" class="btn_radio"/><span>报纸</span></div>
+                                    <div class="item_radio"><input type="radio" name="customer_resource" value="1" disabled="disabled" class="btn_radio"/><span>网络</span></div>
+                                    <div class="item_radio"><input type="radio" name="customer_resource" value="2" disabled="disabled" class="btn_radio"/><span>促销活动</span></div>
+                                    <div class="item_radio"><input type="radio" name="customer_resource" value="3" disabled="disabled" class="btn_radio"/><span>朋友介绍</span></div>
+                                    <div class="item_radio"><input type="radio" name="customer_resource" value="4" disabled="disabled" class="btn_radio"/><span>其他：</span><input class="input_title" type="text" id="" readonly="readonly" placeholder="" style=" width:150px; margin:0 0 0 5;"></div>
+                                	#{/if}
+                                    #{if _?.customer_resource == '0'}
+                                    <div class="item_radio"><input type="radio" name="customer_resource" value="0" checked="checked" class="btn_radio"/><span>报纸</span></div>
+                                    <div class="item_radio"><input type="radio" name="customer_resource" value="1" disabled="disabled" class="btn_radio"/><span>网络</span></div>
+                                    <div class="item_radio"><input type="radio" name="customer_resource" value="2" disabled="disabled" class="btn_radio"/><span>促销活动</span></div>
+                                    <div class="item_radio"><input type="radio" name="customer_resource" value="3" disabled="disabled" class="btn_radio"/><span>朋友介绍</span></div>
+                                    <div class="item_radio"><input type="radio" name="customer_resource" value="4" disabled="disabled" class="btn_radio"/><span>其他：</span><input class="input_title" type="text" id="" readonly="readonly" placeholder="" style=" width:150px; margin:0 0 0 5;"></div>
+                                	#{/if}
+                                	#{if _?.customer_resource == '1'}
+                                    <div class="item_radio"><input type="radio" name="customer_resource" value="0" disabled="disabled" class="btn_radio"/><span>报纸</span></div>
+                                    <div class="item_radio"><input type="radio" name="customer_resource" value="1" checked="checked" class="btn_radio"/><span>网络</span></div>
+                                    <div class="item_radio"><input type="radio" name="customer_resource" value="2" disabled="disabled" class="btn_radio"/><span>促销活动</span></div>
+                                    <div class="item_radio"><input type="radio" name="customer_resource" value="3" disabled="disabled" class="btn_radio"/><span>朋友介绍</span></div>
+                                    <div class="item_radio"><input type="radio" name="customer_resource" value="4" disabled="disabled" class="btn_radio"/><span>其他：</span><input class="input_title" type="text" id="" readonly="readonly"  placeholder="" style=" width:150px; margin:0 0 0 5;"></div>
+                                	#{/if}
+                                	#{if _?.customer_resource == '2'}
+                                    <div class="item_radio"><input type="radio" name="customer_resource" value="0" disabled="disabled" class="btn_radio"/><span>报纸</span></div>
+                                    <div class="item_radio"><input type="radio" name="customer_resource" value="1" disabled="disabled" class="btn_radio"/><span>网络</span></div>
+                                    <div class="item_radio"><input type="radio" name="customer_resource" value="2" checked="checked"  class="btn_radio"/><span>促销活动</span></div>
+                                    <div class="item_radio"><input type="radio" name="customer_resource" value="3" disabled="disabled" class="btn_radio"/><span>朋友介绍</span></div>
+                                    <div class="item_radio"><input type="radio" name="customer_resource" value="4" disabled="disabled" class="btn_radio"/><span>其他：</span><input class="input_title" type="text" id="" readonly="readonly"  placeholder="" style=" width:150px; margin:0 0 0 5;"></div>
+                                	#{/if}
+                                	#{if _?.customer_resource == '3'}
+                                    <div class="item_radio"><input type="radio" name="customer_resource" value="0" disabled="disabled" class="btn_radio"/><span>报纸</span></div>
+                                    <div class="item_radio"><input type="radio" name="customer_resource" value="1" disabled="disabled" class="btn_radio"/><span>网络</span></div>
+                                    <div class="item_radio"><input type="radio" name="customer_resource" value="2" disabled="disabled" class="btn_radio"/><span>促销活动</span></div>
+                                    <div class="item_radio"><input type="radio" name="customer_resource" value="3" checked="checked" class="btn_radio"/><span>朋友介绍</span></div>
+                                    <div class="item_radio"><input type="radio" name="customer_resource" value="4" disabled="disabled" class="btn_radio"/><span>其他：</span><input class="input_title" type="text" id="" readonly="readonly"  placeholder="" style=" width:150px; margin:0 0 0 5;"></div>
+                                	#{/if}
+                                	#{if _?.customer_resource == '4'}
+                                    <div class="item_radio"><input type="radio" name="customer_resource" value="0" disabled="disabled" class="btn_radio"/><span>报纸</span></div>
+                                    <div class="item_radio"><input type="radio" name="customer_resource" value="1" disabled="disabled" class="btn_radio"/><span>网络</span></div>
+                                    <div class="item_radio"><input type="radio" name="customer_resource" value="2" disabled="disabled" class="btn_radio"/><span>促销活动</span></div>
+                                    <div class="item_radio"><input type="radio" name="customer_resource" value="3" disabled="disabled" class="btn_radio"/><span>朋友介绍</span></div>
+                                    <div class="item_radio"><input type="radio" name="customer_resource" value="4" checked="checked" class="btn_radio"/><span>其他：</span><input class="input_title" type="text" id="" value="${_?.customer_resource_info}" readonly="readonly" placeholder="" style=" width:150px; margin:0 0 0 5;"></div>
+                                	#{/if}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="td_title"><span>*</span>录入人：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" name = "" value="${_?.input_person}" readonly="readonly" placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">经手人：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.pass_person}" readonly="readonly"  placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">负责人：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="" value="${_?.responsible_person}" readonly="readonly"  placeholder=""></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="btn_alter">
+            	<a class="" href="@{newr.supervisor.projectManager.ProjectAction.approved(_?.id,_?.project_no,supervisor?.name)}">审核通过</a>
+            	<a class="" href="@{newr.supervisor.projectManager.ProjectAction.projectFailure(_?.id)}">审核失败</a>
+            </div>
+            
+        </div>
+                #{/tr}
+			#{/list}
+        #{/table}  
+        
+    </div>
+</div>
+</body>
+</html>

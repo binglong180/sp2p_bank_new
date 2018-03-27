@@ -1,0 +1,69 @@
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+	business.newr.User currUser = business.newr.User.currUser();
+}%
+#{extends 'newr/common/frontMain.html' /}
+
+<div class="full">
+	<div class="content" >
+    <!--找回密码开始-->
+        <div class="xmxq_div">
+
+			<div class="pingtgg_div">
+                <div class="znxx_title">
+                   ${newsDetail?.get(1).title}
+                    <div class="znxx_title_span">${newsDetail?.get(1)?.startShowTime?.format("yyyy-MM-dd")}</div>
+                </div>  
+                <div class="ptgg_text">
+                 ${newsDetail?.get(1)?.content?.raw()}
+                 <!--  <span style=" width:100%;text-align:right; display:block;">
+                  银信保
+                  <br />
+                  ${newsDetail?.get(1)?.startShowTime?.format("yyyy年MM月dd日")}
+                  </span>  -->
+                </div>    
+
+                <div class="mianbaoxie" >
+                    #{if newsDetail?.get(0)!=null}
+                    <a href="@{newr.front.information.InformationAction.mediaDetail(newsDetail?.get(0).id)}">上一条：${newsDetail?.get(0).title}</a><br>
+                    #{/if}
+                    #{else}
+                     <a>上一条：无</a><br>
+                    #{/else}
+                    #{if newsDetail?.get(2)!=null}
+                    <a href="@{newr.front.information.InformationAction.mediaDetail(newsDetail?.get(2).id)}">下一条：${newsDetail?.get(2).title}</a>
+                     #{/if}
+                    #{else}
+                     <a>下一条：无</a><br>
+                    #{/else}
+                </div>
+                        
+
+
+            </div>
+            <div class="clear"></div>
+        </div>
+        <!--找回密码结束-->
+        <div class="clear"></div>
+    </div><!--content end-->
+
+	<div class="clear"></div>
+</div>
+
+<script>
+	$(function(){
+		$(window).scroll(function(){
+			if($(window).scrollTop()>100){  //距顶部多少像素时，出现返回顶部按钮
+				$("#side-bar .gotop").fadeIn();	
+			}
+			else{
+				$("#side-bar .gotop").hide();
+			}
+		});
+		$("#side-bar .gotop").click(function(){
+			$('html,body').animate({'scrollTop':0},500); //返回顶部动画 数值越小时间越短
+		});
+	});
+</script>
+</body>
+</html>

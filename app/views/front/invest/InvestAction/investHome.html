@@ -1,0 +1,209 @@
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+}%
+#{extends 'common/frontMain.html' /} 
+#{set title:currBackstageSet.seoTitle+'| 我要理财' /}
+<div class="xf_c_wyjk_1_wyjk">
+	<!--理财流程开始-->
+	#{include "front/invest/InvestAction/homeProcedure.control"/}
+	<!--投标搜索-->
+	#{include "front/invest/InvestAction/homeSearch.control"/}
+	<!-- 排序条件 -->
+	<!-- 搜索结果 -->
+	<div class="xf_wylc_sousoulist" id="bidList">
+	
+	<!-- 搜索结果 -->
+	<ul class="xf_c_idx_4_items xf_c_wylc_items">
+		<!--foreach start：-->
+		#{list items:pageBean.page, as:'bid'}
+		<li>
+			<div class="xf_c_idx_4_itemsWrap">
+				<div class="xf_c_idx_4_imgWrap">
+					<div class="xf_c_idx_4_userImg">
+					#{img class:"lazy", data_original:"${bid?.bid_image_filename}", src:"/public/images/loading.gif",alt:"",align:"absmiddle",width:"111px",height:"110px"}#{/img}
+						
+					</div>
+					<div class="xf_c_idx_4_zrzhongImg">
+					
+					</div>
+					#{if bid?.status == 14}
+					<div style="position:absolute;bottom:18px;left:-5px;width:105px;background:url(../images/index_bg.png) no-repeat -961px -559px;height:25px; color: #fff;font-size: 15px; padding:10px 0 0 20px; line-height: 16px;">
+					${bid?.strStatus}
+					#{/if}
+					#{else}
+					<div class="xf_c_idx_4_zrzhongImg">
+					${bid?.strStatus}
+					#{/else}
+					</div>
+				</div>
+				<div class="xf_c_idx_4_tableWrap xf_c_wylc_tableWrap">
+					<div class="xf_c_idx_4_colTitle xf_wylc_colTitle">
+						<span >
+						#{img class:"lazy", data_original:"${bid?.small_image_filename}", src:"/public/images/loading.gif",alt:"",style:"width: 20px; height: 20px;  display: inline-block; float: left; margin: 5px 6px 0 0;"}#{/img}
+						</span> <span
+							class="xf_c_idx_4_loanTitle xf_c_wylc_loanTitle"><a
+							href="@{invest(bid?.id)}" target="_self">${bid?.title}</a> </span> <span
+							class="xf_wylc_lcpocd">编号：${bid?.no}</span> <span
+							class="xf_c_idx_4_loanProgres"> <span
+							class="xf_c_idx_4_progText">借款进度：</span> <span
+							class="xf_c_idx_4_proWrap"><span id="loanSchedule${bid_index}" class="xf_c_idx_4_proPer">${bid?.loan_schedule}%</span>
+						</span> </span>
+					</div>
+					<div class="xf_c_idx_4_data">
+						<ul class="xf_c_idx_4_dataul">
+							<li><div>年利率</div>
+								<div class="xf_c_idx_4_nhsy">${bid?.apr}%</div>
+							</li>
+							<li><div>借款金额</div>
+								<div class="xf_c_idx_4_jkje">${bid?.amount?.format('###,##0.00')}</div>
+							</li>
+							<li><div>还款期限</div>
+								<div class="xf_c_idx_4_hkqx">
+								#{if bid?.period_unit ==-1}
+								${bid?.period}年
+								#{/if}
+								#{if bid?.period_unit ==0}
+								${bid?.period}个月
+								#{/if}
+								#{if bid?.period_unit ==1}
+								${bid?.period}天
+								#{/if}
+								</div>
+							</li>
+							<li><div>还款日期</div>
+								<div class="xf_c_idx_4_hkqx">
+								#{if bid?.repayment_time == null}
+								---
+								#{/if}
+								${bid?.repayment_time?.format('yyyy-MM-dd')}
+								</div>
+							</li>
+							<li class="xf_c_idx_4_last"><div>信用等级</div>
+								<div class="xf_c_idx_4_xydj">
+								#{img class:"lazy", data_original:"${bid?.creditLevel?.image_filename}", src:"/public/images/loading.gif",alt:""}#{/img}
+								</div>
+							</li>
+							<div class="clear"></div>
+						</ul>
+					</div>
+					<div class="xf_c_idx_4_tableBttom">
+						<span class="xf_c_idx_4_hxjeWrap">还需金额：<span
+							class="xf_c_idx_4_hxje">￥
+							#{format money:(bid?.amount-bid?.has_invested_amount)}#{/format}
+							元</span> </span> <span
+							class="xf_c_idx_4_hkfsWrap">
+							
+								
+							还款方式：${bid?.repay_name}
+							
+							</span> 
+							#{if !(constants.Constants.IPS_ENABLE && bid?.is_agency)}
+							<span
+							class="xf_c_idx_4_hkfsWrap2">投标奖励：
+							#{if bid?.bonus_type == 0}
+							不设置奖励
+							#{/if}
+							#{if bid?.bonus_type == 1}
+							按固定奖金${bid?.bonus}元进行奖励
+							#{/if}
+							#{if bid?.bonus_type == 2}
+							按借款总额${bid?.award_scale}%进行奖励
+							#{/if}
+							</span>
+							#{/if}
+					</div>
+				</div>
+				<div class="xf_wylc_tableWrap_cz">
+				   #{if bid?.is_hot ==true}
+					<b class="xf_wylc_tableWrap_czishot">火</b>
+					#{/if}
+					#{if  bid?.amount > bid?.has_invested_amount}
+					 <a href="@{invest(bid?.id)}" target="_self">立即投标</a>
+					 #{/if}
+					<a onclick="checkLogin(${bid?.id})">加入收藏</a> 
+					#{if bid?.amount == bid?.has_invested_amount}
+					<a href="@{invest(bid?.id)}" target="_self">查看详细</a>
+					#{/if}
+				</div>
+			</div></li>
+			#{/list}
+		<!--foreach ends-->
+	</ul>
+	<div class="xf_wylc_page">
+		<!-- 分页器 -->
+			#{page pageTitle:"个标",currPage:pageBean.currPage,pageSize:pageBean.pageSize,totalCount:pageBean.totalCount,theme:2,style:3 /}
+	</div>
+	</div>
+	<!--投标搜索 ends-->
+</div>
+
+<!-- 财富理财说明 -->
+<div class="xf_wylc_wylcExp">
+	#{include "common/WealthToolbox.control"/}
+		
+	#{include "common/CreditRatingIcons.control"/}
+	
+	#{include "common/BorrowingIcons.control"/}
+	
+	<div class="clear"></div>
+</div>
+
+
+<!-- *{登录弹框层}* -->	
+#{include 'front/invest/InvestAction/login.control'/}		
+	
+ *{激活弹框层}* 
+#{include 'front/invest/InvestAction/activeEmail.control'/}	
+
+<script type="text/javascript" src="@{'/public/javascripts/tab/tab_invest.js'}"></script>
+
+<script>
+    $(function(){
+     
+	  #{list items:pageBean.page, as:'bid'}
+	    $('#loanSchedule'+${bid_index}).css({"width":${bid?.loan_schedule}})
+	  #{/list}
+    })
+
+    function checkLogin(bidId){
+    	var listAction = #{jsAction @front.bid.BidAction.checkUserStatus() /};
+		$.post(listAction(), function(data) {
+			switch(data.status * 1){
+			    case 1:
+			    	collectCurrentBid(bidId);  
+				break;
+				/* 未登录 */
+				case -1: 
+					showDiv($("#xf_logintcc_box"));
+					 return;
+				/* 未激活 */
+				case -2: 
+					$("#userName1").html(data.userName);
+					$("#userName2").html(data.userName);
+					$("#email").html(data.email);
+					showDiv($("#active"));
+					return;
+
+				 case -3: 
+					 collectCurrentBid(bidId);  
+						break;
+			}
+		});	
+      }   
+       
+       
+    function collectCurrentBid(bidId){
+    	var collectBid = #{jsAction @collectBid(':bidId')/}
+    	$.post(collectBid({bidId:bidId}),function(data){
+    	
+    		var arr=eval(data);
+			var result = arr.error.msg;
+			alert(result);
+    	})
+    
+    }
+    
+   
+    
+  
+</script>

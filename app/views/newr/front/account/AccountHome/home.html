@@ -1,0 +1,316 @@
+#{extends 'newr/common/frontMain.html' /}
+<link href="@{'/public/skin/css/bootstrap.min.css'}" rel="stylesheet" media="screen">
+<link href="@{'/public/skin/css/bootstrap-datetimepicker.min.css'}" rel="stylesheet" media="screen">
+
+<style>
+.dropdown-menu{ display:block !important;}
+.table-condensed{ color:#505050; font-size:14px; font-weight:bold;}
+.table-condensed tr th.prev,.table-condensed tr th.switch,.table-condensed tr th.next{ background:#ff6867; color:#fff; height:42px; font-size:18px;}
+.table-condensed tr th.dow{ color:#999;}
+.table-condensed .day{ font-size:14px; line-height:25px;}
+.container{ border: 1px solid rgba(0, 0, 0, 0.2);    border-radius:4px;      display: block;    float: left;    left: 0;    list-style: outside none none;  }
+#dtp_input2{width:70px; height:50px; line-height:50px; font-size:28px; color:#333; background:none; border:none; text-align:center;}
+/*原css*/
+.icon-arrow-left{width:14px; height:16px; background:url(@{'/public/skin/images/rili_01.png'}) no-repeat;}
+.icon-arrow-right{width:14px; height:16px; background:url(@{'/public/skin/images/rili_04.png'}) no-repeat;}
+.input-append .add-on,.input-prepend .add-on{display:inline-block;width:auto;height:20px;min-width:16px;padding:4px 5px;font-size:14px;font-weight:normal;line-height:20px;text-align:center;text-shadow:0 1px 0 #ffffff;background-color:#eeeeee;border:1px solid #ccc; display:none;}
+
+/*原css结束*/
+</style>
+
+
+<div class="full">
+	<div class="content" style="background:#fff;">
+		<table cellpadding="0" cellspacing="0" width="100%" style="border-collapse:inherit;">
+			<tr>
+			#{include '/newr/common/leftMenu.html'/}
+				<td class="tree_right_td" valign="top">
+                	<div class="tree_right">
+                    	<div class="right_top">
+                        	<div class="right_name">你好，${user?.name}</div>
+                            <div class="right_icon">
+                            
+                                <div class="id_icon" style="display:;">
+                                	#{if user?.realityName !="" || user?.realityName !=null }
+                                    	<img src="@{'/public/skin/images/icon2_06.png'}" />
+                                    	<div class="id_window">身份已认证</div>
+                                    #{/if}
+                                    #{else}
+                                    	<img src="@{'/public/skin/images/icon_06.png'}" />
+                                    	<div class="id_window">身份未认证</div>
+                                    #{/else}
+                                </div>
+                            
+
+                                <div class="moble_icon" style="display:;">
+                                	#{if user?.mobile !="" || user?.mobile !=null }
+                                    	<img src="@{'/public/skin/images/icon2_08.png'}" />
+                                    	<div class="mob_window">手机已认证</div>
+                                    #{/if}
+                                    #{else}
+										<img src="@{'/public/skin/images/icon_08.png'}" />
+                                    	<div class="mob_window none">手机未认证</div>
+                                    #{/else}
+                                </div>
+
+
+                                <div class="email_icon" style="display:;">
+                                	#{if user?. isEmailVerified }
+                                    	<img src="@{'/public/skin/images/icon2_10.png'}" />
+                                    	<div class="email_window">邮箱已认证</div>
+                                    #{/if}
+                                    #{else}
+										<img src="@{'/public/skin/images/icon_10.png'}" />
+                                    	<div class="email_window none">邮箱未认证</div>
+                                    #{/else}
+                                </div>
+                            
+
+                                <div class="key_icon" style="display:;">
+                                    #{if user?.ipsAcctNo != "" || user?.ipsAcctNo != null}
+                                      <img src="@{'/public/skin/images/icon2_12.png'}" />
+                                      <div class="key_window">交易密码已认证</div>
+                                    #{/if}
+                                    #{else}
+                                    <img src="@{'/public/skin/images/icon_12.png'}" />
+                                      <div class="key_window none">交易密码未认证</div>
+                                    #{/else}
+                                </div>
+
+                            </div>
+                        </div>
+                    	
+                        <table cellpadding="0" cellspacing="0" width="100%" style="margin-top:30px;">
+                        	<tr>
+                            	<td align="left" valign="bottom">
+                                	<span style="font-size:14px;">资产总额（元）:</span>&nbsp;&nbsp;<span style="font-size:34px;font-family:Arial; color:#000;">${(user?.balance+user?.balance2+user?.freeze+user?.receiveCorpus+user?.receiveInterest)?.format('###,##0.00')}</span>
+                                </td>
+                        	</tr>
+                            <tr>
+                            	<td colspan="2" align="left">
+                                    <table class="right_zh_tab" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td class="ze_l5_li" rowspan="2" align="center" valign="middle"><img src="@{'/public/skin/images/zlbg_07.png'}" width="44" height="44" /></td>
+                                            <td class="ze_l5_td2" valign="middle">${(user?.balance+user?.balance2)?.format('###,##0.00')}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ze_l5_td" valign="top">可用余额（元）</td>
+                                        </tr>
+                                    </table>
+ 
+                                    <table class="right_zh_tab" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td class="ze_l5_li" rowspan="2" align="center" valign="middle"><img src="@{'/public/skin/images/zlbg_09.png'}" width="44" height="44" /></td>
+                                            <td class="ze_l5_td2" valign="middle">${user?.freeze?.format('###,##0.00')}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ze_l5_td" valign="top">冻结金额（元）</td>
+                                        </tr>
+                                    </table>
+                                    <table class="right_zh_tab" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td class="ze_l5_li" rowspan="2" align="center" valign="middle"><img src="@{'/public/skin/images/zlbg_11.png'}" width="44" height="44" /></td>
+                                            <td class="ze_l5_td2" valign="middle">${user?.receiveCorpus}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ze_l5_td" valign="top">待收本金（元）</td>
+                                        </tr>
+                                    </table>
+                                    <table class="right_zh_tab" cellpadding="0" cellspacing="0" style=" margin-right:0;">
+                                        <tr>
+                                            <td class="ze_l5_li" rowspan="2" align="center" valign="middle"><img src="@{'/public/skin/images/zlbg_13.png'}" width="44" height="44" /></td>
+                                            <td class="ze_l5_td2" valign="middle">${user?.receiveInterest}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ze_l5_td" valign="top">待收收益（元）</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    	
+                    	<div class="clear"></div>
+                	</div><!--tree_right end-->
+                    
+                    
+                    <div class="tree_right2">
+                    	<div class="right_top_title">还款计划</div>
+                    	<div class="tree_right2_b">
+                        	<div class="rili">
+                            <!--日历开始-->
+                            
+                                <div class="container">
+                                    <form action="" class="form-horizontal">
+                                        <fieldset>
+                                          
+                                            <div class="control-group">
+                                                
+                                                  <div class="controls input-append date form_date" data-date="" data-date-format="yyyy MM dd" data-link-field="dtp_input2" data-link-format="dd">
+                                                   
+                                                  <!--
+                                                        <span class="add-on"><i class="icon-remove"></i></span>
+                                                    -->
+                                                    <span class="add-on" ><i class="icon-th" ></i></span>
+                                                    
+                                                </div> 
+                                                
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            
+                            <!--日历结束-->
+                            </div>
+                            <div class="rili_right">
+                            	<div class="rili_title"><span id="thisMonth"></span>&nbsp;&nbsp;<span id="currMonth" style="font-size:22px; font-family:Arial;"></span>&nbsp;元</div>
+                                
+                                
+                                <div class="pay-cal">
+                                    <div class="pay-day">
+                                        <span class="dayName" id="weekday"></span><span class="day2"><input size="16" style="display:none;" type="text" value="" readonly><input type="show" id="dtp_input2" value="" /></span>	
+                                    </div>
+                                    <div class="need-pay">
+                                        <span class="tips">应收本息</span>
+                                        <span class="money"><strong id="currDay"></strong>元 <a class="check" href="javascript:void(0);" id="checkDetail">查看详情</a></span>	
+                                    </div>
+                                    <div class="clear"></div>
+                              </div>
+                    
+                    
+                            </div>
+                        	<div class="clear"></div>
+                        </div>
+                        
+                        <table cellpadding="0" cellspacing="0" width="740" style="margin:10px auto 20px auto;" id="detailtable">
+
+                        </table>   
+                        
+                        
+                   		<div class="clear"></div>
+                	</div><!--tree_right end-->
+                </td>
+			</tr>
+		</table>	
+        <div class="clear"></div>
+    </div><!--content end-->
+<input type="hidden" value="" id="storeTime" />
+	<div class="clear"></div>
+</div>
+<script type="text/javascript" src="@{'/public/skin/js/jquery-1.8.3.min.js'}" charset="UTF-8"></script>
+<script type="text/javascript" src="@{'/public/skin/js/bootstrap-datetimepicker.js'}" charset="UTF-8"></script>
+<script type="text/javascript">
+<!--页面加载时，动态显示当月收益-->
+window.onload = function() {
+	var time = new Date().format("yyyy-MM-dd");
+	var time1 = new Date();
+	var time2 = new Date().format("yyyy-MM");
+	var weekDay = [ "星期日","星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+	$("#weekday").html(weekDay[time1.getDay()]);
+	$("#dtp_input2").val(time1.getDate());	
+	$("#storeTime").val(time);
+ 		$.ajax({
+ 			 cache:false,
+ 			 type:"POST",
+ 			 data:"month="+time2,
+ 			 url:"@{newr.front.account.AccountHome.queryCorpusInverestByMonth()}",
+ 			 success:function(data){
+ 	 			$("#currMonth").html(data);
+ 			 },
+ 		 	error:function(){
+ 				 $("#currMonth").html("wrong");
+ 	 		}
+ 		});
+ 	
+		$.ajax({
+ 			cache:false,
+ 			type:"POST",
+ 			data:"day="+time,
+ 			url:"@{newr.front.account.AccountHome.queryCorpusInverestByDay()}",
+ 			success:function(res){
+ 				$("#currDay").html(res);
+ 			},
+ 			error:function(){
+ 	 			$("#currDay").html("wrong");
+ 			}
+ 		});
+	}; 
+	$('.form_date').datetimepicker({
+        language: 'en',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0
+    });
+//$('#datetimepicker').datetimepicker('show');
+//$(".datetimepicker").css("display","block");
+//$(".datetimepicker-dropdown-bottom-right").css("display","block");
+//$(".dropdown-menu").css("display","block");
+$('.form_date').datetimepicker('show');
+<!--当选择固定日期时，动态显示到选定日期时的收益-->
+$('.form_date').datetimepicker().on('changeDate', function(ev){
+var time = new Date((ev.date.valueOf()-8*60*60*1000)).format("yyyy-MM-dd");
+var weekTime = new Date(ev.date.valueOf()-8*60*60*1000);
+var weekDay = ["星期日","星期一", "星期二", "星期三", "星期四", "星期五","星期六"];
+$("#weekday").html(weekDay[weekTime.getDay()]);
+$("#storeTime").val(time);
+$("#detailtable").children().remove();
+$.ajax({
+ 	cache:false,
+ 	type:"POST",
+ 	data:"day="+time,
+ 	url:"@{newr.front.account.AccountHome.queryCorpusInverestByDay()}",
+ 	success:function(money){
+ 	 $("#currDay").html(money);
+ 	},
+ 	error:function(){
+ 	 //alert("something may be wrong!");
+ 	}
+ });	
+  
+});
+$(function(){
+	var obj = document.getElementById("child1");
+	change_bg(obj);
+});
+$(function(){
+	var date = new Date().format("yyyy年MM月");
+	$("#thisMonth").text(date+"应该收本息");
+});
+</script>
+<script type="text/javascript">
+	$("#checkDetail").click(function(){
+		$("#detailtable").children().remove();
+		var time=$("#storeTime").val();
+		$.ajax({
+			cache:false,
+			type:"POST",
+			data:"day="+time,
+			url:"@{newr.front.account.AccountHome.queryCorpusInverestDetailByDay()}",
+			dataType:"JSON",
+			success:function(res){
+				var array = eval(res);
+				var trs="";
+				var tr1="";
+				if(array.length==0){
+					trs="<tr style='text-align:center'><td>当前日期下无数据<td></tr>";
+				}else{
+					tr1= "<tr><th class='xmxq_th'>项目</th><th class='xmxq_th'>金额（元）</th><th class='xmxq_th'>类型</th><th class='xmxq_th'>状态</th></tr>";
+ 	 				for(var i=0;i<array.length;i++){
+ 	 					trs +="<tr><td class='xmxq_td'>"+array[i][0]+"</td><td class='xmxq_td'>"+array[i][1]+"</td><td class='xmxq_td'>"+array[i][2]+"</td><td class='xmxq_td'>"+array[i][3]+"</td></tr>";
+ 	 				}
+				}
+	 			$("#detailtable").append(tr1);
+				$("#detailtable").append(trs);
+			},
+			error:function(){
+			}
+		});
+	});
+</script>
+
+
+</body>
+</html>

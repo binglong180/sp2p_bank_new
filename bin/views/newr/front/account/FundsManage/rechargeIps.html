@@ -1,0 +1,123 @@
+#{extends 'newr/common/frontMain.html' /} 
+<script type="text/javascript"> 
+$(document).ready(function(){
+$(".city_link").css("width",document.body.clientWidth +"px ");
+$(".city_link").css("height",document.body.scrollHeight +"px ");
+$(".tck_div").css("margin-top",(document.body.scrollHeight - 508 ) / 2 +"px ");
+});  
+
+$(window).resize(function(){
+ var onLoadWidth = document.body.clientWidth;
+$(".city_link").css("width",document.body.clientWidth +"px ");
+$(".city_link").css("height",document.body.scrollHeight +"px ");
+$(".tck_div").css("margin-top",(document.body.scrollHeight - 508 ) / 2+"px ");
+})
+</script>
+<!--弹出框开始-->
+	
+        <div id="city_link" class="city_link">
+        
+        <div class="city_show">
+             
+        </div>
+        <em class="city_links" href="" onclick="M.goExpr('city_eelou_id','0');return false;">
+        	<div class="tck_div">
+        		<div class="tck_div_title">
+                	<span style="float:left;">登录到汇付天下支付平台充值</span>
+                    <span class="tck_close" href="javascript:;" title="关闭窗口" onclick=   "document.getElementById('city_nav').className='city_nav';document.getElementById('city_link').className='city_link';return !1;"><img src="@{'/public/skin/images/close.png'}" width="17" height="17" /></span>
+                </div>
+                <div class="tck_div_main">
+                	<div class="tck_main">请在新打开的页面完成充值后选择：</div>
+                    <div class="tck_main"><span class="tck_span">充值成功：</span><a class="tck_btn_cz" href="@{newr.front.account.AccountHome.home()}">确认成功</a></div>
+                	<div class="tck_main"><span class="tck_span">充值失败：</span><a class="tck_btn_tx" href="javascript:;" onclick ="location.reload();">重新充值</a></div>
+                	<div class="tck_main" style="text-align:center;">遇到问题请拔打我们的客服热线：400-111-0189（9:00 — 21：00）</div>
+                </div>
+        	</div>
+        </em>
+
+</div>
+<!--弹出框结束-->
+<div class="full">
+	<div class="content" style="background:#fff;">
+		<table cellpadding="0" cellspacing="0" width="100%">
+			<tr>
+			  #{include '/newr/common/leftMenu.html'/}
+				<td class="tree_right_td" valign="top">
+                    
+                    <div class="tree_right2">
+                    	<div class="right_top_title">我要充值</div>
+                    	<div class="tree_right2_b">
+                        
+                            <table cellpadding="0" cellspacing="0" width="400" style="margin:50px auto 20px auto;">
+                                <tr>
+                                    <th class="cz_td" align="right" height="50">可用余额：</th>
+                                    <th class="cz_td" align="left" height="50"><span class="cz_money">${(ipsEnable?user?.balanceDetail?.user_amount+user?.balanceDetail?.user_amount2:user?.balanceDetail?.user_amount)?.format('###,##0.00')}</span>&nbsp;元</th>
+                                </tr>
+                                <tr>
+                                    <td class="cz_td" align="right" height="50">充值金额：</td>
+                                    <form action="@{newr.front.account.FundsManage.submitRecharge()}" method="POST" id="rechangeSubmit"  target="_blank">
+                                    <input type="hidden" name="uuidRepeat" value="${flash?.success}">
+                                    <td class="cz_td" align="left" height="50"><input class="cz_money_input" name="money" id="money" value="请输入要充值的金额" type="text" onclick="javascript:$('#money').val('');" />&nbsp;元</td>
+                                    </form>
+                                </tr>
+                                <tr>
+                                	<td class="cz_td" height="80" colspan="2" valign="bottom" align="center">
+                                    	<span class="city_nav" id="city_nav" >
+                                    		<a class="cz_money_btn" onclick="recharge()">我要充值</a>
+                                        </span>    
+                                    </td>
+                                </tr>
+                            </table>   
+                        
+                        	<div class="cz_shuom">
+                            	<p><b>充值说明：</b></p>
+                                <p>
+                                1. 投资人充值免费，银信保为投资人支付充值费用；
+                                </p>
+                                <p>
+                                2. 在银信保平台仅可使用储蓄卡进行充值，严禁信用卡充值、套现等行为，一经发现将予以处罚，包括但不限于：限制收款、 冻结账户、永久停止服务等；
+                                </p>
+                                <p>
+                                3. 充值需开通网上银行功能，支付限额请参照支付说明；
+                                </p>
+                                <p>
+                                4. 若您的充值金额没有及时到账，请致电400-111-0189。
+                                </p>
+                            
+                        	<div class="clear"></div>
+                        </div>
+                        
+                        	<div class="clear"></div>
+                        </div>
+                   		<div class="clear"></div>
+                	</div><!--tree_right end-->
+                </td>
+			</tr>
+		</table>	
+        <div class="clear"></div>
+    </div><!--content end-->
+
+	<div class="clear"></div>
+</div>
+<script type="text/javascript">
+function recharge(){
+    
+    if($("#money").val() == ''){
+  	  alert("充值金额不能为空");
+  	  return;
+    }
+    
+    if(isNaN($("#money").val())){
+    	alert("请输入正确的充值金额");
+    	return;
+    }
+    $("#rechangeSubmit").submit();
+    $("#city_nav").addClass("city_nav city_hover");
+    document.getElementById('city_link').className='city_link city_hovers';
+    
+}
+$(function(){
+	var obj = document.getElementById("child2");
+	change_bg(obj);
+});
+</script>

@@ -1,0 +1,84 @@
+#{extends 'newr/common/frontMain.html' /}
+%{business.newr.User currUser = business.newr.User.currUser();}%
+<div class="full">
+	<div class="content" style="background:#fff;">
+		<table cellpadding="0" cellspacing="0" width="100%">
+			<tr>
+				#{include '/newr/common/leftMenu.html'/}
+			
+				<td class="tree_right_td" valign="top">
+                    
+                    <div class="tree_right2">
+                    	<div class="right_top_title">安全中心</div>
+                    	<div class="tree_right2_b">
+                        
+                            <table cellpadding="0" cellspacing="0" width="100%" class="anq_center">
+                                <tr>
+                                	<td class="id_icon_on">&nbsp;</td>
+                                    <td class="anq_text" width="65" align="center">实名认证</td>
+                                    <td width="5" align="left">｜</td>
+                                    <td width="432">您#{if currUser?.realityName !="" || currUser?.realityName !=null }已#{/if}#{else}还未#{/else}完成实名认证</td>
+                                    <td class="renz"></td>
+                                    <td>#{if currUser?.realityName !="" || currUser?.realityName !=null }已#{/if}#{else}未#{/else}认证</td>
+                                </tr>
+                                <tr>
+                                	<td class="moble_icon_on"></td>
+                                    <td class="anq_text" width="65" align="center">手机验证</td>
+                                    <td width="5" align="left">｜</td>
+                                    <td width="432">您验证的手机号${currUser?.mobile}，若已丢失或停用，请立即更换</td>
+                                    <td class="renz"></td>
+                                    <td>#{if currUser?.mobile !="" || currUser?.mobile !=null }已#{/if}#{else}未#{/else}验证</td>
+                                </tr>
+                                <tr>
+                                	#{if !currUser?.isEmailVerified}<td class="email_icon_none"></td>#{/if}
+                                	#{else}<td class="email_icon_on"></td>#{/else}
+                                    <td class="anq_text" width="65" align="center">邮箱绑定</td>
+                                    <td width="5" align="left">｜</td>
+                                    <td width="432">
+                                    #{if !currUser?.isEmailVerified}绑定邮箱后，可用邮箱重置登录密码#{/if}
+                                    #{else}${currUser?.email}#{/else}
+                                    #{if !currUser?.isEmailVerified}<td class="weirz"></td>#{/if}
+                                    #{else}<td class="renz"></td>#{/else}
+                               <!--      <td>#{if currUser?.isEmailVerified }已#{/if}#{else}未#{/else}绑定&nbsp;&nbsp;<a class="anq_a" href="@{newr.front.account.CheckAction.goBindEmail()}">#{if currUser?.isEmailVerified }修改#{/if}#{else}绑定#{/else}</a></td>
+                                 -->
+                                	<td>#{if currUser?.isEmailVerified }已#{/if}#{else}未#{/else}绑定&nbsp;&nbsp;<a class="anq_a" href="@{newr.front.account.CheckAction.goBindEmail()}">#{if currUser?.isEmailVerified }#{/if}#{else}绑定#{/else}</a></td> 
+                                 </tr>
+
+                                <tr>
+                                	<td class="key_icon_on"></td>
+                                    <td class="anq_text" width="65" align="center">交易密码</td>
+                                    <td width="5" align="left">｜</td>
+                                    <td width="432">安全性高的密码使交易更安全</td>
+                                    <td class="renz"></td>
+                                    <td>已设置</td>
+                                </tr>
+                                <tr>
+                                	<td class="pass_icon_on"></td>
+                                    <td class="anq_text" width="65" align="center">登录密码</td>
+                                    <td width="5" align="left">｜</td>
+                                    <td width="432">安全性高的密码使账户更安全</td>
+                                    <td class="renz"></td>
+                                    <!-- <td>已设置&nbsp;&nbsp;<a class="anq_a" href="@{newr.front.account.BasicInformation.modifyPassword()}">修改</a></td> -->
+                                	<td>已设置&nbsp;&nbsp;</td>
+                                </tr>
+                            </table>   
+                        
+                        
+                        	<div class="clear"></div>
+                        </div>
+                   		<div class="clear"></div>
+                	</div><!--tree_right end-->
+                </td>
+			</tr>
+		</table>	
+        <div class="clear"></div>
+    </div><!--content end-->
+
+	<div class="clear"></div>
+</div>
+<script type="text/javascript">
+$(function(){
+	var obj = document.getElementById("child6");
+	change_bg(obj);
+});
+</script>

@@ -1,0 +1,58 @@
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+	business.newr.User currUser = business.newr.User.currUser();
+}%
+#{extends 'newr/common/frontMain.html' /}
+
+<div class="full">
+	<!--banner start-->
+	<div class="anqbz_banner_bg">
+    	<div class="anqbz_banner"><img src="@{'public/skin/images/anq_b_03.jpg'}" width="1000" height="379" /></div>
+    </div>
+    <div class="anqbz_second_banner_bg">
+    	<div class="anqbz_second_banner"><img src="@{'public/skin/images/anq_b2_05.jpg'}" width="1000" height="351" /></div>
+    </div>
+    <div class="anqbz_third_banner_bg">
+    	<div class="anqbz_third_banner"><img src="@{'public/skin/images/anq_b3_06.jpg'}" width="1000" height="560" /></div>
+    </div>
+    <div class="anqbz_fourth_banner_bg">
+    	<div class="anqbz_fourth_banner"><img src="@{'public/skin/images/anq_b4_08.jpg'}" width="1000" height="618" /></div>
+    </div>
+    
+    <div class="anqbz_fiveth_banner_bg">
+    	<div class="anqbz_fiveth_banner"><img src="@{'public/skin/images/anq_b5_09.jpg'}" width="1000" height="559" /></div>
+    </div>
+    <div class="anqbz_sixth_banner_bg">
+    	<div class="anqbz_fourth_banner"><img src="@{'public/skin/images/abq_6_10.jpg'}" width="1000" height="349" /></div>
+    </div>
+    <div class="anqbz_seventh_banner_bg">
+    	<div class="anqbz_seventh_banner"><img src="@{'public/skin/images/anq_b6_11.jpg'}" width="1000" height="560" /></div>
+    </div>
+    <div class="anqbz_eightth_banner_bg">
+    	<div class="anqbz_eightth_banner"><img src="@{'public/skin/images/abq_7_12.jpg'}" width="1000" height="349" /></div>
+    </div>
+	<div style="width:100%; height:80px; background:#fff;"></div>    
+	<!--banner end-->
+
+	<div class="clear"></div>
+</div>
+
+<script>
+	$(function(){
+		$(window).scroll(function(){
+			if($(window).scrollTop()>100){  //距顶部多少像素时，出现返回顶部按钮
+				$("#side-bar .gotop").fadeIn();	
+			}
+			else{
+				$("#side-bar .gotop").hide();
+			}
+		});
+		$("#side-bar .gotop").click(function(){
+			$('html,body').animate({'scrollTop':0},500); //返回顶部动画 数值越小时间越短
+		});
+	});
+</script>
+<script type="text/javascript" charset="utf-8" src="skin/js/scroll.js"></script>
+
+</body>
+</html>

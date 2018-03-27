@@ -1,0 +1,98 @@
+#{extends 'common/supervisor.html' /}
+#{set title:'商户转用户' /}
+#{include 'supervisor/financeManager/common/financeManageLeft.control'/}
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".full").css("width",document.body.clientWidth- 300 +"px ");
+});  
+
+$(window).resize(function(){
+	 var onLoadWidth = document.body.clientWidth;
+		$(".full").css("width",document.body.clientWidth- 300 +"px ");
+})
+</script>
+<style>
+.full{float:left; }
+.table01{width:100%;}
+.table01 th,.table01 td{font-size:12px; height:40px; text-align:center; font-weight:normal;}
+.table01 td{ color:#666;}
+.table01 .td_a{ color:#666;}
+.but01{color:#3a7dc0;}
+</style>
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="@{'/public/skin/css/layout.css'}" rel="stylesheet" type="text/css">
+<link href="@{'/public/stylesheets/site.css'}" rel="stylesheet" type="text/css">
+<link href="@{'/public/stylesheets/temp.css'}" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="@{'/public/javascripts/jquery-2.0.js'}"></script>
+<script type="text/javascript" src="@{'/public/javascripts/index.js'}"></script>
+<script type="text/javascript" src="@{'/public/javascripts/jquery.json-2.4.min.js'}"></script>
+<script charset="utf-8" src="@{'public/javascripts/ajaxfileupload.js'}"></script>
+<script type="text/javascript" src="@{'/public/javascripts/common.js'}"></script>
+</head>
+<body>
+<div class="full">
+<div class="list_add_items">
+
+         <div class="list_data">
+        #{form @saveMerchantTransferUser(), method:'POST', id:'merchantTransferUser'}
+             <div class="data_info">
+                <div class="data_item">
+                    <div class="item_title">商户转用户</div>
+                    <div class="item_content">
+                        <ul>
+                            <li>
+                            
+                                <div class="td_title"><span>*</span>用户手机号：</div>
+                                <div class="td_content"><input class="input_title" type="text" name="mobile" id="mobile" placeholder=""></div>
+
+                            </li>
+
+                           
+                            <li>
+                                <div class="td_title"><span>*</span>所转金额：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="amount"  name ="amount" placeholder=""></div>
+                            </li>
+                        
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="btn_alter">
+            <input class="btn_search" type="submit" value = "确认" >
+
+            </div>
+           #{/form}
+        </div>
+
+    </div>
+</div>
+</body>
+
+<script type="text/javascript">
+
+	$("#merchantTransferUser").submit(function(){
+		
+		if($("#mobile").val().trim() ==''){
+			alert("手机号不能为空");
+			return false;
+		}
+
+		
+	    
+	    if($("#amount").val().trim() == ''){
+		       alert("所转金额不能为空");
+		       return false;
+		    } 
+		    
+	    
+		$(":submit",this).attr("disabled","disabled");
+})
+</script>
+</html>

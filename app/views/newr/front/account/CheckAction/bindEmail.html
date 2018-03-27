@@ -1,0 +1,54 @@
+
+#{extends 'newr/common/frontMain.html' /}
+<div class="full">
+	<div class="content" style="background:#fff;">
+		<table cellpadding="0" cellspacing="0" width="100%">
+			<tr>
+				#{include '/newr/common/leftMenu.html'/}
+			
+				<td class="tree_right_td" valign="top">
+                    
+                    <div class="tree_right2">
+                    	<div class="right_top_title">绑定邮箱</div>
+                    	<div class="tree_right2_b">
+                        
+                            <table cellpadding="0" cellspacing="0" width="450" style="margin:50px auto 20px auto;">
+                                <tr>
+                                	<td width="100" align="left" rowspan="2" ><img src="@{'/public/skin/images/win_03.png'}" width="75" height="73" /></td>
+                                    <td class="sqcg">邮件发送成功，请立即激活。</td>
+                                </tr>
+                                <tr>
+                                    <td class="sqcg02">验证邮件已发送到您的邮箱：<a class="sqcg03" href="${emailUrl}">${email}</a>，请点击邮件中的确认链接完成验证。</td>
+                                </tr>
+                                <tr>
+                                	<td class="cz_td" height="80" colspan="2" valign="bottom" align="center">
+                                    		<a class="cz_money_btn" href="${emailUrl}" target="_blank">确认绑定</a>
+                                    </td>
+                                </tr>
+                            </table>   
+                        
+                        	<div class="cz_shuom">
+                            	<p><b>温馨提示：</b></p>
+                                <p>
+                                1. 绑定邮箱可用于登录和安全验证，提高账户安全； 
+                                </p>
+                                <p>
+                                2. 完成邮箱绑定后，可以通过该邮箱接收投资、还款等信息。
+                                </p>
+                            
+                        	<div class="clear"></div>
+                        </div>
+                        
+                        	<div class="clear"></div>
+                        </div>
+                   		<div class="clear"></div>
+                	</div><!--tree_right end-->
+                </td>
+			</tr>
+		</table>	
+        <div class="clear"></div>
+    </div><!--content end-->
+
+	<div class="clear"></div>
+</div>
+

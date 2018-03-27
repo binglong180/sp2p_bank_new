@@ -1,0 +1,106 @@
+	<div class="xf_mem_Account xf_mem_passage">
+		<h3 class="xf_mem_accout_title">银行卡管理</h3>
+		<div class="xf_mem_xydj_search_zh">
+			<table border="0" cellpadding="0" cellspacing="0" width="735"
+				class="xf_mem_xydj_viewcpms xf_mem_zhxx_viewcpms">
+				<tbody>
+					<tr>
+						<th align="center" width="74">序号</th>
+						<th width="110">开户行</th>
+						<th align="center" width="161">支行</th>
+						<th align="center" width="160">账号</th>
+						<th width="100">真实姓名</th>
+						<th width="120">操作</th>
+					</tr>
+					#{if userBanks.size() != 0}
+					#{list items:userBanks, as:'userBanks'}
+					<tr>
+						<td align="center">${userBanks_index}</td>
+						<td align="left">${userBanks?.bankName}</td>
+						<td align="left">${userBanks?.branchBankName}</td>
+						<td align="left">************${userBanks?.account.substring(userBanks?.account.length()-4)}</td>
+						<td align="center">${userBanks?.accountName}</td>
+						<td align="center"><a class="xf_srje_yuan_lan" onClick="editBank('${userBanks?.id}','${userBanks?.bankCode}','${userBanks?.provinceCode}','${userBanks?.cityCode}','${userBanks?.branchBankName}','${userBanks?.account}','${userBanks?.accountName}','')">编辑</a>
+							<span class="xf_srje_yuan_lan">|</span> <a
+							class="xf_srje_yuan_lan" onClick="deleteBank('${userBanks?.id}')">删除</a>
+						</td>
+					</tr>
+					#{/list}
+					#{/if}
+					<tr><td colspan="6" align="center">
+					<a style="color: #24b3ea;" onClick="editBank('','0','0','0','','','','1')">增加银行账号</a>
+					</td></tr>
+				</tbody>
+			</table>
+		</div>
+</div>
+<script type="text/javascript">
+      function editBank(id, bankCode, provinceCode, cityCode, branchBankName, account, accountName, value){
+           $("#bank").val(id);
+           $("#bank_code").val(bankCode);
+           
+           $("#province_code").val(provinceCode);
+           
+           $("#branchBankName").val(branchBankName);
+           $("#bankNumber").val(account);
+           
+           
+           $("#receiver").val(accountName);
+           $("#flag").val(value);
+           if(value == 1){
+           	
+           	 //清空city
+           	 $('#city_code').empty();
+			 $('#city_code').append("<option value=0>请选择</option>");
+           		
+           	 //启用账号输入框
+          	 $('#bankNumber').removeAttr('disabled');
+           
+              $("#changeFont").html("");
+              $("#changeFont").html("增加银行账号");
+              
+              //清空账号的值并且隐藏下拉联想div
+              $("#branchBankName").val("");
+              $("#branchBankName").bigAutocomplete(null);
+           }else{
+              //填充city
+              var cityUrl = #{jsAction @queryCityCode2NameByProvinceCode(':provinceCode')/}
+		      $.getJSON(cityUrl({provinceCode:provinceCode}),function(data){
+				   var size = data.length;
+				   var temp = '';
+				   $('#city_code').empty();
+				   $('#city_code').append("<option value=0>请选择</option>");
+				   for(var i = 0; i <size;i++){
+				   		temp = "<option value="+data[i].name+">"+data[i].value+"</option>";
+				   		$('#city_code').append(temp);
+				   	}
+				   	
+	           	   $("#city_code").val(cityCode);
+		  	 }); 
+		  	 
+		  	getBankNameByCityCodeAndBankCode(cityCode, bankCode); 
+		  	 
+             //禁用账号输入框
+          	 $('#bankNumber').attr('disabled','disabled');
+           }
+           
+           showDiv($("#xf_mem_zjyhzh_window"));
+      }
+      
+      function deleteBank(id){
+          if(confirm("确定要删除吗？")){
+	          var deleteBank = #{jsAction @deleteBank(':id')/}
+			  $.post(deleteBank({id:id}),function(data){
+			  var arr=eval(data);
+			  
+			  if(arr.error.code < 0){
+			      alert(arr.error.msg);
+			      return;
+			  }
+			  
+			  alert(arr.error.msg);
+			  location.reload();
+		});
+	  }
+     }
+</script>

@@ -1,0 +1,23 @@
+%{
+	boolean debtUse = constants.Constants.DEBT_USE;
+}%
+<!-- 记录标的详情(ID和上一个下一个标示) -->
+<input name="bidId" id="bidId" type="hidden" value="${bid?.id}"/> 
+<input name="upNextFlag" id="upNextFlag" type="hidden" value="${bid?.upNextFlag}"/>
+<input name="overBorrowId" id="overBorrowId" type="hidden" value="${auditingOverBorrow?.id}"/>
+<div class="xn_c_content_left">
+  <div class="xn_c_content_leftul">
+    <ul>
+      <li>
+        <div class="xn_c_li_head_one">
+          <div class="xn_c_li_bg" id="lab_1"></div>平台借款标管理
+        </div>
+        <div class="xn_c_li_head_two" id="hi_1">
+          <a id="mg_1" class="xn_c_li_head_twoli" href="@{newr.supervisor.projectManager.ProjectAction.getProject()}">项目录入</a>
+          <a id="mg_2" class="xn_c_li_head_twoli" href="@{newr.supervisor.projectManager.ProjectAction.reviewProject()}">项目审核</a>
+        </div>
+      </li>
+     </ul>
+   </div>
+</div>
+<script type="text/javascript" src="@{'/public/javascripts/tab/tab_mg_bid.js'}"></script>

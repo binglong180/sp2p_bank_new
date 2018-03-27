@@ -1,0 +1,92 @@
+#{extends 'newr/common/frontMain.html' /}
+<div class="full">
+	<div class="content" style="background: #fff;">
+	  #{form @newr.front.account.Message.systemMsgs(), id:'submit'}
+            <input type="hidden" name="currPage" id="currPage">
+            <input type="hidden" name="pageSize" id="pageSize">
+       #{/form}
+		<table cellpadding="0" cellspacing="0" width="100%">
+			<tr>
+				#{include '/newr/common/leftMenu.html'/}
+
+				<td class="tree_right_td" valign="top">
+					<div id="msglist" >
+						<div class="xf_mem_Account">
+							<h3 class="right_top_title">站内消息</h3>
+
+							<table width="100%" cellpadding="0" cellspacing="0">
+								<tr>
+									
+									<th class="box_th">序号</th>
+									<th class="box_th">标题</th>
+									<th class="box_th">发送时间</th>
+									<th class="box_th">状态</th>
+									<th class="box_th">操作</th>
+								</tr>
+
+								#{list pageBean.page, as:'msg'}
+								<tr >
+									<td class="box_td">${msg_index}</td>
+									<td class="box_td">${msg?.title}</td>
+									<td class="box_td">${msg?.time?.format("yyyy-MM-dd HH:mm:ss")}</td>
+									<td class="box_td"><span #{if msg.read_status == '未读'}class="font_hk"#{/if}>${msg.read_status}</span>
+									</td>
+									<td class="box_td"><a class="chakan" href="javascript:;"
+										onclick="systemMsgDetail((${msg_index} + ${pageBean.pageSize} * (${pageBean.currPage} - 1)),'${msg.read_status}')">查看</a>
+									</td>
+								</tr>
+								#{/list}
+
+							</table>
+
+							<!-- 分页器 -->
+							<div class="digg" style="width:740px; margin-top:35px;">
+								#{page
+								currPage:pageBean.currPage,pageSize:pageBean.pageSize,totalCount:pageBean.totalCount,theme:2,style:2}						
+								#{/page}</div>
+						</div>
+					</div>
+					<div id="detail" ></div>
+				</td>
+			</tr>
+		</table>
+		<div class="clear"></div>
+	</div>
+	<!--content end-->
+
+	<div class="clear"></div>
+</div>
+<script type="text/javascript">
+function showPage(currPage, pageSize){
+    $("#currPage").val(currPage);
+    $("#pageSize").val(pageSize);
+    $("#submit").submit();
+  }
+	var g_index = 1;
+	
+	$(function() {
+		/* 高亮显示 */
+		var obj = document.getElementById("child7");
+		change_bg(obj);
+	});
+	function systemMsgDetail(index,status) {
+		g_index = index;
+	
+		$.ajax({
+			url : "@{newr.front.account.Message.systemMsgDetail()}",
+			type : "POST",
+			data : {
+				"index" : index,
+				"keyword" : '%',
+				"readStatus" : status
+			},
+			success : function(data) {
+				$("#detail").html(data).show();
+				$("#msglist").hide();
+			},
+			error : function() {
+				alert("对不起，出现错误!");
+			}
+		});
+	}
+</script>

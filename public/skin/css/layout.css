@@ -1,0 +1,175 @@
+@charset "utf-8";
+html{overflow:hidden; overflow-y:scroll;}
+body, div, ul, ol, li, dd, dl, dt, p, pre,h1, h2, h3, h4, h5, h6, input, form, fieldset, table, td, img, a, span, textarea {margin:0; padding:0;}
+body {font-family:"微软雅黑"; font-size:12px; }
+h1, h2, h3, h4, h5, h6 {font-size:14px; font-weight:normal;}
+a { text-decoration:none; outline:none;}
+a {blr:expression(this.onFocus=this.blur());}
+ul,li {list-style:none;}
+img {border:0;}
+.clear{ clear:both;}
+input, select, textarea {outline:0;}
+textarea {resize:none;}
+.disabled {-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";filter:alpha(opacity=30);opacity:.3;}
+a.disabled {-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";filter:alpha(opacity=30);opacity:.3;}
+/**/
+.full{ max-width:100%; min-width:700px; min-height:935px; border:1px solid #dddddd;}
+.full .data_header{ padding:10; overflow:hidden;background: #f5f5f5;border-bottom: 1px solid #dddddd;}
+.full .data_header .data_item{ float:left; color:#777777; font-size:12px; line-height:30px; padding:0 20 0 0;}
+.full .data_header .data_item .td_title{float:left; padding:0 5 0 0;}
+.full .data_header .data_item .td_content{float:left;}
+.full .data_header .data_item .td_content .input_title{float:left; color:#787878; border:1px solid #c6c6c6; width:150px; height:30px; padding:5;}
+.full .data_header .btn_search{float:left; background:#215b94; line-height:30px; width:80px; height:30px; text-align:center; margin: 1 0 0 0; display:block;}
+.full .data_header .btn_search a{ color:#fff; display:block;}
+.full .data_header .btn_add{float:left; background:#215b94; line-height:30px; width:80px; height:30px; text-align:center; margin: 1 30 0 30; display:block;}
+.full .data_header .btn_add a{ color:#fff; display:block;}
+
+.full .list_items{}
+.full .list_items .list_data{ text-align:center;}
+.full .list_items .list_data .data_title{ background:#e6e6e6;}
+.full .list_items .list_data .data_content{ color:#666666;}
+.full .list_items .list_data .data_content .data_item{}
+.full .list_items .list_data ul{ overflow:auto; line-height:40px;}
+.full .list_items .list_data ul li{ float:left; display:block; overflow:hidden; height:40px;}
+.full .list_items .list_data ul a{ color:#3a7dc0;}
+.full .list_items .list_data ul a:hover{ color:#215b94; text-decoration:underline;}
+.full .list_items .list_data ul .t_01{ width:7%;}
+.full .list_items .list_data ul .t_02{width: 10%;}
+.full .list_items .list_data ul .t_03{width:7%;}
+.full .list_items .list_data ul .t_04{width: 10%;}
+.full .list_items .list_data ul .t_05{width: 10%;}
+.full .list_items .list_data ul .t_06{width:7%;}
+.full .list_items .list_data ul .t_07{width: 5%;}
+.full .list_items .list_data ul .t_08{width: 10%;}
+.full .list_items .list_data ul .t_09{width: 10%;}
+.full .list_items .list_data ul .t_10{width:7%;}
+.full .list_items .list_data ul .t_11{width: 10%;}
+.full .list_items .list_data ul .t_12{width:7%;}
+
+.full .list_items_aim{}
+.full .list_items_aim .list_data{ text-align:center;}
+.full .list_items_aim .list_data .data_title{ background:#e6e6e6;}
+.full .list_items_aim .list_data .data_content{ color:#666666;}
+.full .list_items_aim .list_data .data_content .data_item{}
+.full .list_items_aim .list_data ul{ overflow:auto; line-height:40px;}
+.full .list_items_aim .list_data ul li{ float:left; display:block; overflow:hidden; height:40px;}
+.full .list_items_aim .list_data ul a{ color:#3a7dc0;}
+.full .list_items_aim .list_data ul a:hover{ color:#215b94; text-decoration:underline;}
+.full .list_items_aim .list_data ul .t_01{width:7%;}
+.full .list_items_aim .list_data ul .t_02{width: 15%;}
+.full .list_items_aim .list_data ul .t_03{width: 15%;}
+.full .list_items_aim .list_data ul .t_04{width: 10%;}
+.full .list_items_aim .list_data ul .t_05{width: 10%;}
+.full .list_items_aim .list_data ul .t_06{width: 15%;}
+.full .list_items_aim .list_data ul .t_07{width: 15%;}
+.full .list_items_aim .list_data ul .t_08{width: 12%;}
+.full .list_items_aim .list_data ul .t_09{width:7%;}
+.full .list_items_aim .list_data ul .t_10{width:7%;}
+.full .list_items_aim .list_data ul .t_11{width: 10%;}
+.full .list_items_aim .list_data ul .t_12{width:7%;}
+
+.full .list_aim_setting{}
+.full .list_aim_setting .list_data{}
+.full .list_aim_setting .list_data .data_info{ overflow:hidden; border: 1px solid #e6e6e6; margin: 10; background: #fafaf0;}
+.full .list_aim_setting .list_data .data_info .data_item{overflow: hidden; font-size: 12px; border: 1px solid #dcdcdc; padding: 10; margin: 10; background: #fff; line-height: 30px;}
+.full .list_aim_setting .list_data .data_info .data_item .item_title{border-bottom: 1px solid #dcdcdc; line-height: 25px; font-size: 15px;}
+.full .list_aim_setting .list_data .data_info .data_item .item_content{overflow: hidden;padding: 10 0 0 0;}
+.full .list_aim_setting .list_data .data_info .data_item .item_content ul{}
+.full .list_aim_setting .list_data .data_info .data_item .item_content ul li{overflow: hidden; padding:10 0; width: 50%; float:left;}
+.full .list_aim_setting .list_data .data_info .data_item .item_content ul li .td_title{float: left; width: 140px; text-align: right; padding: 0 5 0 0;}
+.full .list_aim_setting .list_data .data_info .data_item .item_content ul li .td_content{ overflow:hidden;}
+.full .list_aim_setting .list_data .data_info .data_item .item_content ul li .td_content .input_title{width:100%; height: 30px; font-size: 12px; color: #505050; padding: 0 10;}
+.full .list_aim_setting .list_data .data_info .data_item .item_content ul li .td_content .input_select{width:100%; height: 30px; font-size: 12px; color: #505050; padding: 0 10;}
+.full .list_aim_setting .list_data .data_info .data_item .item_content ul li .td_content .btn_radio{margin: 0 10 0 0;}
+.full .list_aim_setting .list_data .data_info .data_item .item_content ul li .td_content .item_radio{}
+.full .list_aim_setting .list_data .data_info .data_item .item_content ul li .td_content .item_radio .btn_radio{margin: 9 5 0 0; float: left;}
+.full .list_aim_setting .list_data .data_info .data_item .item_content ul li .td_content .item_radio span{}
+.full .list_aim_setting .list_data .data_info .data_item .item_content ul li .td_content .item_files{}
+.full .list_aim_setting .list_data .data_info .data_item .item_content ul li .td_content .item_files a{background: #3a7dc0;color: #fff;padding: 7 25;}
+.full .list_aim_setting .list_data .data_info .data_item .item_content ul li .td_content .item_files .upload_files{ width:100px; min-height:auto; padding:0; margin:15 0 0 0;}
+.full .list_aim_setting .list_data .data_info .data_item .item_content ul li .td_content .item_files .upload_files a{ padding:5; line-height: 13px; background:#787878; color:#fff; border-radius: 50px;position: absolute;font-size: 18px;margin: -10 0 0 90;}
+.full .list_aim_setting .list_data .data_info .data_item .item_content ul li .td_content .item_files .upload_files img{ width:100px; min-height:auto; padding:0; margin:0;}
+.full .list_aim_setting .list_data .btn_alter{text-align: center; margin: 30 0 0 0;height:50px;}
+.full .list_aim_setting .list_data .btn_alter a{background: #215b94; color: #fff;padding: 15 50;margin: 0 20; font-size:16px;}
+
+.full .list_add_items{ padding:0 0 30 0;}
+.full .list_add_items .list_data{}
+.full .list_add_items .list_data .data_info{ overflow:hidden; border: 1px solid #e6e6e6; margin: 10; background: #fafaf0;}
+.full .list_add_items .list_data .data_info .data_item{overflow: hidden; font-size: 12px; border: 1px solid #dcdcdc; padding: 10; margin: 10; background: #fff; line-height: 30px;}
+.full .list_add_items .list_data .data_info .data_item .item_title{border-bottom: 1px solid #dcdcdc; line-height: 25px; font-size: 15px;}
+.full .list_add_items .list_data .data_info .data_item .item_content{overflow: hidden;padding: 10 0 0 0;}
+.full .list_add_items .list_data .data_info .data_item .item_content .ul_title{ border-bottom: 1px dashed #dcdcdc; margin: 0 0 15 0; font-size: 12; font-weight:bold;}
+.full .list_add_items .list_data .data_info .data_item .item_content ul{}
+.full .list_add_items .list_data .data_info .data_item .item_content ul li{ float:left;margin:5px 0; overflow: hidden; padding:10 0; width:50%;}
+.full .list_add_items .list_data .data_info .data_item .item_content ul li .td_title{float: left; width: 160px; text-align: right; padding: 0 5 0 0;}
+.full .list_add_items .list_data .data_info .data_item .item_content ul li .td_title span{ color:#ff0000; padding:0 5}
+.full .list_add_items .list_data .data_info .data_item .item_content ul li .td_content{overflow: hidden;}
+.full .list_add_items .list_data .data_info .data_item .item_content ul li .td_content .age{ float:left; padding: 0 15;}
+.full .list_add_items .list_data .data_info .data_item .item_content ul li .td_content .btn_operation{ float:left;}
+.full .list_add_items .list_data .data_info .data_item .item_content ul li .td_content .btn_operation a{ float:left;padding: 0 2;}
+.full .list_add_items .list_data .data_info .data_item .item_content ul li .td_content .input_title{border:1px solid #dcdcdc; width:85%; height: 30px; font-size: 12px; color: #505050; padding: 0 10;}
+.full .list_add_items .list_data .data_info .data_item .item_content ul li .td_content .input_select{width:85%; height: 30px; font-size: 12px; color: #505050; padding: 0 10;}
+.full .list_add_items .list_data .data_info .data_item .item_content ul li .td_content .input_textarea{width:85%; min-height:100px; font-size: 12px; color: #505050; padding:5 10;}
+.full .list_add_items .list_data .data_info .data_item .item_content ul li .td_content .date_icon{ float:left; width:24px; height:24px; background:url(../images/date_icon.png) no-repeat; display:block; margin:2 0 0 5;}
+.full .list_add_items .list_data .data_info .data_item .item_content ul li .td_content .btn_radio{margin: 0 10 0 0;}
+.full .list_add_items .list_data .data_info .data_item .item_content ul li .td_content .item_radio{ float:left; margin:0 15 0 0;}
+.full .list_add_items .list_data .data_info .data_item .item_content ul li .td_content .item_radio .btn_radio{margin: 9 5 0 0; float: none;}
+.full .list_add_items .list_data .data_info .data_item .item_content ul li .td_content .item_radio span{}
+.full .list_add_items .list_data .data_info .data_item .item_content ul li .td_content .item_files{}
+.full .list_add_items .list_data .data_info .data_item .item_content ul li .td_content .item_files a{background: #3a7dc0;color: #fff;padding: 7 25;}
+.full .list_add_items .list_data .data_info .data_item .item_content ul li .td_content .item_files .upload_files{min-height:auto; padding:0; margin:15 0 0 0;}
+.full .list_add_items .list_data .data_info .data_item .item_content ul li .td_content .item_files .upload_files a{ padding:5; line-height: 13px; background:#787878; color:#fff; border-radius: 50px;position: absolute;font-size: 18px;margin: -10 0 0 185;}
+.full .list_add_items .list_data .data_info .data_item .item_content ul li .td_content .item_files .upload_files img{ width:200px; min-height:auto; padding:0; margin:0;}
+.full .list_add_items .list_data .btn_alter{text-align: center; margin: 30 0 0 0;}
+.full .list_add_items .list_data .btn_alter a,.btn_alter input {background: #215b94; color: #fff;padding: 15 50;margin: 0 20; border:none; font-size:16px; font-family:"微软雅黑"; }
+
+
+
+
+
+
+
+
+
+
+
+.list_data .table01{ width:100%; float:left;}
+.list_data .table01 th,.table01 td{ font-size:12px; height:40px; text-align:center; font-weight:normal;}
+.table01 th{background:#e6e6e6;}
+.list_data .table01 td{ color:#666;}
+.list_data .table01 .td_a{ color:#666;}
+.list_data .but01{ color:#3a7dc0;}
+
+/*标的设置新加样式start*/
+.full .list_aim_setting .list_data .data_info .data_item .item_content ul.xgwj li{overflow: hidden; padding:10 0; width: 100%;}
+.shangc{background: #3a7dc0;color: #fff;padding: 7 25;}
+.pic_div{ padding-left:145px;}
+.pic_size{ margin: 15px 35px 0 0; min-height: 128px; padding: 0; width: 200px; float:left;}
+.pic_size a{background: #787878;    border-radius: 50px;    color: #fff;    font-size: 18px;    line-height: 13px;    margin: -10px 0 0 185px;    padding: 5px;    position: absolute;}
+.pic_size img{ margin: 0;    min-height: auto;    padding: 0;    width: 200px;}
+.input_file{width:200px; height:126px; position:absolute; z-index:6;  opacity:0; filter:Alpha(opacity=0);cursor:pointer;}
+
+/*标的设置新加样式end*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

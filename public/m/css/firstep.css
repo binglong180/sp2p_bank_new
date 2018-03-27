@@ -1,0 +1,213 @@
+.header{display:table; width:7.5rem; height:1.1rem; background:#da0022; text-align:center; line-height:1.1rem; font-size:.4rem; color:#FFFFFF; position:relative;}
+.header icon{display:block; width:1.1rem; height:1.1rem; background:url(../images/common/icon-pullleft.png) no-repeat center; background-size:1.1rem 1.1rem; position:absolute; left:0; top:0;}
+
+/*******
+ * @
+ * ***************/
+.bindcard-error{display:block; width:100%; height:0.5rem; line-height:0.5rem; text-align:center; background:#ffe6c8; font-size:0.26rem; color:#da0022;}
+.bindcard{display:block; width:100%; margin-top:0.2rem auto 0 auto;}
+.bindcard-btn{display:block; background:#da0022; width:80%; height:0.86rem; text-align:center; line-height:0.86rem; font-size:0.32rem; color:#FFFFFF; margin:1.6rem auto .5rem auto;}
+
+.bindcard .bindcard-border{display:table; width:100%; height:0.98rem; margin:0.1rem auto; padding:0 0.3rem; background:#FFFFFF; border-top:1px solid #e6e6e6; border-bottom:1px solid #e6e6e6; position:relative;}
+.bindcard .bindcard-border input{display:table; width:100%; height:0.96rem;line-height:0.96rem; padding-left:0.1rem; border:none;color:#333;font-size:0.32rem;font-family:Helvetica, Arial, 'Microsoft YaHei';}
+.bindcard .bindcard-border select{display:table; width:100%; height:0.96rem;line-height:0.96rem; border:none;color:#787878;font-size:0.32rem;font-family:'Microsoft YaHei';}
+.bindcard .bindcard-border .bindcard-border-list{display:table; width:100%; height:0.8rem; padding:0.1rem 0;}
+.bindcard .bindcard-border .bindcard-border-list select{float:left; width:50%; height:0.8rem; border:none; color:#787878;font-size:0.32rem;font-family:'Microsoft YaHei';}
+.bindcard .bindcard-border .bindcard-border-list select:last-child{width:47%; border-left:1px dashed #ccc; margin-left:0.2rem; padding-left:0.2rem}
+.bindcard .bindcard-border a{display:block; background:#da0022; width:1.85rem; height:.64rem; text-align:center; line-height:.64rem; font-size:.28rem; color:#FFFFFF; position:absolute; top:50%; right:.3rem; margin-top:-0.32rem}
+.bindcard .bindcard-border span{display:table; width:100%; height:0.96rem;line-height:0.96rem; padding-left:0.1rem; border:none;color:#333;font-size:0.32rem;}
+.bindcard-result{display:block; width:100%; margin:0 auto}
+.bindcard-result img{display:block; width:1.5rem; height:1.5rem; margin:1.5rem auto 0.5rem auto;}
+.bindcard-result p{font-size:0.36rem; color:#666666; display:block; width:100%; text-align:center;}
+.bindcard-result a{display:block; width:6rem; height:0.86rem; background:#da0022; color:#ffffff; margin:0.8rem auto; font-size:0.32rem; line-height:0.86rem; text-align:center; text-decoration:none; border-radius:0.06rem;}
+
+.myCard-border{display:block; width:100%; height:2rem; background:#fff5e6; border-bottom:1px solid #e5dccf; margin:0.15rem auto; position:relative}
+.myCard-border h4{font-size:0.36rem; color:#505050; position:absolute; left:0.5rem; top:0.5rem;}
+.myCard-border p{font-size:0.28rem; color:#505050; position:absolute; left:0.5rem; top:1.1rem;}
+.myCard-border p em{padding-left:0.1rem;}
+.myCard-border span{font-size:0.28rem; color:#505050; position:absolute; right:0.5rem; top:1.1rem;}
+.mycard .bindcard-btn{position:fixed; bottom:0.5rem; left:50%; margin-left:-40%;}
+
+/*******
+ * @
+ * ***************/
+.login{width:100%;padding:0;font-size:0.28rem;color:#787878;}
+.login li{width:7.5rem; height:1rem; padding:0 0.3rem; background:#FFFFFF; border-bottom:1px solid #ebebeb; border-top:1px solid #ebebeb; overflow:hidden; margin:0.1rem auto; position:relative;}
+.login li input{height:100%;float:left;font-size:0.32rem ;color:#787878;}
+.login li:nth-of-type(1) input,.login li:nth-of-type(2) input{width:100%;}
+.login_btn{display:block; width:6rem; height:0.86rem; line-height:0.86rem; background:#da0022; border-radius:0.15rem; margin:0.8rem auto 0 auto; color:#fff; font-size:0.32rem; text-align:center;}
+.login_test_img{display:block; width:1.58rem; height:0.63rem; position:absolute; top:50%; margin-top:-0.31rem; right:0.3rem}
+.login_sec{width:100%;display:flex; align-items:center; justify-content:center; font-size: 0.28rem; color:#fa8624; overflow:hidden; margin-top:0.5rem;}
+.login_sec p{width:3rem;float:left;}
+.login_sec p:last-child{text-align:right;}
+.login_sec p a{color:#787878;}
+
+.reg-logo{display:table;width:100%; height:2.14rem; padding:0; position:relative;}
+.reg-logo img{display:block; width:6.38rem; height:0.73rem; position:absolute; left:50%; top:50%; margin:-0.36rem 0 0 -3.19rem;}
+.register{width:100%;padding:0;font-size:0.28rem; color:#787878;}
+.register li{height:1rem;padding:0 0.3rem;background:#FFFFFF; border-bottom: 1px solid #ebebeb;border-top:1px solid #ebebeb; overflow:hidden; margin:0.1rem auto; position:relative;}
+.register li input{height: 100%; float:left; font-size:0.32rem; color:#787878;}
+.register li:nth-of-type(1) input,.register li:nth-of-type(4) input,.register li:nth-of-type(5) input{width:100%;}
+.register-bottom{}
+.register-bottom .register_goto{width:100%; display:table; margin:0.4rem auto; font-size:0.26rem;}
+.register-bottom .register_goto label{color:#787878}
+.register-bottom .register_goto a{color:#4b94c8; text-decoration:underline;}
+.register-bottom .check_box{height: 0.48rem;width:0.48rem;display:inline-block;float:left;margin-left:0.3rem;}
+.register-bottom .check_btn {display: none;} 
+.register-bottom .check_btn + label {display:inline-block;background:url(../images/firstep/check.png) no-repeat;background-size:0.24rem; width:0.24rem; height:0.24rem; position: relative; } 
+.register-bottom .check_btn:checked + label {display:inline-block; background:url(../images/firstep/checked.png) no-repeat;background-size:0.24rem; width:0.24rem; height:0.24rem;} 
+
+.register-bottom .register_btn{display:block; width:6rem; height:0.86rem; line-height:0.86rem; background:#da0022; border-radius:0.15rem; margin:0 auto; color:#fff; font-size:0.32rem; text-align:center;}
+.register-bottom p{display:block; width:100%; font-size:0.28rem;color:#787878;text-align:center; margin:0.5rem auto;}
+.register-bottom p a{color:#787878; text-decoration:underline;}
+.reg-result{display:block; width:100%; margin:0 auto}
+.reg-result img{display:block; width:1.5rem; height:1.5rem; margin:1.5rem auto 0.5rem auto;}
+.reg-result p{font-size:0.36rem; color:#666666; display:block; width:100%; text-align:center;}
+.reg-result .reg-result-btn{display:block; width:6.6rem; margin:1rem auto;}
+.reg-result .reg-result-btn a{float:left; display:block; width:2.8rem; height:0.84rem; margin:0 0.25rem; border:1px solid #da0022; background:#da0022; color:#ffffff; font-size:0.32rem; line-height:0.84rem; text-align:center; text-decoration:none; border-radius:0.06rem;}
+.reg-result .reg-result-btn a:last-child{background:#FFFFFF; color:#da0022}
+.reg-result .reg-result-btn a:hover{background:#da0022; color:#FFFFFF}
+
+.myaccount-logo{display:block; width:100%; height:1.1rem; margin:0 auto; padding:0; position:relative;}
+.myaccount-logo img{display:block; width:6.38rem; height:0.73rem; position:absolute; left:0.3rem; top:50%; margin-top:-0.36rem}
+.myaccount-data{display:block; width:7.5rem; height:2.9rem; background:url(../images/firstep/myaccount-bg.png) no-repeat; background-size:7.5rem 2.9rem; position:relative; margin:0.1rem auto;}
+.myaccount-data .myaccount-data-top{display:table; width:100%; height:1.23rem; position:relative; text-align:center;}
+.myaccount-data .myaccount-data-top span{display:block; padding-top:0.15rem; font-size:0.36rem; color:#FFFFFF}
+.myaccount-data .myaccount-data-top span em{display:block; font-size:0.24rem; text-decoration:underline; padding-top:0.1rem}
+.myaccount-data .myaccount-icon{display:block; width:0.48rem; height:0.41rem; background:url(../images/firstep/icon-qq.png) no-repeat; background-size:0.48rem 0.41rem; position:absolute; left:0.3rem; top:50%; margin-top:-0.2rem;}
+.myaccount-data .myaccount-icon-left{display:block; width:0.4rem; height:0.4rem; background:url(../images/firstep/icon-left.png) no-repeat center; background-size:0.24rem 0.4rem; position:absolute; right:0.3rem; top:50%; margin-top:-0.2rem;}
+.myaccount-data ul{display:block; width:100%; position:absolute; left:0; top:1.25rem;}
+.myaccount-data ul li{float:left; width:50%; text-align:center; color:#FFFFFF; font-size:0.28rem; line-height:0.38rem; padding-top:0.4rem;}
+.myaccount-data ul li span{display:block; font-size:0.38rem; padding-top:0.1rem}
+.myaccount-list{display:table; width:100%; margin:0 auto; padding:0;}
+.myaccount-list ul li{display:table; width:100%; padding:0 0.3rem; height:0.98rem; line-height:0.98rem; background:#FFFFFF; border-top:1px solid #e6e6e6}
+.myaccount-list ul li:last-child{border-bottom:1px solid #e6e6e6}
+.myaccount-list ul li a{display:table; width:100%; height:0.98rem; background:url(../images/firstep/icon-pullright.png) right center no-repeat; background-size:0.2rem 0.34rem; font-size:0.32rem; color:#787878;}
+.myaccount-goOut{display:block; width:6.4rem; height:0.86rem; margin:0.7rem auto 0.3rem auto; background:#fff6f2; border:1px solid #ffc8ac; border-radius:0.1rem; text-align:center; line-height:0.86rem; font-size:0.3rem; color:#ff8142}
+.myaccount-bottom{display:block; width:7.5rem; height:1.8rem; background:#f5f5f5; border-top:0.05rem solid #f0f0f0; position:fixed; bottom:0.94rem; left:50%; margin-left:-3.75rem;}
+.myaccount-bottom ul{display:table; width:100%; padding:0.4rem 0; margin:0 auto}
+.myaccount-bottom ul li{float:left; width:25%; height:0.28rem; line-height:0.28rem; border-left:1px dashed #dcdcdc; text-align:center; font-size:0.25rem; color:#969696;}
+.myaccount-bottom ul li a{color:#969696;}
+.myaccount-bottom p{display:block; width:100%; text-align:center; font-size:0.23rem; color:#bebebe;}
+
+.bidinfo-tab{display:block; width:7.2rem; height:0.8rem; background:url(../images/firstep/bid-box.png) no-repeat top center; background-size:7.2rem 0.7rem; margin:0.3rem auto; position:relative; overflow:hidden;}
+.bidinfo-tab li{float:left; width:2.4rem; height:0.8rem; text-align:center; font-size:0.32rem; color:#da0022; line-height:0.7rem;}
+.bidinfo-tab li.current{background:url(../images/firstep/bid-current.png) no-repeat; width:2.4rem; height:0.8rem; background-size:2.4rem 0.79rem; font-weight:bold; color:#FFFFFF}
+.bidinfo-bodyone{display:table; width:100%; margin:0.1rem auto;}
+.bidinfo-bodyone h3{display:block; width:100%; text-align:center; font-size:0.35rem; color:#505050; padding:0.4rem 0;}
+.bidinfo-bodyone dl{display:block; width:7rem; height:5rem; background:url(../images/firstep/bid-border.png) no-repeat bottom center; background-size:7rem 0.07rem; margin:0.1rem auto;}
+.bidinfo-bodyone dl dd{display:table; width:100%; height:0.7rem; line-height:0.7rem; font-size:0.3rem; color:#a0a0a0; position:relative;}
+.bidinfo-bodyone dl dd em{position:absolute; right:0; top:0; color:#787878;}
+.bidinfo-bodyone dl dd em.orange{color:#ff5000}
+.bidinfo-bodyone dl dd .plan{display:block; width:3rem; background:#e6e6e6; height:0.12rem; border-radius:0.05rem; position:absolute; right:1rem; top:50%; margin-top:-0.06rem}
+.bidinfo-bodyone dl dd .plan span{position:absolute;top:0px;left:0px;background:#ffceb8;height:0.1rem;border-radius:0.05rem;}
+.bidinfo-bodyone a{display:block; width:6rem; height:0.84rem; line-height:0.84rem; margin:2rem auto 0 auto; text-align:center; font-size:0.32rem; color:#FFFFFF; background:#da0022; border-radius:0.1rem;}
+.bidinfo-bodytwo{display:table; width:100%; margin:0 auto; padding-bottom:1rem;}
+.bidinfo-bodytwo h4{padding:0.3rem 0rem 0.2rem 0.25rem; color:#505050; font-size:0.3rem; }
+.bidinfo-bodytwo .bidinfo-border{display:block; width:7rem; margin:0 auto; border:1px solid #ebebeb; background:#FFFFFF; border-radius:0.1rem;}
+.bidinfo-bodytwo .bidinfo-border p{font-size:0.3rem; color:#787878; line-height:0.5rem; padding:0.2rem 0.25rem;}
+.bidinfo-bodytwo .bidinfo-border ul{display:table; width:100%;}
+.bidinfo-bodytwo .bidinfo-border ul li{float:left; display:block; width:3rem; height:1.6rem; border:1px solid #ebebeb; border-radius:0.1rem; margin:0.2rem; overflow:hidden; position:relative;}
+.bidinfo-bodytwo .bidinfo-border ul li img{display:block; width:3rem; height:1.6rem;}
+.bidinfo-bodytwo .bidinfo-border ul li span{display:block; width:100%; height:0.38rem; font-size:0.22rem; color:#FFFFFF; text-align:center; line-height:0.38rem; background:#666666; opacity:0.6; position:absolute; left:0; bottom:0;}
+.bidinfo-bodythree{display:block; width:7rem; background:#ffffff; overflow:hidden; border-radius:0.1rem; margin:0.2rem auto; border:1px solid #ebebeb;}
+.bidinfo-bodythree .bidinfo-list{display:block; width:90%; height:1.2rem; margin:-1px auto 0 auto; border-top:1px dashed #dcdcdc; border-bottom:1px dashed #EDEDED; position:relative;}
+.bidinfo-bodythree .bidinfo-list dl{position:absolute; left:0; top:0.2rem;}
+.bidinfo-bodythree .bidinfo-list dl dt{font-size:0.3rem; color:#787878;}
+.bidinfo-bodythree .bidinfo-list dl dd{font-size:0.27rem; color:#a0a0a0; padding-top:0.1rem}
+.bidinfo-bodythree .bidinfo-list span{font-size:0.25rem; color:#a0a0a0; display:block; position:absolute; right:0; bottom:0.2rem;}
+.bidinfo-bodythree .bidinfo-list span em{font-size:0.35rem; color:#787878;}
+.bidinfo-bodythree .bidinfo-list:hover{width:100%; background:#fff7f8; border-top:1px solid #ffe6dc; border-bottom:1px solid #ffe6dc; color:#ff96a6!important;}
+.bidinfo-bodythree .bidinfo-list:hover dl{position:absolute; left:0.35rem; top:0.2rem;}
+.bidinfo-bodythree .bidinfo-list:hover span{position:absolute; right:0.35rem; bottom:0.2rem;}
+.bidinfo-bodythree .bidinfo-list:first-child{border-top:none!important;}
+.bidinfo-bodythree .bidinfo-list:last-child{border-bottom:none!important;}
+
+.bidinfo-popup{display:none; width:100%; height:100%; z-index:10; position:fixed; top:0; left:0; background:rgba(75,75,75,0.7);}
+.bidinfo-popup .bidinfo-popup-body{display:block; width:7.16rem; height:6.02rem; background:url(../images/firstep/bid-popup.png) no-repeat center; background-size:7.16rem 6.02rem; position:fixed; left:50%; top:50%; margin:-3.01rem 0 0 -3.58rem;}
+.bidinfo-popup .bidinfo-popup-body h4{display:table; height:0.8rem; line-height:0.8rem; color:#FFFFFF; font-size:0.28rem; margin:0.2rem 0 0 0.5rem;}
+.bidinfo-popup .bidinfo-popup-body h4 span{font-size:0.32rem; font-weight:bold;}
+.bidinfo-popup .bidinfo-popup-body .close{display:block; width:0.24rem; height:0.24rem; background:url(../images/firstep/bid-close.png) no-repeat center; background-size:0.24rem; position:absolute; right:0.5rem; top:0.45rem;}
+.bidinfo-popup .bidinfo-popup-body ul{display:block; width:6.22rem; margin:0.2rem auto;}
+.bidinfo-popup .bidinfo-popup-body ul li{display:table; width:100%; height:0.9rem; position:relative; border:1px solid #aaaaaa; border-radius:0.1rem;}
+.bidinfo-popup .bidinfo-popup-body ul li input{display:block; width:90%; height:0.5rem; margin:0.2rem auto; font-size:0.26rem; color:#787878;}
+.bidinfo-popup .bidinfo-popup-body ul li:last-child input{display:block; width:50%; margin-left:0.3rem;}
+.bidinfo-popup .bidinfo-popup-body ul li a{display:block; width:1.86rem; height:0.64rem; line-height:0.64rem; text-align:center; background:#da0022; color:#FFFFFF; font-size:0.28rem; position:absolute; right:0.15rem; top:50%; margin-top:-0.32rem;}
+.bidinfo-popup .bidinfo-popup-body ul li p{display:block; width:90%; margin:0 auto; line-height:0.9rem; font-size:0.26rem; color:#787878;}
+.bidinfo-popup .bidinfo-popup-body ul li p em{color:#da0022;}
+.bidinfo-popup .bidinfo-popup-body .bidinfo-popup-btn{display:block; width:4.84rem; height:0.84rem; line-height:0.84rem; font-size:0.32rem; color:#FFFFFF; text-align:center; background:#da0022; border-radius:0.1rem; margin:0.5rem auto 0 auto;}
+
+.footer{height:0.93rem;border-top:1px solid #ebebeb;position: fixed;bottom:0;width:7.5rem;left:50%;margin-left:-3.75rem;background:#f4f4f4;z-index:9;}
+.footer a{display:block;float:left;width:33%; border-left:1px solid #ebebeb; height:0.9rem; line-height:0.9rem; border-top:0.03rem solid #f4f4f4; text-align:center;color:#505050;font-size:0.3rem;}
+.footer a:first-child{border-left:none;}
+.footer a.current{color:#da0022; border-top:0.03rem solid #da0022;}
+
+.bidlist{display:table; width:100%; margin:0 auto; padding-bottom:1.5rem;}
+.bidlist .bidlist-border{display:block; width:7.2rem; height:2.4rem; padding:0.4rem 0; margin:0 auto; border-bottom:1px dashed #d2d2d2; position:relative}
+.bidlist .bidlist-border a{display:table; width:100%; background:url(../images/firstep/icon-pullright.png) no-repeat 6.8rem center; background-size:0.2rem 0.34rem; font-size:.3rem; color:#646464; padding-left:0.2rem;}
+.bidlist .bidlist-border .bidlist-data01{display:block; width:30%; position:absolute; left:.3rem; top:1.14rem;}
+.bidlist .bidlist-border .bidlist-data01 span{display:block; color:#da0022; font-size:0.25rem}
+.bidlist .bidlist-border .bidlist-data01 span em{font-size:0.5rem}
+.bidlist .bidlist-border .bidlist-data01 p{font-size:0.26rem; color:#aaaaaa}
+.bidlist .bidlist-border .bidlist-data02{display:block; width:28%; position:absolute; left:32%; text-align:center; top:1.3rem;}
+.bidlist .bidlist-border .bidlist-data02 span{display:block; color:#aaaaaa; font-size:0.26rem; padding-bottom:0.05rem}
+.bidlist .bidlist-border .bidlist-data02 span em{font-size:0.3rem}
+.bidlist .bidlist-border .bidlist-data02 p{font-size:0.26rem; color:#aaaaaa}
+.bidlist .bidlist-border .bidlist-data03{display:block; width:40%; position:absolute; left:62%; text-align:center; top:1.3rem;}
+.bidlist .bidlist-border .bidlist-data03 span{display:block; color:#aaaaaa; font-size:0.26rem; padding-bottom:0.05rem}
+.bidlist .bidlist-border .bidlist-data03 span em{font-size:0.3rem}
+.bidlist .bidlist-border .bidlist-data03 p{font-size:0.26rem; color:#aaaaaa}
+
+.deal{display:table; width:96%; margin:0.2rem auto;}
+.deal h2{font-size:0.42rem; color:#000; text-align:center; padding:0.25rem}
+.deal h4{font-size:0.32rem; color:#333; text-align:center; padding:0.25rem}
+.deal p{font-size:0.24rem; color:#666; text-indent:0.32rem; line-height:0.42rem; padding-bottom:0.1rem;}
+.bid-deal{}
+.bid-deal h2{font-size:0.42rem; color:#000; text-align:center; padding:0.25rem}
+.bid-deal h4{display:table; width:90%; margin:0.02rem auto 0.2rem auto;font-size: 0.2rem; color: #333333;}
+.bid-deal h4 span{display:inline-block; border-bottom:1px solid #ccc; width:80%}
+.bid-deal-table{display:table;width:90%;margin:0.1rem auto;font-size:0.24rem;color:#333}
+.bid-deal-table>tbody>tr>td{padding:0.2rem 0.1rem;border:1px solid #d8d8d8;}
+.bid-deal p{display:table;width:90%;margin:0.02rem auto;text-indent:0.24rem;font-size:0.2rem;color:#333333;line-height:1.8;}
+.bid-deal h5{display:table;width:90%;margin:0.2rem auto 0.1rem auto;font-size:0.2rem;color:#333333;font-weight:bold;}
+
+
+
+
+
+
+.index-header{display:block; width:100%; height:0.9rem; position:relative; background:#fafafa;}
+.index-header .index-logo img{display:block; width:4.85rem; height:0.53rem; position:absolute; left:0.15rem; top:50%; margin-top:-0.26rem;}
+.index-header ul{position:absolute; right:0.15rem; top:50%; margin-top:-0.15rem;}
+.index-header ul li{float:left; height:0.3rem; line-height:0.3rem; border-left:1px solid #999999}
+.index-header ul li:first-child{border-left:none;}
+.index-header ul li a{display:table; width:100%; font-size:0.3rem; padding:0 0.15rem; color:#da0022}
+
+.banner{height:3rem;overflow:hidden;}
+.slideBox{ position:relative; overflow:hidden; margin:0 auto;  max-width:750px;height:3rem;}
+.slideBox .hd{ position:absolute; height:0.3rem; bottom:0.2rem; width:1.2rem; left:50%; margin-left:-0.6rem; background:#c6c6c6; z-index:1; border-radius:0.15rem;}
+.slideBox .hd li{float:left; display:block; width:0.15rem; height:0.15rem; -webkit-border-radius:50%; -moz-border-radius:50%; border-radius:50%; background:#FFFFFF; text-indent:-9999px; overflow:hidden; margin:0.07rem 0.08rem;}
+.slideBox .hd li:first-child{margin-left:0.2rem;}
+.slideBox .hd li.on{ background:#da0022; border:1px solid #FFFFFF; width:0.19rem; height:0.19rem; margin-top:0.05rem;}
+.slideBox .bd{ position:relative; z-index:0; }
+.slideBox .bd li{ position:relative; text-align:center;}
+.slideBox .bd li img{ background:url(../images/loading.gif) center center no-repeat;  vertical-align:top; width:100%; height:3rem;}
+.notice{display:table;width:100%;height:0.6rem;background:#FFFFFF; border-bottom:1px solid #e5e5e5; position:relative;}
+.notice div{display:block; width:4.2rem; height:0.4rem; margin-top:0.1rem; line-height:0.4rem; font-size:0.28rem; color:#646464; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.notice div ul{margin-left:0.15rem}
+.notice div ul li{display:table; width:100%; height:0.24rem; overflow:hidden; }
+.notice div ul li a{display:table; width:100%; color:#646464}
+
+.index-bid{display:block; width:100%; margin-bottom:1rem;}
+.index-bid h4{display:block; width:6.8rem; height:1.18rem; line-height:1.18rem; margin:0 auto; border-bottom:1px dashed #d2d2d2; text-align:center;}
+.index-bid h4 a{display:block; font-size:0.42rem; color:#da0022; text-decoration:underline;}
+.index-bid h4 a i{display:inline-block; width:0.17rem; height:0.28rem; background:url(../images/firstep/icon-left2.png) no-repeat center; background-size:0.17rem 0.28rem; margin-left:0.1rem}
+.index-bid .index-bidtext{display:block; width:6.8rem; margin:0 auto;}
+.index-bid .index-bidtext p{display:block; width:100%; margin:0.45rem auto; font-size:0.3rem; color:#646464; text-align:center;}
+.index-bid .index-bidtext h3{display:block; width:100%; text-align:center; font-size:0.85rem; color:#da0022;}
+.index-bid .index-bidtext h3 em{font-size:0.25rem;}
+.index-bid .index-bidtext ul{display:table; width:90%; margin:0.6rem auto;}
+.index-bid .index-bidtext ul li{float:left; width:50%; font-size:0.26rem; color:#aaaaaa;}
+.index-bid .index-bidtext ul li span{font-size:0.3rem; color:#505050;}
+.index-bid .index-bidtext ul li:last-child{text-align:right}
+.index-bid .index-bidtext a{display:block; width:6rem; height:0.85rem; margin:0 auto; border-radius:0.1rem; text-align:center; font-size:0.3rem; line-height:0.85rem; background:#da0022; color:#FFFFFF;}

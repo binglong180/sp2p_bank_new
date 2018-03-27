@@ -1,0 +1,44 @@
+ <div class="tree_right2">
+      <div class="right_top_title">${pageBean.page.get(0).title}</div>
+       <div class="tree_right2_b">
+            <div class="znxx_title">
+                  ${pageBean.page.get(0).title}
+                 <div class="znxx_title_span">${pageBean.page.get(0).time?.format("yyyy-MM-dd HH:mm:ss")}</div>
+             </div>
+             <div class="znxx_main">
+                        ${pageBean.page.get(0).content?.raw()}
+            </div>            
+              <div class="znxx_main_bottom">
+              #{if pageBean.currPage == 1}<a href="javascript:goDownItem();">下一条：${pageBean.page.get(1).title}</a>#{/if}
+              #{elseif pageBean.currPage == pageBean.totalCount}<a href="javascript:goUpItem();">上一条：${pageBean.page.get(0).title}</a>#{/elseif}
+              #{else}
+                     <a href="javascript:goUpItem();">上一条：${pageBean.page.get(0).title}</a><br> 
+                     <a href="javascript:goDownItem();">下一条：${pageBean.page.get(2).title}</a> 
+                #{/else}             
+               </div>
+                        
+               <div class="clear"></div>
+            </div>
+             <div class="clear"></div>
+</div><!--tree_right end-->
+<script type="text/javascript">
+	$(function(){
+		$("#unreadSystemMsgCount").html("【${unreadSystemMsgCount}】");
+	});
+	
+	function back() {
+		//$("#detail").hide();
+		//$("#msglist").show();
+		location.reload();
+	}
+	
+	function goUpItem() {
+		systemMsgDetail(g_index-1);
+		
+	}
+	
+	function goDownItem() {
+		systemMsgDetail(g_index+1);
+	}
+	
+</script>

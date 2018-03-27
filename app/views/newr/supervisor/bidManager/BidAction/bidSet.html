@@ -1,0 +1,500 @@
+#{extends 'common/supervisor.html' /}
+#{include 'newr/supervisor/bidManager/bidManagerLeft.control'/}
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".full").css("width",document.body.clientWidth- 268 +"px ");
+});  
+
+$(window).resize(function(){
+	 var onLoadWidth = document.body.clientWidth;
+		$(".full").css("width",document.body.clientWidth- 268 +"px ");
+})
+</script>
+<style>
+.full{float:left; }
+.table01{width:100%;}
+.table01 th,.table01 td{font-size:12px; height:40px; text-align:center; font-weight:normal;}
+.table01 td{ color:#666;}
+.table01 .td_a{ color:#666;}
+.but01{color:#3a7dc0;}
+</style>
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="@{'/public/skin/css/layout.css'}" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="@{'/public/javascripts/jquery-2.0.js'}"></script>
+<script type="text/javascript" src="@{'/public/javascripts/index.js'}"></script>
+<script type="text/javascript" src="@{'/public/javascripts/jquery.json-2.4.min.js'}"></script>
+<script charset="utf-8" src="@{'public/javascripts/ajaxfileupload.js'}"></script>
+<script type="text/javascript" src="@{'/public/javascripts/common.js'}"></script>
+</head>
+<body>
+<div class="full">
+	<div class="list_aim_setting">
+    	<div class="data_header">
+        	<div class="data_item"><div class="td_title" style=" font-size:18px; font-weight:bold;">· 标的设置</div></div>
+        </div>
+        
+        <div class="list_data">
+        	
+            <div class="data_info">
+                <div class="data_item">
+                    <div class="item_title">项目信息</div>
+                    <div class="item_content">
+                        #{table }
+			               #{list page?.page}
+					          #{tr tr_index:_index}
+			                        <ul>
+			                            <li>
+			                                <div class="td_title">申请贷款金额（元）：</div>
+			                                <div class="td_content" id="amount" name="amount">${_?.amount}</div>
+			                            </li>
+			                            <li>
+			                                <div class="td_title">贷款期限：</div>
+			                                <div class="td_content">${_?.period}个月</div>
+			                            </li>
+			                            <li>
+			                                <div class="td_title">还款方式：</div>
+			                                <div class="td_content">#{if _?.repayment_type_id=="2"}按月付息,到期还本#{/if}#{else}一次性还本付息#{/else}</div>
+			                            </li>
+			                            <li>
+			                                <div class="td_title">抵押类型：</div>
+			                                <div class="td_content">#{if _?.collateral_type=="0"}押手续+押车#{/if}#{else}押手续#{/else}</div>
+			                            </li>
+			                            <li>
+			                                <div class="td_title">综合利率：</div>
+			                                <div class="td_content">${_?.apr}</div>
+			                            </li>
+			                            <li>
+			                                <div class="td_title">放款日期：</div>
+			                                <div class="td_content">${_?.loan_time}</div>
+			                            </li>
+			                        </ul>
+			                     #{/tr}
+			        	     #{/list}
+        			    #{/table}  
+                    </div>
+                </div>
+                #{form @setBid(_?.project_no,_?.amount), id:'submit'}
+                <div class="data_item">
+                    <div class="item_title">标的要素</div>
+                    <div class="item_content">
+                      
+                        <ul>
+                            <li>
+                                <div class="td_title">标的名称：</div>
+                                <div class="td_content" id="project_no" name="project_no">>车快融第${_?.project_no}期</div>
+                                <input type="hidden" id="title" name="title" value="${_?.project_no}"/>
+                            </li>
+                            <li>
+                                <div class="td_title">标的总额（元）：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="total_project" value="${_?.total_project}" name="total_project"  onchange='change(this.value)' placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">期限：</div>
+                                <div class="td_content">
+                                    <select name="invest_period" id="invest_period" class="input_select">
+                                        #{if _?.invest_period == '1'}
+                                        <option id="invest_period" value="0">请选择期限</option>
+                                        <option id="invest_period" selected="selected" value="1">1个月</option>
+                                        <option id="invest_period" value="3">3个月</option>
+                                        <option id="invest_period" value="6">6个月</option>
+                                        <option id="invest_period" value="12">12个月</option>
+                                        <option id="invest_period" value="18">18个月</option>
+                                        <option id="invest_period" value="24">24个月</option>
+                                        #{/if}
+                                        #{if _?.invest_period == '3'}
+                                        <option id="invest_period" value="0">请选择期限</option>
+                                        <option id="invest_period" value="1">1个月</option>
+                                        <option id="invest_period" selected="selected" value="3">3个月</option>
+                                        <option id="invest_period" value="6">6个月</option>
+                                        <option id="invest_period" value="12">12个月</option>
+                                        <option id="invest_period" value="18">18个月</option>
+                                        <option id="invest_period" value="24">24个月</option>
+                                        #{/if} 
+                                        #{if _?.invest_period == '6'}
+                                        <option id="invest_period" value="0">请选择期限</option>
+                                        <option id="invest_period" value="1">1个月</option>
+                                        <option id="invest_period" value="3">3个月</option>
+                                        <option id="invest_period" selected="selected" value="6">6个月</option>
+                                        <option id="invest_period" value="12">12个月</option>
+                                        <option id="invest_period" value="18">18个月</option>
+                                        <option id="invest_period" value="24">24个月</option>
+                                        #{/if} 
+                                        #{if _?.invest_period == '12'}
+                                        <option id="invest_period" value="0">请选择期限</option>
+                                        <option id="invest_period" value="1">1个月</option>
+                                        <option id="invest_period" value="3">3个月</option>
+                                        <option id="invest_period" value="6">6个月</option>
+                                        <option id="invest_period" selected="selected" value="12">12个月</option>
+                                        <option id="invest_period" value="18">18个月</option>
+                                        <option id="invest_period" value="24">24个月</option>
+                                        #{/if} 
+                                        #{if _?.invest_period == '18'}
+                                        <option id="invest_period" value="0">请选择期限</option>
+                                        <option id="invest_period" value="1">1个月</option>
+                                        <option id="invest_period" value="3">3个月</option>
+                                        <option id="invest_period" value="6">6个月</option>
+                                        <option id="invest_period" value="12">12个月</option>
+                                        <option id="invest_period" selected="selected" value="18">18个月</option>
+                                        <option id="invest_period" value="24">24个月</option>
+                                        #{/if} 
+                                        #{if _?.invest_period == '24'}
+                                        <option id="invest_period" value="0">请选择期限</option>
+                                        <option id="invest_period" value="1">1个月</option>
+                                        <option id="invest_period" value="3">3个月</option>
+                                        <option id="invest_period" value="6">6个月</option>
+                                        <option id="invest_period" value="12">12个月</option>
+                                        <option id="invest_period" value="18">18个月</option>
+                                        <option id="invest_period" selected="selected" value="24">24个月</option>
+                                        #{/if} 
+                                        #{if _?.invest_period == '0'}
+                                        <option id="invest_period" value="0" selected="selected">请选择期限</option>
+                                        <option id="invest_period" value="1">1个月</option>
+                                        <option id="invest_period" value="3">3个月</option>
+                                        <option id="invest_period" value="6">6个月</option>
+                                        <option id="invest_period" value="12">12个月</option>
+                                        <option id="invest_period" value="18">18个月</option>
+                                        <option id="invest_period" value="24">24个月</option>
+                                        #{/if} 
+                                        #{if _?.invest_period == null}
+                                        <option id="invest_period" value="0" selected="selected">请选择期限</option>
+                                        <option id="invest_period" value="1">1个月</option>
+                                        <option id="invest_period" value="3">3个月</option>
+                                        <option id="invest_period" value="6">6个月</option>
+                                        <option id="invest_period" value="12">12个月</option>
+                                        <option id="invest_period" value="18">18个月</option>
+                                        <option id="invest_period" value="24">24个月</option>
+                                        #{/if} 
+                                    </select>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="td_title">年化收益率（%）：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="year_apr" value="${_?.year_apr}" name="year_apr" placeholder=""></div>
+                            </li>
+                            <li>
+                                <div class="td_title">还款方式：</div>
+                                <div class="td_content">
+                                	#{if _?.repayment_type == '2'}
+                                    <div class="item_radio"><input type="radio" id="repayment_type" name="repayment_type" value="2" checked="checked" class="btn_radio"/><span>按月付息,到期还本</span></div>
+                                    <div class="item_radio"><input type="radio" id="repayment_type" name="repayment_type" value="3" class="btn_radio"/><span>一次性还本付息</span></div>
+                                	#{/if}
+                                	#{if _?.repayment_type == '3'}
+                                    <div class="item_radio"><input type="radio" id="repayment_type" name="repayment_type" value="2" class="btn_radio"/><span>按月付息,到期还本</span></div>
+                                    <div class="item_radio"><input type="radio" id="repayment_type" name="repayment_type" value="3" checked="checked" class="btn_radio"/><span>一次性还本付息</span></div>
+                                	#{/if}
+                                	#{if _?.repayment_type == null}
+                                    <div class="item_radio"><input type="radio" id="repayment_type" name="repayment_type" value="2" class="btn_radio"/><span>按月付息,到期还本</span></div>
+                                    <div class="item_radio"><input type="radio" id="repayment_type" name="repayment_type" value="3" class="btn_radio"/><span>一次性还本付息</span></div>
+                                	#{/if}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+             <!--相关文件start-->
+                 <div class="data_item">
+                        <div class="item_title">相关文件</div>
+                        <div class="item_content">
+                            <ul class="xgwj">                               
+                                <li>
+                                    <div class="td_title"><span>*</span>身份证扫描件：</div>
+                                    <div class="pic_div">  
+                                    
+                                 		<div class="pic_size">    
+                                    		<input type="hidden" name="id_number_positive" id="id_number_positive" value="${_?.id_number_positive}"/>                                 
+                                            <input type="file" class="input_file" name="imgFile" id="id_number_positive_file" onchange="upload('id_number_positive_file','id_number_positive_image','id_number_positive');"/>
+                                        	#{if _?.id_number_positive == ''}
+                                        	<img id="id_number_positive_image" style="position:relative; z-index:5;" src="@{'public/skin/images/sfzzm.jpg'}" /> 
+                                        	#{/if}
+                                        	#{if _?.id_number_positive == null}
+                                        	<img id="id_number_positive_image" style="position:relative; z-index:5;" src="@{'public/skin/images/sfzzm.jpg'}" /> 
+                                        	#{/if}
+                                        	#{else}
+                                        	<img id="id_number_positive_image" style="position:relative; z-index:5;" src="${_?.id_number_positive}" />
+                                        	#{/else}
+                                        </div>
+                                    	<div class="pic_size">
+                                    	    <input type="hidden" name="id_number_back" id="id_number_back" value="${_?.id_number_back}"/>                                 
+                                            <input type="file" class="input_file" name="imgFile" id="id_number_back_file" onchange="upload('id_number_back_file','id_number_back_image','id_number_back');"/>
+                                            #{if _?.id_number_back == ''}
+                                        	<img id="id_number_back_image" style="position:relative; z-index:5;" src="@{'public/skin/images/sfzbm.jpg'}" />
+                                        	#{/if}
+                                        	#{if _?.id_number_back == null}
+                                        	<img id="id_number_back_image" style="position:relative; z-index:5;" src="@{'public/skin/images/sfzbm.jpg'}" />
+                                        	#{/if}
+                                        	#{else}
+                                        	<img id="id_number_back_image" style="position:relative; z-index:5;" src="${_?.id_number_back}" />
+                                        	#{/else}
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="td_title"><span>*</span>车辆照片：</div>
+                                    <div class="pic_div">  
+                                    
+                                    	<div class="pic_size">
+                                    		<input type="hidden" name="car_photo1" id="car_photo1" value="${_?.car_photo1}"/>                                 
+                                            <input type="file" class="input_file" name="imgFile" id="car_photo1_file" onchange="upload('car_photo1_file','car_photo1_image','car_photo1');"/>
+                                        	#{if _?.car_photo1 == ''}
+                                        	 <img id="car_photo1_image" style="position:relative; z-index:5;" src="@{'public/skin/images/qczq.jpg'}" />
+                                        	#{/if}
+                                        	#{if _?.car_photo1 == null}
+                                        	 <img id="car_photo1_image" style="position:relative; z-index:5;" src="@{'public/skin/images/qczq.jpg'}" />
+                                        	#{/if}
+                                        	#{else}
+                                        	<img id="car_photo1_image" style="position:relative; z-index:5;" src="${_?.car_photo1}" />
+                                        	#{/else}
+                                        </div>
+                                        
+                                        
+                                    	<div class="pic_size">
+                                    		<input type="hidden" name="car_photo2" id="car_photo2" value="${_?.car_photo2}"/>                                 
+                                            <input type="file" class="input_file" name="imgFile" id="car_photo2_file" onchange="upload('car_photo2_file','car_photo2_image','car_photo2');"/>
+                                           	#{if _?.car_photo2 == ''}
+                                        	<img id="car_photo2_image" style="position:relative; z-index:5;" src="@{'public/skin/images/qczh.jpg'}" /> 
+                                        	#{/if}
+                                        	#{if _?.car_photo2 == null}
+                                        	<img id="car_photo2_image" style="position:relative; z-index:5;" src="@{'public/skin/images/qczh.jpg'}" /> 
+                                        	#{/if}
+                                        	#{else}
+                                        	<img id="car_photo2_image" style="position:relative; z-index:5;" src="${_?.car_photo2}" />
+                                        	#{/else}
+                                        </div>
+                                        
+                                    
+                                    	<div class="pic_size">                                     
+                                            <input type="hidden" name="car_photo3" id="car_photo3" value="${_?.car_photo3}"/>                                 
+                                            <input type="file" class="input_file" name="imgFile" id="car_photo3_file" onchange="upload('car_photo3_file','car_photo3_image','car_photo3');"/>
+                                            #{if _?.car_photo3 == ''}
+                                        	<img id="car_photo3_image" style="position:relative; z-index:5;" src="@{'public/skin/images/qcyq.jpg'}" />
+                                        	#{/if}
+                                        	#{if _?.car_photo3 == null}
+                                        	<img id="car_photo3_image" style="position:relative; z-index:5;" src="@{'public/skin/images/qcyq.jpg'}" />
+                                        	#{/if}
+                                        	#{else}
+                                        	<img id="car_photo3_image" style="position:relative; z-index:5;" src="${_?.car_photo3}" />
+                                        	#{/else}
+                                        </div>
+                                        
+                                        
+                                    	<div class="pic_size">                                     
+                                            <input type="hidden" name="car_photo4" id="car_photo4" value="${_?.car_photo4}"/>                                 
+                                            <input type="file" class="input_file" name="imgFile" id="car_photo4_file" onchange="upload('car_photo4_file','car_photo4_image','car_photo4');"/>
+                                           	#{if _?.car_photo4 == ''}
+                                        	<img id="car_photo4_image" style="position:relative; z-index:5;" src="@{'public/skin/images/qcyh.jpg'}" />
+                                        	#{/if}
+                                        	#{if _?.car_photo4 == null}
+                                        	<img id="car_photo4_image" style="position:relative; z-index:5;" src="@{'public/skin/images/qcyh.jpg'}" />
+                                        	#{/if}
+                                        	#{else}
+                                        	<img id="car_photo4_image" style="position:relative; z-index:5;" src="${_?.car_photo4}" />
+                                        	#{/else}
+                                        </div>
+                                        
+                                        
+                                        <div class="clear"></div>
+                                    </div>
+                                    
+                                </li>
+                                <li>
+                                    <div class="td_title"><span>*</span>行驶本：</div>
+                                     <div class="pic_div">  
+                                    	<div class="pic_size">                                     
+                                            <input type="hidden" name="driver_book" id="driver_book" value="${_?.driver_book}"/>                                 
+                                            <input type="file" class="input_file" name="imgFile" id="driver_book_file" onchange="upload('driver_book_file','driver_book_image','driver_book');"/>
+                                            #{if _?.driver_book == ''}
+                                        	<img id="driver_book_image" style="position:relative; z-index:5;" src="@{'public/skin/images/xsb.jpg'}" />   
+                                        	#{/if}
+                                        	#{if _?.driver_book == null}
+                                        	<img id="driver_book_image" style="position:relative; z-index:5;" src="@{'public/skin/images/xsb.jpg'}" />   
+                                        	#{/if}
+                                        	#{else}
+                                        	<img id="driver_book_image" style="position:relative; z-index:5;" src="${_?.driver_book}" />
+                                        	#{/else}
+                                        </div>
+                                        
+                                        <div class="clear"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="td_title"><span>*</span>机动车登记证：</div>
+                                   
+                                     <div class="pic_div">  
+                                    	<div class="pic_size">                                     
+                                            <input type="hidden" name="vehicle_certificate" id="vehicle_certificate" value="${_?.vehicle_certificate}"/>                                 
+                                            <input type="file" class="input_file" name="imgFile" id="vehicle_certificate_file" onchange="upload('vehicle_certificate_file','vehicle_certificate_image','vehicle_certificate');"/>
+                                            #{if _?.vehicle_certificate == ''}
+                                        	<img id="vehicle_certificate_image" style="position:relative; z-index:5;" src="@{'public/skin/images/jdcdjz.jpg'}" />    
+                                        	#{/if}
+                                        	#{if _?.vehicle_certificate == null}
+                                        	<img id="vehicle_certificate_image" style="position:relative; z-index:5;" src="@{'public/skin/images/jdcdjz.jpg'}" />    
+                                        	#{/if}
+                                        	#{else}
+                                        	<img id="vehicle_certificate_image" style="position:relative; z-index:5;" src="${_?.vehicle_certificate}" />
+                                        	#{/else}
+                                        </div>
+                                        
+                                        <div class="clear"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="td_title"><span>*</span>借款合同：</div>
+                                   
+                                     <div class="pic_div">  
+                                    	<div class="pic_size">                                     
+                                            <input type="hidden" name="loan_contract1" id="loan_contract1" value="${_?.loan_contract1}"/>                                 
+                                            <input type="file" class="input_file" name="imgFile" id="loan_contract1_file" onchange="upload('loan_contract1_file','loan_contract1_image','loan_contract1');"/>
+                                            #{if _?.loan_contract1 == ''}
+                                        	<img id="loan_contract1_image" style="position:relative; z-index:5;" src="@{'public/skin/images/jkht1.jpg'}" />    
+                                        	#{/if}
+                                        	#{if _?.loan_contract1 == null}
+                                        	<img id="loan_contract1_image" style="position:relative; z-index:5;" src="@{'public/skin/images/jkht1.jpg'}" />    
+                                        	#{/if}
+                                        	#{else}
+                                        	<img id="loan_contract1_image" style="position:relative; z-index:5;" src="${_?.loan_contract1}" />
+                                        	#{/else}
+                                        </div>
+                                    	<div class="pic_size">                                     
+                                            <input type="hidden" name="loan_contract2" id="loan_contract2" value="${_?.loan_contract2}"/>                                 
+                                            <input type="file" class="input_file" name="imgFile" id="loan_contract2_file" onchange="upload('loan_contract2_file','loan_contract2_image','loan_contract2');"/>
+                                            #{if _?.loan_contract2 == ''}
+                                        	<img id="loan_contract2_image" style="position:relative; z-index:5;" src="@{'public/skin/images/jkht2.jpg'}" />    
+                                        	#{/if}
+                                        	#{if _?.loan_contract2 == null}
+                                        	<img id="loan_contract2_image" style="position:relative; z-index:5;" src="@{'public/skin/images/jkht2.jpg'}" />    
+                                        	#{/if}
+                                        	#{else}
+                                        	<img id="loan_contract2_image" style="position:relative; z-index:5;" src="${_?.loan_contract2}" />
+                                        	#{/else}
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="td_title">承诺函：</div>
+                                     <div class="pic_div">  
+                                    	<div class="pic_size">                                     
+                                            <input type="hidden" name="commitment_letter" id="commitment_letter" value="${_?.commitment_letter}"/>                                 
+                                            <input type="file" class="input_file" name="imgFile" id="commitment_letter_file" onchange="upload('commitment_letter_file','commitment_letter_image','commitment_letter');"/>
+                                           	#{if _?.commitment_letter == ''}
+                                        	 <img id="commitment_letter_image" style="position:relative; z-index:5;" src="@{'public/skin/images/cnh.jpg'}" />      
+                                        	#{/if}
+                                        	#{if _?.commitment_letter == null}
+                                        	 <img id="commitment_letter_image" style="position:relative; z-index:5;" src="@{'public/skin/images/cnh.jpg'}" />      
+                                        	#{/if}
+                                        	#{else}
+                                        	<img id="commitment_letter_image" style="position:relative; z-index:5;" src="${_?.commitment_letter}" />
+                                        	#{/else}
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+             
+             <!--相关文件end-->
+            #{/form}
+             
+            <div class="btn_alter">
+            	<a class="" onclick="setBidSubmit();">保存</a>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+	function setBidSubmit() {
+	    if($("#total_project").val().isBlank()){
+		  alert("标的总额不能为空!");
+		  return;
+	    }
+	    if($("#invest_period").val() == "0"){
+			  alert("请选择期限！");
+			  return;
+		}
+	    if($("#year_apr").val().isBlank()){
+			  alert("年化收益率不能为空!");
+			  return;
+		}
+	    if($('input:radio[name="repayment_type"]:checked').val() == undefined){
+	    	  alert("请选择还款方式!");
+		      return false;
+		    }
+	    if($("#id_number_positive").val().isBlank()){
+	    	 alert("请上传正面身份证扫描件!");
+			  return;
+		}
+	    if($("#id_number_back").val().isBlank()){
+			  alert("请上传反面身份证扫描件!");
+			  return;
+		}
+	    if($("#car_photo1").val().isBlank()){
+			  alert("请上传车辆照片!");
+			  return;
+		}
+	    if($("#car_photo2").val().isBlank()){
+			  alert("请上传车辆照片!");
+			  return;
+		}
+	    if($("#car_photo3").val().isBlank()){
+			  alert("请上传车辆照片!");
+			  return;
+		}
+	    if($("#car_photo4").val().isBlank()){
+			  alert("请上传车辆照片!");
+			  return;
+		}
+	    if($("#driver_book").val().isBlank()){
+			  alert("请上传行驶本照片!");
+			  return;
+		}
+	    if($("#vehicle_certificate").val().isBlank()){
+			  alert("请上传机动车登记证!");
+			  return;
+		}
+	    if($("#loan_contract1").val().isBlank()){
+			  alert("请上传借款合同!");
+			  return;
+		}
+	    if($("#loan_contract2").val().isBlank()){
+			  alert("请上传借款合同!");
+			  return;
+		}
+		$("#submit").submit();
+	}
+	
+   function change(total_project) {
+    	if(total_project>=${_?.amount}){
+    		alert("输入标的总额必须小于等于申请贷款金额");
+    	}
+    } 
+    
+    function upload(imgFile, image, imageFilename) {
+		$.ajaxFileUpload({
+			url : '@{newr.supervisor.bidManager.BidAction.uploadImg()}',
+			secureuri : false,
+			fileElementId :imgFile ,
+			dataType : 'text',
+			success : function(data) {
+				data = $.evalJSON(data);
+				if (data.code < 0) {
+					alert(data.msg);
+					return;
+				}
+				$("#"+image).attr("src", data.filename);
+				$("#"+imageFilename).attr("value",data.filename);
+			},
+			error : function(data, status, e) {
+				alert("上传图片失败");
+			}
+		})
+	}
+	
+</script>
+</body>
+</html>

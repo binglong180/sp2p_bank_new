@@ -1,0 +1,88 @@
+#{extends 'newr/common/frontMain.html' /}
+<div class="full">
+	<div class="content" >
+    <!--找回密码开始-->
+        <div class="xmxq_div">
+        	<div class="t_l_d_title">
+                <font class="t_l_d_title_td01" style="line-height:56px;">实名认证</font>
+            </div>
+            <div class="true_name_left">
+            	<div style="width:120px; height:99px; margin:0 auto;"><img src="@{'/public/skin/images/hflogo_03.jpg'}" width="120" height="99" /></div>
+                <div class="true_name_title">恭喜您已注册成功！</div>
+                <div class="true_name_text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;银信保与第三方资金托管公司 —— 汇付天下合作，实现专人专户，专款专用。为您的资金安全保驾护航。为享受更好的资金安全服务，请先开通汇付支付账户。</div>            
+            </div>
+            #{form @newr.front.account.CheckAction.doCheckRealName(), id:'form'}
+            <table class="true_name_table" cellpadding="0" cellspacing="0">
+            	<tr>
+                	<td align="right"><font class="zhmm_i">*</font>真实姓名：</td>
+                    <td width="270">                    	
+                    	<input type="text" class="user-input" id="realName" name="realName" value="请输入真实姓名" onfocus="if(this.value=='请输入真实姓名'){this.value='';}"  onblur="if(this.value==''){this.value='请输入真实姓名';}" />
+                    	  #{if flash.nameError}
+			                <!--  <span class="p_zctctishi" style="color:red">${flash?.nameError}</span> -->
+			              <span class="td_n_span">${flash?.nameError}</span>
+			              #{/if}
+			              #{else}<span class="td_n_span"  id="realNameError"></span>#{/else}
+                    </td>
+            	</tr>
+            	<tr>
+                	<td align="right"><font class="zhmm_i">*</font>身份证号：</td>
+                    <td width="270">                    	
+                    	<input type="text" class="user-input" id="idNumber" name="idNumber" value="请输入身份证号" onfocus="if(this.value=='请输入身份证号'){this.value='';}"  onblur="if(this.value==''){this.value='请输入身份证号';}" onKeyUp="value=value.replace(/[\W|^_]/g,'')"/>
+                    	#{if flash.idNoError}
+			            <!--  <span class="p_zctctishi" style="color:red">${flash?.idNoError}</span> -->
+			            <span class="td_n_span">${flash?.idNoError}</span>
+			            #{/if}
+			            #{else}<span class="td_n_span"  id="idNumberError"></span>#{/else}
+                    </td>
+            	</tr>
+            	<tr>
+                    <td colspan="2" align="right">                    	
+                        <a class="true_btn_cz" onclick="submit()">开通汇付天下账户</a>
+                    </td>
+            	</tr>
+            </table>
+              #{/form}
+            <div class="clear"></div>
+        </div>
+        <!--找回密码结束-->
+        <div class="clear"></div>
+    </div><!--content end-->
+
+	<div class="clear"></div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	   $("form :input").blur(function(){
+		   if($(this).attr("id") == "realName"){
+			   $("#realNameError").html("");
+			   if(realName == "请输入真实姓名"){
+			   		$("#realNameError").html("请输入真实姓名");
+			     	return;
+			    }
+		   }
+		   
+		   if($(this).attr("id") == "idNumber"){
+			   $("#idNumberError").html("");
+			   if(realName == "请输入身份证号"){
+			   		$("#idNumberError").html("请输入身份证号");
+			     	return;
+			    }
+		   }
+	   });
+});
+function submit() {
+	var realName = $("#realName").val();
+    if(realName == "请输入真实姓名"){
+   		$("#realNameError").html("请输入真实姓名");
+     	return;
+    }
+    
+    var idNumber = $("#idNumber").val();
+    if(idNumber == "请输入身份证号"){
+   		$("#idNumberError").html("请输入身份证号");
+     	return;
+    }
+  $("#form").submit();
+}
+</script>
+

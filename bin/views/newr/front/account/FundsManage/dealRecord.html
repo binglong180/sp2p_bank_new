@@ -1,0 +1,233 @@
+
+#{extends 'newr/common/frontMain.html' /}
+<script src="@{'/public/javascripts/laydate/laydate.js'}"></script>
+<div class="full">
+	<div class="content" style="background:#fff;">
+		<table cellpadding="0" cellspacing="0" width="100%">
+			<tr>
+		       #{include '/newr/common/leftMenu.html'/}
+				<td class="tree_right_td" valign="top">
+                    
+                    <div class="tree_right2">
+                    	<div class="right_top_title">资金流水</div>
+                    	#{form @newr.front.account.FundsManage.dealRecord(), id:'submit'}
+                    	 <input name="type"  type="hidden" id="payTypeStr" value="${pageBean?.conditions?.type}">
+                    	  <input name="currPage"  type="hidden" id="currPage">
+                        	<div class="date_search">
+                            	<span>日期：</span>
+                            	<span><input class="cz_money_input" style="width:102px;" name="beginTime" value="${pageBean.conditions?.dateBegin}" onclick="laydate()" type="text" /></span>
+                                <span>&nbsp;—&nbsp;</span>
+                                <span><input class="cz_money_input" style="width:102px;" name="endTime" value="${pageBean.conditions?.dateEnd}" onclick="laydate()" type="text" /></span>
+                                <span><a class="date_btn_tx" href="javascript:$('#submit').submit()">搜索</a></span>
+                            </div>
+                          #{/form}  
+					<!--tab开始-->
+                    <div class="tree_dis">
+                    	<ul class="tree_ul">
+                            <li><a href="javascript:" onclick="querydeal(0)">全部</a></li>
+                            <li><a href="javascript:" onclick="querydeal(1)">充值</a></li>
+                            <li><a href="javascript:" onclick="querydeal(2)">提现</a></li>
+                            <li><a href="javascript:" onclick="querydeal(3)">投资</a></li>
+                            <!--  <li><a href="javascript:" onclick="querydeal(4)">收益</a></li> -->
+                            <li><a href="javascript:" onclick="querydeal(5)">收款</a></li>
+                    	</ul>
+                   		<div class="clear"></div>
+                    </div>    
+                    <div class="box2">
+                        <!--全部开始-->
+                     
+                        <!--第一个table开始-->
+                            <table width="100%" cellpadding="0" cellspacing="0" style='display:none' id="showTable0">
+                                <tr>
+                                    <th class="box_th">类型</th>
+                                    <th class="box_th">时间</th>
+                                    <th class="box_th">金额（元）</th>
+                                    <th class="box_th">可用余额</th>
+                                </tr>
+                                #{if pageBean.page.size() != 0}
+	                            #{list items:pageBean.page,as:'dealRecord'}
+	                            #{if dealRecord?.amount > 0}
+                                <tr>
+                                    <td class="box_td">${dealRecord?.name}</td>
+                                    <td class="box_td">${dealRecord?.time?.format('yyyy-MM-dd HH:mm')}</td>
+                                    <td class="box_td">${dealRecord?.amount?.format("###,##0.00")}</td>
+                                    <td class="box_td">${dealRecord?.balance?.format("###,##0.00")}</td>
+                                </tr>
+                               #{/if}
+			                  #{/list}
+			                    #{/if}
+                                
+                            </table>
+                            <!--第一个table结束-->
+                       
+                         <!--全部结束-->  
+                        <!--充值开始-->
+                      
+                            <table width="100%" cellpadding="0" cellspacing="0" style='display:none' id="showTable1">
+                                <tr>
+                                    <th class="box_th">类型</th>
+                                    <th class="box_th">时间</th>
+                                    <th class="box_th">金额（元）</th>
+                                    <th class="box_th">可用余额</th>
+                                </tr>
+                                #{if pageBean.page.size() != 0}
+	                            #{list items:pageBean.page,as:'dealRecord'}
+	                            #{if dealRecord?.amount > 0}
+                                <tr>
+                                    <td class="box_td">${dealRecord?.name}</td>
+                                    <td class="box_td">${dealRecord?.time?.format('yyyy-MM-dd HH:mm')}</td>
+                                    <td class="box_td">${dealRecord?.amount?.format("###,##0.00")}</td>
+                                    <td class="box_td">${dealRecord?.balance?.format("###,##0.00")}</td>
+                                </tr>
+                                #{/if}
+			                    #{/list}
+			                    #{/if}
+                            </table>
+                      
+                       <!--充值结束-->  
+                        <!--提现开始-->
+                       
+                            <table width="100%" cellpadding="0" cellspacing="0" style='display:none' id="showTable2">
+                                <tr>
+                                    <th class="box_th">类型</th>
+                                    <th class="box_th">时间</th>
+                                    <th class="box_th">金额（元）</th>
+                                    <th class="box_th">可用余额</th>
+                                </tr>
+                                #{if pageBean.page.size() != 0}
+	                            #{list items:pageBean.page,as:'dealRecord'}
+	                            #{if dealRecord?.amount > 0}
+                                <tr>
+                                    <td class="box_td">${dealRecord?.name}</td>
+                                    <td class="box_td">${dealRecord?.time?.format('yyyy-MM-dd HH:mm')}</td>
+                                    <td class="box_td">${dealRecord?.amount?.format("###,##0.00")}</td>
+                                    <td class="box_td">${dealRecord?.balance?.format("###,##0.00")}</td>
+                                </tr>
+                                #{/if}
+			                    #{/list}
+			                    #{/if}
+                            </table>
+                      
+                       <!--提现结束-->  
+                        <!--投资开始-->
+                       
+                            <table width="100%" cellpadding="0" cellspacing="0" style='display:none' id="showTable3">
+                                <tr>
+                                    <th class="box_th">类型</th>
+                                    <th class="box_th">时间</th>
+                                    <th class="box_th">金额（元）</th>
+                                    <th class="box_th">可用余额</th>
+                                </tr>
+                                #{if pageBean.page.size() != 0}
+	                            #{list items:pageBean.page,as:'dealRecord'}
+	                            #{if dealRecord?.amount > 0}
+                                <tr>
+                                    <td class="box_td">${dealRecord?.name}</td>
+                                    <td class="box_td">${dealRecord?.time?.format('yyyy-MM-dd HH:mm')}</td>
+                                    <td class="box_td">${dealRecord?.amount?.format("###,##0.00")}</td>
+                                    <td class="box_td">${dealRecord?.balance?.format("###,##0.00")}</td>
+                                </tr>
+                                #{/if}
+			                    #{/list}
+			                    #{/if}
+                            </table>
+                      
+                       <!--投资结束-->  
+                        <!--收益开始-->
+                      
+                            <table width="100%" cellpadding="0" cellspacing="0" style='display:none' id="showTable4">
+                                <tr>
+                                    <th class="box_th">类型</th>
+                                    <th class="box_th">时间</th>
+                                    <th class="box_th">金额（元）</th>
+                                    <th class="box_th">可用余额</th>
+                                </tr>
+                                #{if pageBean.page.size() != 0}
+	                            #{list items:pageBean.page,as:'dealRecord'}
+	                            #{if dealRecord?.amount > 0}
+                                <tr>
+                                    <td class="box_td">${dealRecord?.name}</td>
+                                    <td class="box_td">${dealRecord?.time?.format('yyyy-MM-dd HH:mm')}</td>
+                                    <td class="box_td">${dealRecord?.amount?.format("###,##0.00")}</td>
+                                    <td class="box_td">${dealRecord?.balance?.format("###,##0.00")}</td>
+                                </tr>
+                                #{/if}
+			                    #{/list}
+			                    #{/if}
+                            </table>
+                      
+                       <!--收益结束-->  
+                        <!--回收本金开始-->
+                        
+                            <table width="100%" cellpadding="0" cellspacing="0" style='display:none' id="showTable5">
+                                <tr>
+                                    <th class="box_th">类型</th>
+                                    <th class="box_th">时间</th>
+                                    <th class="box_th">金额（元）</th>
+                                    <th class="box_th">可用余额</th>
+                                </tr>
+                                #{if pageBean.page.size() != 0}
+	                            #{list items:pageBean.page,as:'dealRecord'}
+	                            #{if dealRecord?.amount > 0}
+                                <tr>
+                                    <td class="box_td">${dealRecord?.name}</td>
+                                    <td class="box_td">${dealRecord?.time?.format('yyyy-MM-dd HH:mm')}</td>
+                                    <td class="box_td">${dealRecord?.amount?.format("###,##0.00")}</td>
+                                    <td class="box_td">${dealRecord?.balance?.format("###,##0.00")}</td>
+                                </tr>
+                                #{/if}
+			                    #{/list}
+			                    #{/if}
+                            </table>
+                        </div>
+                       <!--回收本金结束-->  
+                       
+                         
+                        <div class="clear"></div>
+                    </div><!--box2 结束-->
+					<!--tab结束-->
+
+                    <!--翻页开始-->
+                        <div class="digg" style="width:725px; margin-right:15px;"> 
+                            #{page funMethod:"showPage",currPage:pageBean.currPage,pageSize:pageBean.pageSize,totalCount:pageBean.totalCount,theme:2,style:2 /}     
+                       </div> 
+                    <!--翻页结束-->
+                        
+                        	
+                   		<div class="clear"></div>
+                	</div><!--tree_right end-->
+                </td>
+			</tr>
+		</table>	
+        <div class="clear"></div>  
+    </div><!--content end-->
+
+	<div class="clear"></div>
+</div>
+<script type="text/javascript" src="@{'/public/skin/js/tab.js'}"></script>
+<script type="text/javascript">
+
+function showPage(currPage, pageSize){
+    $("#currPage").val(currPage);
+    $("#submit").submit();
+}
+function querydeal(type){
+  $("#payTypeStr").attr("value",type);
+  $("#submit").submit();
+};
+$(function(){
+    var type =${type}
+    $(".tree_ul").jTab({
+        menutag: ".tree_ul li",
+        boxtag: ".box2 > div",
+        cur: type
+    });
+});
+$(function(){
+var obj = document.getElementById("child5");
+change_bg(obj);
+});
+$(function(){
+	$("#showTable${pageBean?.conditions?.type}").show();
+});
+</script>

@@ -1,0 +1,67 @@
+#{extends 'm/common/frontMain.html' /} 
+<section class="row" style="background:#fff;">
+	<div class="app-locate">
+		<a class="app-return" href="@{m.front.account.AccountHomeAction.accountHome()}"> < 返回</a>
+		<h2>我要充值</h2>
+	</div>
+	<div class="app-recharge">
+		<form action="@{m.front.account.FundsManageAction.submitRecharge()}" method="POST" id="rechargeSubmit">
+		<input type="hidden" name="uuidRepeat" value="${flash?.success}">
+		<dl>
+			<dt>可用余额（元）：</dt>
+			<dd><span>${(user?.balance+user?.balance2)?.format('###,##0.00')}</span></dd>
+		</dl>
+		<dl>
+			<dt>充值金额：</dt>
+			<dd>
+				<input placeholder="请输入充值金额" id="money" name="money" type="text">
+				<span>元</span>
+			</dd>
+		</dl>
+		<dl>
+			<dt>支付方式：</dt>
+			<dd>
+				<i class="app-recharge-icon"><img src="@{'/public/m/images/zf.png'}"/></i>
+			</dd>
+		</dl>
+		<span class="hint-error" id="recharge-hint"></span>
+		</form>		
+		<a class="" onclick="recharge()"><button type="button" class="app-btn app-btn-default app-radius">立即充值</button></a>
+		
+		<p data-toggle="modal" data-target="#myModal">充值注意事项</p>
+	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content modal-noradius">
+		  <div class="modal-header modal-bgred">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title" id="myModalLabel">充值注意事项</h4>
+		  </div>
+		  <div class="modal-body modal-recharge">	
+			<dl>
+				<dd>1. 投资人充值免费，银信保为投资人支付充值费用；</dd>			
+				<dd>2. 在银信保平台仅可使用储蓄卡进行充值，严禁信用卡充值、套现等行为，一经发现将予以处罚，包括但不限于：限制收款、 冻结账户、永久停止服务等；</dd>
+				<dd>3. 充值需开通网上银行功能，支付限额请参照支付说明；</dd>
+				<dd>4. 若您的充值金额没有及时到账，请致电400-111-0189。</dd>
+			</dl>
+		  </div>
+		</div>
+	  </div>
+	</div>
+</section>
+<script type="text/javascript">
+function recharge(){
+    if($("#money").val() == ''){
+    	$("#recharge-hint").html("充值金额不能为空");
+  	  	return;
+    }else{
+    	if(isNaN($("#money").val())){
+        	$("#recharge-hint").html("请输入正确的充值金额");
+        	return;
+        }else{
+        	$("#rechargeSubmit").submit();
+        }
+    }  
+}
+</script>

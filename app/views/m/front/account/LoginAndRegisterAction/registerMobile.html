@@ -1,0 +1,266 @@
+#{extends 'm/common/frontMain.html' /} 
+
+<section class="row" style="background:#fff;">
+	<div class="app-locate">
+		<!--  <a class="app-return" href=""> < 返回</a> -->
+		<h2>注册</h2>
+	</div>
+	<div class="app-form">
+		#{form @m.front.account.loginAndRegisterAction.registering(), id:'submit'}
+		<ul class="app-reg-form">
+			<li>
+				<img class="app-label app-icon01" src="@{'/public/m/images/icon05.png'}"/>
+				<input class="app-input" id="userName" name="userName" placeholder="请输入用户名(3-10位字符)" type="text">
+				<span class="form-error" id="userName-hint"></span>
+			</li>
+			<li>
+				<img class="app-label app-icon04" src="@{'/public/m/images/icon08.png'}"/>
+				<input class="app-input" id="mobile" name="mobile" placeholder="请输入手机号" maxlength="11" type="text">
+				<span class="form-error" id="mobile-hint"></span> 
+			</li>
+			<li>
+				<img class="app-label app-icon02" src="@{'/public/m/images/icon06.png'}"/>
+				<input class="app-input" id="password" name="password" placeholder="请输入密码(6-20位字符)" type="password">
+				<span class="form-error" id="password-hint"></span> 
+			</li>
+			<li>
+				<img class="app-label app-icon06" src="@{'/public/m/images/icon11.png'}"/>
+				<input type="hidden" id = "randomID" />
+				<input id="code" name="code" placeholder="请输入验证码" type="text">
+				<img class="app-vf" id="img" src="@{'/public/skin/images/yzm_03.jpg'}" onclick="change()"/>
+				<span class="form-error" id="code-hint"></span> 
+			</li>
+			<li>
+				<img class="app-label app-icon05" src="@{'/public/m/images/icon09.png'}"/>
+				<input id="smsCode" name="smsCode" placeholder="请输入手机验证码" type="text">
+				<a onclick="sendCode();"><span class="app-code" id="sendSmsCode">发送验证码</span></a>
+				<span class="form-error" id="smsCode-hint"></span> 
+			</li>
+			<li>
+				<img class="app-label app-icon03" src="@{'/public/m/images/icon07.png'}"/>
+				<input class="app-input" id="recommendId" name="recommendId" placeholder="推荐人手机号,选填" maxlength="11" type="text">
+				<span class="form-error" id="recommendId-hint"></span> 
+			</li>
+		</ul>
+		<div class="checkbox app-checkbox">
+				<label>
+				  <input type="checkbox" checked="true">我已阅读并同意 <a href="@{m.front.account.LoginAndRegisterAction.agreement()}">《槐乡富直销银行服务协议》</a>
+				</label>
+				<!-- 未勾选协议的时候提示用户 -->
+				<p class="checkbox-hint" id="agreement-hint">请阅读并同意槐乡富直销银行服务协议</p>
+		</div>
+		<span class="hint-error" id="register_error"></span>
+		#{/form}
+		<a class="" onClick="register();"><button type="button" class="app-btn app-btn-default app-radius">注册</button></a>
+	</div>
+	<dl class="app-form-bottom">
+		<dt>已有账号？ <a href="@{m.front.account.LoginAndRegisterAction.login()}">现在登录</a></dt>
+	</dl>
+</section>
+	
+<script type="text/javascript">
+/*初始加载时生成验证码*/
+$(function(){
+    var setCode = #{jsAction @m.front.account.loginAndRegisterAction.setCode()/}
+		$.post(setCode({}),function(data){
+			var arr=eval(data);
+			var img = arr.img;
+			$("#img").attr("src","@{m.front.account.loginAndRegisterAction.getImg()}?id="+img);	
+			$("#randomID").val(img);
+	});
+	$(".xf_wyjkfb_4_windowClose").click(function(){
+		$(this).parents(".xf_zqzr_znx_window").hide(300);
+	});
+});
+/*点击时生成验证码*/
+function change(){
+	var setCode = #{jsAction @m.front.account.loginAndRegisterAction.setCode()/}
+	$.post(setCode({}),function(data){
+		var arr=eval(data);
+		var img = arr.img;
+		$("#randomID").val(img);
+		$("#img").attr("src","@{m.front.account.loginAndRegisterAction.getImg()}?id="+img)	
+	});
+}
+/*点击时发送短信验证码*/
+function sendCode(){
+	$("#register_error").html("");
+	var mobile = $("#mobile").val().trim();
+	var code = '';
+	var randomId = '';
+	if(mobile == ""){
+		$("#register_error").html("请输入手机号");
+     	return;
+    }
+	
+	code = $("#code").val().trim();
+	randomID = $("#randomID").val().trim();
+	
+	if(code == '') {
+		  $("#register_error").html("请输入验证码");
+ 		  return;
+    }
+	
+    var verifyMobile = #{jsAction @verifyMobileForReg(':mobile',':code',':randomID')/}
+	$.post(verifyMobile({mobile:mobile,code:code,randomID:randomID}),function(data){
+	    if(data.code < 0){
+	    	$("#register_error").html(data.msg);
+	    	change();
+	    }else{
+			countDown();
+			$("#sendSmsCode").attr("onclick", "void(0);");
+			$("#sendSmsCode").attr("style", "cursor: default");
+		}
+	},'json');
+}
+var remain = 90;
+/*点击发送短信验证码后倒计时*/
+function countDown() {
+   if (remain == 0) {
+	   remain = 90;
+	   $("#sendSmsCode").html("点击发送");
+	   $("#sendSmsCode").attr("onclick", "sendCode();");
+	   $("#sendSmsCode").attr("style", "cursor:pointer");
+	   return;
+   }
+
+   $("#sendSmsCode").html("" + remain-- + "秒后重发");
+   setTimeout("countDown()",1000);
+}
+
+/*注册*/
+function register(){
+	alert(111);
+	//用户名合法性验证
+    var username = $.trim($("#userName").val());
+    if(username ==''){
+    	$("#userName-hint").html("请输入用户名");
+    	return;
+    }else if(username.length < 3){
+    	$("#userName-hint").html("用户名长度过短");
+    	return;
+    }else if(username.length > 10){
+    	$("#userName-hint").html("用户名长度过长");
+    	return;
+    }else if(!/^[\u4E00-\u9FA5A-Za-z0-9_]+$/.test(username)){
+    	$("#userName-hint").html("用户名含有敏感字符");
+    	return;
+    }
+    //手机号码合法性验证	 
+   	var mobile = $.trim($("#mobile").val());
+    if(mobile == ''){
+    	$("#mobile-hint").html("请输入手机号码");
+    	return;
+    }else if(!(mobile).isMobileNum()){
+    	$("#mobile-hint").html("手机号格式有误");
+    	return;
+    }
+    //密码合法性验证
+     var password = $("#password").val();
+     if(password == ''){
+    	  $("#password-hint").html("请输入登录密码");
+          return; 
+     }else if(password.length < 6){
+    	  $("#password-hint").html("密码长度为6-20个字符");
+         return;
+     }else if(password.length >20){
+    	  $("#password-hint").html("密码长度为6-20个字符");
+          return;
+     }else if(!/^([^\s'‘’]{6,20})$/.test(password)){
+    	  $("#password-hint").html("密码由6-20位字符组成（不含'）");
+     	  return;
+     }
+	 //验证码验证  
+     /* if($("#code").val() == '') {
+    	  $("#code-hint").html("请输入验证码");
+    	  return;
+     }
+     var smsCode = $("#smsCode").val();
+     if(smsCode == ""){
+    	  $("#smsCode-hint").html("请填写短信校验码");
+          return;
+     } */
+     //推荐人合法性验证
+     var reccmmodUser = $.trim($("#recommendId").val());
+     var flag = true;
+   	 if(reccmmodUser != ''){
+   		 	if(!reccmmodUser.isMobileNum()){
+		    	$("#register_error").html("请输入正确的手机号");
+		    	return;
+		     }else{
+		    	 $.ajax({
+		    		  url : "@{m.front.account.LoginAndRegisterAction.hasMobileExists()}",
+		    		  type : "POST",
+		    		  data : {
+		    			  "mobile" : reccmmodUser
+		    		  },
+		    		  dataType:'json',
+		    		  success : function(data) {
+		    			  if(data.code < 0){
+		    				  if(data.code != -2){
+									$("#register_error").html(data.msg);
+									return;
+		    				  }
+		    			  }else{
+		    				 $("#register_error").html("推荐人手机号不存在");
+		    				 flag = false;
+		    				 return;
+		    			  }
+		    			},
+		    		 });
+		     } 
+   	  }
+   	/*
+   	$.ajax({
+		  url : "@{m.front.account.LoginAndRegisterAction.hasNameExist()}",
+		  type : "POST",
+		  data : {
+			  "name" : name:encodeURI(username)
+		  },
+		  dataType:'json',
+		  success : function(data) {
+			  
+			  var arr=eval(data);
+			  
+			  if(arr.error.code < 0){
+			  	   bName = -1;
+			  	   $("#userName-hint").html(arr.error.msg);
+			  	   return;
+			    }else{
+			       bName = 0;
+			    }
+			},
+	 });*/
+   	 
+   	 //注册协议验证
+     if(!$("input[type='checkbox']").is(':checked')){
+    	  $("#register_error").html("请阅读并同意《银信保服务协议》");
+    	  return;
+     }
+       
+	 var verifyMobile = #{jsAction @verifySmsCodeForReg(':mobile',':smsCode')/}
+	 $.post(verifyMobile({mobile:$("#mobile").val().trim(),smsCode:$("#smsCode").val()}),function(data){
+		 if(data.code < 0){
+		 	$("#register_error").html(data.msg);
+		 }else{
+			if(flag){
+		      $("#submit").submit();
+			}
+		 }
+	 },'json');
+  }
+/*获取请求参数*/  
+function GetQueryString(name){
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+     var r = window.location.search.substr(1).match(reg);
+     if(r!=null)return  unescape(r[2]); return null;
+}
+/*初始化时加载请求参数*/
+$(function(){
+	var recommendMobile=GetQueryString("recommendMobile");
+	if(recommendMobile !=null && recommendMobile.toString().length>1){
+		$("#recommendId").val(recommendMobile);
+	}
+});
+
+</script>

@@ -1,0 +1,109 @@
+%{
+	business.BackstageSet  currBackstageSet = business.BackstageSet.getCurrentBackstageSet();
+	business.newr.User currUser = business.newr.User.currUser();
+}%
+#{extends 'newr/common/frontMain.html' /}
+
+<div class="full">
+	<div class="content">
+		<div class="lxwm_title">联系我们</div>
+        <div class="lxwm_cont">
+        	<div class="lxwm_left">
+            	<dl class="lxwm_dl">
+                	<dt class="lxwm_dl_dt01">联系地址</dt>
+                    <dd class="lxwm_dl_dd01">总部地址</dd>
+                    <dd class="lxwm_dl_dd02">地址：深圳市龙华新区观澜新城社区观澜大道113号6楼606室<br />邮编：518000</dd>
+                    <dd class="lxwm_dl_dd01">北京运营中心</dd>
+                    <dd class="lxwm_dl_dd02">地址：北京市海淀区互联网金融产业园1002室<br />邮编：100195</dd>
+        		</dl>
+                
+            	<dl class="lxwm_dl">
+                	<dt class="lxwm_dl_dt02">客服电话</dt>
+                    <dd class="lxwm_dl_dd02" style="padding-top:10px;">
+                        如果您在使用银信保网站过程中遇到任何问题，请您于客服联系。
+                        <br />
+                        银信保客服中心提醒您：为了保障您的财产安全,请选择银信保官方客服电话咨询。
+                        <br />
+                        客服热线：<font class="color">400-111-0189</font>
+                        <br />
+                        服务时间：上午9:00—晚上21:00
+                        <br />
+                        <span style="float:left; display:inline-block;">在线客服 ：</span><a href="tencent://message/?uin=938049488&Site=sc.chinaz.com&Menu=yes" style="float:left; display:inline-block;"><img src="@{'public/skin/images/QQ_03.jpg'}" width="92" height="23" /></a>
+                        <br />
+                        QQ交流群：<font class="color">187177343</font> (银信保理财交流群）                    
+                    </dd>
+        		</dl>
+                
+            	<dl class="lxwm_dl">
+                	<dt class="lxwm_dl_dt03">商务合作</dt>
+                    <dd class="lxwm_dl_dd02" style="padding-top:10px;">
+                        如果贵公司希望与我们建立商务合作关系，形成优势互补，请将合作意向进行简要描述并
+                        <br />
+                        发送邮件至：<font class="color">bd@yinxinbao.com</font>我们会尽快与您联系。 
+                        <br />
+                        联系电话：<font class="color">010-88856606</font>转<font class="color">856</font>
+                    </dd>
+        		</dl>
+                
+        	</div>
+            <div class="lxwm_right">
+            
+            	<dl class="lxwm_dl">
+                	<dt class="lxwm_dl_dt04">媒体合作</dt>
+                    <dd class="lxwm_dl_dd02" style="padding-top:10px;">
+                       如果有媒体采访需求，请将您的媒体名称、采访提纲、联系方式发至：
+                        <br /><font class="color">yinxinbao@yinxinbao.com</font>，我们会尽快与您联系。 
+                        <br />联系电话：<font class="color">010-88856606</font>转<font class="color">856</font>
+                    </dd>
+        		</dl>
+            
+            	<dl class="lxwm_dl">
+                	<dt class="lxwm_dl_dt05">关注我们</dt>
+                    <dd class="lxwm_dl_dd02" style="padding-top:10px;">
+                        如果您想及时了解银信保的最近动态，请关注我们的官方微博和微信。
+                        <br />新浪微博：银信保<font class="color"><a href="http://weibo.com/u/5838658174?is_all=1">http://weibo.com/u/5838658174?is_all=1</a></font>
+                        <br />微信公众号：银信保 
+                    </dd>
+        		</dl>
+            	
+                <div style="width:320px; margin:0 auto;" >
+                	<dl class="lxwm_dl_weix">
+                    	<dt class="lxwm_dl_weix_img"><img src="@{'public/skin/images/weixin_03.jpg'}" width="132" height="133" /></dt>
+                        <dd class="lxwm_dl_weix_text" >扫一扫关注微信</dd>
+                    </dl>
+                	<dl class="lxwm_dl_weib">
+                    	<dt class="lxwm_dl_weix_img"><img src="@{'public/skin/images/weibo_03.jpg'}" width="132" height="133" /></dt>
+                        <dd class="lxwm_dl_weix_text" >扫一扫关注微博</dd>
+                    </dl>
+                </div>    
+            
+            </div>
+        	<div class="clear"></div>
+        </div>
+
+
+
+        <div class="clear"></div>
+    </div><!--content end-->
+
+	<div class="clear"></div>
+</div>
+
+
+<script>
+	$(function(){
+		$(window).scroll(function(){
+			if($(window).scrollTop()>100){  //距顶部多少像素时，出现返回顶部按钮
+				$("#side-bar .gotop").fadeIn();	
+			}
+			else{
+				$("#side-bar .gotop").hide();
+			}
+		});
+		$("#side-bar .gotop").click(function(){
+			$('html,body').animate({'scrollTop':0},500); //返回顶部动画 数值越小时间越短
+		});
+	});
+</script>
+</body>
+</html>
