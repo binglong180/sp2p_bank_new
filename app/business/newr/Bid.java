@@ -15,6 +15,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.Transient;
 
 import models.t_bank_accounts;
 import models.t_bids;
@@ -86,6 +87,9 @@ public class Bid implements Serializable{
 	
 	public String no; // 编号
 	public Date time; // 发布时间
+	
+	public Date startTime;//发标时间（标的录入时间）
+	
 	public String title; // 标题
 	public double amount; // 借款金额
 	public int periodUnit; // 借款期限单位
@@ -96,8 +100,26 @@ public class Bid implements Serializable{
 	public String imageFilename1; // 借款图片
 	public String description; // 借款描述
 	public int status; // 审核状态
-	public String strStatus; // 0审核中 1借款中（审核通过） 2还款中 3已还款 -1审核不通过 -2流标
-
+	/**
+	 * -1,审核未通过；0.审核中;1.审核通过（到发标时间后为投标中）;2.待放款(放款审核通过);3已满标(已售罄)4结标;5回款中;6.项目完结回款成功
+	10.审核中待验证;11.提前借款待验证;12.借款中待验证;20.审核中待支付投标奖励;21.提前借款待支付投标奖励;
+	31.计息中(已完结);22.借款中待支付投标奖励
+	41.预热中
+	14.本金垫付还款中(已放款)
+	-1.审核不通过;
+	-2.借款中不通过;
+	-3.放款不通过;
+	-4.流标;
+	-5.撤销
+	-10.未验证
+	 */
+	
+	public String strStatus; //后台状态字段
+	
+	public String statusInvest; //投资列表状态字段
+	
+	public String statusInvestUser; //投资客户状态字段
+	
 	public double hasInvestedAmount; // 已投总额
 	public double loanSchedule; // 借款进度比例
 	public double minInvestAmount; // 最低金额招标
@@ -110,9 +132,9 @@ public class Bid implements Serializable{
 	public int type; // 
 
 	public double serviceFees; // 服务费
-	public int investPeriod; // 满标期限
-	public Date investExpireTime; // 满标日期
-	public Date beginInterest; // 实际满标日期
+	public int investPeriod; // 满标期限（投标期限）
+	public Date investExpireTime; // 满标日期（实际满标后进行更改）
+	public Date beginInterest; // 起息日
 	
 	public Date repaymentTime;  //还款日期
 	public Date recentRepayTime;//最近还款时间
@@ -150,6 +172,13 @@ public class Bid implements Serializable{
 	//v7.2.6 add 
 	public int ipsStatus;  //资金托管交易状态：0正常，1标的结束处理中
 	public PaymentServiceImpl paymentServiceImpl = new PaymentServiceImpl();
+	
+	
+	
+	//标的完结时间
+   	public Date endInterest;
+   	//倒计时百分比
+  	public int  countDownPercent;
 
 	/**
 	 * 获取_id
@@ -372,14 +401,14 @@ public class Bid implements Serializable{
 		this.userId = tbid.user_id; // 用户ID
 		this.repayment = new Repayment();
 		this.repayment.id = tbid.repayment_type_id; // 返款类型
-		this.time = tbid.time; // 发布时间
+		this.time = tbid.time; // 发布时间（标的录入时间）
 		this.title = tbid.title; // 标题
 		this.amount = _amount; // 借款金额
 		this.periodUnit = tbid.period_unit; // 借款期限单位
 		this.period = tbid.period; // 借款期限
 		this.investPeriod = tbid.invest_period; // 投标期限
 		this.investExpireTime = tbid.invest_expire_time; // 满标日期
-		this.beginInterest = tbid.begin_interest; // 气息日
+		this.beginInterest = tbid.begin_interest; // 起息日
 		this.apr = tbid.apr; // 年利率
 		this.bankAccountId = tbid.bank_account_id; // 借款标绑定的银行卡
 		this.serviceFees = tbid.service_fees;//服务费
@@ -395,6 +424,7 @@ public class Bid implements Serializable{
 		this.settlementCount = tbid.settlement_count;
 		this.beginInterest = tbid.begin_interest;
 		this.productId = tbid.product_id;
+		this.startTime=tbid.start_time;//发标时间
 	}
 	
 	/**
@@ -1492,4 +1522,192 @@ public class Bid implements Serializable{
 	    double fee = amount*(1-(investRate-apr)*0.01*period/360); 
 	    return fee;
    }
+   
+	/*--------------------------牛牛新增-------------------------------*/
+	public Date getEndInterest() {
+		return DateUtil.dateAddDay(beginInterest, period);
+	}
+   
+   
+	public Date currentTime=new Date();
+	
+	
+	//获得百分比
+	public int getCountDownPercent() {
+		long timedif=this.investExpireTime.getTime()-currentTime.getTime();
+		long per=investPeriod*1000*60*60*24;
+		
+		if(timedif<0){
+			countDownPercent=0;
+		}else if(timedif>per){
+			countDownPercent=100;
+		}else {
+			countDownPercent=(int) (timedif/per*100);
+		}
+		return countDownPercent;
+	}
+
+
+	public void setCountDownPercent(int countDownPercent) {
+		this.countDownPercent = countDownPercent;
+	}
+	
+	public int getStatus() {
+		//修改标的状态为预热中   41
+		if(this.status==1&&this.startTime.getTime()>this.currentTime.getTime()){
+			this.status=41;
+		}
+		//修改标的状态为计息中   31
+		if(this.status==3&&this.beginInterest.getTime()>this.currentTime.getTime()){
+			this.status=31;
+		}
+		return status;
+	}
+
+	public void setStatus(int status) {
+		
+		
+		this.status = status;
+	}
+
+	public String getStrStatus() {
+		switch(this.status){
+		case -10:
+			this.strStatus="未验证";
+			break;
+		case -5:
+			this.strStatus="撤销";
+			break;
+		case -4:
+			this.strStatus="流标";
+			break;
+		case -3:
+			this.strStatus="放款不通过";
+			break;
+		case -2:
+			this.strStatus="借款中不通过";
+			break;
+		case -1:
+			this.strStatus="审核不通过";
+			break;
+		case 0:
+			this.strStatus="审核中";
+			break;
+		case 1:
+			this.strStatus="审核通过";
+			break;
+		case 2:
+			this.strStatus="放款中";
+			break;
+		case 3:
+			this.strStatus="已满标";
+			break;
+		case 4:
+			this.strStatus="标的结标";
+			break;
+		case 5:
+			this.strStatus="回款中";
+			break;
+		case 6:
+			this.strStatus="回款成功";
+			break;
+		case 31:
+			this.strStatus="计息中";
+			break;
+		case 41:
+			this.strStatus="预热中";
+			break;
+		}
+		/**
+		 * -1,审核未通过；0.审核中;1.审核通过（到发标时间后为投标中）;2.待放款(放款审核通过);3已满标(已售罄)4结标;5回款中;6.项目完结回款成功
+		10.审核中待验证;11.提前借款待验证;12.借款中待验证;20.审核中待支付投标奖励;21.提前借款待支付投标奖励;
+		31.计息中(已完结);22.借款中待支付投标奖励
+		41.预热中
+		14.本金垫付还款中(已放款)
+		-1.审核不通过;
+		-2.借款中不通过;
+		-3.放款不通过;
+		-4.流标;
+		-5.撤销
+		-10.未验证
+		 */
+		return strStatus;
+	}
+
+	public void setStrStatus(String strStatus) {
+		this.strStatus = strStatus;
+	}
+
+	public String getStatusInvest() {		
+		switch(this.status){
+		case -10:
+		case -5:
+		case -4:
+		case -3:
+		case -2:
+		case -1:
+		case 0:
+		case 1:
+			this.statusInvest="投标中";
+			break;
+		case 3:
+			this.statusInvest="已售罄";
+			break;
+		case 2:
+		case 4:
+		case 5:
+		case 6:
+		case 31:
+			this.statusInvest="已完结";
+			break;
+		case 41:
+			this.statusInvest="预热中";
+			break;
+		}
+		return statusInvest;
+	}
+
+	public void setStatusInvest(String statusInvest) {
+		this.statusInvest = statusInvest;
+	}
+
+	public String getStatusInvestUser() {
+		
+		switch(this.status){
+		case -10:
+		case -5:
+		case -4:
+		case -3:
+		case -2:
+		case -1:
+		case 0:
+		case 2:
+		case 1:
+			this.statusInvestUser="投标中";
+			break;
+		case 3:
+			this.statusInvestUser="已满标";
+			break;
+		case 4:
+		case 5:
+			this.statusInvestUser="投资结束";
+			break;
+		case 6:
+			this.statusInvestUser="转出到账";
+			break;
+		case 31:
+			this.statusInvestUser="投资中";
+			break;
+		case 41:
+			this.statusInvestUser="预热中";
+			break;
+		}
+		return statusInvestUser;
+	}
+
+	public void setStatusInvestUser(String statusInvestUser) {
+		this.statusInvestUser = statusInvestUser;
+	}
+	
+	
 }

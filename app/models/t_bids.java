@@ -180,10 +180,14 @@ public class t_bids extends Model {
 	
 	@Transient
 	public String sign;
+	//标结束日期
 	@Transient
-	public Date endInterest;//标结束日期
+	public Date endInterest;
 	
 	
+	public Date getEndInterest() {
+		return DateUtil.dateAddDay(begin_interest, period);
+	}
 	
 	
 
@@ -195,7 +199,6 @@ public class t_bids extends Model {
 	}
 	@Transient
 	public String loanUserName;
-	
 	
 	
 	

@@ -700,6 +700,7 @@ public class ProjectAction extends SupervisorController {
 		settlementWithUserName( resultList);
 		render(resultList);
 	}
+	
 	private static void settlementWithUserName(List<t_settlement> resultList){
 		for(t_settlement settlement:resultList){
 		    if(settlement.settle_type==SettleType.SETTLEUSER){		    	

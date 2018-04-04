@@ -28,7 +28,7 @@
     			<dd>预期年化收益率：<em class="orange" id="apr">${bid?.apr}%</em></dd>
     			<dd>期限：<em class="orange">${bid?.period}天</em></dd>
     			<dd>到期还款方式：<em>${bid?.repayment?.name}</em></dd>
-    			<dd>募集时间：<p class="plan"><span style="width:100%"></span></p><em class="orange">%</em></dd>
+    			<dd>募集时间：<p class="plan"><span style="width:${bid?.countDownPercent}%"></span></p><em class="orange">${bid?.countDownPercent}%</em></dd>
     			<dd>起投金额：<em>1000 元</em></dd>
     			<dd>融资规模：<em>${bid?.amount?.format('###,##0.00')} 元</em></dd>
     			<dd>剩余可投金额：<em>${(bid?.amount-bid?.hasInvestedAmount).format('###,##0.00')} 元</em></dd>
