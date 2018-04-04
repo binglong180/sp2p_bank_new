@@ -61,7 +61,7 @@ public class SupervisorInterceptor extends BaseController{
 	
 	/**
 	 * 权限拦截
-	 */
+	 *//*
 	@Before(unless = {
 				"supervisor.account.AccountAction.home", 
 				"supervisor.account.AccountAction.editSupervisor",
@@ -109,9 +109,9 @@ public class SupervisorInterceptor extends BaseController{
 		}
 	}
 	
-	/**
+	*//**
 	 * 未设密码拦截
-	 */
+	 *//*
 	@Before(unless = {
 				"supervisor.account.AccountAction.home", 
 				"supervisor.account.AccountAction.editSupervisor",
@@ -133,6 +133,6 @@ public class SupervisorInterceptor extends BaseController{
 			
 			AccountAction.home();
 		}
-	}
+	}*/
 	
 }

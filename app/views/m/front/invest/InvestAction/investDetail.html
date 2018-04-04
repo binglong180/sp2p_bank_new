@@ -23,12 +23,12 @@
     		<li id="3">成交记录</li>
     	</ul>	
     	<div class="bidinfo-bodyone">
-    		<h3>车快融${bid?.title}期</h3>
+    		<h3>槐乡富${bid?.title}期</h3>
     		<dl>
     			<dd>预期年化收益率：<em class="orange" id="apr">${bid?.apr}%</em></dd>
     			<dd>期限：<em class="orange">${bid?.period}天</em></dd>
     			<dd>到期还款方式：<em>${bid?.repayment?.name}</em></dd>
-    			<dd>融资进度：<p class="plan"><span style="width:20%"></span></p><em class="orange">${(bid?.hasInvestedAmount/bid?.amount*100).format('###,##0')}%</em></dd>
+    			<dd>募集时间：<p class="plan"><span style="width:100%"></span></p><em class="orange">%</em></dd>
     			<dd>起投金额：<em>1000 元</em></dd>
     			<dd>融资规模：<em>${bid?.amount?.format('###,##0.00')} 元</em></dd>
     			<dd>剩余可投金额：<em>${(bid?.amount-bid?.hasInvestedAmount).format('###,##0.00')} 元</em></dd>
@@ -64,7 +64,7 @@
     		#{list items:pageBean?.page, as: 'records'}
     		<div class="bidinfo-list">
     			<dl>
-    				<dt>${records?.user_id}</dt>
+    				<dt>${records?.userName}</dt>
     				<dd>${records?.time}</dd>
     			</dl>
     			<span><em>${records?.amount}</em>元</span>
@@ -158,9 +158,9 @@
 					alert("验证失败！");
 					return;
 				}
-				
+
 				//成功后跳转页面
-				//window.location.href="";
+				window.location.href="/m/front/invest/viewBidInvestRecords";
 			}
 			});
 	    		
@@ -168,8 +168,9 @@
 	
 	//计算预计收益
 	function showYjsy(){
-		var apr=${bid?.apr};
-		var period=${bid?.period};
+		var hasInvestedAmount='${bid?.amount-bid?.hasInvestedAmount}';
+		var apr='${bid?.apr}';
+		var period='${bid?.period}';
 		var lendAmount=$("#lendAmount").val();
 		if(lendAmount<1000){
 			$("#lendAmount").val(1000);
@@ -178,6 +179,10 @@
 		}
 		if(lendAmount%1000!=0){
 			alert("请输入1000的整数。");
+			return;
+		}
+		if(lendAmount>hasInvestedAmount){
+			alert("输入金额大于可投金额！");
 			return;
 		}
 		var interest=lendAmount*apr/100/360*period;

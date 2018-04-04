@@ -111,7 +111,7 @@ public class User implements Serializable{
 	public double balance;
 	public boolean createBid;	
 	/*
-	 * 新版用  待收本金',待收利息
+	 * 新版用  待收本金,待收利息
 	 * */
 	public  double receiveCorpus;
 	public  double receiveInterest;

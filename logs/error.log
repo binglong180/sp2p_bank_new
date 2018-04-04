@@ -1,194 +1,86 @@
-2018-03-26 11:55:48,990 ERROR ~ 
+2018-04-03 18:11:55,150 ERROR ~ 
 
-@77d0ighge
-Internal Server Error (500) for request GET /
+@77f8kf060
+Internal Server Error (500) for request GET /m/investDetail?bidId=143
 
-Oops: DuplicateMemberException
-An unexpected error occured caused by exception DuplicateMemberException: duplicate method: count in models.t_bills
-  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 20726
-play.exceptions.UnexpectedException: While applying play.db.jpa.JPAPlugin@4be525ab on models.t_bills
-	at play.plugins.PluginCollection.enhance(PluginCollection.java:556)
-	at play.classloading.ApplicationClasses$ApplicationClass.enhance(ApplicationClasses.java:235)
-	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:167)
-	at play.classloading.ApplicationClassloader.getAllClasses(ApplicationClassloader.java:431)
-	at play.Play.start(Play.java:523)
+Oops: ExceptionInInitializerError
+An unexpected error occured caused by exception ExceptionInInitializerError: null
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 66652
+play.exceptions.UnexpectedException: Unexpected Error
+	at play.Invoker$Invocation.onException(Invoker.java:244)
+	at play.Invoker$Invocation.run(Invoker.java:286)
+	at Invocation.HTTP Request(Play!)
+Caused by: java.lang.ExceptionInInitializerError
+	at org.hibernate.engine.UnsavedValueFactory.instantiate(UnsavedValueFactory.java:45)
+	at org.hibernate.engine.UnsavedValueFactory.getUnsavedIdentifierValue(UnsavedValueFactory.java:67)
+	at org.hibernate.tuple.PropertyFactory.buildIdentifierProperty(PropertyFactory.java:67)
+	at org.hibernate.tuple.entity.EntityMetamodel.<init>(EntityMetamodel.java:135)
+	at org.hibernate.persister.entity.AbstractEntityPersister.<init>(AbstractEntityPersister.java:485)
+	at org.hibernate.persister.entity.SingleTableEntityPersister.<init>(SingleTableEntityPersister.java:133)
+	at org.hibernate.persister.PersisterFactory.createClassPersister(PersisterFactory.java:84)
+	at org.hibernate.impl.SessionFactoryImpl.<init>(SessionFactoryImpl.java:286)
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1872)
+	at org.hibernate.ejb.Ejb3Configuration.buildEntityManagerFactory(Ejb3Configuration.java:906)
+	at play.db.jpa.JPAPlugin.onApplicationStart(JPAPlugin.java:267)
+	at play.plugins.PluginCollection.onApplicationStart(PluginCollection.java:525)
+	at play.Play.start(Play.java:533)
+	at play.Play.detectChanges(Play.java:637)
+	at play.Invoker$Invocation.init(Invoker.java:198)
+	... 1 more
+Caused by: java.lang.NullPointerException
+	at models.t_bids.<clinit>(t_bids.java:200)
+	... 16 more
+2018-04-03 18:12:12,181 ERROR ~ 
+
+@77f8kf061
+Internal Server Error (500) for request GET /m/investDetail?bidId=143
+
+Oops: ObjectExistsException
+An unexpected error occured caused by exception ObjectExistsException: Cache play already exists
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 83683
+play.exceptions.UnexpectedException: Unexpected Error
+	at play.Play.start(Play.java:563)
 	at play.Play.detectChanges(Play.java:637)
 	at play.Invoker$Invocation.init(Invoker.java:198)
 	at Invocation.HTTP Request(Play!)
-Caused by: javassist.bytecode.DuplicateMemberException: duplicate method: count in models.t_bills
-	at javassist.bytecode.ClassFile.testExistingMethod(ClassFile.java:593)
-	at javassist.bytecode.ClassFile.addMethod(ClassFile.java:577)
-	at javassist.CtClassType.addMethod(CtClassType.java:1235)
-	at play.db.jpa.JPAEnhancer.enhanceThisClass(JPAEnhancer.java:29)
-	at play.db.jpa.JPAPlugin.enhance(JPAPlugin.java:102)
-	at play.plugins.PluginCollection.enhance(PluginCollection.java:551)
-	... 7 more
-2018-03-26 12:03:03,341 ERROR ~ 
+Caused by: net.sf.ehcache.ObjectExistsException: Cache play already exists
+	at net.sf.ehcache.CacheManager.addCache(CacheManager.java:934)
+	at play.cache.EhCacheImpl.<init>(EhCacheImpl.java:32)
+	at play.cache.EhCacheImpl.newInstance(EhCacheImpl.java:41)
+	at play.cache.Cache.init(Cache.java:241)
+	at play.Play.start(Play.java:529)
+	... 3 more
+2018-04-03 18:13:30,912 ERROR ~ 
 
-@77d0jfaie
-Internal Server Error (500) for request GET /
+@77f8kf062
+Internal Server Error (500) for request GET /m/investDetail?bidId=143
 
-Oops: DuplicateMemberException
-An unexpected error occured caused by exception DuplicateMemberException: duplicate method: count in models.t_bills
-  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 16265
-play.exceptions.UnexpectedException: While applying play.db.jpa.JPAPlugin@4be525ab on models.t_bills
-	at play.plugins.PluginCollection.enhance(PluginCollection.java:556)
-	at play.classloading.ApplicationClasses$ApplicationClass.enhance(ApplicationClasses.java:235)
-	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:167)
-	at play.classloading.ApplicationClassloader.getAllClasses(ApplicationClassloader.java:431)
-	at play.Play.start(Play.java:523)
-	at play.Play.detectChanges(Play.java:637)
+JPA error
+A JPA error occurred (Unable to build EntityManagerFactory): could not instantiate test objectmodels.t_bids
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 162414
+play.exceptions.JPAException: Unable to build EntityManagerFactory
+	at play.db.jpa.JPAPlugin.onApplicationStart(JPAPlugin.java:269)
+	at play.plugins.PluginCollection.onApplicationStart(PluginCollection.java:525)
+	at play.Play.start(Play.java:533)
+	at play.Play.detectChanges(Play.java:649)
 	at play.Invoker$Invocation.init(Invoker.java:198)
 	at Invocation.HTTP Request(Play!)
-Caused by: javassist.bytecode.DuplicateMemberException: duplicate method: count in models.t_bills
-	at javassist.bytecode.ClassFile.testExistingMethod(ClassFile.java:593)
-	at javassist.bytecode.ClassFile.addMethod(ClassFile.java:577)
-	at javassist.CtClassType.addMethod(CtClassType.java:1235)
-	at play.db.jpa.JPAEnhancer.enhanceThisClass(JPAEnhancer.java:29)
-	at play.db.jpa.JPAPlugin.enhance(JPAPlugin.java:102)
-	at play.plugins.PluginCollection.enhance(PluginCollection.java:551)
-	... 7 more
-2018-03-26 13:09:42,015 ERROR ~ 
-
-@77d128ndl
-Internal Server Error (500) for request GET /
-
-Oops: DuplicateMemberException
-An unexpected error occured caused by exception DuplicateMemberException: duplicate method: count in models.t_bills
-  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 23564
-play.exceptions.UnexpectedException: While applying play.db.jpa.JPAPlugin@142edebe on models.t_bills
-	at play.plugins.PluginCollection.enhance(PluginCollection.java:556)
-	at play.classloading.ApplicationClasses$ApplicationClass.enhance(ApplicationClasses.java:235)
-	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:167)
-	at play.classloading.ApplicationClassloader.getAllClasses(ApplicationClassloader.java:431)
-	at play.Play.start(Play.java:523)
-	at play.Play.detectChanges(Play.java:637)
-	at play.Invoker$Invocation.init(Invoker.java:198)
-	at Invocation.HTTP Request(Play!)
-Caused by: javassist.bytecode.DuplicateMemberException: duplicate method: count in models.t_bills
-	at javassist.bytecode.ClassFile.testExistingMethod(ClassFile.java:593)
-	at javassist.bytecode.ClassFile.addMethod(ClassFile.java:577)
-	at javassist.CtClassType.addMethod(CtClassType.java:1235)
-	at play.db.jpa.JPAEnhancer.enhanceThisClass(JPAEnhancer.java:29)
-	at play.db.jpa.JPAPlugin.enhance(JPAPlugin.java:102)
-	at play.plugins.PluginCollection.enhance(PluginCollection.java:551)
-	... 7 more
-2018-03-26 13:12:45,835 ERROR ~ 
-
-@77d12ja2a
-Internal Server Error (500) for request GET /
-
-Oops: DuplicateMemberException
-An unexpected error occured caused by exception DuplicateMemberException: duplicate method: count in models.t_bills
-  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 15081
-play.exceptions.UnexpectedException: While applying play.db.jpa.JPAPlugin@4be525ab on models.t_bills
-	at play.plugins.PluginCollection.enhance(PluginCollection.java:556)
-	at play.classloading.ApplicationClasses$ApplicationClass.enhance(ApplicationClasses.java:235)
-	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:167)
-	at play.classloading.ApplicationClassloader.getAllClasses(ApplicationClassloader.java:431)
-	at play.Play.start(Play.java:523)
-	at play.Play.detectChanges(Play.java:637)
-	at play.Invoker$Invocation.init(Invoker.java:198)
-	at Invocation.HTTP Request(Play!)
-Caused by: javassist.bytecode.DuplicateMemberException: duplicate method: count in models.t_bills
-	at javassist.bytecode.ClassFile.testExistingMethod(ClassFile.java:593)
-	at javassist.bytecode.ClassFile.addMethod(ClassFile.java:577)
-	at javassist.CtClassType.addMethod(CtClassType.java:1235)
-	at play.db.jpa.JPAEnhancer.enhanceThisClass(JPAEnhancer.java:29)
-	at play.db.jpa.JPAPlugin.enhance(JPAPlugin.java:102)
-	at play.plugins.PluginCollection.enhance(PluginCollection.java:551)
-	... 7 more
-2018-03-26 13:16:19,535 ERROR ~ 
-
-@77d135e3k
-Internal Server Error (500) for request GET /
-
-Compilation error (In /app/business/newr/Bill.java around line 109)
-The file /app/business/newr/Bill.java could not be compiled. Error raised is : bid_id cannot be resolved or is not a field
-  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 11996
-play.exceptions.CompilationException: bid_id cannot be resolved or is not a field
-	at play.classloading.ApplicationCompiler$2.acceptResult(ApplicationCompiler.java:246)
-	at org.eclipse.jdt.internal.compiler.Compiler.handleInternalException(Compiler.java:676)
-	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:520)
-	at play.classloading.ApplicationCompiler.compile(ApplicationCompiler.java:282)
-	at play.classloading.ApplicationClassloader.getAllClasses(ApplicationClassloader.java:426)
-	at play.Play.start(Play.java:523)
-	at play.Play.detectChanges(Play.java:637)
-	at play.Invoker$Invocation.init(Invoker.java:198)
-	at Invocation.HTTP Request(Play!)
-2018-03-26 13:16:56,024 ERROR ~ 
-
-@77d137g42
-Internal Server Error (500) for request GET /
-
-Oops: DuplicateMemberException
-An unexpected error occured caused by exception DuplicateMemberException: duplicate method: count in models.t_bills
-  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 14816
-play.exceptions.UnexpectedException: While applying play.db.jpa.JPAPlugin@4be525ab on models.t_bills
-	at play.plugins.PluginCollection.enhance(PluginCollection.java:556)
-	at play.classloading.ApplicationClasses$ApplicationClass.enhance(ApplicationClasses.java:235)
-	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:167)
-	at play.classloading.ApplicationClassloader.getAllClasses(ApplicationClassloader.java:431)
-	at play.Play.start(Play.java:523)
-	at play.Play.detectChanges(Play.java:637)
-	at play.Invoker$Invocation.init(Invoker.java:198)
-	at Invocation.HTTP Request(Play!)
-Caused by: javassist.bytecode.DuplicateMemberException: duplicate method: count in models.t_bills
-	at javassist.bytecode.ClassFile.testExistingMethod(ClassFile.java:593)
-	at javassist.bytecode.ClassFile.addMethod(ClassFile.java:577)
-	at javassist.CtClassType.addMethod(CtClassType.java:1235)
-	at play.db.jpa.JPAEnhancer.enhanceThisClass(JPAEnhancer.java:29)
-	at play.db.jpa.JPAPlugin.enhance(JPAPlugin.java:102)
-	at play.plugins.PluginCollection.enhance(PluginCollection.java:551)
-	... 7 more
-2018-03-26 13:20:31,132 ERROR ~ 
-
-@77d13jm09
-Internal Server Error (500) for request GET /
-
-Oops: DuplicateMemberException
-An unexpected error occured caused by exception DuplicateMemberException: duplicate method: count in models.t_bills
-  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 16697
-play.exceptions.UnexpectedException: While applying play.db.jpa.JPAPlugin@310c247a on models.t_bills
-	at play.plugins.PluginCollection.enhance(PluginCollection.java:556)
-	at play.classloading.ApplicationClasses$ApplicationClass.enhance(ApplicationClasses.java:235)
-	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:167)
-	at play.classloading.ApplicationClassloader.getAllClasses(ApplicationClassloader.java:431)
-	at play.Play.start(Play.java:523)
-	at play.Play.detectChanges(Play.java:637)
-	at play.Invoker$Invocation.init(Invoker.java:198)
-	at Invocation.HTTP Request(Play!)
-Caused by: javassist.bytecode.DuplicateMemberException: duplicate method: count in models.t_bills
-	at javassist.bytecode.ClassFile.testExistingMethod(ClassFile.java:593)
-	at javassist.bytecode.ClassFile.addMethod(ClassFile.java:577)
-	at javassist.CtClassType.addMethod(CtClassType.java:1235)
-	at play.db.jpa.JPAEnhancer.enhanceThisClass(JPAEnhancer.java:29)
-	at play.db.jpa.JPAPlugin.enhance(JPAPlugin.java:102)
-	at play.plugins.PluginCollection.enhance(PluginCollection.java:551)
-	... 7 more
-2018-03-26 13:23:34,787 ERROR ~ 
-
-@77d14481i
-Internal Server Error (500) for request GET /
-
-Oops: DuplicateMemberException
-An unexpected error occured caused by exception DuplicateMemberException: duplicate method: count in models.t_bills
-  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 15902
-play.exceptions.UnexpectedException: While applying play.db.jpa.JPAPlugin@4be525ab on models.t_bills
-	at play.plugins.PluginCollection.enhance(PluginCollection.java:556)
-	at play.classloading.ApplicationClasses$ApplicationClass.enhance(ApplicationClasses.java:235)
-	at play.classloading.ApplicationClassloader.loadApplicationClass(ApplicationClassloader.java:167)
-	at play.classloading.ApplicationClassloader.getAllClasses(ApplicationClassloader.java:431)
-	at play.Play.start(Play.java:523)
-	at play.Play.detectChanges(Play.java:637)
-	at play.Invoker$Invocation.init(Invoker.java:198)
-	at Invocation.HTTP Request(Play!)
-Caused by: javassist.bytecode.DuplicateMemberException: duplicate method: count in models.t_bills
-	at javassist.bytecode.ClassFile.testExistingMethod(ClassFile.java:593)
-	at javassist.bytecode.ClassFile.addMethod(ClassFile.java:577)
-	at javassist.CtClassType.addMethod(CtClassType.java:1235)
-	at play.db.jpa.JPAEnhancer.enhanceThisClass(JPAEnhancer.java:29)
-	at play.db.jpa.JPAPlugin.enhance(JPAPlugin.java:102)
-	at play.plugins.PluginCollection.enhance(PluginCollection.java:551)
-	... 7 more
-2018-03-26 16:17:01,630 ERROR ~ Could not bind on port 9000  ~ play.Logger.error(Logger.java:399) ~ play ~ 1154
+Caused by: org.hibernate.InstantiationException: could not instantiate test objectmodels.t_bids
+	at org.hibernate.engine.UnsavedValueFactory.instantiate(UnsavedValueFactory.java:48)
+	at org.hibernate.engine.UnsavedValueFactory.getUnsavedIdentifierValue(UnsavedValueFactory.java:67)
+	at org.hibernate.tuple.PropertyFactory.buildIdentifierProperty(PropertyFactory.java:67)
+	at org.hibernate.tuple.entity.EntityMetamodel.<init>(EntityMetamodel.java:135)
+	at org.hibernate.persister.entity.AbstractEntityPersister.<init>(AbstractEntityPersister.java:485)
+	at org.hibernate.persister.entity.SingleTableEntityPersister.<init>(SingleTableEntityPersister.java:133)
+	at org.hibernate.persister.PersisterFactory.createClassPersister(PersisterFactory.java:84)
+	at org.hibernate.impl.SessionFactoryImpl.<init>(SessionFactoryImpl.java:286)
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1872)
+	at org.hibernate.ejb.Ejb3Configuration.buildEntityManagerFactory(Ejb3Configuration.java:906)
+	at play.db.jpa.JPAPlugin.onApplicationStart(JPAPlugin.java:267)
+	... 5 more
+Caused by: java.lang.reflect.InvocationTargetException
+	at org.hibernate.engine.UnsavedValueFactory.instantiate(UnsavedValueFactory.java:45)
+	... 15 more
+Caused by: java.lang.NullPointerException
+	at models.t_bids.<init>(t_bids.java:200)
+	... 16 more

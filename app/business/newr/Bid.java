@@ -3,6 +3,7 @@ package business.newr;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ import payment.api.vo.BankAccount;
 import payment.newr.zj.service.impl.PaymentServiceImpl;
 import play.Logger;
 import play.cache.Cache;
+import play.db.helper.JpaHelper;
 import play.db.jpa.JPA;
 import utils.Arith;
 import utils.DataUtil;
@@ -394,6 +396,16 @@ public class Bid implements Serializable{
 		this.beginInterest = tbid.begin_interest;
 		this.productId = tbid.product_id;
 	}
+	
+	/**
+	 * 修改标状态为放款中状态码 2
+	 */
+	public static int updateStatus(long bidId) throws SQLException{
+		int row=-1;
+		String sql = "update t_bids set status=2 where id= ? ";
+		JpaHelper.execute(sql, bidId).executeUpdate();
+		return row;
+	}
 	public Integer settlementCount;
 	
 	 /**
@@ -407,9 +419,13 @@ public class Bid implements Serializable{
 		public static List<t_bids> queryBidAuditing(PageBean<t_bids> pageBean, ErrorInfo error) {
 			error.clear();
 			int count = -1;			
-	
+			List<t_bids> results = t_bids.find(" status = 1  and invest_expire_time<now() ").fetch();
+			for (t_bids bid : results) {
+				String sql="update t_bids set status=3 where id= ? ";
+				JpaHelper.execute(sql, bid.id).executeUpdate();
+			}
 			StringBuffer sql = new StringBuffer("SELECT count(b.id) FROM  t_bids b	 "
-					+ " where b.status = 1");
+					+ " where b.status = 3 ");
 			EntityManager em = JPA.em();
 	        Query query = em.createNativeQuery(sql.toString());
 	        List<?> list = null;
@@ -434,7 +450,7 @@ public class Bid implements Serializable{
 	        
 			try {
 				List<t_bids> result = 
-						t_bids.find(" status = 1  ").fetch(pageBean.currPage , pageBean.pageSize);
+						t_bids.find(" status = 3  ").fetch(pageBean.currPage , pageBean.pageSize);
 				return result;
 			} catch (Exception e) {
 				Logger.error("标->审核中的标列表,查询列表:" + e.getMessage());
@@ -1351,6 +1367,7 @@ public class Bid implements Serializable{
 		//1 分账
 		List<t_settlement>  resultList = new ArrayList<t_settlement>();
 		try {
+			Bid.updateStatus(this.id);
 			t_users user = t_users.find("id=?", this.userId).first();
 			t_user_bank_accounts accounts = t_user_bank_accounts.find("user_id=?", user.getId()).first();
 			t_settlement settleLoan = new t_settlement();
@@ -1451,6 +1468,7 @@ public class Bid implements Serializable{
 		}
 		return null;
 	}
+	
 	private Tx134xResponse settleBid(Tx1341Request tx1341Request){
 		Map<String, String> paramMap = new HashMap<String, String>();
 	    paramMap.put("UsrCustId", user.id+"");
@@ -1469,6 +1487,7 @@ public class Bid implements Serializable{
 	    Tx134xResponse response = paymentServiceImpl.fullBidRelease(tx1341Request);	  
 	 return response;   
 	}
+	
    private Double calculateLoanerMoney(double amount,double investRate,double apr,int period){
 	    double fee = amount*(1-(investRate-apr)*0.01*period/360); 
 	    return fee;

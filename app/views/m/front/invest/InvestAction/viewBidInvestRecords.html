@@ -96,7 +96,7 @@ function rolldealdetail(title,investId){
 			<tbody id="tbody">
 				#{list items:pageBean?.page , as: 'records'}
 				<tr data-toggle="modal" data-target="#myModal" class="myModal">
-					<td><span>车快融<em>${records?.title}期</em></span></td>
+					<td><span>槐乡富<em>${records?.title}期</em></span></td>
 					<td>${records?.invest_amount}</td>
 					<td><span class="table-time">${records?.time?.format('yyyy-MM-dd')}<em>${records?.time?.format('HH:mm:ss')}</em></span></td>
 					<td><span class="table-text-red">#{if records?.status == 2}

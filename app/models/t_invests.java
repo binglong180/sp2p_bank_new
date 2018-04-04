@@ -1,8 +1,16 @@
 package models;
 
 import java.util.Date;
+
 import javax.persistence.Entity;
+import javax.persistence.Transient;
+
+import org.junit.Ignore;
+
+import business.newr.User;
+import models.newr.t_users;
 import play.db.jpa.Model;
+import utils.ErrorInfo;
 
 /**
  * 
@@ -27,6 +35,21 @@ public class t_invests extends Model {
 	public String intermediary_agreement;
 	public String guarantee_invest;	
 	
+	@Transient
+	public String userName;
+	
+	
+
+	public String getUserName() {
+		String name=User.queryUserNameById(user_id, new ErrorInfo());
+		this.userName=name.substring(0,3);
+		return userName+"****";
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	public t_invests(long user_id,long bid_id){
 		this.bid_id = bid_id;
 		this.user_id = user_id;

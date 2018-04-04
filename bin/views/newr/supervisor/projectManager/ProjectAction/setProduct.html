@@ -62,7 +62,7 @@ $(window).resize(function(){
                                     <img onclick="WdatePicker({el:$dp.$('startTime')})" src="@{'/public/My97DatePicker/skin/datePicker.gif'}" _fcksavedurl="@{'/public/My97DatePicker/skin/datePicker.gif'}" width="16" height="22" align="absmiddle"> 
                             </li>
                              <li>
-                                <div class="td_title"><span>*</span>出票日期：</div>
+                                <div class="td_title"><span>*</span>到期日期：</div>
                                     <input id="endTime"  name = "ticket.end_time" placeholder = "yyyy-mm-dd" type="text" style="height:30px;"/> 
                                     <img onclick="WdatePicker({el:$dp.$('endTime')})" src="@{'/public/My97DatePicker/skin/datePicker.gif'}" _fcksavedurl="@{'/public/My97DatePicker/skin/datePicker.gif'}" width="16" height="22" align="absmiddle"> 
                             </li>
@@ -72,7 +72,7 @@ $(window).resize(function(){
                                      <option  value="1">商业汇票</option>
                                      <option  value="2">承兑汇票</option>
                                   </select>
-                                <div class="td_content"><input class="input_title" type="text" id="type" name ="ticket.type"  placeholder=""></div>
+                           
                             </li>
                             <li>
                                 <div class="td_title"><span>*</span>商票编号：</div>
@@ -82,7 +82,10 @@ $(window).resize(function(){
                                 <div class="td_title"><span>*</span>商票金额：</div>
                                 <div class="td_content"><input class="input_title" type="text" id="amout" name ="ticket.ticket_amout"  placeholder=""></div>
                             </li>
-                            
+                            <li>
+                            <br/>
+                            <br/>
+                            </li>
                             <li>
                                  <div class="td_title"><span>*</span>票据影印件：</div>
                                     <div class="pic_div">  

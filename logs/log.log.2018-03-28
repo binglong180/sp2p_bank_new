@@ -1,0 +1,153 @@
+2018-03-28 08:52:56,147 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-28 08:52:58,508 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 2361
+2018-03-28 08:52:58,629 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 2482
+2018-03-28 08:53:28,147 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 32000
+2018-03-28 08:53:43,712 INFO  ~ Connected to jdbc:mysql://127.0.0.1/p2p_bank?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci  ~ play.Logger.info(Logger.java:289) ~ play ~ 47565
+2018-03-28 08:53:46,206 INFO  ~ Application 'sp2p_bank' is now started !  ~ play.Logger.info(Logger.java:289) ~ play ~ 50059
+2018-03-28 08:53:46,812 DEBUG ~ select t_system_o0_.id as id32_, t_system_o0_._key as column2_32_, t_system_o0_._value as column3_32_, t_system_o0_.description as descript4_32_ from t_system_options t_system_o0_ order by t_system_o0_.id  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 50665
+2018-03-28 08:53:47,288 DEBUG ~ select t_dict_ad_0_.id as id18_, t_dict_ad_0_.name as name18_ from t_dict_ad_provinces t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 51141
+2018-03-28 08:53:47,384 DEBUG ~ select t_dict_ad_0_.id as id53_, t_dict_ad_0_.name as name53_, t_dict_ad_0_.province_id as province3_53_ from t_dict_ad_citys t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 51237
+2018-03-28 09:12:34,011 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-28 09:12:35,162 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1151
+2018-03-28 09:12:35,273 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1262
+2018-03-28 09:12:46,878 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 12867
+2018-03-28 09:12:55,257 ERROR ~ 
+
+@77deba49c
+Internal Server Error (500) for request GET /
+
+Compilation error (In /app/controllers/m/front/newHomeAction.java around line 25)
+The file /app/controllers/m/front/newHomeAction.java could not be compiled. Error raised is : Type mismatch: cannot convert from PageBean&lt;Bid> to PageBean&lt;t_bids>
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 21246
+play.exceptions.CompilationException: Type mismatch: cannot convert from PageBean<Bid> to PageBean<t_bids>
+	at play.classloading.ApplicationCompiler$2.acceptResult(ApplicationCompiler.java:246)
+	at org.eclipse.jdt.internal.compiler.Compiler.handleInternalException(Compiler.java:676)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:520)
+	at play.classloading.ApplicationCompiler.compile(ApplicationCompiler.java:282)
+	at play.classloading.ApplicationClassloader.getAllClasses(ApplicationClassloader.java:426)
+	at play.Play.start(Play.java:523)
+	at play.Play.detectChanges(Play.java:637)
+	at play.Invoker$Invocation.init(Invoker.java:198)
+	at Invocation.HTTP Request(Play!)
+2018-03-28 09:12:56,270 ERROR ~ 
+
+@77deba49d
+Internal Server Error (500) for request GET /
+
+Compilation error (In /app/controllers/m/front/newHomeAction.java around line 25)
+The file /app/controllers/m/front/newHomeAction.java could not be compiled. Error raised is : Type mismatch: cannot convert from PageBean&lt;Bid> to PageBean&lt;t_bids>
+  ~ play.Logger.niceThrowable(Logger.java:570) ~ play ~ 22259
+play.exceptions.CompilationException: Type mismatch: cannot convert from PageBean<Bid> to PageBean<t_bids>
+	at play.classloading.ApplicationCompiler$2.acceptResult(ApplicationCompiler.java:246)
+	at org.eclipse.jdt.internal.compiler.Compiler.handleInternalException(Compiler.java:676)
+	at org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:520)
+	at play.classloading.ApplicationCompiler.compile(ApplicationCompiler.java:282)
+	at play.classloading.ApplicationClassloader.getAllClasses(ApplicationClassloader.java:426)
+	at play.Play.start(Play.java:523)
+	at play.Play.detectChanges(Play.java:649)
+	at play.Invoker$Invocation.init(Invoker.java:198)
+	at Invocation.HTTP Request(Play!)
+2018-03-28 09:15:01,723 INFO  ~ Connected to jdbc:mysql://127.0.0.1/p2p_bank?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci  ~ play.Logger.info(Logger.java:289) ~ play ~ 147712
+2018-03-28 09:15:04,265 INFO  ~ Application 'sp2p_bank' is now started !  ~ play.Logger.info(Logger.java:289) ~ play ~ 150254
+2018-03-28 09:15:04,683 DEBUG ~ select t_system_o0_.id as id32_, t_system_o0_._key as column2_32_, t_system_o0_._value as column3_32_, t_system_o0_.description as descript4_32_ from t_system_options t_system_o0_ order by t_system_o0_.id  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 150672
+2018-03-28 09:15:04,774 DEBUG ~ select t_dict_ad_0_.id as id18_, t_dict_ad_0_.name as name18_ from t_dict_ad_provinces t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 150763
+2018-03-28 09:15:04,783 DEBUG ~ select t_dict_ad_0_.id as id53_, t_dict_ad_0_.name as name53_, t_dict_ad_0_.province_id as province3_53_ from t_dict_ad_citys t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 150772
+2018-03-28 09:33:18,628 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-28 09:33:19,765 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1137
+2018-03-28 09:33:19,884 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1256
+2018-03-28 09:33:23,764 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 5136
+2018-03-28 09:33:33,684 INFO  ~ Connected to jdbc:mysql://127.0.0.1/p2p_bank?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci  ~ play.Logger.info(Logger.java:289) ~ play ~ 15056
+2018-03-28 09:33:35,780 INFO  ~ Application 'sp2p_bank' is now started !  ~ play.Logger.info(Logger.java:289) ~ play ~ 17152
+2018-03-28 09:33:36,260 DEBUG ~ select t_system_o0_.id as id32_, t_system_o0_._key as column2_32_, t_system_o0_._value as column3_32_, t_system_o0_.description as descript4_32_ from t_system_options t_system_o0_ order by t_system_o0_.id  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 17632
+2018-03-28 09:33:36,363 DEBUG ~ select t_dict_ad_0_.id as id18_, t_dict_ad_0_.name as name18_ from t_dict_ad_provinces t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 17735
+2018-03-28 09:33:36,372 DEBUG ~ select t_dict_ad_0_.id as id53_, t_dict_ad_0_.name as name53_, t_dict_ad_0_.province_id as province3_53_ from t_dict_ad_citys t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 17744
+2018-03-28 10:07:27,044 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-28 10:07:28,323 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1279
+2018-03-28 10:07:28,435 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1391
+2018-03-28 10:07:33,901 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 6857
+2018-03-28 10:07:44,384 INFO  ~ Connected to jdbc:mysql://127.0.0.1/p2p_bank?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci  ~ play.Logger.info(Logger.java:289) ~ play ~ 17340
+2018-03-28 10:07:46,434 INFO  ~ Application 'sp2p_bank' is now started !  ~ play.Logger.info(Logger.java:289) ~ play ~ 19390
+2018-03-28 10:07:46,964 DEBUG ~ select t_system_o0_.id as id32_, t_system_o0_._key as column2_32_, t_system_o0_._value as column3_32_, t_system_o0_.description as descript4_32_ from t_system_options t_system_o0_ order by t_system_o0_.id  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 19920
+2018-03-28 10:07:47,057 DEBUG ~ select t_dict_ad_0_.id as id18_, t_dict_ad_0_.name as name18_ from t_dict_ad_provinces t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 20013
+2018-03-28 10:07:47,067 DEBUG ~ select t_dict_ad_0_.id as id53_, t_dict_ad_0_.name as name53_, t_dict_ad_0_.province_id as province3_53_ from t_dict_ad_citys t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 20023
+2018-03-28 10:35:39,757 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-28 10:35:40,936 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1179
+2018-03-28 10:35:41,057 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1300
+2018-03-28 10:35:46,403 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 6646
+2018-03-28 10:35:56,746 INFO  ~ Connected to jdbc:mysql://127.0.0.1/p2p_bank?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci  ~ play.Logger.info(Logger.java:289) ~ play ~ 16989
+2018-03-28 10:35:58,952 INFO  ~ Application 'sp2p_bank' is now started !  ~ play.Logger.info(Logger.java:289) ~ play ~ 19195
+2018-03-28 10:35:59,577 DEBUG ~ select t_system_o0_.id as id32_, t_system_o0_._key as column2_32_, t_system_o0_._value as column3_32_, t_system_o0_.description as descript4_32_ from t_system_options t_system_o0_ order by t_system_o0_.id  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 19820
+2018-03-28 10:35:59,691 DEBUG ~ select t_dict_ad_0_.id as id18_, t_dict_ad_0_.name as name18_ from t_dict_ad_provinces t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 19934
+2018-03-28 10:35:59,699 DEBUG ~ select t_dict_ad_0_.id as id53_, t_dict_ad_0_.name as name53_, t_dict_ad_0_.province_id as province3_53_ from t_dict_ad_citys t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 19942
+2018-03-28 10:38:43,167 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-28 10:38:44,310 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1143
+2018-03-28 10:38:44,432 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1265
+2018-03-28 10:38:49,596 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 6429
+2018-03-28 10:39:00,700 INFO  ~ Connected to jdbc:mysql://127.0.0.1/p2p_bank?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci  ~ play.Logger.info(Logger.java:289) ~ play ~ 17533
+2018-03-28 10:39:02,819 INFO  ~ Application 'sp2p_bank' is now started !  ~ play.Logger.info(Logger.java:289) ~ play ~ 19652
+2018-03-28 10:39:03,275 DEBUG ~ select t_system_o0_.id as id32_, t_system_o0_._key as column2_32_, t_system_o0_._value as column3_32_, t_system_o0_.description as descript4_32_ from t_system_options t_system_o0_ order by t_system_o0_.id  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 20108
+2018-03-28 10:39:03,366 DEBUG ~ select t_dict_ad_0_.id as id18_, t_dict_ad_0_.name as name18_ from t_dict_ad_provinces t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 20199
+2018-03-28 10:39:03,375 DEBUG ~ select t_dict_ad_0_.id as id53_, t_dict_ad_0_.name as name53_, t_dict_ad_0_.province_id as province3_53_ from t_dict_ad_citys t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 20208
+2018-03-28 13:42:43,003 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-28 13:42:44,228 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1225
+2018-03-28 13:42:44,386 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1383
+2018-03-28 13:42:50,206 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 7203
+2018-03-28 13:43:01,261 INFO  ~ Connected to jdbc:mysql://127.0.0.1/p2p_bank?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci  ~ play.Logger.info(Logger.java:289) ~ play ~ 18258
+2018-03-28 13:43:03,396 INFO  ~ Application 'sp2p_bank' is now started !  ~ play.Logger.info(Logger.java:289) ~ play ~ 20393
+2018-03-28 13:43:03,893 DEBUG ~ select t_system_o0_.id as id32_, t_system_o0_._key as column2_32_, t_system_o0_._value as column3_32_, t_system_o0_.description as descript4_32_ from t_system_options t_system_o0_ order by t_system_o0_.id  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 20890
+2018-03-28 13:43:03,999 DEBUG ~ select t_dict_ad_0_.id as id18_, t_dict_ad_0_.name as name18_ from t_dict_ad_provinces t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 20996
+2018-03-28 13:43:04,008 DEBUG ~ select t_dict_ad_0_.id as id53_, t_dict_ad_0_.name as name53_, t_dict_ad_0_.province_id as province3_53_ from t_dict_ad_citys t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 21005
+2018-03-28 14:02:37,889 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-28 14:02:39,029 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1140
+2018-03-28 14:02:39,144 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1255
+2018-03-28 14:02:39,652 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1763
+2018-03-28 14:02:49,127 INFO  ~ Connected to jdbc:mysql://127.0.0.1/p2p_bank?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci  ~ play.Logger.info(Logger.java:289) ~ play ~ 11238
+2018-03-28 14:02:51,194 INFO  ~ Application 'sp2p_bank' is now started !  ~ play.Logger.info(Logger.java:289) ~ play ~ 13305
+2018-03-28 14:02:51,607 DEBUG ~ select t_system_o0_.id as id32_, t_system_o0_._key as column2_32_, t_system_o0_._value as column3_32_, t_system_o0_.description as descript4_32_ from t_system_options t_system_o0_ order by t_system_o0_.id  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 13718
+2018-03-28 14:02:51,687 DEBUG ~ select t_dict_ad_0_.id as id18_, t_dict_ad_0_.name as name18_ from t_dict_ad_provinces t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 13798
+2018-03-28 14:02:51,695 DEBUG ~ select t_dict_ad_0_.id as id53_, t_dict_ad_0_.name as name53_, t_dict_ad_0_.province_id as province3_53_ from t_dict_ad_citys t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 13806
+2018-03-28 14:33:16,177 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-28 14:33:17,325 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1148
+2018-03-28 14:33:17,458 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1281
+2018-03-28 14:33:22,255 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 6078
+2018-03-28 14:33:32,736 INFO  ~ Connected to jdbc:mysql://127.0.0.1/p2p_bank?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci  ~ play.Logger.info(Logger.java:289) ~ play ~ 16559
+2018-03-28 14:33:35,105 INFO  ~ Application 'sp2p_bank' is now started !  ~ play.Logger.info(Logger.java:289) ~ play ~ 18928
+2018-03-28 14:33:35,618 DEBUG ~ select t_system_o0_.id as id32_, t_system_o0_._key as column2_32_, t_system_o0_._value as column3_32_, t_system_o0_.description as descript4_32_ from t_system_options t_system_o0_ order by t_system_o0_.id  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 19441
+2018-03-28 14:33:35,731 DEBUG ~ select t_dict_ad_0_.id as id18_, t_dict_ad_0_.name as name18_ from t_dict_ad_provinces t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 19554
+2018-03-28 14:33:35,740 DEBUG ~ select t_dict_ad_0_.id as id53_, t_dict_ad_0_.name as name53_, t_dict_ad_0_.province_id as province3_53_ from t_dict_ad_citys t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 19563
+2018-03-28 14:48:12,397 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-28 14:48:13,589 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1192
+2018-03-28 14:48:13,704 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1307
+2018-03-28 14:48:16,868 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 4471
+2018-03-28 14:48:26,905 INFO  ~ Connected to jdbc:mysql://127.0.0.1/p2p_bank?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci  ~ play.Logger.info(Logger.java:289) ~ play ~ 14508
+2018-03-28 14:48:29,095 INFO  ~ Application 'sp2p_bank' is now started !  ~ play.Logger.info(Logger.java:289) ~ play ~ 16698
+2018-03-28 14:48:29,588 DEBUG ~ select t_system_o0_.id as id32_, t_system_o0_._key as column2_32_, t_system_o0_._value as column3_32_, t_system_o0_.description as descript4_32_ from t_system_options t_system_o0_ order by t_system_o0_.id  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 17191
+2018-03-28 14:48:29,695 DEBUG ~ select t_dict_ad_0_.id as id18_, t_dict_ad_0_.name as name18_ from t_dict_ad_provinces t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 17298
+2018-03-28 14:48:29,704 DEBUG ~ select t_dict_ad_0_.id as id53_, t_dict_ad_0_.name as name53_, t_dict_ad_0_.province_id as province3_53_ from t_dict_ad_citys t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 17307
+2018-03-28 15:13:30,567 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-28 15:13:31,826 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1259
+2018-03-28 15:13:31,967 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1400
+2018-03-28 15:13:33,610 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 3043
+2018-03-28 15:13:43,559 INFO  ~ Connected to jdbc:mysql://127.0.0.1/p2p_bank?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci  ~ play.Logger.info(Logger.java:289) ~ play ~ 12992
+2018-03-28 15:13:45,602 INFO  ~ Application 'sp2p_bank' is now started !  ~ play.Logger.info(Logger.java:289) ~ play ~ 15035
+2018-03-28 15:13:46,080 DEBUG ~ select t_system_o0_.id as id32_, t_system_o0_._key as column2_32_, t_system_o0_._value as column3_32_, t_system_o0_.description as descript4_32_ from t_system_options t_system_o0_ order by t_system_o0_.id  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 15513
+2018-03-28 15:13:46,192 DEBUG ~ select t_dict_ad_0_.id as id18_, t_dict_ad_0_.name as name18_ from t_dict_ad_provinces t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 15625
+2018-03-28 15:13:46,201 DEBUG ~ select t_dict_ad_0_.id as id53_, t_dict_ad_0_.name as name53_, t_dict_ad_0_.province_id as province3_53_ from t_dict_ad_citys t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 15634
+2018-03-28 21:20:47,969 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-28 21:20:49,073 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1104
+2018-03-28 21:20:49,182 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1213
+2018-03-28 21:21:06,613 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 18644
+2018-03-28 21:21:18,585 INFO  ~ Connected to jdbc:mysql://127.0.0.1/p2p_bank?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci  ~ play.Logger.info(Logger.java:289) ~ play ~ 30616
+2018-03-28 21:21:21,121 INFO  ~ Application 'sp2p_bank' is now started !  ~ play.Logger.info(Logger.java:289) ~ play ~ 33152
+2018-03-28 21:21:21,680 DEBUG ~ select t_system_o0_.id as id32_, t_system_o0_._key as column2_32_, t_system_o0_._value as column3_32_, t_system_o0_.description as descript4_32_ from t_system_options t_system_o0_ order by t_system_o0_.id  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 33711
+2018-03-28 21:21:21,920 DEBUG ~ select t_dict_ad_0_.id as id18_, t_dict_ad_0_.name as name18_ from t_dict_ad_provinces t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 33951
+2018-03-28 21:21:21,995 DEBUG ~ select t_dict_ad_0_.id as id53_, t_dict_ad_0_.name as name53_, t_dict_ad_0_.province_id as province3_53_ from t_dict_ad_citys t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 34026
+2018-03-28 22:35:54,224 INFO  ~ Starting E:\myCode\sp2p_bank  ~ play.Logger.info(Logger.java:289) ~ play ~ 0
+2018-03-28 22:35:55,305 WARN  ~ You're running Play! in DEV mode  ~ play.Logger.warn(Logger.java:344) ~ play ~ 1081
+2018-03-28 22:35:55,424 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...  ~ play.Logger.info(Logger.java:289) ~ play ~ 1200
+2018-03-28 22:36:16,147 WARN  ~ Ignoring  (static params must be specified as key:'value',...)  ~ play.Logger.warn(Logger.java:344) ~ play ~ 21923
+2018-03-28 22:36:27,182 INFO  ~ Connected to jdbc:mysql://127.0.0.1/p2p_bank?useUnicode=yes&characterEncoding=UTF-8&connectionCollation=utf8_general_ci  ~ play.Logger.info(Logger.java:289) ~ play ~ 32958
+2018-03-28 22:36:29,341 INFO  ~ Application 'sp2p_bank' is now started !  ~ play.Logger.info(Logger.java:289) ~ play ~ 35117
+2018-03-28 22:36:29,872 DEBUG ~ select t_system_o0_.id as id32_, t_system_o0_._key as column2_32_, t_system_o0_._value as column3_32_, t_system_o0_.description as descript4_32_ from t_system_options t_system_o0_ order by t_system_o0_.id  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 35648
+2018-03-28 22:36:29,985 DEBUG ~ select t_dict_ad_0_.id as id18_, t_dict_ad_0_.name as name18_ from t_dict_ad_provinces t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 35761
+2018-03-28 22:36:29,998 DEBUG ~ select t_dict_ad_0_.id as id53_, t_dict_ad_0_.name as name53_, t_dict_ad_0_.province_id as province3_53_ from t_dict_ad_citys t_dict_ad_0_  ~ org.hibernate.jdbc.util.SQLStatementLogger.logStatement(SQLStatementLogger.java:111) ~ org.hibernate.SQL ~ 35774

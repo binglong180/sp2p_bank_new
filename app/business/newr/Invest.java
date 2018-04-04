@@ -15,8 +15,11 @@ import javax.persistence.Query;
 import models.t_bids;
 import models.t_bill_invests;
 import models.t_bills;
+import models.t_dict_bid_repayment_types;
 import models.t_invests;
 import models.t_system_options;
+import models.t_user_bank_accounts;
+import models.newr.t_ticket;
 import models.newr.t_user_automatic_invest_options;
 import models.newr.t_users;
 import models.newr.v_newr_invest_records;
@@ -26,7 +29,9 @@ import models.newr.v_recommendFeeDetail;
 import org.apache.commons.lang.StringUtils;
 
 import play.Logger;
+import play.db.jpa.GenericModel.JPAQuery;
 import play.db.jpa.JPA;
+import play.db.jpa.JPABase;
 import utils.Arith;
 import utils.CnUpperCaser;
 import utils.DataUtil;
@@ -75,9 +80,38 @@ public class Invest implements Serializable{
 	public long transfersId;
 	public boolean isAutomaticInvest;
 	
+	
 	public User user;
 	public Bid bid;
 
+	/**
+	 * 通过投资ID查询投资信息
+	 */
+	public static Map queryInvestById(long id){
+		ErrorInfo error =new ErrorInfo();
+		t_invests invests = t_invests.findById(id);
+		
+		String query="where user_id=?";
+		
+	
+	
+		
+		t_bids bid = t_bids.findById(invests.bid_id);
+		
+		t_ticket ticket = t_ticket.findById(bid.product_id);
+		t_dict_bid_repayment_types repaymentTypes=t_dict_bid_repayment_types.findById(bid.repayment_type_id);
+		Map map=new HashMap();
+		UserBankAccounts account=UserBankAccounts.queryUserAllBankAccount(invests.user_id).get(0);
+		map.put("account", account);
+		map.put("invests", invests);
+		map.put("bid",bid);
+		map.put("repaymentTypes", repaymentTypes);
+		map.put("ticket", ticket);
+		return map;
+		
+	}
+	
+	
 	
 	/**
 	 * 获取加密投资者ID
@@ -508,7 +542,7 @@ public class Invest implements Serializable{
 		bid.id = bidId;	
 		EntityManager em = JPA.em();
 		try {
-			int rows = em.createQuery("update t_bids set real_invest_expire_time = ? where id=?").setParameter(1, new Date())
+			int rows = em.createQuery("update t_bids set invest_expire_time = ? where id=?").setParameter(1, new Date())
 																								 .setParameter(2, bidId).executeUpdate();		
 			if(rows == 0){
 				JPA.setRollbackOnly();
@@ -1523,15 +1557,16 @@ public class Invest implements Serializable{
 		page.currPage = currPage;
 		page.pageSize = pageSize;
 		EntityManager em = JPA.em();
-		StringBuffer sql = new StringBuffer("select * from t_bids where `t_bids`.`status` IN  (1, 3, 4)");
+		StringBuffer sql = new StringBuffer("select * from t_bids where `t_bids`.`status` >=1  and `t_bids`.start_time<NOW()");
 		List<Object> params = new ArrayList<Object>();
 			try {
-				sql.append(" order by loan_schedule,t_bids.product_id desc ");
+				sql.append(" order by loan_schedule,t_bids.id desc ");
 				System.out.println("sql-----------------"+sql.toString());
 				Query query = em.createNativeQuery(sql.toString(),t_bids.class);
 	            for(int n = 1; n <= params.size(); n++){
 	                query.setParameter(n, params.get(n-1));
 	            }
+	           
 	            query.setFirstResult((currPage - 1) * pageSize);
 	            query.setMaxResults(pageSize);
 	            bidList = query.getResultList();

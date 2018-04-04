@@ -23,11 +23,20 @@ public class newHomeAction extends BaseController {
 		User tempUser = User.currUser();
 		PageBean<t_bids>  pageBean = new PageBean<t_bids>();
 		pageBean= Invest.queryAllBids(currPage,pageSize,error);
+		t_bids bids=null;
+		if(pageBean.page.size()>0){
+			bids = pageBean.page.get(0);
+		}
+		
 		if(tempUser!=null){
 			user.id = User.currUser().id;
-			render(user,pageBean);
+			render(user,bids);
 		}else{
-			render(user,pageBean);
+			if(bids==null){
+				render(user);
+			}else{
+				render(user,bids);
+			}
 		}
 		
 	}

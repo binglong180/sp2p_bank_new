@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Transient;
 
 import play.db.jpa.Model;
+import utils.DateUtil;
 import utils.Security;
 import business.BackstageSet;
 import constants.Constants;
@@ -17,8 +18,10 @@ import constants.Constants;
  * @version 6.0
  * @created 2014-4-4 下午03:32:02
  */
-@Entity
+@Entity()
 public class t_bids extends Model {
+	
+	
 	public long user_id;
 	public Date time;
 	public String bid_no;  //标的编号（资金托管使用）
@@ -26,23 +29,23 @@ public class t_bids extends Model {
 	public String ips_bill_no;
 	public long product_id;
 	public String title;
-	public String loan_purpose;
+	public String loan_purpose;//借款目的
 	public long repayment_type_id;
 	public double amount;
 	public int period;
 	public double min_invest_amount;
 	public double has_settle_amount;
 	public int invest_period;
-	public Date invest_expire_time;
-	public Date begin_interest;
-	public double apr;
+	public Date invest_expire_time;//满标时间
+	public Date begin_interest;//起息日
+	public double apr;//利率
 	public long bank_account_id;
 
-	public double max_loan;
+	public double max_loan;//贷款限额
 	public String description;
 	public double service_fees;
 
-	public int status;
+	public int status;//标的状态
 	public double loan_schedule;
 	public double has_invested_amount;
 
@@ -62,6 +65,8 @@ public class t_bids extends Model {
 	public String pact; // 借款合同
 	public String guarantee_no; // 居间服务协议
 	public String guarantee; // 保障函
+	
+	public Date start_time;//发标时间
 	/**
 	 * 标的号，借款标编号代码 + id
 	 */
@@ -176,7 +181,12 @@ public class t_bids extends Model {
 	@Transient
 	public String sign;
 	@Transient
-	public Date endInterest;
+	public Date endInterest;//标结束日期
+	
+	
+	
+	
+
 	/**
 	 * 获取加密ID
 	 */
@@ -185,5 +195,10 @@ public class t_bids extends Model {
 	}
 	@Transient
 	public String loanUserName;
+	
+	
+	
+	
+	
 	
 }

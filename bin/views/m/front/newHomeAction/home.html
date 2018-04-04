@@ -47,13 +47,13 @@
 	<div class="index-bid">
 		<h4><a href="">槐乡富<i></i></a></h4>
 		<div class="index-bidtext">
-			<p>项目名称项目名称项目名称</p>
-			<h3>4.50<em>%</em></h3>
+			<p>槐乡富${bids?.title}期</p>
+			<h3>${bids?.apr}<em>%</em></h3>
 			<ul>
-				<li>起投金额：<span>1000.00</span>元</li>
-				<li>期限：<span>180 </span>天</li>
+				<li>起投金额：<span>#{format money:(bids?.min_invest_amount)}#{/format}</span>元</li>
+				<li>期限：<span>${bids?.period} </span>天</li>
 			</ul>
-			<a href="">立即投资</a>
+			<a href="@{m.front.invest.InvestAction.investDetail(bids?.id)}">立即投资</a>
 		</div>
 	</div>	
 	<!-- 底部 -->

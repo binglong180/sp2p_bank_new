@@ -30,7 +30,7 @@ $(window).resize(function(){
 <script type="text/javascript" src="@{'/public/javascripts/index.js'}"></script>
 <script type="text/javascript" src="@{'/public/javascripts/jquery.json-2.4.min.js'}"></script>
 <script charset="utf-8" src="@{'public/javascripts/ajaxfileupload.js'}"></script>
-<script type="text/javascript" src="@{'/public/javascripts/common.js'}"></script>
+
 </head>
 <body>
 <div class="full">
@@ -64,11 +64,16 @@ $(window).resize(function(){
                                 <div class="td_content">
                                  <input class="input_title" type="text" id="invest_period" name="invest_period" placeholder="">
                                 </div>
-                            </li>                            
+                            </li>  
+                            <li>
+                                <div class="td_title"><span>*</span>发标日：</div>
+                                <input id="start_time"  name = "start_time" placeholder = "yyyy-mm-dd" type="text" style="height:30px;"/> 
+                                    <img onclick="WdatePicker({el:$dp.$('start_time')})" src="@{'/public/My97DatePicker/skin/datePicker.gif'}" _fcksavedurl="@{'/public/My97DatePicker/skin/datePicker.gif'}" width="16" height="22" align="absmiddle"> 
+                            </li>                           
                             <li>
                                 <div class="td_title"><span>*</span>起息日：</div>
                                 <input id="begin_interest"  name = "begin_interest" placeholder = "yyyy-mm-dd" type="text" style="height:30px;"/> 
-                                    <img onclick="WdatePicker({el:$dp.$('invest_expire_time')})" src="@{'/public/My97DatePicker/skin/datePicker.gif'}" _fcksavedurl="@{'/public/My97DatePicker/skin/datePicker.gif'}" width="16" height="22" align="absmiddle"> 
+                                    <img onclick="WdatePicker({el:$dp.$('begin_interest')})" src="@{'/public/My97DatePicker/skin/datePicker.gif'}" _fcksavedurl="@{'/public/My97DatePicker/skin/datePicker.gif'}" width="16" height="22" align="absmiddle"> 
                             </li>                                                   
                             <li>
                                 <div class="td_title"><span>*</span>投资人年化利率：</div>
@@ -129,10 +134,8 @@ $(window).resize(function(){
                     </div>
                 </div>
             </div>
-
             <div class="btn_alter">
             <input class="btn_search" type="submit" value = "保存" >
-
             </div>
            #{/form}
         </div>

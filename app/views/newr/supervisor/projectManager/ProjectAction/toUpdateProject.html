@@ -1,0 +1,233 @@
+#{extends 'common/supervisor.html' /}
+#{include 'newr/supervisor/projectManager/projectManagerLeft.control'/}
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".full").css("width",document.body.clientWidth- 200 +"px ");
+});  
+
+$(window).resize(function(){
+	 var onLoadWidth = document.body.clientWidth;
+		$(".full").css("width",document.body.clientWidth- 200 +"px ");
+})
+</script>
+<style>
+.full{float:left; }
+.table01{width:100%;}
+.table01 th,.table01 td{font-size:12px; height:40px; text-align:center; font-weight:normal;}
+.table01 td{ color:#666;}
+.table01 .td_a{ color:#666;}
+.but01{color:#3a7dc0;}
+</style>
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="@{'/public/skin/css/layout.css'}" rel="stylesheet" type="text/css">
+<link href="@{'/public/stylesheets/site.css'}" rel="stylesheet" type="text/css">
+<link href="@{'/public/stylesheets/temp.css'}" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="@{'/public/javascripts/jquery-2.0.js'}"></script>
+<script type="text/javascript" src="@{'/public/javascripts/index.js'}"></script>
+<script type="text/javascript" src="@{'/public/javascripts/jquery.json-2.4.min.js'}"></script>
+<script charset="utf-8" src="@{'public/javascripts/ajaxfileupload.js'}"></script>
+
+</head>
+<body>
+<div class="full">
+<div class="list_add_items">
+    <div class="data_header">
+        <div class="data_item"><div class="td_title" style=" font-size:18px; font-weight:bold;">· 修改项目</div></div>
+        </div>
+         <div class="list_data">
+        #{form @updateProject(), method:'POST', id:'saveProject'}
+             <div class="data_info">
+                <div class="data_item">
+                    <div class="item_title">贷款信息</div>
+                    <div class="item_content">
+                        <ul>
+                            <li>
+                                <div class="td_title"><span>*</span>借款人：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="reality_name" name="reality_name" value="${user?.reality_name}"></div>
+                            </li>
+                            <li>
+                                <div class="td_title"><span>*</span>贷款金额（元）：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="amount" name="amount" value="${bid?.amount}"></div>
+                            </li>
+                            <li>
+                                <div class="td_title"><span>*</span>贷款期限(天)：</div>
+                                <div class="td_content">
+                                 <input class="input_title" type="text" id="period" name="period" value="${bid?.period}">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="td_title"><span>*</span>募集期(天)：</div>
+                                <div class="td_content">
+                                 <input class="input_title" type="text" id="invest_period" name="invest_period" value="${bid?.invest_period}">
+                                </div>
+                            </li>  
+                            <li>
+                                <div class="td_title"><span>*</span>发标日：</div>
+                                <input id="start_time"  name = "start_time" value="${bid?.start_time}" type="text" style="height:30px;"/> 
+                                    <img onclick="WdatePicker({el:$dp.$('start_time')})" src="@{'/public/My97DatePicker/skin/datePicker.gif'}" _fcksavedurl="@{'/public/My97DatePicker/skin/datePicker.gif'}" width="16" height="22" align="absmiddle"> 
+                            </li>                           
+                            <li>
+                                <div class="td_title"><span>*</span>起息日：</div>
+                                <input id="begin_interest"  name = "begin_interest"  value="${bid?.begin_interest}" type="text" style="height:30px;"/> 
+                                    <img onclick="WdatePicker({el:$dp.$('begin_interest')})" src="@{'/public/My97DatePicker/skin/datePicker.gif'}" _fcksavedurl="@{'/public/My97DatePicker/skin/datePicker.gif'}" width="16" height="22" align="absmiddle"> 
+                            </li>                                                   
+                            <li>
+                                <div class="td_title"><span>*</span>投资人年化利率：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="apr" name ="apr" value="${bid?.apr}"></div>
+                            </li>
+                            <li>
+                                <div class="td_title"><span>*</span>标的类型：</div>
+                                <div class="td_content">
+                                <select name="type" id="type" class="input_select">
+                                     <option value="1">如意宝</option>
+                                     <option value="2">槐乡富</option>
+                                </select>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="td_title"><span>*</span>商票编号：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="ticket_no" name="ticket_no" value="${ticket?.ticket_no}"></div>
+                            </li>           
+                             <li>
+                                <div class="td_title"><span>*</span>融资年化利率：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="invest_rate" name ="invest_rate" value="${bid?.invest_rate}"></div>
+                            </li> 
+                            <li>
+                                <div class="td_title"><span>*</span>贷款用途：</div>
+                                <div class="td_content"><textarea class="input_textarea" type="text" id="loanUsage" name = "loanUsage"  >${bid?.loan_purpose}</textarea></div>
+                            </li>
+                            <li>
+                                <div class="td_title"><span>*</span>担保函编号：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="guarantee_no" name = "guarantee_no" value="${bid?.guarantee_no}"></div>
+                            </li>
+                            <li>
+                                <div class="td_title"><span>*</span>合同编号：</div>
+                                <div class="td_content"><input class="input_title" type="text" id="pact_no" name = "pact_no" value="${bid?.pact_no}"></div>
+                            </li>
+                             <li>
+                                 <div class="td_title"><span>*</span>保障函：</div>
+                                    <div class="pic_div">  
+                                       <div class="pic_size">
+                                           <input type="hidden" name="guarantee" id="guarantee" value="${bid?.guarantee}"/>                                 
+                                           <input type="file" class="input_file" name="imgFile" id="guarantee_file" onchange="upload('guarantee_file','guarantee_image','guarantee');"/>
+                                           <img id="guarantee_image" style="position:relative; z-index:5;" src="${bid?.guarantee}" />
+                                       </div> 
+                                    <div class="clear"></div>
+                                  </div>
+                             </li>
+                             <li>
+                                 <div class="td_title"><span>*</span>合同：</div>
+                                    <div class="pic_div">  
+                                       <div class="pic_size">
+                                           <input type="hidden" name="pact" id="pact" value="${bid?.pact}"/>                                 
+                                           <input type="file" class="input_file" name="imgFile" id="pact_file" onchange="upload('pact_file','pact_image','pact');"/>
+                                           <img id="pact_image" style="position:relative; z-index:5;" src="${bid?.pact}" />
+                                       </div> 
+                                    <div class="clear"></div>
+                                  </div>
+                             </li>                                                                                                  
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="btn_alter">
+            <input class="btn_search" type="submit" value = "修改" >
+            </div>
+             <input type="hidden" name="title" id="title" value="${bid?.title}"/> 
+             <input type="hidden" name="id" id="id" value="${bid?.id}"/>      
+           #{/form}
+        </div>
+
+    </div>
+</div>
+</body>
+
+<script type="text/javascript">
+function upload(imgFile, image, imageFilename) {
+	$.ajaxFileUpload({
+		url : '@{newr.supervisor.projectManager.ProjectAction.uploadImg()}',
+		secureuri : false,
+		fileElementId :imgFile ,
+		dataType : 'text',
+		success : function(data) {
+			data = $.evalJSON(data);
+			if (data.code < 0) {
+				alert(data.msg);
+				return;
+			}
+			$("#"+image).attr("src", data.filename);
+			$("#"+imageFilename).attr("value",data.filename);
+		},
+		error : function(data, status, e) {
+			alert("上传图片失败");
+		}
+	})
+}
+	$("#saveProject").submit(function(){
+		
+		if($("#name").val().trim() ==''){
+			alert("申请人真实姓名不能为空");
+			return false;
+		}
+
+		if($("#name").val().length>=4){ 
+			alert("申请人姓名格式不正确！请重新输入！");
+			return false; 
+	    }
+		
+        if($("#name").val().trim().length!=0){    
+      		    reg=/^[\u0391-\uFFE5]+$/;    
+	        if(!reg.test($("#name").val().trim())){    
+	            alert("申请人姓名格式不正确！请重新输入！");  
+	            return false;
+	       	}    
+        }   
+	      var mobileNumer =  $("#mobileNumber").val().trim();
+	      var phoneReg = /^1[3578]\d{9}$/; 
+	  
+	    	if(phoneReg.test(mobileNumer) == false){
+	    	alert("请填写本人的正确手机号");
+
+	    	return false;
+
+	    	}	
+	    if($("#loanAmount").val().trim() == ''){
+		       alert("贷款金额不能为空");
+		       return false;
+		    } 
+	    
+	    if($("#loanDate").find("option:selected").text() == "请选择贷款期限"){
+	    	
+			alert("请选择贷款期限");
+		       return false;
+			
+		}
+	   
+	    if($('input:radio[name="repaymentType"]:checked').val() == undefined){
+		      alert("请选择还款方式");
+		      return false;
+	    }
+	    if($('input:radio[name="pledgeType"]:checked').val() == undefined){
+		      alert("请选择抵押类型");
+		      return false;
+		    }
+	    if($("#rate").val().trim() == ''){
+		       alert("综合利率不能为空");
+		       return false;
+		    }
+	    if($("#extendLoanDate").val().trim() == ''){
+		       alert("放款日期不能为空");
+		       return false;
+		    }
+	    if($("#loanUsage").val().trim() == ''){
+		       alert("贷款用途不能为空");
+		       return false;
+		    }
+		$(":submit",this).attr("disabled","disabled");
+})
+</script>
+</html>

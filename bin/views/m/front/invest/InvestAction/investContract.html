@@ -12,24 +12,26 @@
 <div class="container">
 	<div class="bid-deal">
 		<h2>借款协议</h2>
-		<h4>协议编号：<span></span></h4>
+		<h4>协议编号：${invests?.pact}<span></span></h4>
+		
+
 		<table class="bid-deal-table">
 			<tr>
 				<td style="width:2.5rem">借出人：</td>
-				<td></td>
+				<td>${account?.accountName}</td>
 			</tr>
 			<tr>
 				<td>身份证号码：</td>
-				<td></td>
+				<td>${account?.identificationNumber}</td>
 			</tr>
 			<tr>
 				<td>投资申请号：</td>
-				<td></td>
+				<td>${account?.accountName}</td>
 			</tr>
 			<tr><td align="center" colspan="2"></td></tr>
 			<tr>
 				<td>借入人：</td>
-				<td></td>
+				<td>${ticket?.holder}</td>
 			</tr>
 			<tr>
 				<td>身份证号码（组织机构代码）：</td>
@@ -40,6 +42,7 @@
 				<td></td>
 			</tr>
 		</table>
+		
 		<p>经互联网金融综合服务平台（下称“平台”）的撮合，借出人同意向借入人提供借款，借入人同意向借出人借款。经各方协商一致，现就上述借款事宜订立如下协议，以期共同遵守：</p>
 		<p>一、定义</p>
 		<p>除非缔约方另有约定，本协议下列术语定义如下：</p>
@@ -57,39 +60,47 @@
 		<table class="bid-deal-table">
 			<tr>
 				<td style="width:2.5rem">借款总额</td>
-				<td></td>
+				<td>${bid?.amount}</td>
 			</tr>
 			<tr>
 				<td>最小借款单位</td>
-				<td></td>
+				<td>
+				#{if bid?.min_invest_amount>=0}
+					1000
+				#{/if}
+				#{else}
+					${bid?.min_invest_amount}
+				#{/else}
+				</td>
 			</tr>
 			<tr>
 				<td>借款期限</td>
-				<td></td>
+				<td>${bid?.period}天</td>
 			</tr>
 			<tr>
 				<td>借款期间</td>
-				<td></td>
+				<td>${bid?.begin_interest?.format('yyyy-MM-dd')}至${bid?.repayment_time?.format('yyyy-MM-dd')}</td>
 			</tr>
 			<tr>
 				<td>起息日</td>
-				<td></td>
+				<td>${bid?.begin_interest?.format('yyyy-MM-dd')}</td>
 			</tr>
 			<tr>
 				<td>借款利率</td>
-				<td></td>
+				<td>${bid?.apr}%</td>
 			</tr>
 			<tr>
 				<td>借款用途</td>
-				<td></td>
+				<td>${bid?.description}</td>
 			</tr>
 			<tr>
 				<td>还款方式</td>
-				<td></td>
+				<td>${repaymentTypes?.name}</td>
 			</tr>
 			<tr>
 				<td>到期还款日</td>
-				<td></td>
+				
+				<td>${bid?.repayment_time?.format('yyyy-MM-dd')}</td>
 			</tr>
 		</table>
 		<p>三、 各方权利义务</p>
@@ -119,9 +130,11 @@
 		<p>4.6 除上述约定外，借入人还需承担因未按约还款所产生的一切费用，包括但不限于诉讼费、财产保全费、执行费、仲裁费、律师代理费、差旅费、评估费、拍卖费、催收费用等。</p>
 		<p>五、 还款保障条款</p>
 		<p>5.1 本协议项下的还款保障方式为：</p>
-		<p>5.1.1 由[ ]提供保证担保（担保函编号为[ ]）保障，具体为[ ]；</p>
-		<p>5.1.2 由[ ]提供抵押担保（合同编号为[ ]）保障，具体为[ ]；</p>
-		<p>5.1.3 由[ ]提供质押担保（合同编号为[ ]）保障，具体为[ ]。[此项可在标的生成后手动录入]</p>
+		<!-- [此项可在标的生成后手动录入] -->
+		<p>5.1.1 由[${ticket?.creater}]提供保证担保（担保函编号为[${ticket?.ticket_no}]）保障，具体为[${ticket?.contract_bill}]；</p>
+		<p>5.1.2 由[${ticket?.creater}]提供抵押担保（合同编号为[${ticket?.ticket_no}]）保障，具体为[${ticket?.contract_bill}]；</p>
+		<p>5.1.3 由[${ticket?.creater}]提供质押担保（合同编号为[${ticket?.ticket_no}]）保障，具体为[${ticket?.contract_bill}]。</p>
+		
 		<p>5.2 为确保上述保障措施得以充分有效履行，借出人无条件、不可撤销及变更地授权平台以其自己的名义行使上述担保权利。</p>
 		<p>六、 违约条款</p>
 		<p>6.1 发生下列任何一项或几项情形的，视为借入人违约：</p>
@@ -158,8 +171,8 @@
 		<p>8.9 协议各方应按法律法规及相关规定各自承担与本协议相关的税费。</p>
 		<p>九、 法律的适用和争议的解决</p>
 		<p>本协议受中华人民共和国法律管辖并按中华人民共和国法律解释。本协议履行中发生争议，可由各方协商解决，协商不成可向本协议签订地有管辖权的人民法院起诉。本协议签订地为[ 洪洞县洪洞洪都村镇银行有限责任公司 ]。</p>
-		<p style="text-align:right;">借出人签订日期：XXX</p>
-		<p style="text-align:right;">借入人签订日期：XXX</p>
+		<p style="text-align:right;">借出人签订日期：${invests?.time?.format('yyyy-MM-dd HH:mm:ss')}</p>
+		<p style="text-align:right;">借入人签订日期：${bid?.time?.format('yyyy-MM-dd HH:mm:ss')}</p>
 	</div>
 </div>
 </body>

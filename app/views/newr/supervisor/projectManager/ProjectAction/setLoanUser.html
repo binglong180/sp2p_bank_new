@@ -82,6 +82,7 @@ $(window).resize(function(){
 	                                <select onchange=""  name="bankID" id="oldBank">
 	                                  #{list items:banks, as:'bank'}
 	                                   <option value="${bank?.bank_code}">${bank?.bank_name}</option>
+	                                   
 	                                  #{/list}					                  
 				                   </select>
                                 </div>
@@ -106,6 +107,7 @@ $(window).resize(function(){
                                 <div class="td_title"><span>*</span>支行所在市：</div>
                                 <div class="td_content"><input class="input_title" type="text" id="city" name ="city"  placeholder=""></div>
                             </li>
+                            
                              <li>
                                  <div class="td_title"><span>*</span>营业执照：</div>
                                     <div class="pic_div">  
@@ -122,7 +124,7 @@ $(window).resize(function(){
                                     <div class="pic_div">  
                                        <div class="pic_size">
                                            <input type="hidden" name="code_certificate_image" id="code_certificate_image" value=""/>                                 
-                                           <input type="file" class="input_file" name="imgFile" id="business_licence_image_file" onchange="upload('code_certificate_image_file','code_certificate_image_image','code_certificate_image');"/>
+                                           <input type="file" class="input_file" name="imgFile" id="code_certificate_image_file" onchange="upload('code_certificate_image_file','code_certificate_image_image','code_certificate_image');"/>
                                            <img id="code_certificate_image_image" style="position:relative; z-index:5;" src="@{'public/skin/images/qcyh.jpg'}" />
                                        </div> 
                                     <div class="clear"></div>

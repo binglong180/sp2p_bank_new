@@ -80,7 +80,28 @@ $(window).resize(function(){
 		  #{/td}
 		  #{td}${_?.time?.format('yyyy-MM-dd')}#{/td}
 		  #{td}${_?.invest_expire_time?.format('yyyy-MM-dd')}#{/td}
-		  #{td}<span ><a class="" href="@{newr.supervisor.projectManager.ProjectAction.fullBid(_?.id)}">满标放款</a></span>#{/td}
+		   #{td}
+		   					#{if _?.status==-1}审核未通过#{/if}
+				  			#{if _?.status==0}待审核中#{/if}
+				        	#{if _?.status==1}审核通过#{/if}
+				        	#{if _?.status==2}待放款#{/if}
+				        	#{if _?.status==3}已满标#{/if}
+				        	#{if _?.status==4}结标(待回款)#{/if}
+				        	#{if _?.status==5}回款中#{/if}
+				        	#{if _?.status==6}项目完结#{/if}
+				        	#{if _?.status==-3}放款不通过#{/if}
+				        	#{if _?.status==-5}撤销#{/if}
+				        	#{if _?.status==31}计息中(已完结)#{/if}
+		   
+		   #{/td}
+		   
+		  #{td}
+		  	#{if _?.status==3}
+		 	<span>
+		 		<a class="" href="@{newr.supervisor.projectManager.ProjectAction.fullBid(_?.id)}">满标放款</a>
+		  	</span>
+		  	#{/if}
+		  #{/td}
 	     
 	    #{/tr}
 	    #{/list}

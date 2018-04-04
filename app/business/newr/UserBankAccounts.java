@@ -44,6 +44,7 @@ public class UserBankAccounts implements Serializable{
 	public String mobile;
 	public String card_type;
 	public String txSNBinding;
+	public String identificationNumber;
 	
 	public UserBankAccounts(){
 		
@@ -100,6 +101,7 @@ public class UserBankAccounts implements Serializable{
 		this.province = userBankAccounts.province;
 		this.city = userBankAccounts.city;
         this.txSNBinding = userBankAccounts.txSNBinding;
+        this.identificationNumber=userBankAccounts.identificationNumber;
 	}
 	
 	/**

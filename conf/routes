@@ -94,11 +94,16 @@ POST /newr/front/account/WealthCircle/queryRecommendFeeDetail			newr.front.accou
 *       /newr/supervisor/project/uploadImg                      newr.supervisor.projectManager.ProjectAction.uploadImg
 
 *     	/newr/supervisor/getProject        						newr.supervisor.projectManager.ProjectAction.getProject
+
+
+
 GET     /newr/supervisor/updateProjectDetails        		    newr.supervisor.projectManager.ProjectAction.updateProjectDetails
 *     	/newr/supervisor/reviewProject        					newr.supervisor.projectManager.ProjectAction.reviewProject
 GET    	/newr/supervisor/getProjectDetails        				newr.supervisor.projectManager.ProjectAction.getProjectDetails
 *       /newr/supervisor/getProjectDetailsSuc       			newr.supervisor.projectManager.ProjectAction.approved
 *       /newr/supervisor/getProjectDetailsFai        			newr.supervisor.projectManager.ProjectAction.projectFailure
+#修改标的信息
+*       /newr/supervisor/toUpdateProject    					newr.supervisor.projectManager.ProjectAction.toUpdateProject
 # ***********************************************标的管理*****************************************************
 # -----------------------------------------------全部标的列表----------------------------------------------------------
 #
@@ -308,6 +313,13 @@ GET   /newr/supervisor/project/fullList                                         
 GET   /newr/supervisor/project/fullBid                                            newr.supervisor.projectManager.ProjectAction.fullBid
 
 GET   /newr/supervisor/project/querySettlement                                           newr.supervisor.projectManager.ProjectAction.querySettlement
+
+#获取项目详情
+*     /newr/supervisor/project/projectDetails                                   newr.supervisor.projectManager.ProjectAction.projectDetails
+#保存修改
+*     /newr/supervisor/project/updateProject									newr.supervisor.projectManager.ProjectAction.updateProject
+
+
 ###-----------------------------------------放款管理----------------------------------------------------------
 # 待放款借款标管理
 *       /supervisor/financeManager/readyReleaseList           					supervisor.financeManager.LoanManager.readyReleaseList

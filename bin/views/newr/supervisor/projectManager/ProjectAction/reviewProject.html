@@ -31,15 +31,23 @@ $(window).resize(function(){
 
 <div class="full">
 	<div class="list_items">
-        <div class="list_data">     
+        <div class="list_data">  
+        
+		</div>   
+        #{form @newr.supervisor.projectManager.ProjectAction.getProject(),method:'post',id :'bidsSearch'}
             #{table}
-        	<table class="table01" cellpadding="0" cellspacing="0">
+            
+            <table class="table01" cellpadding="0" cellspacing="0">
+			<div class="xf_wylc_tbssinput">
+				<input type="hidden" id="currPage" name="currPage"/>
+    			<input type="hidden" id="pageSize" name="pageSize"/>
             	<tr>
                 	<th>序号</th>
                     <th>申请人</th>
                     <th>贷款金额（元）</th>
                     <th>年化利率</th>
                     <th>期限</th>
+                    <th>发标日</th>
                     <th>项目起息日</th>
                     <th>项目到期日</th>
                     <th>还款方式</th>
@@ -56,36 +64,44 @@ $(window).resize(function(){
 				        	<td><a class="but01" href="">${_?.loanUserName}</a></td>
 				        	<td>${_?.amount}</td>
 				        	<td>${_?.apr}</td>
-				        	<td>${_?.nvest_expire_time}</td>
-				        	<td>${_?.endInterest}</td>				        
+				        	<td>${_?.period}</td>
+				        	<td>${_?.start_time}</td>
+				        	<td>${_?.begin_interest}</td>
+				        	<td>${_?.endInterest?.format('yyyy-MM-dd HH:mm:ss')}</td>				        
 				        	<td>#{if _?.repayment_type_id=="2"}按月付息,到期还本#{/if}#{else}一次性还本付息#{/else}</td>
 				        	<td>${_?.has_invested_amount}</td>
-				        	<td>#{if _?.status=="-1"}审核失败#{/if}
-				        	    #{if _?.status=="0"}待审核中#{/if}
-				        	    #{if _?.status=="1"}审核通过#{/if}
+				        	
+				        	<td>
+				        	#{if _?.status==-1}审核未通过#{/if}
+				        	#{if _?.status==0}待审核中#{/if}
+				        	#{if _?.status==1}审核通过#{/if}
 				        	</td>
-				        	<td><a class="but01" href="@{newr.supervisor.projectManager.ProjectAction.deleteProject(_?.id)}">审核通过</a></td>
+				        	#{if _?.status==0}
+				        	<td><a class="but01" href="@{newr.supervisor.projectManager.ProjectAction.projectDetails(_?.id)}">审核</a></td>
+				        	#{/if}
+				        	
 			       		</tr>   
 			        #{/tr}
-	        	#{/list}
+	        	#{/list}	        		
        	 </table>
-         #{/table}  
-       			
+       #{/table}  
+       #{/form}
         </div>
     	<!-- 列表底部 -->
 	    <div class="xn_c_content_bottom">
 	      <div class="page_warp">
-	        #{page currPage:page.currPage,totalCount:page.totalCount,pageSize:page.pageSize,theme:2,style:4/}
+	      	#{page currPage:page.currPage,pageSize:page.pageSize,totalCount:page.totalCount,theme:2,style:5/}
+	       
 	      </div>
 	    </div>
     </div>
-</div>
 </body>
 <script type="text/javascript">
-	function showPage(currPage, pageSize){
-		$("#currPage").val(currPage);
-		$("#pageSize").val(pageSize);
-		$("#submit").submit();
-	}
+function showPage(currPage, pageSize){
+	 
+	 $("#currPage").val(currPage);
+    $("#pageSize").val(pageSize);
+    $("#bidsSearch").submit();	
+}
 </script>
 </html>
