@@ -83,6 +83,45 @@ public class Invest implements Serializable{
 	
 	public User user;
 	public Bid bid;
+	
+	public String statusStr;//状态字符
+	
+	public String getStatusStr() {
+		switch(Integer.valueOf(this.status)){
+		case -10:
+		case -5:
+		case -4:
+		case -3:
+		case -2:
+		case -1:
+		case 0:
+		case 2:
+		case 1:
+			this.statusStr="投标中";
+			break;
+		case 3:
+			this.statusStr="已满标";
+			break;
+		case 4:
+		case 5:
+			this.statusStr="投资结束";
+			break;
+		case 6:
+			this.statusStr="转出到账";
+			break;
+		case 31:
+			this.statusStr="投资中";
+			break;
+		case 41:
+			this.statusStr="预热中";
+			break;
+		}
+		return statusStr;
+	}
+
+	public void setStatusStr(String statusStr) {
+		this.statusStr = statusStr;
+	}
 
 	/**
 	 * 通过投资ID查询投资信息
@@ -1557,7 +1596,9 @@ public class Invest implements Serializable{
 		page.currPage = currPage;
 		page.pageSize = pageSize;
 		EntityManager em = JPA.em();
-		StringBuffer sql = new StringBuffer("select * from t_bids where `t_bids`.`status` >=1  and `t_bids`.start_time<NOW()");
+		StringBuffer sql = new StringBuffer("select * from t_bids where `t_bids`.`status` >=1 ");
+		//select * from t_bids where `t_bids`.`status` >=1  and `t_bids`.start_time<NOW()
+		
 		List<Object> params = new ArrayList<Object>();
 			try {
 				sql.append(" order by loan_schedule,t_bids.id desc ");

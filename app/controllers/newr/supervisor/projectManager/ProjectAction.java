@@ -34,6 +34,7 @@ import utils.NumberUtil;
 import utils.PageBean;
 
 import business.newr.Bid;
+import business.newr.Bill;
 
 import com.shove.Convert;
 
@@ -175,6 +176,8 @@ public class ProjectAction extends SupervisorController {
 					tbid.audit_suggest = null; // 审核意见(默认为null)
 					tbid.last_repay_time = null; // 最后放款时间(默认为null)	
 					tbid.begin_interest = parseDate(begin_interest);
+				
+					tbid.repayment_time=new Date(tbid.endInterest.getTime()+5*1000*60*60*24);
 					tbid.pact = pact;
 					tbid.pact_no = pact_no;
 					tbid.guarantee = guarantee;
@@ -646,7 +649,6 @@ public class ProjectAction extends SupervisorController {
 			bank_name = "";
 		}
     	
-		
     	t_user_bank_accounts bank = new t_user_bank_accounts();
     	bank.bank_code = Integer.parseInt(bankID);
     	bank.account = account.replaceAll(" ", "");
@@ -659,6 +661,7 @@ public class ProjectAction extends SupervisorController {
     	bank.save();
     	getloanUser();
     }
+    
 	/**
 	 * 满标待放款借款标列表
 	 */
@@ -690,9 +693,15 @@ public class ProjectAction extends SupervisorController {
 		
 				
 	}
+	
+	//发送满标放款请求
 	private static List<t_settlement>  sendFullCommand(Bid bid,ErrorInfo error){
 		List<t_settlement> resultList= bid.releaseBid(error);
-	     return resultList;
+		Bill bill=new Bill();
+		bill.addBill(bid, new Date(), error);
+		bill.addInvestBills(bid.id, bid.repayment.id, bid.userId, error);
+		
+	    return resultList;
 	}
     
 	public static void querySettlement(Long bid){

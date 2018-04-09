@@ -118,7 +118,7 @@ public class Bid implements Serializable{
 	
 	public String statusInvest; //投资列表状态字段
 	
-	public String statusInvestUser; //投资客户状态字段
+	
 	
 	public double hasInvestedAmount; // 已投总额
 	public double loanSchedule; // 借款进度比例
@@ -1392,12 +1392,13 @@ public class Bid implements Serializable{
 			Logger.error("满标放款通知回调失败", e.getStackTrace());
 		}
 	}
+	
     //满标放款 (后期需要优化 针对标未满放款 要多一个状态 ，避免和投标产生并发现象)
 	public List<t_settlement> releaseBid(ErrorInfo error) {
 		//1 分账
 		List<t_settlement>  resultList = new ArrayList<t_settlement>();
 		try {
-			Bid.updateStatus(this.id);
+			
 			t_users user = t_users.find("id=?", this.userId).first();
 			t_user_bank_accounts accounts = t_user_bank_accounts.find("user_id=?", user.getId()).first();
 			t_settlement settleLoan = new t_settlement();
@@ -1420,12 +1421,14 @@ public class Bid implements Serializable{
 			settleLoan.serial_number = GUIDGenerator.genGUID();
 			settleBank.save();
 			resultList.add(settleBank);
-			settleBid(error,user,accounts,settleLoan,settleBank);
+			//settleBid(error,user,accounts,settleLoan,settleBank);
+			
 		} catch (Exception e) {
           Logger.error("结算 -分账", e.getStackTrace());
 		}
 		return resultList;
 	}
+	
 	//满标放款结算到借款人账户
 	private Long settleBid(ErrorInfo error,t_users user,
 			t_user_bank_accounts accounts,t_settlement settleLoan,
@@ -1461,6 +1464,7 @@ public class Bid implements Serializable{
 			tx1341Request.setBankAccount(bankAccount);			
 			Tx134xResponse tx134xResponse = settleBid(tx1341Request);
 			if("2000".equals(tx134xResponse.getCode())){
+			
 				//放款到银行
 				t_bank_accounts bankAccounts = (t_bank_accounts) t_bank_accounts.findAll().get(0);				
 				Tx1341Request tx1341RequestOfBank = new Tx1341Request();
@@ -1479,9 +1483,11 @@ public class Bid implements Serializable{
 				bankAccountOfBank.setCity(bankAccounts.city);
 				tx1341Request.setBankAccount(bankAccountOfBank);
 				Tx134xResponse Tx134xResponseOfbank = settleBid(tx1341RequestOfBank);
+				
 				if("2000".equals(Tx134xResponseOfbank.getCode())){
+					//满标放款状态更改
 					JPA.em().createNativeQuery("update t_bids set status=? where mer_bill_no=?")
-					.setParameter(1, Constants.BID_PRE_REPAYMENT).setParameter(1, this.merBillNo).executeUpdate();
+					.setParameter(1, Constants.BID_PRE_REPAYMENT).setParameter(2, this.merBillNo).executeUpdate();
 					error.code=1;
 				}else{
 					error.code=-3;
@@ -1500,6 +1506,8 @@ public class Bid implements Serializable{
 	}
 	
 	private Tx134xResponse settleBid(Tx1341Request tx1341Request){
+		
+		
 		Map<String, String> paramMap = new HashMap<String, String>();
 	    paramMap.put("UsrCustId", user.id+"");
 	    paramMap.put("parentOrderno", tx1341Request.getSerialNumber());
@@ -1515,6 +1523,8 @@ public class Bid implements Serializable{
 	    paramMap.put("city",tx1341Request.getBankAccount().getCity());
 	    DataUtil.printRequestData(paramMap, "结算提交参数", PayType.SETTLE);
 	    Tx134xResponse response = paymentServiceImpl.fullBidRelease(tx1341Request);	  
+	    
+	    
 	 return response;   
 	}
 	
@@ -1671,43 +1681,7 @@ public class Bid implements Serializable{
 		this.statusInvest = statusInvest;
 	}
 
-	public String getStatusInvestUser() {
-		
-		switch(this.status){
-		case -10:
-		case -5:
-		case -4:
-		case -3:
-		case -2:
-		case -1:
-		case 0:
-		case 2:
-		case 1:
-			this.statusInvestUser="投标中";
-			break;
-		case 3:
-			this.statusInvestUser="已满标";
-			break;
-		case 4:
-		case 5:
-			this.statusInvestUser="投资结束";
-			break;
-		case 6:
-			this.statusInvestUser="转出到账";
-			break;
-		case 31:
-			this.statusInvestUser="投资中";
-			break;
-		case 41:
-			this.statusInvestUser="预热中";
-			break;
-		}
-		return statusInvestUser;
-	}
-
-	public void setStatusInvestUser(String statusInvestUser) {
-		this.statusInvestUser = statusInvestUser;
-	}
+	
 	
 	
 }

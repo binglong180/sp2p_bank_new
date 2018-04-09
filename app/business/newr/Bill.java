@@ -271,7 +271,7 @@ public class Bill implements Serializable{
 				bills.repayment_time = add(new Date(), Calendar.DAY_OF_MONTH, deadline);
 			}
 			
-			bid.recentRepayTime = bills.repayment_time;
+			bills.repayment_time=bid.repaymentTime;
 			bills.repayment_corpus = borrowSum;
 			bills.repayment_interest = monPayInterest;
 			bills.status = Constants.NO_REPAYMENT;
@@ -2864,4 +2864,17 @@ public class Bill implements Serializable{
 		
 		return result==null?0:(Double)result;
 	}
+
+	public Bid getBid() {
+		 Bid bid=new Bid();
+		 bid.id=this.bidId;
+		 return bid;
+	}
+
+	public void setBid(Bid bid) {
+		this.bid = bid;
+	}
+	
+	
+	
 }

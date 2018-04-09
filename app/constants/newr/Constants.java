@@ -252,7 +252,7 @@ public class Constants {
 	 *待放款
 	 */
 	public static final int BID_PRE_REPAYMENT=2;
-	/**还款中(已放款)**/
+	/**已满标**/
 	public static final int BID_REPAYMENT = 3;
 	/**借款逾期**/
 	public static final int BID_OVERTIME = 4;
